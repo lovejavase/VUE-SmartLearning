@@ -1,24 +1,8 @@
 <template>
 	<!-- <Footer :currentPage='0'></Footer> -->
+	<!-- 顶部 -->
+	<myheader title='智能交流'></myheader>
 	<view class="talk">
-		<!-- 顶部 -->
-		<view class="header">
-			<el-button class="itemBtn" link>
-				<el-icon class="icon">
-					<ArrowLeft></ArrowLeft>
-				</el-icon>
-			</el-button>
-			<view class="title">
-				<text class="text">AI对话</text>
-				<view class="background">
-				</view>
-			</view>
-			<el-button class="itemBtn" link>
-				<el-icon class="icon">
-					<ArrowLeft></ArrowLeft>
-				</el-icon>
-			</el-button>
-		</view>
 		<!-- 对话 -->
 		<view class="dialog">
 			<!-- 提示 -->
@@ -26,7 +10,7 @@
 		</view>
 		<!-- 输入 -->
 		<view class="input">
-			
+
 		</view>
 	</view>
 </template>
@@ -35,27 +19,26 @@
 	import {
 		ref,
 	} from 'vue'
-import {
-		ArrowLeft,
-		View as IconView
-	} from '@element-plus/icons-vue'
+	import myheader from "@/component/header.vue"
 	// defineExpose(currentPage)
 </script>
 
 <style scoped>
-	.talk{
+	.talk {
 		background-color: #f3efee;
 	}
-	.header{
+
+	.header {
 		margin: 0;
 		padding: 20rpx;
 		display: flex;
 		justify-content: space-between;
 	}
+
 	.header .title {
 		position: relative;
 	}
-	
+
 	.header .title .text {
 		font-size: 24px;
 	}
@@ -71,5 +54,6 @@ import {
 		/* left: 4%; */
 		bottom: 2px;
 	}
+
 	/* 对话框 */
 </style>

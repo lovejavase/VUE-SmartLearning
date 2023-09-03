@@ -16,7 +16,13 @@ export default {
 <style>
 /*每个页面公共css */
 body{
-	font-size: 16px;
+	/* font-size: 12px; */
+}
+::v-deep .uni-tabbar-bottom{
+	background-color: #f3efee;
+}
+::v-deep .uni-tabbar{
+	border-radius: 50rpx 50rpx 0 0;
 }
 
 </style>

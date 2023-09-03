@@ -69,6 +69,13 @@
 				"navigationStyle": "custom"
 				// "enablePullDownRefresh": false
 			}
+		},  {
+			"text": "书籍详情页",
+			"path": "pages/class/book",
+			"style": {
+				"navigationStyle": "custom"
+				// "enablePullDownRefresh": false
+			}
 		}, {
 			"text": "用户",
 			"path": "pages/user/user",
@@ -123,13 +130,13 @@
 	"tabBar": {
 		"backgroundColor": "#90c9b4",
 		"selectedColor": "#f6e382",
-		// "borderStyle": "",
-		// "midButton": {
-		// 	"text": "",//智能对话
-		// 	"pagePath":"pages/talk/talk",
-		// 	"iconPath": "static/image/footer/talk.png",
-		// 	"selectedIconPath":"static/image/footer/talk2.png"
-		// },
+		"borderStyle": "none",
+		"midButton": {
+			"text": "",//智能对话
+			"pagePath":"pages/talk/talk",
+			"iconPath": "static/image/footer/talk.png",
+			"selectedIconPath":"static/image/footer/talk2.png"
+		},
 		"list": [{
 				"text": "", //首页
 				"pagePath": "pages/index/index",

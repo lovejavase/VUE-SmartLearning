@@ -35,7 +35,8 @@
 			</view>
 			<!-- 内容 -->
 			<view class="content">
-				<el-card class="card" v-for="(i,index) in 4" :key="i" @click='gotoCourse' shadow="never" :body-style="{ padding: '0px' }">
+				<el-card class="card" v-for="(i,index) in 4" :key="i" @click='gotoCourse' shadow="never"
+					:body-style="{ padding: '0px' }">
 					<img src="@/static/image/class1.png" class="image" />
 					<view class="text">
 						<text class="className">AI实践与广泛应用</text>
@@ -105,7 +106,7 @@
 							<div class="itemBook">地平线2025:人工智能来了</div>
 							<div class="itemAuthor">共12章</div>
 						</view>
-						<el-button class="itemBtn" link>
+						<el-button class="itemBtn" link @click='gotoBook'>
 							<el-icon class="icon">
 								<ArrowRight></ArrowRight>
 							</el-icon>
@@ -143,6 +144,12 @@
 	let gotoCourse = () => {
 		uni.navigateTo({
 			url: '/pages/class/course'
+		})
+	};
+	// 书籍跳转
+	let gotoBook = () => {
+		uni.navigateTo({
+			url: '/pages/class/book'
 		})
 	};
 </script>
@@ -363,7 +370,8 @@
 
 	.book .item .itemBtn {
 		background-color: #f3efee;
-		padding: 6rpx;
+		padding: 6rpx 2rpx;
+		padding-right: 10rpx;
 		margin-left: 20rpx;
 		font-size: 12px;
 		border-radius: 20rpx;
