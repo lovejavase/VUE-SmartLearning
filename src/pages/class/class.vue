@@ -7,18 +7,16 @@
 		<view class="carousal">
 			<el-carousel trigger="click" indicator-position="none" height="300rpx">
 				<el-carousel-item>
-					<img class="carImg" src="@/static/image/classBanner1.png" alt="" style="width: 100%;">
+					<image class="carImg" src="@/static/image/classBanner1.png" alt="" style="width: 100%;" />
 				</el-carousel-item>
 				<el-carousel-item>
-					<img class="carImg" src="@/static/image/classBanner1.png" alt="" style="width: 100%;">
+					<image class="carImg" src="@/static/image/classBanner1.png" alt="" style="width: 100%;" />
 				</el-carousel-item>
 				<el-carousel-item>
-					<img class="carImg" src="@/static/image/classBanner1.png" alt="" style="width: 100%;">
+					<image class="carImg" src="@/static/image/classBanner1.png" alt="" style="width: 100%;" />
 				</el-carousel-item>
-
 			</el-carousel>
 		</view>
-
 		<!-- 精选好课 -->
 		<view class="topClass">
 			<!-- 标题 -->
@@ -37,7 +35,7 @@
 			<view class="content">
 				<el-card class="card" v-for="(i,index) in 4" :key="i" @click='gotoCourse' shadow="never"
 					:body-style="{ padding: '0px' }">
-					<img src="@/static/image/class1.png" class="image" />
+					<image src="@/static/image/class1.png" class="image" />
 					<view class="text">
 						<text class="className">AI实践与广泛应用</text>
 						<br>
@@ -56,7 +54,7 @@
 			<ClassTitle :title="title[0]"></ClassTitle>
 			<!-- 内容 -->
 			<view class="content" v-for="(i,index) in 2">
-				<img src="@/static/image/similar2.png" alt="">
+				<image src="@/static/image/similar2.png" alt="" />
 				<el-card class="box-card" shadow="never">
 					<div class="itemTitle">人工智能觉醒之谜（上）什么是意识？</div>
 					<div class="itemName">真假世界未解之谜</div>
@@ -101,7 +99,7 @@
 						<text>各类智能化产品已经成为人类生活当中不可或缺的一部分智能手机、电脑、数控电器，甚至是已经逐渐形成规模化生产制造的各类机器人.....所有的这一切表明:人工智能来了人工智能的时代到来了!</text>
 					</view>
 					<view class="item">
-						<img src="@/static/image/book1.png" alt="">
+						<image src="@/static/image/book1.png" alt="" />
 						<view class="">
 							<div class="itemBook">地平线2025:人工智能来了</div>
 							<div class="itemAuthor">共12章</div>
@@ -166,12 +164,11 @@
 	.carousal {
 		margin: 30rpx auto;
 		width: 680rpx;
-		/* margin-top: 0; */
+	}
 
-		/* .carImg {
-			width: 100rpx;
-			height: auto;
-		} */
+	.carousal image {
+		width: 100%;
+		height: 100%;
 	}
 
 	/* 推广结束 */
@@ -243,6 +240,7 @@
 
 	.topClass .content .image {
 		width: 100%;
+		height: 180rpx;
 		display: block;
 	}
 
@@ -286,7 +284,7 @@
 		padding: 20rpx 10rpx;
 	}
 
-	.similar .content img {
+	.similar .content image {
 		width: 240rpx;
 		height: auto;
 		max-height: 210rpx;
@@ -353,8 +351,9 @@
 		margin-top: 16rpx;
 	}
 
-	.book .item img {
+	.book .item image {
 		width: 100rpx;
+		height: 130rpx;
 		border-radius: 10rpx;
 	}
 

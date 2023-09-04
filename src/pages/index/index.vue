@@ -9,13 +9,13 @@
 					</el-col>
 					<el-col :span="7" class="topButton">
 						<el-button class="topBtn" plain @click="gotoNotice">
-							<img src="http://www.a-puppy-c.top/smartLearning/news.png" alt=""
-								style="width: 40px;height: 40px;">
+							<image src="http://www.a-puppy-c.top/smartLearning/news.png" alt=""
+								style="width: 40px;height: 40px;"/>
 							<!-- <el-image :src="news" alt=""/> -->
 						</el-button>
 						<el-button class="topBtn" plain @click="gotoMy">
-							<img src="http://www.a-puppy-c.top/smartLearning/my.png" alt=""
-								style="width: 40px;height: 40px;">
+							<image src="http://www.a-puppy-c.top/smartLearning/my.png" alt=""
+								style="width: 40px;height: 40px;"/>
 						</el-button>
 					</el-col>
 				</el-row>
@@ -37,16 +37,13 @@
 		<view class="carousal">
 			<el-carousel trigger="click" indicator-position="none" :height="imgHeight">
 				<el-carousel-item @click="banner1">
-					<img class="carImg" src="http://www.a-puppy-c.top/smartLearning/days1.png" alt=""
-						style="width: 100%;">
+					<image class="carImg" src="http://www.a-puppy-c.top/smartLearning/days1.png" mode="aspectFit" alt="" />
 				</el-carousel-item>
 				<el-carousel-item @click="banner1">
-					<img class="carImg" src="http://www.a-puppy-c.top/smartLearning/days1.png" alt=""
-						style="width: 100%;">
+					<image class="carImg" src="http://www.a-puppy-c.top/smartLearning/days1.png" mode="aspectFit" alt="" />
 				</el-carousel-item>
 				<el-carousel-item @click="banner1">
-					<img class="carImg" src="http://www.a-puppy-c.top/smartLearning/days1.png" alt=""
-						style="width: 100%;">
+					<image class="carImg" src="http://www.a-puppy-c.top/smartLearning/days1.png" mode="aspectFit" alt="" />
 				</el-carousel-item>
 			</el-carousel>
 		</view>
@@ -55,36 +52,31 @@
 			<el-row justify="space-between">
 				<el-col :span="3">
 					<view class="toolImg" @click="gotoAItalk">
-						<img src="http://www.a-puppy-c.top/smartLearning/tool1-2.png" alt=""
-							style="width: 100%; height: auto;">
+						<image src="@/static/image/tool1-2.png" alt=""/>
 						<text class="toolItem">AI对话</text>
 					</view>
 				</el-col>
 				<el-col :span="3">
 					<view class="toolImg" @click="gotoIntelligent">
-						<img src="http://www.a-puppy-c.top/smartLearning/tool2.png" alt=""
-							style="width: 100%; height: auto;">
+						<image src="@/static/image/tool2.png" alt=""/>
 						<text class="toolItem">智能识别</text>
 					</view>
 				</el-col>
 				<el-col :span="3">
 					<view class="toolImg" @click="gotoClass">
-						<img src="http://www.a-puppy-c.top/smartLearning/tool3.png" alt=""
-							style="width: 100%; height: auto;">
+						<image src="@/static/image/tool3.png" alt=""/>
 						<text class="toolItem">乐趣课堂</text>
 					</view>
 				</el-col>
 				<el-col :span="3">
 					<view class="toolImg" @click="">
-						<img src="http://www.a-puppy-c.top/smartLearning/tool4-un.png" alt=""
-							style="width: 100%; height: auto;">
+						<image src="@/static/image/tool4-un.png" alt=""/>
 						<text class="toolItem">实践体验</text>
 					</view>
 				</el-col>
 				<el-col :span="3">
 					<view class="toolImg" @click="">
-						<img src="http://www.a-puppy-c.top/smartLearning/tool5-un.png" alt=""
-							style="width: 100%; height: auto;">
+						<image src="@/static/image/tool5-un.png" alt=""/>
 						<text class="toolItem">知识科普</text>
 					</view>
 				</el-col>
@@ -98,7 +90,7 @@
 			<scroll-view class="navscroll" scroll-x>
 				<view class="content" v-for="(i, index) in 2" :key="i">
 					<el-card class="card" shadow="never" :body-style="{ padding: '0px' }">
-						<img src="@/static/image/class1.png" class="image" />
+						<image src="@/static/image/class1.png" class="image" />
 						<view class="text" @click="gotoCourse">
 							<text class="className">AI实践与广泛应用</text>
 							<el-row class="row">
@@ -126,9 +118,9 @@
 			<view class="content" v-for="(i, index) in 2" :key="i">
 				<el-row justify="space-evenly" @click="gotoNews">
 					<el-col :span="7">
-						<img class="img" src="@/static/image/news1.png" alt="">
+						<image class="img" src="@/static/image/news1.png" alt=""/>
 						<view class="uContent">
-							<img class="uimg" src="@/static/image/userImg1.png" alt="">
+							<image class="uimg" src="@/static/image/userImg1.png" alt=""/>
 							<el-row class="userName" justify="center">
 								<el-col :span="24">
 									<text>某用户</text>
@@ -343,11 +335,11 @@
 	.carousal {
 		margin: 30rpx auto;
 		width: 680rpx;
-
-		/* .carImg {
-			width: 100rpx;
-			height: auto;
-		} */
+	}
+	
+	.carousal image{
+		width: 100%;
+		height: 100%;
 	}
 
 	/* 轮播结束 */
@@ -358,15 +350,13 @@
 		padding: 0 0.4rem;
 	}
 
-	/* background-color: aliceblue; */
 	.tool .toolImg {
 		width: 100%;
-		/* font-size: 1rem; */
-
 	}
 
-	.tool .toolImg img {
-		width: 100%;
+	.tool .toolImg image {
+		width: 100rpx;
+		height: 100rpx;
 	}
 
 	.tool .toolItem {
@@ -406,6 +396,7 @@
 
 	.class .content .image {
 		width: 100%;
+		height: 250rpx;
 		display: block;
 	}
 
@@ -458,6 +449,7 @@
 
 	.news .content .img {
 		width: 100px;
+		height: 190rpx;
 		border-radius: 10px;
 		position: absolute;
 		top: -22px;
@@ -472,6 +464,7 @@
 		/* background-color: black; */
 		border-radius: 50%;
 		width: 32px;
+		height: 32px;
 		display: inline-block;
 		margin-bottom: -2%;
 	}

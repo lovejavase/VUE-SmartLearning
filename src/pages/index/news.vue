@@ -144,6 +144,7 @@
 
 	.comment .btnGroup image {
 		width: 50rpx;
+		height: 50rpx;
 	}
 
 	/* 评论区结束 */
