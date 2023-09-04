@@ -121,7 +121,7 @@
 		<!-- 推荐新闻 -->
 		<view class="news">
 			<!-- 标题 -->
-			<titleItem :title="title[1]"></titleItem>
+			<titleItem :title="title[1]" @click='gotoNewsList'></titleItem>
 			<!-- 新闻内容 -->
 			<view class="content" v-for="(i, index) in 2" :key="i">
 				<el-row justify="space-evenly" @click="gotoNews">
@@ -203,7 +203,7 @@
 	let gotoIntelligent = () => {
 		uni.navigateTo({
 			//智能识别
-			url: '/pages/class/intelligent'
+			url: '/pages/index/intelligent'
 		});
 	};
 	let gotoClass = () => {
@@ -221,10 +221,16 @@
 			url: '/pages/class/course'
 		})
 	};
-	// 新闻跳转
+	// 新闻列表跳转
+	let gotoNewsList = () => {
+		uni.navigateTo({
+			url: '/pages/index/newsList'
+		})
+	};
+	 // 新闻跳转
 	let gotoNews = () => {
 		uni.navigateTo({
-			url: '/pages/class/news'
+			url: '/pages/index/news'
 		})
 	};
 </script>
@@ -307,6 +313,7 @@
 		border: none;
 		/* 对border进行样式修改 */
 	}
+
 	.top .topInput :deep(.el-input-group__append) {
 		box-shadow: 0 0 0 0px var(--el-input-border-color, var(--el-border-color)) inset;
 		background-color: transparent !important;

@@ -1,7 +1,7 @@
 <template>
-	<!-- 新闻详情页 -->
-	<view class="news">
-		新闻详情页
+	<!-- 相关页 -->
+	<view class="similar">
+		相关页
 	</view>
 </template>
 

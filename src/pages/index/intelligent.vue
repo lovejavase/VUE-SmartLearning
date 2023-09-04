@@ -145,8 +145,8 @@
 		ArrowRight,
 		View as IconView
 	} from '@element-plus/icons-vue'
-	import ClassHeader from './component/header.vue'
-	import ClassTitle from './component/title.vue'
+	import ClassHeader from '../class/component/header.vue'
+	import ClassTitle from '../class/component/title.vue'
 
 	const hText = "智能识别"
 	const searchText = "搜索功能"

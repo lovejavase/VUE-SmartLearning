@@ -7,6 +7,27 @@
 				"navigationStyle": "custom"
 			}
 		}, {
+			"text": "智能识别",
+			"path": "pages/index/intelligent",
+			"style": {
+				"navigationStyle": "custom"
+				// "enablePullDownRefresh": false
+			}
+		}, {
+			"text": "新闻详情",
+			"path": "pages/index/news",
+			"style": {
+				"navigationStyle": "custom"
+				// "enablePullDownRefresh": false
+			}
+		},{
+			"text": "新闻列表页",
+			"path": "pages/index/newsList",
+			"style": {
+				"navigationStyle": "custom"
+				// "enablePullDownRefresh": false
+			}
+		}, {
 			"text": "课堂",
 			"path": "pages/class/class",
 			"style": {
@@ -14,15 +35,15 @@
 				// "enablePullDownRefresh": false
 			}
 		}, {
-			"text": "智能识别",
-			"path": "pages/class/intelligent",
+			"text": "课程详情页",
+			"path": "pages/class/course",
 			"style": {
 				"navigationStyle": "custom"
 				// "enablePullDownRefresh": false
 			}
 		}, {
-			"text": "课程详情页",
-			"path": "pages/class/course",
+			"text": "相关推荐页",
+			"path": "pages/class/similar",
 			"style": {
 				"navigationStyle": "custom"
 				// "enablePullDownRefresh": false
@@ -63,13 +84,6 @@
 				// "enablePullDownRefresh": false
 			}
 		}, {
-			"text": "新闻详情页",
-			"path": "pages/class/news",
-			"style": {
-				"navigationStyle": "custom"
-				// "enablePullDownRefresh": false
-			}
-		},  {
 			"text": "书籍详情页",
 			"path": "pages/class/book",
 			"style": {
@@ -132,10 +146,10 @@
 		"selectedColor": "#f6e382",
 		"borderStyle": "none",
 		"midButton": {
-			"text": "",//智能对话
-			"pagePath":"pages/talk/talk",
+			"text": "", //智能对话
+			"pagePath": "pages/talk/talk",
 			"iconPath": "static/image/footer/talk.png",
-			"selectedIconPath":"static/image/footer/talk2.png"
+			"selectedIconPath": "static/image/footer/talk2.png"
 		},
 		"list": [{
 				"text": "", //首页

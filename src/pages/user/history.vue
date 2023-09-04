@@ -34,12 +34,13 @@
 	}
 
 	/* 日期标题 */
-	.history .day{
+	.history .day {
 		font-size: 14px;
 		display: block;
 		margin: 20rpx 50rpx;
 		color: #515151;
-	} 
+	}
+
 	/* 内容 */
 	.history .content {
 		width: 670rpx;
@@ -77,4 +78,6 @@
 		color: #909090;
 		margin: 12rpx 0;
 	}
+
+	
 </style>
