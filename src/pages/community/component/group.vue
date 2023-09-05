@@ -22,8 +22,17 @@
 		<!-- 我的圈子 -->
 		<titleItem :title="groupTitle[1]"></titleItem>
 		<view class="my">
-			<view class="item" v-for="text in my">
-				<text class="name">{{text}}</text>
+			<view class="item">
+				<image src="@/static/image/group1.png" mode=""></image>
+				<text class="name">自然百科</text>
+			</view>
+			<view class="item">
+				<image src="@/static/image/group3.png" mode=""></image>
+				<text class="name">AI智能</text>
+			</view>
+			<view class="item">
+				<image src="@/static/image/group2.png" mode=""></image>
+				<text class="name">历史</text>
 			</view>
 		</view>
 		<!-- 互动话题 -->
@@ -47,7 +56,17 @@
 	import titleItem from "./title.vue"
 
 	const groupTitle = ["推荐圈子", "我的圈子", "互动话题"]
-	const my = ["自然百科", "AI智能", "历史"]
+	const my = [{
+		name: "自然百科",
+		img: '@/static/image/group1.png'
+	}, {
+		name: "AI智能",
+		img: '@/static/image/group2.png'
+	}, {
+		name: "历史",
+		img: '@/static/image/group3.png'
+	}]
+	console.log(my[0])
 	const talkList = [{
 			title: "#你认为未来的智能是怎样的？",
 			name: "用户名1",
@@ -143,20 +162,28 @@
 	}
 
 	.group .my .item {
-		background-color: #15a0ac60;
+		/* background-color: #15a0ac60; */
 		width: 180rpx;
 		height: 200rpx;
 		border-radius: 20rpx;
+		overflow: hidden;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 	}
 
+
+	.group .my .item image{
+		width: 180rpx;
+		height: 200rpx;
+	}
 	.group .my .item .name {
+		position: fixed;
 		font-size: 16px;
 		font-weight: 500;
 		color: #ffffff;
-		text-shadow: 4rpx 4rpx 4rpx #15a0ac95;
+		text-shadow: 10rpx 10rpx 6rpx #252525,-4rpx -4rpx 6rpx #252525 ;
+		/* text-shadow: 12rpx 12rpx 6rpx #252525,-4rpx -4rpx 6rpx #252525 ; */
 	}
 
 	/* 我的圈子结束 */
