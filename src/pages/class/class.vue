@@ -115,6 +115,9 @@
 				</el-card>
 			</view>
 		</view>
+
+		<!-- 底部 -->
+		<Footer></Footer>
 	</view>
 </template>
 

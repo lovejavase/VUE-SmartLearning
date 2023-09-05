@@ -2,7 +2,7 @@
 	<view class="attention">
 		<view class="item" v-for="user in mylist">
 			<view class="user">
-				<img src="@/static/image/userImg1.png" alt="">
+				<image src="@/static/image/userImg1.png" alt=""/>
 				<view class="">
 					<text class="name">{{user.name}}</text>
 					<text class="num">内容：{{user.num}}</text>
@@ -70,8 +70,9 @@
 		padding: 20rpx;
 	}
 
-	.attention .user img {
+	.attention .user image {
 		width: 80rpx;
+		height: 80rpx;
 		margin-right: 14rpx;
 	}
 

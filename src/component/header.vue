@@ -2,7 +2,7 @@
 	<!-- 用户子页面的头部 -->
 	<view class="header">
 		<view class="back" @click="back">
-			<img src="@/static/image/icon/back.svg" alt="">
+			<image src="@/static/image/icon/back.svg" alt=""/>
 		</view>
 		<view class="title">
 			<view class="bottom">
@@ -10,7 +10,7 @@
 			<text class="">{{title}}</text>
 		</view>
 		<view class="more">
-			<img src="@/static/image/icon/more.svg" alt="">
+			<image src="@/static/image/icon/more.svg" alt=""/>
 		</view>
 	</view>
 </template>
@@ -60,7 +60,7 @@
 		background-color: #f6e38280;
 		border-radius: 4px;
 	}
-	.header img{
+	.header image{
 		width: 20px;
 		height: 20px;
 		margin-top: 4rpx;

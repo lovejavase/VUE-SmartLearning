@@ -16,19 +16,19 @@
 <style>
 	/*每个页面公共css */
 	body {
-		/* font-size: 12px; */
+		
 	}
 
-	::v-deep .uni-tabbar-bottom {
+	/* 	::v-deep .uni-tabbar-bottom {
 		background-color: #f3efee;
 	}
 
 	::v-deep .uni-tabbar {
 		border-radius: 50rpx 50rpx 0 0;
-	}
+	} */
 
 	/* 中间按钮 */
-	::v-deep .uni-tabbar__mid {
+	/* ::v-deep .uni-tabbar__mid {
 		background-color: #f6e382;
 		border-radius: 50rpx;
 		bottom: 40rpx;
@@ -38,5 +38,5 @@
 	::v-deep .uni-tabbar__mid img{
 		width: 40rpx !important;
 		height: auto !important;
-	}
+	} */
 </style>

@@ -4,7 +4,7 @@
 		<!-- 视频播放器 -->
 		<video src="" controls class="video"></video>
 		<!-- 后退和分享按钮 -->
-		<view class="back">
+		<view class="back" >
 			<el-button class="btn" link @click="back">
 				<img src="@/static/image/icon/back_android.svg" alt="">
 			</el-button>
@@ -107,12 +107,14 @@
 
 	.video {
 		width: 100%;
+		z-index: 0;
 	}
 
 	/* 视频结束 */
 
 	/* 分享和后退按钮开始 */
 	.back {
+		z-index: 1;
 		position: fixed;
 		top: 0;
 		width: 710rpx;

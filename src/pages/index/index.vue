@@ -145,7 +145,7 @@
 			</view>
 		</view>
 		<!-- 底部 -->
-		<!-- <Footer></Footer> -->
+		<Footer></Footer>
 	</view>
 </template>
 
@@ -235,6 +235,7 @@
 		/* font-size: 14px; */
 		font-size: 12px;
 		font-weight: 500;
+		padding-bottom: 90rpx;
 	}
 
 	/* 顶部开始 */

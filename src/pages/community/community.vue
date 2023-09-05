@@ -50,6 +50,8 @@
 			</el-button>
 		</view>
 
+		<!-- 底部 -->
+		<Footer></Footer>
 	</view>
 </template>
 <script lang="ts" setup>

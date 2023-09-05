@@ -3,74 +3,48 @@
 	<view class="user">
 		<!-- 顶部 -->
 		<view class="header">
-			<el-button link class="btn">
-				<el-icon>
-					<ArrowLeftBold />
-				</el-icon>
-			</el-button>
+			<view link class="btn">
+				<image src="@/static/image/icon/back.png" alt="" />
+			</view>
 			<view class="my">
 				<text>个人中心</text>
 			</view>
-			<el-button link class="btn">
-				<el-icon>
-					<svg t="1691140789919" class="icon" viewBox="0 0 1024 1024" version="1.1"
-						xmlns="http://www.w3.org/2000/svg" p-id="2321" width="128" height="128">
-						<path
-							d="M512 299.013c54.298 0 98.34-44.011 98.34-98.309S566.298 102.4 512 102.4s-98.34 44.012-98.34 98.31c0.03 54.266 44.042 98.303 98.34 98.303z m0 425.974c-54.298 0-98.34 44.011-98.34 98.304 0 54.297 44.042 98.309 98.34 98.309s98.34-44.012 98.34-98.31-44.042-98.303-98.34-98.303z m0-311.311c-54.298 0-98.34 44.011-98.34 98.309 0 54.292 44.042 98.304 98.34 98.304s98.34-44.012 98.34-98.304c0-54.298-44.042-98.31-98.34-98.31z"
-							p-id="2322" fill="#ffffff"></path>
-					</svg>
-				</el-icon>
-			</el-button>
+			<view link class="btn">
+				<image src="@/static/image/icon/more.png" alt="" />
+			</view>
 		</view>
 		<!-- 个人信息 -->
 		<view class="details">
 			<!-- <el-avatar :size="50" src="@/static/image/userImg1.png" /> -->
-			<img @click="modify" class="uimg" src="@/static/image/userImg1.png" alt="">
+			<image @click="modify" class="uimg" src="@/static/image/userImg1.png" alt="" />
+			<!-- <image @click="modify" class="uimg" :src="userAvatar" alt="" /> -->
 			<view @click="modify">
 				<el-row class="udetail" align="bottom">
-					<el-col :span="10"><text class="uname">用户名</text></el-col>
-					<el-col :span="12"><text class="ulv">lv.12</text></el-col>
-					<el-col :span="24"><text class="uid">ID:123456789</text></el-col>
+					<el-col :span="10"><text class="uname">{{user.userNickName}}</text></el-col>
+					<el-col :span="12"><text class="ulv">lv.{{user.userVip}}</text></el-col>
+					<el-col :span="24"><text class="uid">ID:{{user.userNumber}}</text></el-col>
 				</el-row>
 			</view>
-			<el-button class="sign" link>
+			<view class="sign  btn-flex">
 				<!-- <view class="content"> -->
-				<el-icon class="icon">
-					<svg t="1691162779395" class="icon" viewBox="0 0 1024 1024" version="1.1"
-						xmlns="http://www.w3.org/2000/svg" p-id="7316" width="128" height="128">
-						<path
-							d="M896 108.032h-52.224c-16.896 0-30.72 13.824-30.72 30.72s13.824 30.72 30.72 30.72H896c16.896 0 30.72 13.824 30.72 30.72v651.776c0 16.896-13.824 30.72-30.72 30.72H129.536c-16.896 0-30.72-13.824-30.72-30.72V200.192c0-16.896 13.824-30.72 30.72-30.72h79.36c16.896 0 30.72-13.824 30.72-30.72s-13.824-30.72-30.72-30.72H129.536c-50.688 0-92.16 41.472-92.16 92.16v651.776c0 50.688 41.472 92.16 92.16 92.16H896c50.688 0 92.16-41.472 92.16-92.16V200.192c0-50.688-41.472-92.16-92.16-92.16z"
-							fill="#ffffff" p-id="7317"></path>
-						<path
-							d="M408.576 169.472H640c16.896 0 30.72-13.824 30.72-30.72s-13.824-30.72-30.72-30.72H408.576c-16.896 0-30.72 13.824-30.72 30.72s13.824 30.72 30.72 30.72zM308.736 225.28c16.896 0 30.72-13.824 30.72-30.72V55.296c0-16.896-13.824-30.72-30.72-30.72s-30.72 13.824-30.72 30.72V194.56c0 16.896 13.824 30.72 30.72 30.72zM741.376 225.28c16.896 0 30.72-13.824 30.72-30.72V63.488c0-16.896-13.824-30.72-30.72-30.72s-30.72 13.824-30.72 30.72V194.56c0 16.896 13.824 30.72 30.72 30.72zM728.064 385.024L457.728 655.36l-123.904-123.904c-11.776-11.776-31.232-11.776-43.52 0-11.776 11.776-11.776 31.232 0 43.52l145.408 145.408c6.144 6.144 13.824 9.216 21.504 9.216 3.072 0 6.144-0.512 8.704-1.536 4.608-1.536 9.216-3.584 12.8-7.68l291.84-291.84c11.776-11.776 11.776-31.232 0-43.52-11.264-12.288-30.72-12.288-42.496 0z"
-							fill="#ffffff" p-id="7318"></path>
-					</svg>
-				</el-icon>
+				<image src="@/static/image/icon/day.png" mode="">
+
+				</image>
 				<text class="text">签到赢好礼</text>
 				<!-- </view> -->
-			</el-button>
+			</view>
 		</view>
 		<!-- 会员 -->
 		<view class="vip">
 			<view class="level">
-				<el-icon class="icon">
-					<svg t="1691169889571" class="icon" viewBox="0 0 1024 1024" version="1.1"
-						xmlns="http://www.w3.org/2000/svg" p-id="2660" width="32" height="32">
-						<path
-							d="M167.4 69c32.6-13.6 70 1.8 83.6 34.4L512 729.6 773 103.4c13.6-32.6 51-48 83.6-34.4s48 51 34.4 83.6l-320 768c-10 23.8-33.2 39.4-59 39.4s-49.2-15.6-59-39.4l-320-768c-13.6-32.6 1.8-70 34.4-83.6z"
-							p-id="2661" fill="#ffffff"></path>
-					</svg>
-				</el-icon>
+				<image class="icon" src="@/static/image/icon/v.png" mode=""></image>
 				<text class="text">普通会员</text>
 			</view>
-			<view class="">
-				<el-button class="upgrade" link>
-					<text class="text">升级智能VIP</text>
-					<el-icon class="icon">
-						<ArrowRightBold />
-					</el-icon>
-				</el-button>
+			<view class="upgrade btn-flex" link>
+				<text class="text">升级智能VIP</text>
+				<image src="@/static/image/icon/right_brown.png" mode=""></image>
 			</view>
+
 		</view>
 		<!-- 背景渐变 -->
 		<view class="bg">
@@ -83,91 +57,81 @@
 		</view>
 		<!-- 积分 -->
 		<view class="score">
-			<el-button class="btn" link>
+			<view class="btn btn-flex" link>
 				<view class="info">
 					<text>积分</text>
 					<text>123</text>
 				</view>
-			</el-button>
-			<el-button class="btn" link @click='history'>
+			</view>
+			<view class="btn btn-flex" link @click='history'>
 				<view class="info">
 					<text>足迹</text>
 					<text>9</text>
 				</view>
-			</el-button>
-			<el-button class="btn" link @click="collect">
+			</view>
+			<view class="btn btn-flex" link @click="collect">
 				<view class="info">
 					<text>收藏</text>
 					<text>12</text>
 				</view>
-			</el-button>
+			</view>
 		</view>
 		<!-- 工具栏 -->
 		<view class="tool">
-			<el-button class="btn" link>
+			<view class="btn btn-flex" link>
 				<view class="box">
 					<view class="title">
-						<img src="@/static/image/icon/vip.svg" alt="">
+						<image src="@/static/image/icon/vip.svg" alt="" />
 						<text>会员积分</text>
 					</view>
-					<el-icon class="icon">
-						<ArrowRightBold />
-					</el-icon>
+					<image src="@/static/image/icon/right_grey.png" mode=""></image>
 				</view>
-			</el-button>
-			<el-button class="btn" link>
+			</view>
+			<view class="btn btn-flex" link>
 				<view class="box">
 					<view class="title">
-						<img src="@/static/image/icon/score.svg" alt="">
+						<image src="@/static/image/icon/score.svg" alt="" />
 						<text>积分兑换</text>
 					</view>
-					<el-icon class="icon">
-						<ArrowRightBold />
-					</el-icon>
+					<image src="@/static/image/icon/right_grey.png" mode=""></image>
 				</view>
-			</el-button>
+			</view>
 			<!-- 图片推广start -->
 			<view class="img">
-				<img src="@/static/image/user_img1.png" alt="">
+				<image src="@/static/image/user_img1.png" alt="" />
 			</view>
 			<!-- 图片推广end -->
-			<el-button class="btn" link @click="setup">
+			<view class="btn btn-flex" link @click="setup">
 				<view class="box">
 					<view class="title">
-						<img src="@/static/image/icon/settings.svg" alt="">
+						<image src="@/static/image/icon/settings.svg" alt="" />
 						<text>设置中心</text>
 					</view>
-					<el-icon class="icon">
-						<ArrowRightBold />
-					</el-icon>
+					<image src="@/static/image/icon/right_grey.png" mode=""></image>
 				</view>
-			</el-button>
-			<el-button class="btn" link>
+			</view>
+			<view class="btn btn-flex" link>
 				<view class="box">
 					<view class="title">
-						<img src="@/static/image/icon/service.svg" alt="">
+						<image src="@/static/image/icon/service.svg" alt="" />
 						<text>客服中心</text>
 					</view>
-					<el-icon class="icon">
-						<ArrowRightBold />
-					</el-icon>
+					<image src="@/static/image/icon/right_grey.png" mode=""></image>
 				</view>
-			</el-button>
+			</view>
 
-			<el-button class="btn" link>
+			<view class="btn btn-flex" link>
 				<view class="box">
 					<view class="title">
-						<img src="@/static/image/icon/comment.svg" alt="">
+						<image src="@/static/image/icon/comment.svg" alt="" />
 						<text>意见反馈</text>
 					</view>
-					<el-icon class="icon">
-						<ArrowRightBold />
-					</el-icon>
+					<image src="@/static/image/icon/right_grey.png" mode=""></image>
 				</view>
-			</el-button>
+			</view>
 		</view>
 		<!-- 底部组件 -->
-		<!-- <Footer style="background-color: #ffffff;"></Footer> -->
+		<Footer></Footer>
 	</view>
 </template>
 
@@ -177,14 +141,35 @@
 	} from '@dcloudio/uni-app';
 	import {
 		ArrowLeftBold,
-		ArrowRightBold,
-		Calendar,
-		Picture
+		ArrowRightBold
 	} from '@element-plus/icons-vue'
+	import {
+		onMounted,
+		reactive,
+		ref
+	} from 'vue';
+
+
+	let user = reactive({
+		userAvatar: ref(''),
+		userEmail: ref(''),
+		userGrade: ref(''),
+		userId: ref(),
+		userInterest: ref(''),
+		userLoginAddress: ref(''),
+		userNickName: ref('aa'),
+		userNumber: ref(''),
+		userPhone: ref(''),
+		userPoints: ref(''),
+		userState: ref(''),
+		userVip: ref('')
+	})
 
 	// onLaunch(
 	// uni.hideTabBar() //隐藏原生导航栏
 	// )
+
+	// 跳转方法
 	let setup = () => {
 		uni.navigateTo({
 			url: '/pages/user/setup'
@@ -205,12 +190,54 @@
 			url: '/pages/user/collect'
 		})
 	}
+
+	// smzhouqi
+	onMounted(() => {
+		getUser()
+	})
+
+	// 接口调用
+	let getUser = () => {
+		console.log("开始调用getUser")
+		uni.request({
+			url: 'http://a-puppy-c.top:9999/Smart/User/getUser',
+			method: 'GET',
+			data: {
+				userId: 1
+			},
+			header: {
+				'custom-header': 'getUser' //自定义请求头信息
+			},
+			success: (res) => {
+				console.log("调用getUser成功");
+				console.log(res.data);
+				// user=res.data.data;
+				// console.log(user)
+				// console.log(user.userNickName)
+				user.userNickName = res.data.data.userNickName
+				user.userAvatar = res.data.data.userAvatar
+				user.userNumber = res.data.data.userNumber
+				user.userVip = res.data.data.userVip
+				return res.data
+			},
+			fail() {
+				console.log("调用getUser失败");
+			}
+		})
+	}
 </script>
 
 <style scoped>
 	.user {
 		background-color: #15a0ac;
-		padding-top: 20rpx;
+		padding-top: 30rpx;
+	}
+
+	.btn-flex {
+		display: inline-flex;
+		align-items: center;
+		font-size: 14px;
+		color: #4e4e4e;
 	}
 
 	/* 顶部开始 */
@@ -221,12 +248,19 @@
 		color: white
 	}
 
+	.header .btn image {
+		width: 100%;
+		height: 100%;
+	}
+
 	.header .btn {
 		width: 50rpx;
 		height: 50rpx;
 		margin: 30rpx;
 		font-size: 50rpx;
 		color: white;
+		display: inline-flex;
+		align-items: center;
 	}
 
 	.header .my {
@@ -246,10 +280,12 @@
 		display: flex;
 		justify-content: space-between;
 		padding: 10rpx 0;
+		margin: 20rpx 0;
 	}
 
 	.details .uimg {
 		width: 130rpx;
+		height: 130rpx;
 		margin-left: 80rpx;
 		border-radius: 50%;
 	}
@@ -277,7 +313,8 @@
 	.details .udetail .uid {
 		font-size: 12px;
 		/* font-weight: 600; */
-		color: #303133;
+		color: #515151;
+		font-weight: 600;
 	}
 
 	/* 签到 */
@@ -290,8 +327,9 @@
 		color: #ffffff;
 	}
 
-	.details .sign .icon {
-		font-size: 14px;
+	.details .sign image {
+		width: 30rpx;
+		height: 30rpx;
 	}
 
 	.details .sign .text {
@@ -321,19 +359,26 @@
 	}
 
 	.vip .level .icon {
-		font-size: 18px;
-		margin-right: 2rpx;
+		width: 40rpx;
+		height: 40rpx;
+		margin-right: 10rpx;
 	}
 
 	.vip .upgrade {
 		font-size: 12px;
 		height: 50rpx;
-		padding: 4rpx 10rpx;
+		padding: 4rpx 8rpx;
+		padding-left: 12rpx;
 		margin: 20rpx;
 		border-radius: 50rpx;
 		background-image: linear-gradient(to right, #d8cdbe, #b29575);
 		color: #603011;
 		border: none;
+	}
+
+	.vip .upgrade image {
+		width: 30rpx;
+		height: 30rpx;
 	}
 
 	/* 会员结束 */
@@ -373,6 +418,7 @@
 		margin: 0;
 		border: none;
 		border-radius: 0;
+		justify-content: center;
 	}
 
 	.score .btn:nth-child(2) {
@@ -385,6 +431,7 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: space-evenly;
+		align-items: center;
 
 	}
 
@@ -414,8 +461,10 @@
 		justify-content: space-between;
 		align-items: center;
 	}
-	.tool .btn .box img{
+
+	.tool .btn .box image {
 		width: 50rpx;
+		height: 50rpx;
 		margin-right: 6rpx;
 	}
 
@@ -431,13 +480,13 @@
 
 	/* 图片 */
 	.tool .img {
-		width: 730rpx;
+		width: 700rpx;
 		height: 210rpx;
-		margin: auto;
-		/* background-color: #90c9b4; */
+		margin: 0 auto;
+		box-shadow: 6rpx 6rpx 10rpx #90909090;
 	}
-	
-	.tool .img img{
+
+	.tool .img image {
 		width: 100%;
 		height: 100%;
 	}

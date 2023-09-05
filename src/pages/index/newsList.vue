@@ -43,7 +43,7 @@
 		padding: 20rpx;
 		width: 690rpx;
 		background-color: #ffffff;
-		box-shadow: 0 10rpx 10rpx #90909090;
+		box-shadow: 6rpx 6rpx 10rpx #90909090;
 		border-radius: 10rpx;
 	}
 
@@ -66,7 +66,7 @@
 		padding: 30rpx 20rpx;
 		background-color: #ffffff;
 		border-radius: 10rpx;
-		box-shadow: 0 10rpx 10rpx #90909090;
+		box-shadow: 6rpx 6rpx 10rpx #90909090;
 	}
 
 	.news .item {

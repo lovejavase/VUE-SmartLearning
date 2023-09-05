@@ -1,127 +1,69 @@
 <template>
-	<view class="footer">
-		<block>
-			<view class="tabbar-item" v-for="(item, index) in list" :class="[item.centerItem ? ' center-item' : '']"
-				@click="changeItem(item)">
-				<view class="item-top">
-					<image :src="currentItem == item.id ? item.selectIcon : item.icon"></image>
-				</view>
-				<view class="item-bottom" :class="[currentItem == item.id ? 'item-active' : '']">
+	<view class="buttom">
+		<view class="footer">
+			<view class="btn" @click="gotoIndex">
+				<image class="img" src="@/static/image/footer/index.png" />
+			</view>
+			<view class="btn" @click="gotoClass">
+				<image class="img" src="@/static/image/footer/class.png" />
+			</view>
+			<view class="mid">
+				
+			</view>
+			<view class="btn" @click='gotocommunity'>
+				<image class="img" src="@/static/image/footer/community.png" />
+			</view>
+			<view class="btn" @click="gotoUser">
+				<image class="img" src="@/static/image/footer/user.png" />
+			</view>
+			<view class="talk" @click='gototalk'>
+				<view class="btn">
+					<image class="midImg" src="@/static/image/footer/talk.png" />
 				</view>
 			</view>
-		</block>
-
-		<!-- <view class="talk">
-			<el-button plain class="btn">
-				<img class="img" src="@/static/image/footer/talk.png" mode="" />
-			</el-button>
-		</view> -->
+		</view>
 	</view>
-	<!-- <el-affix position="bottom" :offset="30"> -->
-	<!-- <view class="buttom"> -->
-	<!-- <view class="footer">
-			<el-button plain class="btn" >
-				<img class="img" src="@/static/image/footer/index.png" mode="" />
-			</el-button>
-			<el-button plain class="btn">
-				<img class="img" src="@/static/image/footer/class.png" mode="" />
-			</el-button>
-			<el-button plain class="btn">
-				<img class="img" src="@/static/image/footer/community.png" mode="" />
-			</el-button>
-			<el-button plain class="btn">
-				<img class="img" src="@/static/image/footer/user.png" mode="" />
-			</el-button>
-			<view class="talk">
-				<el-button plain class="btn">
-					<img class="img" src="@/static/image/footer/talk.png" mode="" />
-				</el-button>
-			</view>
-		</view> -->
-	<!-- </view> -->
-	<!-- </el-affix> -->
 </template>
-
 
 <script setup>
 	import {
-		onMounted,
-		ref,
-		defineProps,
-		toRefs
+		ref
 	} from 'vue'
-	const props = defineProps({
-		currentPage: Number,
-	})
-	const currentPage = toRefs(props)
-	let currentItem = 0
-	let list = [{
-			id: 0,
-			text: "", //首页
-			pagePath: "pages/index/index",
-			iconPath: "static/image/footer/index.png",
-			selectedIconPath: "static/image/footer/index2.png",
-			centerItem: false
-		},
-		{
-			id: 1,
-			text: "", //课堂
-			pagePath: "pages/class/class",
-			iconPath: "static/image/footer/class.png",
-			selectedIconPath: "static/image/footer/class2.png",
-			centerItem: false
-		},
-		{
-			id: 2,
-			text: "", //智能对话
-			pagePath: "pages/talk/talk",
-			iconPath: "static/image/footer/talk.png",
-			selectedIconPath: "static/image/footer/talk2.png",
-			centerItem: true
-		},
-		{
-			id: 3,
-			text: "", //社区
-			pagePath: "pages/community/community",
-			iconPath: "static/image/footer/community.png",
-			selectedIconPath: "static/image/footer/community2.png",
-			centerItem: false
-		},
-		{
-			id: 4,
-			text: "", //用户
-			pagePath: "pages/user/user",
-			iconPath: "static/image/footer/user.png",
-			selectedIconPath: "static/image/footer/user2.png",
-			centerItem: false
-		}
-	]
-
-	onMounted(() => {
-		this.currentItem = this.currentPage;
-		console.log(currentItem);
-		uni.hideTabBar();
-	})
-
-	// mounted() {
-
-	// 	},
-
-	let changeItem = (item) => {
-		let _this = this;
-		//_this.currentItem = item.id;
-		uni.switchTab({
-			url: item.path
+	let gotoIndex = () => {
+		uni.redirectTo({
+			url: '/pages/index/index'
 		});
+	};
+	let gotoClass = () => {
+		uni.redirectTo({
+			url: '/pages/class/class'
+		});
+	}
+	let gotoUser = () => {
+		uni.redirectTo({
+			url: '/pages/user/user'
+		})
+	}
+	let gotocommunity = () => {
+		uni.redirectTo({
+			url: '/pages/community/community'
+		})
+	}
+	let gototalk = () => {
+		uni.navigateTo({
+			url: '/pages/talk/talk'
+		})
 	}
 </script>
 
 <style scoped>
 	.buttom {
 		position: fixed;
-		buttom: 0;
+		/* buttom: 20rpx; */
+		/* top: 0; */
+		bottom: 0;
 		width: 750rpx;
-		height: auto;
+		z-index: 99;
 	}
 
 	.footer {
@@ -139,13 +81,23 @@
 	.footer .btn {
 		background-color: transparent;
 		border: none;
-		width: 18%;
+		width: 80rpx;
 		height: auto;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 10rpx;
 		/* padding: 0; */
 	}
 
+	.footer .midImg {
+		width: 50rpx;
+		height: 70rpx;
+	}
+
 	.footer .img {
-		width: 100%;
+		width: 60rpx;
+		height: 60rpx;
 	}
 
 	.footer .talk {
@@ -158,7 +110,7 @@
 	}
 
 	.footer .talk .btn {
-		width: 100rpx;
+		/* width: 100rpx; */
 		height: auto;
 	}
 </style>
