@@ -7,9 +7,9 @@
 		</view>
 		<view class="content">
 			<!-- 验证码登录包括手机号和邮箱验证码 -->
-			<el-button class="btn1" style="margin-top: 30px;" size="large" round>登录</el-button>
+			<el-button class="btn1" style="margin-top: 30px;" size="large" round @click='login'>登录</el-button>
 			<!-- 验证码登录包括手机号和邮箱-->
-			<el-button class="btn1" size="large" round>注册</el-button>
+			<el-button class="btn1" size="large" round @click='register'>注册</el-button>
 			<el-button class="btnNo" plain>不登录，随便看看</el-button>
 			<text class="or">OR</text>
 			<view class="other">
@@ -57,9 +57,16 @@
 </template>
 
 <script setup>
-	// import {
-	// 	Search
-	// } from '@element-plus/icons-vue'
+	let login=()=>{
+		uni.navigateTo({
+			url:'/pages/user/login'
+		})
+	}
+	let register=()=>{
+		uni.navigateTo({
+			url:'/pages/user/register'
+		})
+	}
 </script>
 
 <style scoped>

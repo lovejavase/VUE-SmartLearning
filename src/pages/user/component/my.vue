@@ -137,7 +137,9 @@
 
 <script setup>
 	import {
-		onLaunch
+		onLaunch,
+		onLoad,
+		onShow
 	} from '@dcloudio/uni-app';
 	import {
 		ArrowLeftBold,
@@ -168,6 +170,7 @@
 
 	// 跳转方法
 	let setup = () => {
+		uni.$emit(user)
 		uni.navigateTo({
 			url: '/pages/user/setup'
 		})
@@ -188,7 +191,7 @@
 		})
 	}
 
-	// smzhouqi
+	// // smzhouqi
 	onMounted(() => {
 		getUser()
 	})
@@ -221,6 +224,7 @@
 	.user {
 		background-color: #15a0ac;
 		padding-top: 30rpx;
+		width: 750rpx;
 	}
 
 	.btn-flex {

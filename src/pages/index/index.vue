@@ -65,7 +65,7 @@
 				<el-col :span="3">
 					<view class="toolImg" @click="gotoClass">
 						<image src="@/static/image/tool3.png" alt=""/>
-						<text class="toolItem">乐趣课堂</text>
+						<text class="toolItem">未命名测验</text>
 					</view>
 				</el-col>
 				<el-col :span="3">

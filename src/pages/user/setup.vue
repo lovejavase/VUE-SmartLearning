@@ -31,6 +31,8 @@
 
 <script setup>
 	import myheader from "@/component/header.vue"
+	
+	
 </script>
 
 <style >

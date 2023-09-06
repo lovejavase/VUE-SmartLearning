@@ -21,7 +21,7 @@
 			</view>
 		</view>
 		<text class="login">已有账户？登录</text>
-		<el-button class="btn" plain>
+		<el-button class="btn" plain @click='register'>
 			<text>注册</text>
 		</el-button>
 	</view>
@@ -29,12 +29,40 @@
 
 <script setup>
 	import {
-		ref,
-		// createApp
+		ref
 	} from 'vue'
 	const account = ref('')
 	const pwd = ref('')
 	const rePwd = ref('')
+
+	const register = () => {
+		if (pwd.value == rePwd.value) {
+			uni.request({
+				url: 'http://a-puppy-c.top:9999/Smart/User/register',
+				method: 'POST',
+				header:{'content-type': 'application/x-www-form-urlencoded'},
+				data: {
+					account: account.value,
+					pwd: pwd.value
+				},
+				success: (res) => {
+					console.log("调用register成功");
+					console.log(res.data);
+
+				},
+				fail() {
+					console.log("调用register失败");
+				}
+			})
+		}else{
+			console.log('密码不一致')
+			uni.showToast({
+				title:'密码不一致',
+				duration:1500.,
+				icon:'error'
+			})
+		}
+	}
 </script>
 
 <style scoped>

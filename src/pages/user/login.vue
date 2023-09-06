@@ -10,7 +10,7 @@
 		</view> -->
 		<view class="input">
 			<view class="box">
-				<el-input v-model="name" placeholder="请输入您的用户名" />
+				<el-input v-model="account" placeholder="请输入您的用户名" />
 			</view>
 			<view class="box">
 				<el-input v-model="pwd" type="password" placeholder="请输入您的密码" show-password />
@@ -64,7 +64,7 @@
 			</view>
 		</view>
 		<text class="login">没有账户？注册</text>
-		<el-button class="btn" plain>
+		<el-button class="btn" plain @click='login'>
 			<text>登录</text>
 		</el-button>
 	</view>
@@ -75,9 +75,41 @@
 		ref,
 		// createApp
 	} from 'vue'
-	const name = ref('')
+	const account = ref('')
 	const pwd = ref('')
 	const remember = ref('')
+
+	// 接口调用
+	let login = () => {
+		console.log("开始调用login")
+		uni.request({
+			url: 'http://a-puppy-c.top:9999/Smart/User/login',
+			method: 'GET',
+			header: {
+				'Authorization': uni.getStorageSync('Authorization'),
+				'content-type': 'application/x-www-form-urlencoded'
+			},
+			data: {
+				account: account.value,
+				pwd: pwd.value
+			},
+			success: (res) => {
+				console.log(account.value)
+				console.log(pwd.value)
+				if (res.data.code == 200) {
+					console.log("调用login成功");
+				} else {
+					console.log("调用login失败");
+					console.log(res.data)
+				}
+
+
+			},
+			fail() {
+				console.log("调用login失败");
+			}
+		})
+	}
 </script>
 
 <style scoped>
@@ -139,14 +171,16 @@
 		height: 90rpx;
 		margin: 0 5rpx;
 	}
+
 	/* 记住用户名和忘记密码 */
 	.choice {
 		display: flex;
 		width: 520rpx;
 		justify-content: space-between;
 	}
+
 	/* 其它登录方式 */
-	.or{
+	.or {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -172,6 +206,7 @@
 		font-size: 24px;
 		margin: 0 14px;
 	}
+
 	/* 注册或登录 */
 	.login {
 		display: block;
@@ -179,7 +214,7 @@
 		font-size: 12px;
 	}
 
-	 .btn {
+	.btn {
 		width: 560rpx;
 		background-color: #f6e382;
 		border: none;
