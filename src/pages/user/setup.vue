@@ -7,23 +7,23 @@
 		<view class="content">
 			<view class="item">
 				<text>账号与安全</text>
-				<img src="@/static/image/icon/right.svg" alt="">
+				<image src="@/static/image/icon/right.svg" alt="" />
 			</view>
 			<view class="item">
 				<text>隐私设置</text>
-				<img src="@/static/image/icon/right.svg" alt="">
+				<image src="@/static/image/icon/right.svg" alt="" />
 			</view>
 			<view class="item">
 				<text>通知设置</text>
-				<img src="@/static/image/icon/right.svg" alt="">
+				<image src="@/static/image/icon/right.svg" alt="" />
 			</view>
 			<view class="item">
 				<text>个性化设置</text>
-				<img src="@/static/image/icon/right.svg" alt="">
+				<image src="@/static/image/icon/right.svg" alt="" />
 			</view>
 			<view class="item">
 				<text>订阅通知</text>
-				<img src="@/static/image/icon/right.svg" alt="">
+				<image src="@/static/image/icon/right.svg" alt="" />
 			</view>
 		</view>
 	</view>
@@ -35,7 +35,7 @@
 
 <style >
 	.setup{
-		padding-top: 30rpx;
+		padding-top: 40rpx;
 	}
 	.setup .content{
 		width: 660rpx;
@@ -47,11 +47,12 @@
 		align-items: center;
 		justify-content: space-between;
 		font-size: 14px;
-		margin: 20rpx 0;
+		margin: 30rpx 0;
 		padding: 24rpx 0;
 		border-bottom:  #eeeeee solid 4rpx;
 	}
-	.setup .content .item img{
+	.setup .content .item image{
 		width: 16px;
+		height: 16px;
 	}
 </style>

@@ -4,6 +4,7 @@
 			<text @click='clickTab(0)' class="tab-btn" :class="navIndex==0?'activite':''">关注</text>
 			<text @click='clickTab(1)' class="tab-btn" :class="navIndex==1?'activite':''">推荐</text>
 			<text @click='clickTab(2)' class="tab-btn" :class="navIndex==2?'activite':''">圈子</text>
+			<view class="bg" :class="bg"></view>
 		</view>
 		<view class="tabs">
 			<attention v-if="navIndex==0"></attention>
@@ -63,21 +64,28 @@
 	import recommend from "./component/recommendation.vue"
 
 	const navIndex = ref(0)
+	const bg = ref('bg0')
 	const clickTab = (index) => {
-		console.log(index)
+		// console.log(index)
 		navIndex.value = index
+		if (index == 0) {
+			bg.value = 'bg0'
+		} else if (index == 1) {
+			bg.value = 'bg1'
+		} else {
+			bg.value = 'bg2'
+		}
 	}
 
-
 	let topMy = () => {
-		console.log("顶部按钮")
+		console.log("点击了顶部按钮")
 	}
 </script>
 
 <style>
 	.community {
 		margin: 0;
-		padding: 0;
+		padding-top: 30rpx;
 		position: relative;
 		/* background-color: #f3efee; */
 	}
@@ -91,14 +99,35 @@
 
 	.tab—btns .tab-btn {
 		display: inline-flex;
-		/* background-color: #eeeeee; */
-		font-size: 16px;
+		font-size: 20px;
+		color: #515151;
 		padding: 10rpx;
 		margin: 0 10rpx;
 	}
 
+	.tab—btns .bg {
+		width: 42px;
+		height: 4px;
+		background-color: #f6e38290;
+		border-radius: 2px;
+		position: fixed;
+	}
+
+	.tab—btns .bg0 {
+		left: 48rpx !important;
+	}
+
+	.tab—btns .bg1 {
+		left: 170rpx !important;
+	}
+
+	.tab—btns .bg2 {
+		left: 290rpx !important;
+	}
+
 	.activite {
-		background-color: aliceblue;
+		/* background-color: aliceblue; */
+		color: #15a0ac;
 	}
 
 	/* 标签页结束 */
@@ -112,7 +141,7 @@
 		width: 230rpx;
 		position: fixed;
 		z-index: 99;
-		top: 26rpx;
+		top: 64rpx;
 		right: 0rpx;
 	}
 
