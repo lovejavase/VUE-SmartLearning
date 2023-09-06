@@ -150,14 +150,14 @@
 	} from 'vue';
 
 
-	let user = reactive({
+	const user = ref({
 		userAvatar: ref(''),
 		userEmail: ref(''),
 		userGrade: ref(''),
 		userId: ref(),
 		userInterest: ref(''),
 		userLoginAddress: ref(''),
-		userNickName: ref('aa'),
+		userNickName: ref(''),
 		userNumber: ref(''),
 		userPhone: ref(''),
 		userPoints: ref(''),
@@ -165,9 +165,6 @@
 		userVip: ref('')
 	})
 
-	// onLaunch(
-	// uni.hideTabBar() //隐藏原生导航栏
-	// )
 
 	// 跳转方法
 	let setup = () => {
@@ -211,14 +208,7 @@
 			success: (res) => {
 				console.log("调用getUser成功");
 				console.log(res.data);
-				// user=res.data.data;
-				// console.log(user)
-				// console.log(user.userNickName)
-				user.userNickName = res.data.data.userNickName
-				user.userAvatar = res.data.data.userAvatar
-				user.userNumber = res.data.data.userNumber
-				user.userVip = res.data.data.userVip
-				return res.data
+				user.value = res.data.data;
 			},
 			fail() {
 				console.log("调用getUser失败");

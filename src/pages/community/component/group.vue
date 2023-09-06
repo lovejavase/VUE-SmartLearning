@@ -66,7 +66,7 @@
 		name: "历史",
 		img: '@/static/image/group3.png'
 	}]
-	console.log(my[0])
+	// console.log(my[0])
 	const talkList = [{
 			title: "#你认为未来的智能是怎样的？",
 			name: "用户名1",
@@ -173,16 +173,17 @@
 	}
 
 
-	.group .my .item image{
+	.group .my .item image {
 		width: 180rpx;
 		height: 200rpx;
 	}
+
 	.group .my .item .name {
 		position: fixed;
 		font-size: 16px;
 		font-weight: 500;
 		color: #ffffff;
-		text-shadow: 10rpx 10rpx 6rpx #252525,-4rpx -4rpx 6rpx #252525 ;
+		text-shadow: 10rpx 10rpx 6rpx #252525, -4rpx -4rpx 6rpx #252525;
 		/* text-shadow: 12rpx 12rpx 6rpx #252525,-4rpx -4rpx 6rpx #252525 ; */
 	}
 

@@ -1,16 +1,16 @@
 <template>
 	<view class="community">
-		<el-tabs v-model="activeName" class="tabs" @tab-click="handleClick">
-			<el-tab-pane label="关注" name="attention">
-				<attention></attention>
-			</el-tab-pane>
-			<el-tab-pane label="推荐" name="recommendation">
-				<recommend></recommend>
-			</el-tab-pane>
-			<el-tab-pane label="圈子" name="group">
-				<groupItem></groupItem>
-			</el-tab-pane>
-		</el-tabs>
+		<view class="tab—btns">
+			<text @click='clickTab(0)' class="tab-btn" :class="navIndex==0?'activite':''">关注</text>
+			<text @click='clickTab(1)' class="tab-btn" :class="navIndex==1?'activite':''">推荐</text>
+			<text @click='clickTab(2)' class="tab-btn" :class="navIndex==2?'activite':''">圈子</text>
+		</view>
+		<view class="tabs">
+			<attention v-if="navIndex==0"></attention>
+			<recommend v-if="navIndex==1"></recommend>
+			<groupItem v-if="navIndex==2"></groupItem>
+		</view>
+
 		<view class="link">
 			<el-button class="h-btn" link @click="topMy">
 				<el-icon>
@@ -54,21 +54,22 @@
 		<Footer></Footer>
 	</view>
 </template>
-<script lang="ts" setup>
-	import { ref } from 'vue'
-	import type { TabsPaneContext } from 'element-plus'
+<script setup>
+	import {
+		ref
+	} from 'vue'
 	import groupItem from "./component/group.vue"
 	import attention from "./component/attention.vue"
 	import recommend from "./component/recommendation.vue"
 
-	const activeName = ref('attention')
-
-	const handleClick = (tab : TabsPaneContext, event : Event) => {
-		console.log(tab, event)
+	const navIndex = ref(0)
+	const clickTab = (index) => {
+		console.log(index)
+		navIndex.value = index
 	}
 
-	
-	let topMy=()=>{
+
+	let topMy = () => {
 		console.log("顶部按钮")
 	}
 </script>
@@ -81,36 +82,27 @@
 		/* background-color: #f3efee; */
 	}
 
-	/* 对tabs样式的修改 */
-	::v-deep .el-tabs__nav-wrap::after {
-		height: 0px;
+	/* 标签页开始 */
+	.tab—btns {
+		width: 100%;
+		padding: 30rpx;
+
 	}
 
-	::v-deep .el-tabs__item.is-active {
-		color: #15a0ac !important;
+	.tab—btns .tab-btn {
+		display: inline-flex;
+		/* background-color: #eeeeee; */
+		font-size: 16px;
+		padding: 10rpx;
+		margin: 0 10rpx;
 	}
 
-	::v-deep .el-tabs__active-bar {
-		background-color: #f6e382 !important;
-		height: 6rpx;
-		border-radius: 3rpx;
+	.activite {
+		background-color: aliceblue;
 	}
 
-	::v-deep .el-tabs__header {
-		margin: 0 40rpx;
-		margin-top: 30rpx;
-	}
+	/* 标签页结束 */
 
-	::v-deep .el-tabs__item {
-		font-size: 18px;
-		font-weight: 600;
-		color: #909090;
-		padding-left: 0;
-	}
-
-	::v-deep .el-tabs__content {
-		background-color: #f3efee70;
-	}
 
 	/* end */
 	/* 右上角按钮开始 */
@@ -118,8 +110,9 @@
 		font-size: 20px;
 		margin: 4rpx;
 		width: 230rpx;
-		position: absolute;
-		top: 10rpx;
+		position: fixed;
+		z-index: 99;
+		top: 26rpx;
 		right: 0rpx;
 	}
 
@@ -130,5 +123,6 @@
 	.link :deep(i) {
 		/* margin: 4rpx; */
 	}
+
 	/* 右上角按钮结束 */
 </style>
