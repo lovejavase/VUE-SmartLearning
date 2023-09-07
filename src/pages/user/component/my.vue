@@ -151,20 +151,20 @@
 		ref
 	} from 'vue';
 
-
-	const user = ref({
-		userAvatar: ref(''),
-		userEmail: ref(''),
-		userGrade: ref(''),
-		userId: ref(),
-		userInterest: ref(''),
-		userLoginAddress: ref(''),
-		userNickName: ref(''),
-		userNumber: ref(''),
-		userPhone: ref(''),
-		userPoints: ref(''),
-		userState: ref(''),
-		userVip: ref('')
+	var userId = 1
+	var user = ref({
+		userAvatar: '',
+		userEmail: '',
+		userGrade: '',
+		userId: 0,
+		userInterest: '',
+		userLoginAddress: '',
+		userNickName: '',
+		userNumber: '',
+		userPhone: '',
+		userPoints: '',
+		userState: '',
+		userVip: ''
 	})
 
 
@@ -196,14 +196,14 @@
 		getUser()
 	})
 
-	// 接口调用
+	// 获取用户信息
 	let getUser = () => {
 		console.log("开始调用getUser")
 		uni.request({
 			url: 'http://a-puppy-c.top:9999/Smart/User/getUser',
 			method: 'GET',
 			data: {
-				userId: 1
+				userId: userId
 			},
 			header: {
 				'custom-header': 'getUser' //自定义请求头信息

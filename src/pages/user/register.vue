@@ -40,26 +40,32 @@
 			uni.request({
 				url: 'http://a-puppy-c.top:9999/Smart/User/register',
 				method: 'POST',
-				header:{'content-type': 'application/x-www-form-urlencoded'},
+				header: {
+					'content-type': 'application/x-www-form-urlencoded'
+				},
 				data: {
 					account: account.value,
 					pwd: pwd.value
 				},
 				success: (res) => {
-					console.log("调用register成功");
-					console.log(res.data);
+					if (res.data.code == 200) {
+						console.log("调用register成功");
+					} else {
+						console.log("调用register失败");
+					}
+					console.log(res.data)
 
 				},
 				fail() {
 					console.log("调用register失败");
 				}
 			})
-		}else{
+		} else {
 			console.log('密码不一致')
 			uni.showToast({
-				title:'密码不一致',
-				duration:1500.,
-				icon:'error'
+				title: '密码不一致',
+				duration: 1500.,
+				icon: 'error'
 			})
 		}
 	}

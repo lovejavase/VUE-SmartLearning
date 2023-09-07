@@ -75,13 +75,22 @@
 		ref,
 		// createApp
 	} from 'vue'
+	import user from '../../api/user';
 	const account = ref('')
 	const pwd = ref('')
 	const remember = ref('')
+	var userid = 2
+	// var islogin=false
+
 
 	// 接口调用
 	let login = () => {
 		console.log("开始调用login")
+		uni.$emit('userid',userid)
+		uni. navigateBack({
+			// url: '/pages/user/user'
+			delta:1
+		})
 		uni.request({
 			url: 'http://a-puppy-c.top:9999/Smart/User/login',
 			method: 'GET',
@@ -94,15 +103,18 @@
 				pwd: pwd.value
 			},
 			success: (res) => {
-				console.log(account.value)
-				console.log(pwd.value)
+				// console.log(account.value)
+				// console.log(pwd.value)
 				if (res.data.code == 200) {
 					console.log("调用login成功");
+					
 				} else {
 					console.log("调用login失败");
-					console.log(res.data)
+					if(code == -10006){
+						// 跳转到手机号验证页
+					}
 				}
-
+				console.log(res.data)
 
 			},
 			fail() {
