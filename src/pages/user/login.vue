@@ -86,10 +86,10 @@
 	// 接口调用
 	let login = () => {
 		console.log("开始调用login")
-		uni.$emit('userid',userid)
-		uni. navigateBack({
+		uni.$emit('userid', userid)
+		uni.navigateBack({
 			// url: '/pages/user/user'
-			delta:1
+			delta: 1
 		})
 		uni.request({
 			url: 'http://a-puppy-c.top:9999/Smart/User/login',
@@ -103,14 +103,12 @@
 				pwd: pwd.value
 			},
 			success: (res) => {
-				// console.log(account.value)
-				// console.log(pwd.value)
 				if (res.data.code == 200) {
 					console.log("调用login成功");
-					
+
 				} else {
 					console.log("调用login失败");
-					if(code == -10006){
+					if (res.data.code == -10006) {
 						// 跳转到手机号验证页
 					}
 				}

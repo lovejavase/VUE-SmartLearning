@@ -16,8 +16,8 @@
 		<!-- 个人信息 -->
 		<view class="details">
 			<!-- <el-avatar :size="50" src="@/static/image/userImg1.png" /> -->
-			<image @click="modify" class="uimg" src="@/static/image/userImg1.png" alt="" />
-			<!-- <image @click="modify" class="uimg" :src="userAvatar" alt="" /> -->
+			<!-- <image @click="modify" class="uimg" src="@/static/image/userImg1.png" alt="" /> -->
+			<image @click="modify" class="uimg" :src="user.userAvatar" alt="" />
 			<view @click="modify">
 				<el-row class="udetail" align="bottom">
 					<el-col :span="10"><text class="uname">{{user.userNickName}}</text></el-col>
@@ -206,12 +206,16 @@
 				userId: userId
 			},
 			header: {
-				'custom-header': 'getUser' //自定义请求头信息
+				'Authorization': uni.getStorageSync('Authorization'),
+				'content-type': 'application/x-www-form-urlencoded'
 			},
 			success: (res) => {
-				console.log("调用getUser成功");
+				console.log("用户-调用getUser成功");
 				console.log(res.data);
 				user.value = res.data.data;
+				// 用户缓存
+				let item = JSON.stringify(user.value)
+				uni.setStorageSync('userInfo',item)
 			},
 			fail() {
 				console.log("调用getUser失败");

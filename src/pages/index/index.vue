@@ -10,12 +10,12 @@
 					<el-col :span="7" class="topButton">
 						<el-button class="topBtn" plain @click="gotoNotice">
 							<image src="http://www.a-puppy-c.top/smartLearning/news.png" alt=""
-								style="width: 40px;height: 40px;"/>
+								style="width: 40px;height: 40px;" />
 							<!-- <el-image :src="news" alt=""/> -->
 						</el-button>
 						<el-button class="topBtn" plain @click="gotoMy">
 							<image src="http://www.a-puppy-c.top/smartLearning/my.png" alt=""
-								style="width: 40px;height: 40px;"/>
+								style="width: 40px;height: 40px;" />
 						</el-button>
 					</el-col>
 				</el-row>
@@ -37,13 +37,16 @@
 		<view class="carousal">
 			<el-carousel trigger="click" indicator-position="none" :height="imgHeight">
 				<el-carousel-item @click="banner1">
-					<image class="carImg" src="http://www.a-puppy-c.top/smartLearning/days1.png" mode="aspectFit" alt="" />
+					<image class="carImg" src="http://www.a-puppy-c.top/smartLearning/days1.png" mode="aspectFit"
+						alt="" />
 				</el-carousel-item>
 				<el-carousel-item @click="banner1">
-					<image class="carImg" src="http://www.a-puppy-c.top/smartLearning/days1.png" mode="aspectFit" alt="" />
+					<image class="carImg" src="http://www.a-puppy-c.top/smartLearning/days1.png" mode="aspectFit"
+						alt="" />
 				</el-carousel-item>
 				<el-carousel-item @click="banner1">
-					<image class="carImg" src="http://www.a-puppy-c.top/smartLearning/days1.png" mode="aspectFit" alt="" />
+					<image class="carImg" src="http://www.a-puppy-c.top/smartLearning/days1.png" mode="aspectFit"
+						alt="" />
 				</el-carousel-item>
 			</el-carousel>
 		</view>
@@ -52,31 +55,31 @@
 			<el-row justify="space-between">
 				<el-col :span="3">
 					<view class="toolImg" @click="gotoAItalk">
-						<image src="@/static/image/tool1-2.png" alt=""/>
+						<image src="@/static/image/tool1-2.png" alt="" />
 						<text class="toolItem">AI对话</text>
 					</view>
 				</el-col>
 				<el-col :span="3">
 					<view class="toolImg" @click="gotoIntelligent">
-						<image src="@/static/image/tool2.png" alt=""/>
+						<image src="@/static/image/tool2.png" alt="" />
 						<text class="toolItem">智能识别</text>
 					</view>
 				</el-col>
 				<el-col :span="3">
 					<view class="toolImg" @click="gotoClass">
-						<image src="@/static/image/tool3.png" alt=""/>
+						<image src="@/static/image/tool3.png" alt="" />
 						<text class="toolItem">未命名测验</text>
 					</view>
 				</el-col>
 				<el-col :span="3">
 					<view class="toolImg" @click="">
-						<image src="@/static/image/tool4-un.png" alt=""/>
+						<image src="@/static/image/tool4-un.png" alt="" />
 						<text class="toolItem">实践体验</text>
 					</view>
 				</el-col>
 				<el-col :span="3">
 					<view class="toolImg" @click="">
-						<image src="@/static/image/tool5-un.png" alt=""/>
+						<image src="@/static/image/tool5-un.png" alt="" />
 						<text class="toolItem">知识科普</text>
 					</view>
 				</el-col>
@@ -115,33 +118,25 @@
 			<!-- 标题 -->
 			<titleItem :title="title[1]" @click='gotoNewsList'></titleItem>
 			<!-- 新闻内容 -->
-			<view class="content" v-for="(i, index) in 2" :key="i">
-				<el-row justify="space-evenly" @click="gotoNews">
-					<el-col :span="7">
-						<image class="img" src="@/static/image/news1.png" alt=""/>
-						<view class="uContent">
-							<image class="uimg" src="@/static/image/userImg1.png" alt=""/>
-							<el-row class="userName" justify="center">
-								<el-col :span="24">
-									<text>某用户</text>
-								</el-col>
-								<el-col>
-									<text>04-24 9.47</text>
-								</el-col>
-							</el-row>
+			<view class="content" v-for="(item, index) in news" :key="index">
+				<view class="newsItem" @click="gotoNews">
+					<image class="img" src="@/static/image/news1.png" alt="" />
+					<view class="uContent">
+						<image class="uimg" src="@/static/image/userImg1.png" alt="" />
+						<view class="userName">
+							<text>{{userName[index]}}</text>
+							<text class="time">{{item.createTime}}</text>
 						</view>
-					</el-col>
-					<el-col :span="14">
-						<view class="conTitle">
-							我们生活中有哪些人工智能？
-						</view>
-						<view class="conText">
-							1.语音助手：如Siri、Alexa.Google Assistant等，能够回答问题、执行指令、提供信息等。
-							<br>
-							2.家居：如智能灯泡、智能门、智能电视等，能够通过语音进行控制。
-						</view>
-					</el-col>
-				</el-row>
+					</view>
+				</view>
+				<view class="newsDetail">
+					<view class="conTitle">
+						{{item.newTitle}}
+					</view>
+					<view class="conText">
+						{{item.newDetail}}
+					</view>
+				</view>
 			</view>
 		</view>
 		<!-- 底部 -->
@@ -151,8 +146,11 @@
 
 <script setup>
 	import {
+		onMounted,
+		reactive,
 		ref
-	} from 'vue'
+	} from 'vue';
+
 	import {
 		Search,
 		ArrowRight,
@@ -161,6 +159,12 @@
 		View as IconView
 	} from '@element-plus/icons-vue'
 	import titleItem from './component/title.vue'
+	import {
+		onInit,
+		onLoad,
+		onReady,
+		onShow
+	} from '@dcloudio/uni-app';
 
 	const input = ref('')
 	const hiText = "Here is artificial intelligence"
@@ -169,6 +173,93 @@
 	const value = "$150"
 	const title = ["学习课堂", "特别新闻"]
 
+	const news = ref([])
+	const userName = ref([])
+
+
+	onMounted(() => {
+
+	})
+	// 获取新闻列表
+	let getNews = () => {
+		console.log("开始调用查询新闻接口")
+		return new Promise((resolve, reject) => {
+			uni.request({
+				url: 'http://a-puppy-c.top:9999/Smart/New/selectAllNews',
+				method: 'GET',
+				data: {
+					start: 0,
+					limit: 2
+				},
+				header: {
+					'Authorization': uni.getStorageSync('Authorization'),
+					'content-type': 'application/x-www-form-urlencoded'
+				},
+				success: (res) => {
+					if (res.data.code == 200) {
+						// console.log(news);
+						console.log("主页-调用selectAllNews成功");
+						// 给news数组赋值
+						// news = res.data.data;
+						// console.log(news);
+						resolve(res.data.data)
+					} else {
+						// console.log(res.data);
+						console.log("主页-调用selectAllNews失败");
+					}
+				},
+				fail() {
+					console.log("接口请求失败");
+				}
+			})
+		})
+
+	}
+	getNews().then(res => {
+		for (let j = 0; j < res.length; j++) {
+			news.value.push(res[j])
+		}
+		// 根据新闻用户id获取用户名
+		for (var i = 0; i < news.value.length; i++) {
+			getUser(news.value[i].newUser).then(res => {
+				console.log(res)
+				userName.value.push(res.userNickName)
+			})
+		}
+		console.log(userName.value)
+	})
+	// 根据新闻用户id获取用户名
+	let getUser = (userid) => {
+		console.log("开始调用查询用户接口")
+		return new Promise((resolve, reject) => {
+			uni.request({
+				url: 'http://a-puppy-c.top:9999/Smart/User/getUser',
+				method: 'GET',
+				data: {
+					userId: userid
+				},
+				header: {
+					'Authorization': uni.getStorageSync('Authorization'),
+					'content-type': 'application/x-www-form-urlencoded'
+				},
+				success: (res) => {
+					if (res.data.code == 200) {
+						console.log("主页-调用getUser成功");
+						resolve(res.data.data)
+					} else {
+						console.log(res.data);
+						console.log("主页-调用getUser失败");
+					}
+				},
+				fail() {
+					console.log("接口请求失败");
+				}
+			})
+		})
+
+	}
+
+	// 右上角【通知】和【我的】
 	let gotoNotice = () => {
 		uni.navigateTo({
 			url: '/pages/public/notice'
@@ -199,13 +290,9 @@
 		});
 	};
 	let gotoClass = () => {
-		uni.switchTab({ //跳转到导航页
-			//乐趣课堂
+		uni.navigateTo({ //普通页面跳转
 			url: '/pages/class/class'
-		})
-		// uni.navigateTo({  //普通页面跳转
-		// 	url: '/pages/class/class'
-		// });
+		});
 	};
 	// 课堂跳转
 	let gotoCourse = () => {
@@ -219,7 +306,7 @@
 			url: '/pages/index/newsList'
 		})
 	};
-	 // 新闻跳转
+	// 新闻跳转
 	let gotoNews = () => {
 		uni.navigateTo({
 			url: '/pages/index/news'
@@ -235,7 +322,7 @@
 		/* font-size: 14px; */
 		font-size: 12px;
 		font-weight: 500;
-		padding-bottom: 90rpx;
+		padding-bottom: 40rpx;
 	}
 
 	/* 顶部开始 */
@@ -337,8 +424,8 @@
 		margin: 30rpx auto;
 		width: 680rpx;
 	}
-	
-	.carousal image{
+
+	.carousal image {
 		width: 100%;
 		height: 100%;
 	}
@@ -441,28 +528,47 @@
 
 	.news .content {
 		background-color: #ffffff;
-		margin-top: 8%;
+		width: 680rpx;
+		min-height: 250rpx;
+		margin: 50rpx auto;
 		border-radius: 10px;
-		padding: 1% 0%;
+		padding: 10rpx 0;
 		position: relative;
-		/* overflow: hidden; */
+		display: flex;
+		z-index: 9;
+	}
+
+	/* 大图和用户详情 */
+	.news .newsItem {
+		margin-left: 18rpx;
+		position: absolute;
+		top: -40rpx;
+		z-index: 10;
+		font-size: 12px;
 	}
 
 	.news .content .img {
-		width: 100px;
+		width: 190rpx;
 		height: 190rpx;
-		border-radius: 10px;
-		position: absolute;
-		top: -22px;
-		/* left: 0; */
+	}
+
+	.news .content .time {
+		display: block;
+		/* background-color: #909090; */
+		width: 130rpx;
+		white-space: nowrap;
+		/* height: 1em; */
+		overflow: hidden;
 	}
 
 	.news .content .uContent {
-		margin-top: 80px;
+		margin-top: 10px;
+		display: flex;
+		align-items: center;
 	}
 
-	.uimg {
-		/* background-color: black; */
+	/* 头像 */
+	.news .content .uimg {
 		border-radius: 50%;
 		width: 32px;
 		height: 32px;
@@ -475,7 +581,20 @@
 		display: inline-block;
 	}
 
+	.news .content .userName :nth-child(1) {
+		display: block;
+		margin-left: 4rpx;
+	}
+
+
+	/* 新闻详情 */
+	.news .newsDetail {
+		padding: 10rpx 12rpx;
+		margin-left: 210rpx;
+	}
+
 	.news .content .conTitle {
+		display: block;
 		font-size: 14px;
 		color: #90c9b4;
 		margin: 2% 0%;
@@ -483,8 +602,16 @@
 	}
 
 	.news .content .conText {
+		display: block;
 		line-height: 1.14rem;
-		margin-bottom: 2%;
+		max-height: 200rpx;
+		/* width: 200rpx; */
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: -webkit-box;
+		-webkit-line-clamp: 5;
+		-webkit-box-orient: vertical;
+
 	}
 
 	/* 推荐新闻结束 */
