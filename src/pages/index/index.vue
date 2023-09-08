@@ -118,7 +118,7 @@
 			<!-- 标题 -->
 			<titleItem :title="title[1]" @click='gotoNewsList'></titleItem>
 			<!-- 新闻内容 -->
-			<view class="content" v-for="(item, index) in news" :key="index" @click="gotoNews">
+			<view class="content" v-for="(item, index) in news" :key="index" @click="gotoNews(index)">
 				<view class="newsItem">
 					<image class="img" src="@/static/image/news1.png" alt="" />
 					<view class="uContent">
@@ -182,15 +182,16 @@
 			for (let j = 0; j < res.length; j++) {
 				news.value.push(res[j])
 			}
-			// 根据新闻用户id获取用户名
+			// 根据新闻的用户id获取用户名
 			for (var i = 0; i < news.value.length; i++) {
 				getUser(news.value[i].newUser).then(res => {
-					console.log(res)
+					// console.log(res)
 					userName.value.push(res.userNickName)
 				})
 			}
-			console.log(userName.value)
+			console.log(news.value)
 		})
+		console.log(news);
 
 	})
 	// 获取新闻列表
@@ -228,7 +229,6 @@
 		})
 
 	}
-
 	// 根据新闻用户id获取用户名
 	let getUser = (userid) => {
 		console.log("开始调用查询用户接口")
@@ -308,9 +308,9 @@
 		})
 	};
 	// 新闻跳转
-	let gotoNews = () => {
+	let gotoNews = (newsId) => {
 		uni.navigateTo({
-			url: '/pages/index/news'
+			url: '/pages/index/news?id=' + newsId
 		})
 	};
 </script>

@@ -5,15 +5,14 @@
 		<myheader title='新闻详情'></myheader>
 		<view class="content">
 			<!-- 标题 -->
-			<text class="title">人工智能的诞生：1943-1956</text>
+			<text class="title">{{news.newTitle}}</text>
 			<!-- 图片 -->
 			<image src="@/static/image/user_img1.png" alt="" />
-			<text class="tip">备注备注备注备注</text>
+			<text class="tip">图片备注七个字</text>
 			<!-- 正文 -->
 			<view class="text">
-				<text class="line">1.控制论与早期神经网络</text>
-				<text class="info">1.控制论与早期神经网络控制论与早期神经网络控制论与早期
-					神经网络控制论与早期神经网络控制论与早期神经网络</text>
+				<!-- <text class="line">{{news[0].newTitle}}</text> -->
+				<text class="info">{{news.newDetail}}</text>
 			</view>
 			<!-- 评价 -->
 			<view class="comment">
@@ -38,7 +37,55 @@
 
 <script setup>
 	import myheader from "@/component/header.vue"
+	import {
+		onLoad
+	} from '@dcloudio/uni-app';
+	import {
+		onMounted,
+		ref
+	} from "vue";
 	const input = ''
+	var newsId = -1
+	// const news = ref([{newTitle:'0',newDetail:'1'}])
+	const news = ref({})
+
+
+	onLoad((res) => {
+		// console.log(~~res.id)
+		newsId = ~~res.id + 1 //id字符串转数字类型
+		getNew(newsId).then(res => {
+			news.value = res
+		})
+	})
+
+	let getNew = (id) => {
+		return new Promise((resolve, reject) => {
+			uni.request({
+				url: 'http://a-puppy-c.top:9999/Smart/New/selectNewDetail',
+				method: 'GET',
+				data: {
+					newId: id
+				},
+				header: {
+					'Authorization': uni.getStorageSync('Authorization'),
+					'content-type': 'application/x-www-form-urlencoded'
+				},
+				success: (res) => {
+					if (res.data.code == 200) {
+						console.log("主页-调用selectNewDetail成功");
+						console.log(res.data);
+						resolve(res.data.data)
+					} else {
+						console.log("主页-调用selectNewDetail失败");
+						console.log(res.data);
+					}
+				},
+				fail() {
+					console.log("接口请求失败");
+				}
+			})
+		})
+	}
 </script>
 
 <style>
