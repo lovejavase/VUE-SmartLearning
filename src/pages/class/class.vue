@@ -33,17 +33,17 @@
 			</view>
 			<!-- 内容 -->
 			<view class="content">
-				<el-card class="card" v-for="(i,index) in 4" :key="i" @click='gotoCourse' shadow="never"
-					:body-style="{ padding: '0px' }">
+				<el-card class="card" v-for="(item,index) in classes" :key="index" @click='gotoCourse(index)'
+					shadow="never" :body-style="{ padding: '0px' }">
 					<image src="@/static/image/class1.png" class="image" />
 					<view class="text">
-						<text class="className">AI实践与广泛应用</text>
+						<text class="className">{{item.lessonTitle}}</text>
 						<br>
 						<el-icon class="icon">
 							<UserFilled />
 						</el-icon>
-						<text class="name">123教授</text>
-						<text class="value">￥150</text>
+						<text class="name">{{item.lessonTeacher}}</text>
+						<text class="value">￥{{item.lessonPrice}}</text>
 					</view>
 				</el-card>
 			</view>
@@ -135,16 +135,57 @@
 
 	import ClassTitle from './component/title.vue'
 	import ClassHeader from './component/header.vue'
+	import {
+		onLoad
+	} from '@dcloudio/uni-app';
 
 	const input = ''
 	const text = "乐趣课堂"
 	const searchText = "搜索课堂"
 	const title = ["相关推荐", "好书推荐"]
+	const classes = ref([])
+
+	onLoad(() => {
+		getList().then(res => {
+			for (let j = 0; j < res.length; j++) {
+				classes.value.push(res[j])
+			}
+			// console.log(classes.value)
+		})
+	})
+
+	let getList = () => {
+		return new Promise((resolve, reject) => {
+			uni.request({
+				url: 'http://a-puppy-c.top:9999/Smart/Lesson/getList',
+				method: 'GET',
+				data: {
+					start: 0,
+					limit: 4
+				},
+				header: {
+					'Authorization': uni.getStorageSync('Authorization'),
+					'content-type': 'application/x-www-form-urlencoded'
+				},
+				success: (res) => {
+					if (res.data.code == 200) {
+						console.log("getList请求成功");
+						resolve(res.data.data)
+					} else {
+						console.log("getList请求失败");
+					}
+				},
+				fail() {
+					console.log("接口请求失败");
+				}
+			})
+		})
+	}
 
 	// 课堂跳转
-	let gotoCourse = () => {
+	let gotoCourse = (id) => {
 		uni.navigateTo({
-			url: '/pages/class/course'
+			url: '/pages/class/course?id=' + id
 		})
 	};
 	// 书籍跳转
@@ -161,6 +202,7 @@
 		padding: 0;
 		background-color: #f3efee;
 		font-size: 12px;
+		padding-bottom: 80rpx;
 	}
 
 	/* 推广开始 */

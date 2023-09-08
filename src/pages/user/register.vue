@@ -20,7 +20,7 @@
 				<el-input v-model="rePwd" type="password" placeholder="请确认您的密码" show-password />
 			</view>
 		</view>
-		<text class="login">已有账户？登录</text>
+		<text class="login" @click="gotoLogin">已有账户？登录</text>
 		<el-button class="btn" plain @click='register'>
 			<text>注册</text>
 		</el-button>
@@ -35,6 +35,11 @@
 	const pwd = ref('')
 	const rePwd = ref('')
 
+	let gotoLogin = () => {
+		uni.navigateTo({
+			url: '/pages/user/login'
+		})
+	}
 	const register = () => {
 		if (pwd.value == rePwd.value) {
 			uni.request({
@@ -53,7 +58,7 @@
 					} else {
 						console.log("调用register失败");
 					}
-					console.log(res.data)
+					// console.log(res.data)
 
 				},
 				fail() {

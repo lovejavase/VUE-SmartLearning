@@ -91,17 +91,17 @@
 			<titleItem :title="title[0]"></titleItem>
 			<!-- 滚动视图 -->
 			<scroll-view class="navscroll" scroll-x>
-				<view class="content" v-for="(i, index) in 2" :key="i">
+				<view class="content" v-for="(item, index) in classItem" :key="index">
 					<el-card class="card" shadow="never" :body-style="{ padding: '0px' }">
 						<image src="@/static/image/class1.png" class="image" />
-						<view class="text" @click="gotoCourse">
-							<text class="className">AI实践与广泛应用</text>
+						<view class="text" @click="gotoCourse(item.lessonId-1)">
+							<text class="className">{{item.lessonTitle}}</text>
 							<el-row class="row">
 								<el-col :span="18">
 									<el-icon class="icon">
 										<UserFilled />
 									</el-icon>
-									<text class="name">123教授</text>
+									<text class="name">{{item.lessonTeacher}}</text>
 									<!-- 热门推荐标签 -->
 								</el-col>
 								<el-col :span="5" :offset="1">
@@ -175,6 +175,7 @@
 
 	const news = ref([])
 	const userName = ref([])
+	const classItem = ref([])
 
 
 	onLoad(() => {
@@ -189,11 +190,45 @@
 					userName.value.push(res.userNickName)
 				})
 			}
-			console.log(news.value)
+			// console.log(news.value)
 		})
-		console.log(news);
+		// 获取课程
+		getList().then(res => {
+			for (let i = 0; i < res.length; i++) {
+				classItem.value.push(res[i])
+			}
+		})
 
 	})
+	// 查询部分课程
+	let getList = () => {
+		return new Promise((resolve, reject) => {
+			uni.request({
+				url: 'http://a-puppy-c.top:9999/Smart/Lesson/getList',
+				method: 'GET',
+				data: {
+					start: 0,
+					limit: 2
+				},
+				header: {
+					'Authorization': uni.getStorageSync('Authorization'),
+					'content-type': 'application/x-www-form-urlencoded'
+				},
+				success: (res) => {
+					if (res.data.code == 200) {
+						console.log("getList请求成功");
+						resolve(res.data.data)
+					} else {
+						console.log("getList请求失败");
+					}
+					// console.log(res.data);
+				},
+				fail() {
+					console.log("接口请求失败");
+				}
+			})
+		})
+	}
 	// 获取新闻列表
 	let getNews = () => {
 		console.log("开始调用查询新闻接口")
@@ -212,18 +247,15 @@
 				success: (res) => {
 					if (res.data.code == 200) {
 						// console.log(news);
-						console.log("主页-调用selectAllNews成功");
-						// 给news数组赋值
-						// news = res.data.data;
-						// console.log(news);
+						console.log("selectAllNews请求成功");
 						resolve(res.data.data)
 					} else {
-						// console.log(res.data);
-						console.log("主页-调用selectAllNews失败");
+
+						console.log("selectAllNews请求失败");
 					}
 				},
 				fail() {
-					console.log("接口请求失败");
+					// console.log("接口请求失败");
 				}
 			})
 		})
@@ -244,11 +276,11 @@
 				},
 				success: (res) => {
 					if (res.data.code == 200) {
-						console.log("主页-调用getUser成功");
+						console.log("getUser请求成功");
 						resolve(res.data.data)
 					} else {
-						console.log("主页-调用getUser失败");
-						console.log(res.data);
+						console.log("getUser请求失败");
+						// console.log(res.data);
 					}
 				},
 				fail() {
@@ -294,9 +326,9 @@
 		});
 	};
 	// 课堂跳转
-	let gotoCourse = () => {
+	let gotoCourse = (id) => {
 		uni.navigateTo({
-			url: '/pages/class/course'
+			url: '/pages/class/course?id='+id
 		})
 	};
 	// 新闻列表跳转

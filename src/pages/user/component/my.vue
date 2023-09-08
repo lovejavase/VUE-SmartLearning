@@ -211,11 +211,11 @@
 			},
 			success: (res) => {
 				console.log("用户-调用getUser成功");
-				console.log(res.data);
+				// console.log(res.data);
 				user.value = res.data.data;
 				// 用户缓存
-				let item = JSON.stringify(user.value)
-				uni.setStorageSync('userInfo',item)
+				// let item = JSON.stringify(user.value)
+				// uni.setStorageSync('userInfo',item)
 			},
 			fail() {
 				console.log("调用getUser失败");

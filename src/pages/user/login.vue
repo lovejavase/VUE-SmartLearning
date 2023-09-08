@@ -63,7 +63,7 @@
 					</el-icon></el-button>
 			</view>
 		</view>
-		<text class="login">没有账户？注册</text>
+		<text class="login" @click="gotoRegister">没有账户？注册</text>
 		<el-button class="btn" plain @click='login'>
 			<text>登录</text>
 		</el-button>
@@ -83,6 +83,11 @@
 	// var islogin=false
 
 
+	let gotoRegister = () => {
+		uni.navigateTo({
+			url: '/pages/user/register'
+		})
+	}
 	// 接口调用
 	let login = () => {
 		console.log("开始调用login")
@@ -112,7 +117,7 @@
 						// 跳转到手机号验证页
 					}
 				}
-				console.log(res.data)
+				// console.log(res.data)
 
 			},
 			fail() {

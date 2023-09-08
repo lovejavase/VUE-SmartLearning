@@ -92,7 +92,7 @@
 	/* 推荐圈子开始 */
 	.group .recommend {
 		width: 590rpx;
-		background-color: #fef5e3;
+		background-color: #f6d95f20;;
 		padding: 20rpx 40rpx;
 		margin: 20rpx;
 		border-radius: 20rpx;
@@ -199,7 +199,7 @@
 		margin-top: 30rpx;
 		padding: 30rpx 40rpx;
 		width: 590rpx;
-		background-color: #a6accc;
+		background-color: #949bb8;
 		border-radius: 20rpx;
 	}
 

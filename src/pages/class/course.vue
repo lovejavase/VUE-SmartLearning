@@ -4,7 +4,7 @@
 		<!-- 视频播放器 -->
 		<video src="" controls class="video"></video>
 		<!-- 后退和分享按钮 -->
-		<view class="back" >
+		<view class="back">
 			<el-button class="btn" link @click="back">
 				<img src="@/static/image/icon/back_android.svg" alt="">
 			</el-button>
@@ -14,11 +14,11 @@
 		</view>
 		<!-- 简介 -->
 		<view class="content">
-			<text class="title">AI实践与广泛应用</text>
+			<text class="title">{{classItem.lessonTitle}}</text>
 			<view class="name">
 				<!-- 图标 -->
 				<img src="@/static/image/icon/people_fill.svg" alt="">
-				<text>123教授</text>
+				<text>{{classItem.lessonTeacher}}</text>
 				<!-- 收藏功能 -->
 				<el-button class="favor" link>
 					<img src="@/static/image/icon/favor_fill.svg" alt="">
@@ -52,22 +52,16 @@
 			</view>
 			<!-- 用户评论 -->
 			<view class="box">
-				<view class="item" v-for="i in 3">
+				<view class="item" v-for="(item,index) in remark" :key="index">
 					<img src="@/static/image/userImg1.png" alt="">
 					<view class="info">
-						<text class="name">{{name}}</text>
-						<text class="time">{{time}}</text>
-						<text class="text">{{text}}</text>
+						<text class="name">{{item.userNickName}}</text>
+						<text class="time">{{item.time}}</text>
+						<text class="text">{{item.text}}</text>
 						<view class="btnGroup">
-							<el-button class="btn" link>
-								<img src="@/static/image/icon/appreciate_fill_light.svg" alt="">
-							</el-button>
-							<el-button class="btn" link>
-								<img src="@/static/image/icon/oppose_fill_light.svg" alt="">
-							</el-button>
-							<el-button class="btn" link>
-								<img src="@/static/image/icon/message_fill_light.svg" alt="">
-							</el-button>
+							<image class='btn' src="@/static/image/icon/appreciate_fill_light.svg" alt="" />
+							<image class='btn' src="@/static/image/icon/oppose_fill_light.svg" alt="" />
+							<image class='btn' src="@/static/image/icon/message_fill_light.svg" alt="" />
 						</view>
 					</view>
 				</view>
@@ -77,6 +71,9 @@
 </template>
 
 <script setup>
+	import {
+		onLoad
+	} from '@dcloudio/uni-app';
 	import {
 		ref
 	} from 'vue';
@@ -88,10 +85,86 @@
 	const name = "用户123"
 	const time = "08-09 18:08"
 	const text = "人工智能的实践和应用应该是两个不同的概念。"
-	
-	let back=()=>{
+
+	// const classes = ref([])
+	const classItem = ref({})
+	const remark = ref([]) //评论
+	const classId = ref(-1) //课程id，实际的值应该+1
+
+	let back = () => {
 		uni.navigateBack({
-			delta:2
+			delta: 1
+		})
+	}
+	onLoad((res) => {
+		classId.value = ~~res.id //id字符串转数字类型
+		getAllLesson().then(res => {
+			// 查询所有课程中id与页面传入id相同的课程
+			for (let j = 0; j < res.length; j++) {
+				if (j == classId.value) {
+					classItem.value = res[j]
+				}
+			}
+			selectRemarkByLesson(classId.value + 1).then(res => {
+				for (let i = 0; i < res.length; i++) {
+					remark.value.push(res[i])
+				}
+				// console.log(remark.value)
+			})
+		})
+	})
+	// 查询所有课程
+	let getAllLesson = () => {
+		return new Promise((resolve, reject) => {
+			uni.request({
+				url: 'http://a-puppy-c.top:9999/Smart/Lesson/getAllLesson',
+				method: 'GET',
+				data: {},
+				header: {
+					'Authorization': uni.getStorageSync('Authorization'),
+					'content-type': 'application/x-www-form-urlencoded'
+				},
+				success: (res) => {
+					if (res.data.code == 200) {
+						console.log("getAllLesson请求成功");
+						resolve(res.data.data)
+					} else {
+						console.log("getAllLesson请求失败");
+					}
+					// console.log(res.data);
+				},
+				fail() {
+					console.log("接口请求失败");
+				}
+			})
+		})
+	}
+	// 根据课程id查询评论
+	let selectRemarkByLesson = (classId) => {
+		return new Promise((resolve, reject) => {
+			uni.request({
+				url: 'http://a-puppy-c.top:9999/Smart/Lesson/selectRemarkByLesson',
+				method: 'GET',
+				data: {
+					lessonId: classId
+				},
+				header: {
+					'Authorization': uni.getStorageSync('Authorization'),
+					'content-type': 'application/x-www-form-urlencoded'
+				},
+				success: (res) => {
+					if (res.data.code == 200) {
+						console.log("selectRemarkByLesson请求成功");
+						resolve(res.data.data)
+					} else {
+						console.log("selectRemarkByLesson请求失败");
+					}
+					// console.log(res.data);
+				},
+				fail() {
+					console.log("接口请求失败");
+				}
+			})
 		})
 	}
 </script>
@@ -123,10 +196,12 @@
 		justify-content: space-between;
 		background-color: transparent;
 	}
-	.back .btn{
-		background-color:#9e9e9e60;
+
+	.back .btn {
+		background-color: #9e9e9e60;
 	}
-	.back .btn img{
+
+	.back .btn img {
 		width: 50rpx;
 	}
 
@@ -280,6 +355,7 @@
 	.comment .box .item .info .btn {
 		width: 40rpx;
 		height: 40rpx;
+		margin-right: 20rpx;
 	}
 
 	.comment .box .item .info .btn img {

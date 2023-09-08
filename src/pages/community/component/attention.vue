@@ -109,7 +109,7 @@
 		margin: 0 auto;
 		width: 620rpx;
 		padding: 20rpx;
-		background-color: #fef5e3;
+		background-color: #f6d95f20;
 		border-radius: 20rpx;
 		/* border: #909090 1px solid; */
 	}

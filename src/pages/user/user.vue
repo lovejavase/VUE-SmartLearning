@@ -22,7 +22,7 @@
 	onLoad(() => {
 		// console.log('11')
 		uni.$on('userid', function(res) {
-			console.log(res)
+			// console.log(res)
 			login.value = res > 0 ? true : false
 		})
 	})
