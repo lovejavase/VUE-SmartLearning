@@ -118,8 +118,8 @@
 			<!-- 标题 -->
 			<titleItem :title="title[1]" @click='gotoNewsList'></titleItem>
 			<!-- 新闻内容 -->
-			<view class="content" v-for="(item, index) in news" :key="index">
-				<view class="newsItem" @click="gotoNews">
+			<view class="content" v-for="(item, index) in news" :key="index" @click="gotoNews">
+				<view class="newsItem">
 					<image class="img" src="@/static/image/news1.png" alt="" />
 					<view class="uContent">
 						<image class="uimg" src="@/static/image/userImg1.png" alt="" />
@@ -177,7 +177,20 @@
 	const userName = ref([])
 
 
-	onMounted(() => {
+	onLoad(() => {
+		getNews().then(res => {
+			for (let j = 0; j < res.length; j++) {
+				news.value.push(res[j])
+			}
+			// 根据新闻用户id获取用户名
+			for (var i = 0; i < news.value.length; i++) {
+				getUser(news.value[i].newUser).then(res => {
+					console.log(res)
+					userName.value.push(res.userNickName)
+				})
+			}
+			console.log(userName.value)
+		})
 
 	})
 	// 获取新闻列表
@@ -215,19 +228,7 @@
 		})
 
 	}
-	getNews().then(res => {
-		for (let j = 0; j < res.length; j++) {
-			news.value.push(res[j])
-		}
-		// 根据新闻用户id获取用户名
-		for (var i = 0; i < news.value.length; i++) {
-			getUser(news.value[i].newUser).then(res => {
-				console.log(res)
-				userName.value.push(res.userNickName)
-			})
-		}
-		console.log(userName.value)
-	})
+
 	// 根据新闻用户id获取用户名
 	let getUser = (userid) => {
 		console.log("开始调用查询用户接口")
@@ -247,8 +248,8 @@
 						console.log("主页-调用getUser成功");
 						resolve(res.data.data)
 					} else {
-						console.log(res.data);
 						console.log("主页-调用getUser失败");
+						console.log(res.data);
 					}
 				},
 				fail() {
@@ -597,7 +598,8 @@
 		display: block;
 		font-size: 14px;
 		color: #90c9b4;
-		margin: 2% 0%;
+		/* margin: 4rpx 0; */
+		margin-bottom: 6rpx;
 		font-weight: 600;
 	}
 
