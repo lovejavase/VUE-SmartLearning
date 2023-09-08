@@ -25,7 +25,7 @@
 					{{favor_score}}
 				</el-button>
 			</view>
-			<text>在实践和应用中，人工智能技术都扮演着重要的角色，但是它们的目的和重点略有不同。在实践和应用中，人工智能技术都扮演着重要的角色，但是它们的目的和重点略有不同。</text>
+			<text>{{classItem.lessonDetail}}</text>
 			<view class="info">
 				<img src="@/static/image/icon/attention_fill.svg" alt="">
 				<text>{{info_watch}}</text>
@@ -103,6 +103,7 @@
 			for (let j = 0; j < res.length; j++) {
 				if (j == classId.value) {
 					classItem.value = res[j]
+					// console.log(res[j]);
 				}
 			}
 			selectRemarkByLesson(classId.value + 1).then(res => {
