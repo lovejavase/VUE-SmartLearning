@@ -9,10 +9,12 @@
 		<!-- 验证功能 -->
 		<view class="input">
 			<view class="box">
-				<input class="uni-input" v-model="account" maxlength="11" placeholder="请输入您的手机号" />
+				<input class="uni-input" v-model="account" maxlength="11" placeholder="请输入您的手机号"
+					placeholder-style="font-size:14px" />
 			</view>
 			<view class="box">
-				<input class="uni-input" v-model="code" maxlength="8" placeholder="请输入验证码" />
+				<input class="uni-input" v-model="code" maxlength="8" placeholder="请输入验证码"
+					placeholder-style="font-size:14px" />
 				<text class="sendCode" @click="msg">获取验证码</text>
 			</view>
 		</view>
@@ -60,7 +62,7 @@
 			</view>
 		</view>
 		<!-- 按钮 -->
-		<text class="send" @click="">登录</text>
+		<text class="send" @click="login">登录</text>
 	</view>
 </template>
 
@@ -68,11 +70,85 @@
 	import {
 		ref
 	} from 'vue';
-	const account = ref('')
-	const code = ref('')
-	
-	let msg=()=>{
+	const account = ref()
+	const code = ref()
+	// const code = ref('')
+
+	let msg = () => {
 		console.log('发送验证码')
+		if ((account.value).toString().length == 11) {
+			console.log(account.value)
+			SendSms(account.value).then(res => {
+				console.log(res)
+			})
+		}
+	}
+	let login = () => {
+		console.log('登录')
+		console.log(code.value)
+		checkCode(account.value, code.value).then(res => {
+			console.log(res)
+		})
+	}
+	// 获取验证码
+	let SendSms = (phone) => {
+		return new Promise((resolve, reject) => {
+			uni.request({
+				url: 'http://a-puppy-c.top:9999/Smart/Send/SendSms',
+				method: 'GET',
+				header: {
+					'Authorization': uni.getStorageSync('Authorization'),
+					'content-type': 'application/x-www-form-urlencoded'
+				},
+				data: {
+					phone: phone
+				},
+				success: (res) => {
+					if (res.data.code == 200) {
+						console.log("调用SendSms成功");
+						resolve(res.data.msg)
+					} else {
+						console.log("调用SendSms失败");
+						if (res.data.code == -10006) {
+
+						}
+					}
+
+				},
+				fail() {
+					console.log("请求失败");
+				}
+			})
+		})
+	}
+	// 验证码登录
+	let checkCode = (phone, code) => {
+		return new Promise((resolve, reject) => {
+			uni.request({
+				url: 'http://a-puppy-c.top:9999/Smart/Send/checkCode',
+				method: 'POST',
+				header: {
+					'Authorization': uni.getStorageSync('Authorization'),
+					'content-type': 'application/x-www-form-urlencoded'
+				},
+				data: {
+					account: phone,
+					code: code
+				},
+				success: (res) => {
+					if (res.data.code == 200) {
+						console.log("调用checkCode成功");
+					} else {
+						console.log("调用checkCode失败");
+					}
+					resolve(res.data.msg)
+
+				},
+				fail() {
+					console.log("请求失败");
+				}
+			})
+		})
 	}
 </script>
 

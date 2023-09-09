@@ -7,8 +7,8 @@
 			<!-- 标题 -->
 			<text class="title">{{news.newTitle}}</text>
 			<!-- 图片 -->
-			<image src="@/static/image/user_img1.png" alt="" />
-			<text class="tip">图片备注七个字</text>
+			<image :src="news.newInImg" alt="" />
+			<text class="tip">与人工智能交谈</text>
 			<!-- 正文 -->
 			<view class="text">
 				<!-- <text class="line">{{news[0].newTitle}}</text> -->
@@ -48,13 +48,14 @@
 	var newsId = -1
 	// const news = ref([{newTitle:'0',newDetail:'1'}])
 	const news = ref({})
-
+	
 
 	onLoad((res) => {
 		// console.log(~~res.id)
 		newsId = ~~res.id + 1 //id字符串转数字类型
 		getNew(newsId).then(res => {
 			news.value = res
+			console.log(news.value)
 		})
 	})
 
@@ -73,7 +74,8 @@
 				success: (res) => {
 					if (res.data.code == 200) {
 						console.log("主页-调用selectNewDetail成功");
-						console.log(res.data);
+						var newInImg = "http://www.a-puppy-c.top/smartLearning/newin1.jpg";
+						
 						resolve(res.data.data)
 					} else {
 						console.log("主页-调用selectNewDetail失败");
@@ -103,13 +105,16 @@
 	/* 标题 */
 	.title {
 		display: block;
-		font-size: 20px;
+		font-size: 28px;
+		font-weight: bolder;
+		font-family:  "Helvetica Neue", "Arial", sans-serif;
+		 font-variant-ligatures: normal;
 	}
 
 	/* 大图 */
 	.content>image {
 		width: 100%;
-		height: 200rpx;
+		height: 350rpx;
 		margin: 20rpx auto;
 		margin-top: 30rpx;
 		/* border: #909090 1px solid; */
@@ -125,6 +130,7 @@
 	/* 正文 */
 	.text {
 		margin-top: 40rpx;
+		margin-bottom: 40rpx;
 	}
 
 	.text .line {
@@ -134,24 +140,30 @@
 
 	.text .info {
 		display: block;
-		font-size: 14px;
+		font-size: 17px;
+		line-height: 4vh;
 		margin-top: 20rpx;
 	}
 
 	/* 评论区开始 */
 	/* 输入框 */
 	.comment {
+		width: 100%;
+		position: fixed;
+		bottom: 0;
 		margin-top: 50rpx;
 		display: flex;
-		justify-content: space-evenly;
+		/* justify-content: space-evenly; */
 		align-items: center;
 		border-top: #909090 1px solid;
 		padding: 20rpx 0;
+		background-color: #ffffff;
+	
 	}
 
 	.comment .input {
-		width: 300rpx;
-		height: 60rpx;
+		width: 400rpx;
+		height: 70rpx;
 		border-radius: 30rpx !important;
 		overflow: hidden;
 		color: #ffffff;

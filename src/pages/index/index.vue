@@ -68,7 +68,7 @@
 				<el-col :span="3">
 					<view class="toolImg" @click="gotoClass">
 						<image src="@/static/image/tool3.png" alt="" />
-						<text class="toolItem">未命名测验</text>
+						<text class="toolItem">问答测验</text>
 					</view>
 				</el-col>
 				<el-col :span="3">
@@ -82,6 +82,7 @@
 						<image src="@/static/image/tool5-un.png" alt="" />
 						<text class="toolItem">知识科普</text>
 					</view>
+
 				</el-col>
 			</el-row>
 		</view>
@@ -93,7 +94,7 @@
 			<scroll-view class="navscroll" scroll-x>
 				<view class="content" v-for="(item, index) in classItem" :key="index">
 					<el-card class="card" shadow="never" :body-style="{ padding: '0px' }">
-						<image src="@/static/image/class1.png" class="image" />
+						<image :src="item.lessonImage" class="image" />
 						<view class="text" @click="gotoCourse(item.lessonId-1)">
 							<text class="className">{{item.lessonTitle}}</text>
 							<el-row class="row">
@@ -120,14 +121,16 @@
 			<!-- 新闻内容 -->
 			<view class="content" v-for="(item, index) in news" :key="index" @click="gotoNews(index)">
 				<view class="newsItem">
-					<image class="img" src="@/static/image/news1.png" alt="" />
+					<image class="img" :src="item.newImg" alt="" />
 					<view class="uContent">
-						<image class="uimg" src="@/static/image/userImg1.png" alt="" />
+						<image class="uimg" :src="avatar[index]" alt="" />
 						<view class="userName">
 							<text>{{userName[index]}}</text>
-							<text class="time">{{item.createTime}}</text>
+
 						</view>
+
 					</view>
+					<text class="time">{{item.createTime}}</text>
 				</view>
 				<view class="newsDetail">
 					<view class="conTitle">
@@ -176,18 +179,21 @@
 	const news = ref([])
 	const userName = ref([])
 	const classItem = ref([])
+	const avatar = ref([])
 
 
 	onLoad(() => {
 		getNews().then(res => {
 			for (let j = 0; j < res.length; j++) {
 				news.value.push(res[j])
+				console.log(news.value[j].newImg)
 			}
 			// 根据新闻的用户id获取用户名
 			for (var i = 0; i < news.value.length; i++) {
 				getUser(news.value[i].newUser).then(res => {
-					// console.log(res)
+					console.log(res.userAvatar)
 					userName.value.push(res.userNickName)
+					avatar.value.push(res.userAvatar)
 				})
 			}
 			// console.log(news.value)
@@ -196,6 +202,7 @@
 		getList().then(res => {
 			for (let i = 0; i < res.length; i++) {
 				classItem.value.push(res[i])
+				console.log(classItem.value[i].lessonImage)
 			}
 		})
 
@@ -328,7 +335,7 @@
 	// 课堂跳转
 	let gotoCourse = (id) => {
 		uni.navigateTo({
-			url: '/pages/class/course?id='+id
+			url: '/pages/class/course?id=' + id
 		})
 	};
 	// 新闻列表跳转
@@ -414,9 +421,9 @@
 	}
 
 	/* .top .n-border {
-			border: none !important;
-			box-shadow: 0 0 0 0px;
-		} */
+border: none !important;
+box-shadow: 0 0 0 0px;
+} */
 
 	.top .topInput :deep(.el-input__wrapper) {
 		/* // 如果没有下面这一行样式的话 无法对border进行自定义修改 */
@@ -481,9 +488,10 @@
 	.tool .toolItem {
 		width: 100%;
 		display: inline-block;
-		font-size: 12px;
+		font-size: 14px;
 		white-space: nowrap;
 		text-align: center;
+		font-weight: bold;
 	}
 
 	/* 工具结束 */
@@ -579,17 +587,18 @@
 	}
 
 	.news .content .img {
-		width: 190rpx;
-		height: 190rpx;
+		width: 160rpx;
+		border-radius: 10px;
+		height: 160rpx;
+		margin-top: 10px;
 	}
 
 	.news .content .time {
 		display: block;
-		/* background-color: #909090; */
-		width: 130rpx;
+		width: 124rpx;
 		white-space: nowrap;
-		/* height: 1em; */
 		overflow: hidden;
+		margin: 8rpx 10rpx;
 	}
 
 	.news .content .uContent {
@@ -600,6 +609,7 @@
 
 	/* 头像 */
 	.news .content .uimg {
+		/* margin-top: 20px; */
 		border-radius: 50%;
 		width: 32px;
 		height: 32px;
@@ -635,7 +645,8 @@
 
 	.news .content .conText {
 		display: block;
-		line-height: 1.14rem;
+		line-height: 1.2rem;
+		font-size: 13px;
 		max-height: 200rpx;
 		/* width: 200rpx; */
 		overflow: hidden;
