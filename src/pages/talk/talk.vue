@@ -67,7 +67,7 @@
 	//发送的消息
 	const chatMsg = ref("")
 	const msgList = ref([{
-			botContent: "hello，请问我有什么可以帮助你的吗？",
+			botContent: "你好！有什么我可以帮助您的吗？",
 			recordId: 0,
 			titleId: 0,
 			userContent: "",

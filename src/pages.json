@@ -112,6 +112,13 @@
 				// "enablePullDownRefresh": false
 			}
 		}, {
+			"text": "验证",
+			"path": "pages/user/authenticate",
+			"style": {
+				"navigationStyle": "custom"
+				// "enablePullDownRefresh": false
+			}
+		}, {
 			"text": "个人资料",
 			"path": "pages/user/modify",
 			"style": {

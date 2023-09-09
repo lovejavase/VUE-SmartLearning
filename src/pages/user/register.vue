@@ -87,11 +87,15 @@
 		flex-direction: column;
 	}
 
+	
 	.bg {
 		margin-top: 160rpx;
 		padding-left: 10rpx;
+		display: flex;
+		align-items: center;
+		flex-direction: column;
 	}
-
+	
 	.bg .text1 {
 		margin-bottom: 20rpx;
 		width: 300rpx;
@@ -104,14 +108,14 @@
 		border-radius: 250rpx;
 		color: white;
 	}
-
+	
 	.bg .text2 {
 		color: black;
 		display: block;
-		width: 300rpx;
+		/* width: 300rpx; */
 		font-size: 60rpx;
 		text-align: center;
-		padding-left: 20rpx;
+		/* padding-left: 20rpx; */
 	}
 
 	.input {

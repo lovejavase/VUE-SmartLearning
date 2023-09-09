@@ -1,17 +1,23 @@
 <template>
-	<!-- 未登录页面 -->
-	<view class="visit">
-		<view class="title">
-			<text class="hello1">HELLO!</text><br>
-			<text class="hello2">欢迎回来</text>
+	<!-- 手机短信验证页 -->
+	<view class="authenticate">
+		<!-- 大标题 -->
+		<view class="bg">
+			<text class="text1">欢迎</text>
+			<text class="text2">验证登录</text>
 		</view>
-		<view class="content">
-			<!-- 验证码登录包括手机号和邮箱验证码 -->
-			<view class="btn1" style="margin-top: 50rpx;" @click='login'>登录</view>
-			<!-- 验证码登录包括手机号和邮箱-->
-			<view class="btn1" @click='register'>注册</view>
-			<view class="btnNo" plain>不登录，随便看看</view>
-			<text class="or">OR</text>
+		<!-- 验证功能 -->
+		<view class="input">
+			<view class="box">
+				<input class="uni-input" v-model="account" maxlength="11" placeholder="请输入您的手机号" />
+			</view>
+			<view class="box">
+				<input class="uni-input" v-model="code" maxlength="8" placeholder="请输入验证码" />
+				<text class="sendCode" @click="msg">获取验证码</text>
+			</view>
+		</view>
+		<view class="or">
+			<text class="title">其它登录方式</text>
 			<view class="other">
 				<el-button class="orBtn" plain><el-icon>
 						<svg t="1690990258465" class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -53,101 +59,136 @@
 					</el-icon></el-button>
 			</view>
 		</view>
+		<!-- 按钮 -->
+		<text class="send" @click="">登录</text>
 	</view>
 </template>
 
 <script setup>
-	let login = () => {
-		uni.navigateTo({
-			url: '/pages/user/login'
-		})
-	}
-	let register = () => {
-		uni.navigateTo({
-			url: '/pages/user/register'
-		})
+	import {
+		ref
+	} from 'vue';
+	const account = ref('')
+	const code = ref('')
+	
+	let msg=()=>{
+		console.log('发送验证码')
 	}
 </script>
 
-<style scoped>
-	.visit {
-		background-color: #15a0ac;
-		height: auto;
-		margin: 0;
-		padding: 0;
+<style>
+	.authenticate {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+
+	}
+
+	.bg {
+		margin-top: 160rpx;
+		padding-left: 10rpx;
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+	}
+
+	.bg .text1 {
+		margin-bottom: 20rpx;
+		width: 300rpx;
+		height: 300rpx;
+		display: block;
+		font-size: 90rpx;
+		text-align: center;
+		line-height: 300rpx;
+		background: #15a0ac;
+		border-radius: 250rpx;
+		color: white;
+	}
+
+	.bg .text2 {
+		color: black;
+		display: block;
+		/* width: 300rpx; */
+		font-size: 60rpx;
+		text-align: center;
+		/* padding-left: 20rpx; */
+	}
+
+	/* 输入框 */
+
+	.input {
+		margin-top: 70rpx;
+		width: 560rpx;
+	}
+
+	.input .box {
+		border-radius: 45rpx !important;
+		overflow: hidden;
+		border: #d6d6d6 1px solid;
+		height: 90rpx;
+		margin-bottom: 30rpx;
+		position: relative;
+	}
+
+	.input .uni-input {
+		margin: 20rpx 12rpx;
+		margin-left: 30rpx;
+		z-index: 0;
+	}
+
+	/* 发送验证码 */
+	.sendCode {
+		font-size: 12px;
+		color: #7a7a7a;
+		position: absolute;
+		top: 30rpx;
+		right: 20rpx;
+		z-index: 10;
+	}
+
+	/* 其它登录方式 */
+	.or {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin: 10rpx 0;
 		font-size: 12px;
 	}
 
 	.title {
-		padding: 4% 7%;
-		color: white;
-		padding-top: 120rpx;
-		/* margin-top: 70px; */
-		/* background-color: #15a0ac; */
-	}
-
-	.title .hello1 {
-		font-size: 50px;
-	}
-
-	.title .hello2 {
-		font-size: 22px;
-		display: block;
-		margin-top: 20rpx;
-	}
-
-	.content {
-		background-color: white;
-		border-radius: 40px 40px 0 0;
-		padding: 10% 5%;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		/* height: 400px; */
-		height: 800rpx;
-	}
-
-	.content .btn1 {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		background-color: #90c9b4;
-		color: white;
-		border: none;
-		font-size: 14px;
-		height: 42px;
-		font-weight: 600;
-		margin: 10px;
-		width: 80%;
-		border-radius: 50rpx;
-	}
-
-	.content .btnNo {
-		margin-top: 40px;
-		border: none;
 		color: #7a7a7a;
-	}
-
-	.content .or {
-		color: #7a7a7a;
-		width: 96%;
+		/* width: 96%; */
 		text-align: center;
-		margin-top: 16px;
-		/* height: 0; */
-		/* border: #f6e382 solid 4px; */
 	}
 
-	.content .other {
+	.other {
 		margin-top: 16px;
 		display: flex;
 		justify-content: center;
 	}
 
-	.content .orBtn {
+	.orBtn {
 		border: none;
 		width: 24px;
 		height: 24px;
 		font-size: 24px;
 		margin: 0 14px;
+	}
+
+	/* 按钮 */
+
+	.send {
+		display: block;
+		text-align: center;
+		margin: 30rpx 0;
+		padding: 10rpx 0;
+		width: 560rpx;
+		background-color: #f6e382;
+		border: none;
+		border-radius: 26rpx;
+		color: white;
+		text-shadow: 2rpx 2rpx 4rpx #c7b869;
+		font-size: 16px;
+		font-weight: 600;
 	}
 </style>

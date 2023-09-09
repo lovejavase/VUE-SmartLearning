@@ -5,9 +5,6 @@
 			<text class="text1">登录</text>
 			<text class="text2">欢迎回来！</text>
 		</view>
-		<!-- 		<view class="text">
-			<text>欢迎加入！</text>
-		</view> -->
 		<view class="input">
 			<view class="box">
 				<el-input v-model="account" placeholder="请输入您的用户名" />
@@ -142,6 +139,9 @@
 	.bg {
 		margin-top: 160rpx;
 		padding-left: 10rpx;
+		display: flex;
+		align-items: center;
+		flex-direction: column;
 	}
 
 	.bg .text1 {
@@ -160,12 +160,13 @@
 	.bg .text2 {
 		color: black;
 		display: block;
-		width: 300rpx;
+		/* width: 300rpx; */
 		font-size: 60rpx;
 		text-align: center;
-		padding-left: 20rpx;
+		/* padding-left: 20rpx; */
 	}
 
+	/* 输入框 */
 	.input {
 		margin-top: 70rpx;
 		width: 560rpx;
