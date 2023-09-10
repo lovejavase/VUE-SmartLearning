@@ -1,23 +1,33 @@
+<script setup>
+	import {
+		onHide,
+		onLaunch,
+		onShow
+	} from '@dcloudio/uni-app';
+
+	const userDetail = ''
+
+	onLaunch(() => {
+		console.log('App Launch')
+	})
+	onShow(() => {
+		console.log('App onShow')
+	})
+	onHide(() => {
+		console.log('App onHide')
+	})
+</script>
 <script>
 	export default {
-
-		onLaunch: function() {
-			console.log('App Launch')
+		globalData: {
+			userDetail: {},
 		},
-		onShow: function() {
-			console.log('App Show')
-		},
-		onHide: function() {
-			console.log('App Hide')
-		},
-	}
+	};
 </script>
 
 <style>
 	/*每个页面公共css */
-	body {
-		
-	}
+	body {}
 
 	/* 	::v-deep .uni-tabbar-bottom {
 		background-color: #f3efee;

@@ -2,89 +2,66 @@
 	<view class="index">
 		<!-- 顶部 -->
 		<view class="top">
-			<view>
-				<el-row justify="space-between">
-					<el-col :span="6" class="topHi">
-						<el-text class="titleTop" size="large">Hi!</el-text>
-					</el-col>
-					<el-col :span="7" class="topButton">
-						<el-button class="topBtn" plain @click="gotoNotice">
-							<image src="http://www.a-puppy-c.top/smartLearning/news.png" alt=""
-								style="width: 40px;height: 40px;" />
-							<!-- <el-image :src="news" alt=""/> -->
-						</el-button>
-						<el-button class="topBtn" plain @click="gotoMy">
-							<image src="http://www.a-puppy-c.top/smartLearning/my.png" alt=""
-								style="width: 40px;height: 40px;" />
-						</el-button>
-					</el-col>
-				</el-row>
-				<el-text class="titleBottom" size="large">{{hiText}}</el-text>
-			</view>
+			<view class="">
+				<view class="topTop">
+					<view class="topHi">
+						<text class="titleTop">Hi!</text>
+					</view>
+					<view class="topButton">
+						<view class="topBtn" @click="gotoNotice">
+							<image src="@/static/image/news.png" mode=""></image>
+						</view>
+						<view class="topBtn" @click="gotoMy">
+							<image src="@/static/image/my.png" mode=""></image>
+						</view>
 
+					</view>
+				</view>
+				<text class="titleBottom">{{hiText}}</text>
+			</view>
 			<view class="topBottom">
-				<!-- <el-input v-model="input" class="topInput" size="large" placeholder="搜索科普/课堂/识别" :suffix-icon="Search" /> -->
-				<div class="topInput">
-					<el-input v-model="input" size="large" placeholder="搜索科普/课堂/识别">
-						<template #append class="p-0">
-							<el-button class="searchBtn" :icon="Search" />
-						</template>
-					</el-input>
-				</div>
+				<input class="search" v-model="input" placeholder="搜索科普/课堂/识别" />
+				<image @click="sendSearch" src="@/static/image/icon/search.png" mode=""></image>
 			</view>
 		</view>
 		<!-- 卡片轮播 -->
 		<view class="carousal">
-			<el-carousel trigger="click" indicator-position="none" :height="imgHeight">
-				<el-carousel-item @click="banner1">
-					<image class="carImg" src="http://www.a-puppy-c.top/smartLearning/days1.png" mode="aspectFit"
-						alt="" />
-				</el-carousel-item>
-				<el-carousel-item @click="banner1">
-					<image class="carImg" src="http://www.a-puppy-c.top/smartLearning/days1.png" mode="aspectFit"
-						alt="" />
-				</el-carousel-item>
-				<el-carousel-item @click="banner1">
-					<image class="carImg" src="http://www.a-puppy-c.top/smartLearning/days1.png" mode="aspectFit"
-						alt="" />
-				</el-carousel-item>
-			</el-carousel>
+			<swiper class="swiper" circular easeInOutCubic autoplay="true" interval="4500" duration="500">
+				<swiper-item>
+					<image class="carImg" src="@/static/image/days1.png" mode="aspectFit" alt="" />
+				</swiper-item>
+				<swiper-item>
+					<image class="carImg" src="@/static/image/days1.png" mode="aspectFit" alt="" />
+				</swiper-item>
+				<swiper-item>
+					<image class="carImg" src="@/static/image/days1.png" mode="aspectFit" alt="" />
+				</swiper-item>
+			</swiper>
 		</view>
 		<!-- 功能 -->
 		<view class="tool">
-			<el-row justify="space-between">
-				<el-col :span="3">
-					<view class="toolImg" @click="gotoAItalk">
-						<image src="@/static/image/tool1-2.png" alt="" />
-						<text class="toolItem">AI对话</text>
-					</view>
-				</el-col>
-				<el-col :span="3">
-					<view class="toolImg" @click="gotoIntelligent">
-						<image src="@/static/image/tool2.png" alt="" />
-						<text class="toolItem">智能识别</text>
-					</view>
-				</el-col>
-				<el-col :span="3">
-					<view class="toolImg" @click="gotoClass">
-						<image src="@/static/image/tool3.png" alt="" />
-						<text class="toolItem">问答测验</text>
-					</view>
-				</el-col>
-				<el-col :span="3">
-					<view class="toolImg" @click="">
-						<image src="@/static/image/tool4-un.png" alt="" />
-						<text class="toolItem">实践体验</text>
-					</view>
-				</el-col>
-				<el-col :span="3">
-					<view class="toolImg" @click="">
-						<image src="@/static/image/tool5-un.png" alt="" />
-						<text class="toolItem">知识科普</text>
-					</view>
-
-				</el-col>
-			</el-row>
+			<!-- <view justify="space-between"> -->
+			<view class="toolImg" @click="gotoAItalk">
+				<image src="@/static/image/tool1-2.png" alt="" />
+				<text class="toolItem">AI对话</text>
+			</view>
+			<view class="toolImg" @click="gotoIntelligent">
+				<image src="@/static/image/tool2.png" alt="" />
+				<text class="toolItem">智能识别</text>
+			</view>
+			<view class="toolImg" @click="gotoClass">
+				<image src="@/static/image/tool3.png" alt="" />
+				<text class="toolItem">问答测验</text>
+			</view>
+			<view class="toolImg" @click="">
+				<image src="@/static/image/tool4-un.png" alt="" />
+				<text class="toolItem">实践体验</text>
+			</view>
+			<view class="toolImg" @click="">
+				<image src="@/static/image/tool5-un.png" alt="" />
+				<text class="toolItem">知识科普</text>
+			</view>
+			<!-- </view> -->
 		</view>
 		<!-- 学习课堂 -->
 		<view class="class">
@@ -92,25 +69,19 @@
 			<titleItem :title="title[0]"></titleItem>
 			<!-- 滚动视图 -->
 			<scroll-view class="navscroll" scroll-x>
-				<view class="content" v-for="(item, index) in classItem" :key="index">
-					<el-card class="card" shadow="never" :body-style="{ padding: '0px' }">
-						<image :src="item.lessonImage" class="image" />
-						<view class="text" @click="gotoCourse(item.lessonId-1)">
-							<text class="className">{{item.lessonTitle}}</text>
-							<el-row class="row">
-								<el-col :span="18">
-									<el-icon class="icon">
-										<UserFilled />
-									</el-icon>
-									<text class="name">{{item.lessonTeacher}}</text>
-									<!-- 热门推荐标签 -->
-								</el-col>
-								<el-col :span="5" :offset="1">
-									<text class="value">￥150</text>
-								</el-col>
-							</el-row>
+				<view class="content card" v-for="(item, index) in classItem" :key="index">
+					<image :src="item.lessonImage" class="image" />
+					<view class="text" @click="gotoCourse(item.lessonId-1)">
+						<text class="className">{{item.lessonTitle}}</text>
+						<view class="row">
+							<view>
+								<image src="@/static/image/icon/user1.svg" mode=""></image>
+								<text class="name">{{item.lessonTeacher}}</text>
+								<!-- 热门推荐标签 -->
+							</view>
+							<text class="value">￥150</text>
 						</view>
-					</el-card>
+					</view>
 				</view>
 			</scroll-view>
 		</view>
@@ -126,9 +97,7 @@
 						<image class="uimg" :src="avatar[index]" alt="" />
 						<view class="userName">
 							<text>{{userName[index]}}</text>
-
 						</view>
-
 					</view>
 					<text class="time">{{item.createTime}}</text>
 				</view>
@@ -207,6 +176,10 @@
 		})
 
 	})
+	// 搜索按钮
+	let sendSearch = () => {
+		console.log(input.value)
+	}
 	// 查询部分课程
 	let getList = () => {
 		return new Promise((resolve, reject) => {
@@ -375,6 +348,13 @@
 		padding-top: 20px;
 	}
 
+	.top .topTop {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin: 20rpx 0;
+	}
+
 	.top .topHi {
 		/* display: flex; */
 		/* justify-content: baseline; */
@@ -386,6 +366,8 @@
 	}
 
 	.top .titleBottom {
+		font-size: 16px;
+		display: block;
 		color: white;
 	}
 
@@ -400,58 +382,39 @@
 	.top .topBtn {
 		width: 40px;
 		height: 40px;
-		background-color: #15a0ac;
-		border: none;
-		border-radius: 10px;
+		margin: 0 10rpx;
 	}
 
-	.top .topBtn img {
-		width: 40px;
+	.top .topBtn image {
+		width: 100%;
+		height: 100%;
 	}
 
 	/* 下搜索框 */
 	.top .topBottom {
-		width: 680rpx;
-		margin: 20rpx auto;
-	}
-
-	.top .topInput {
+		width: auto;
+		height: 70rpx;
+		background-color: #ffffff;
+		margin: 30rpx auto;
+		padding: 0 20rpx;
 		border-radius: 40px !important;
 		overflow: hidden;
-	}
-
-	/* .top .n-border {
-border: none !important;
-box-shadow: 0 0 0 0px;
-} */
-
-	.top .topInput :deep(.el-input__wrapper) {
-		/* // 如果没有下面这一行样式的话 无法对border进行自定义修改 */
-		box-shadow: 0 0 0 0px var(--el-input-border-color, var(--el-border-color)) inset;
-		border: none;
-		/* 对border进行样式修改 */
-	}
-
-	.top .topInput :deep(.el-input-group__append) {
-		box-shadow: 0 0 0 0px var(--el-input-border-color, var(--el-border-color)) inset;
-		background-color: transparent !important;
-		border: none !important;
+		display: flex;
+		align-items: center;
 	}
 
 
-	.top .searchBtn {
-		height: 100%;
-		border-radius: 0 40px 40px 0;
-		border: none;
-		font-size: 20px;
-		padding: 9px 12px 7px 12px;
+	.top .topBottom .search {
+		/* background-color: #909090; */
+		width: 100%;
+		/* margin-left: 20rpx; */
 	}
 
-	.top .searchBtn:hover,
-	.searchBtn:checked {
-		/* color: #f3efee; */
-		background-color: #ffffff;
-		color: #15a0ac;
+	.top .topBottom image {
+		/* background-color: #90c9b4; */
+		margin-left: 10rpx;
+		width: 40rpx;
+		height: 40rpx;
 	}
 
 
@@ -474,10 +437,15 @@ box-shadow: 0 0 0 0px;
 	.tool {
 		margin: 0 30rpx;
 		padding: 0 0.4rem;
+		display: flex;
+		justify-content: space-between;
 	}
 
 	.tool .toolImg {
-		width: 100%;
+		width: 100rpx;
+		display: flex;
+		flex-wrap: wrap;
+		justify-items: center;
 	}
 
 	.tool .toolImg image {
@@ -505,20 +473,19 @@ box-shadow: 0 0 0 0px;
 	.class .navscroll {
 		white-space: nowrap;
 		width: 100%;
-		height: 194px;
+		/* height: 194px; */
 	}
 
 	.class .content {
 		display: inline-block;
-		margin-top: 3%;
+		margin-top: 20rpx;
 		/* 斜体 */
 		font-style: italic;
-		width: 64%;
-		margin-right: 6%;
-	}
-
-	.class .content .card {
+		width: 440rpx;
+		margin-right: 40rpx;
 		border-radius: 14px;
+		background-color: #ffffff;
+		overflow: hidden;
 	}
 
 	.class .content .image {
@@ -532,12 +499,21 @@ box-shadow: 0 0 0 0px;
 	}
 
 	.class .content .className {
-		/* font-size: 14px; */
+		font-size: 14px;
 		font-weight: 600;
 	}
 
 	.class .content .row {
-		margin-top: 2%;
+		margin-top: 10rpx;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		font-size: 12px;
+	}
+
+	.class .content image {
+		width: 20rpx;
+		height: 20rpx;
 	}
 
 	.class .content .icon {
@@ -636,11 +612,11 @@ box-shadow: 0 0 0 0px;
 
 	.news .content .conTitle {
 		display: block;
-		font-size: 14px;
+		font-size: 16px;
 		color: #90c9b4;
 		/* margin: 4rpx 0; */
 		margin-bottom: 6rpx;
-		font-weight: 600;
+		/* font-weight: 600; */
 	}
 
 	.news .content .conText {

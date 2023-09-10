@@ -2,30 +2,30 @@
 	<!-- 课程详情页 -->
 	<view class="course">
 		<!-- 视频播放器 -->
-		<video src="" controls class="video"></video>
+		<video :src="classItem.lessonLink" controls class="video"></video>
 		<!-- 后退和分享按钮 -->
 		<view class="back">
-			<el-button class="btn" link @click="back">
-				<img src="@/static/image/icon/back_android.svg" alt="">
-			</el-button>
-			<el-button class="btn" link>
-				<img src="@/static/image/icon/share.svg" alt="">
-			</el-button>
+			<view class="btn" link @click="back">
+				<image src="@/static/image/icon/back_android.svg" alt="" />
+			</view>
+			<view class="btn" link>
+				<image src="@/static/image/icon/share.svg" alt="" />
+			</view>
 		</view>
 		<!-- 简介 -->
 		<view class="content">
 			<text class="title">{{classItem.lessonTitle}}</text>
 			<view class="name">
 				<!-- 图标 -->
-				<img src="@/static/image/icon/people_fill.svg" alt="">
+				<image src="@/static/image/icon/people_fill.svg" alt="" />
 				<text>{{classItem.lessonTeacher}}</text>
 				<!-- 收藏功能 -->
-				<el-button class="favor" link>
-					<img src="@/static/image/icon/favor_fill.svg" alt="">
+				<view class="favor" link>
+					<image src="@/static/image/icon/favor_fill.svg" alt="" />
 					{{favor_score}}
-				</el-button>
+				</view>
 			</view>
-			<text>{{classItem.lessonDetail}}</text>
+			<text class="detail">{{classItem.lessonDetail}}</text>
 			<view class="info">
 				<img src="@/static/image/icon/attention_fill.svg" alt="">
 				<text>{{info_watch}}</text>
@@ -38,22 +38,19 @@
 			<view class="input">
 				<text class="title">热门评论</text>
 				<!-- 输入框 -->
-				<el-input class="item" v-model="input" size="small" placeholder="写条评论吧...">
-					<template #append class="p-0">
-						<el-button class="send">
-							<img src="@/static/image/icon/check.svg" alt="">
-						</el-button>
-					</template>
-				</el-input>
-				<el-button class="more" link>
+				<view class="topBottom">
+					<input class="search" v-model="input" placeholder="写条评论吧" placeholder-style="font-size:14px" />
+					<image @click="" src="@/static/image/icon/check.svg" mode=""></image>
+				</view>
+				<view class="more" link>
 					查看更多
-					<img src="@/static/image/icon/right.svg" alt="">
-				</el-button>
+					<image src="@/static/image/icon/right.svg" alt=""/>
+				</view>
 			</view>
 			<!-- 用户评论 -->
 			<view class="box">
 				<view class="item" v-for="(item,index) in remark" :key="index">
-					<img src="@/static/image/userImg1.png" alt="">
+					<image :src="item.userAvatar" alt="" class="remarkImg"/>
 					<view class="info">
 						<text class="name">{{item.userNickName}}</text>
 						<text class="time">{{item.time}}</text>
@@ -172,7 +169,7 @@
 
 <style>
 	.course {
-		background-color: #f3efee;
+		background-color: #f3f3f3;
 		font-size: 12px;
 	}
 
@@ -181,6 +178,7 @@
 
 	.video {
 		width: 100%;
+		height: 350px;
 		z-index: 0;
 	}
 
@@ -188,7 +186,7 @@
 
 	/* 分享和后退按钮开始 */
 	.back {
-		z-index: 1;
+		z-index: 100;
 		position: fixed;
 		top: 0;
 		width: 710rpx;
@@ -200,10 +198,16 @@
 
 	.back .btn {
 		background-color: #9e9e9e60;
+		padding: 4rpx;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 10rpx;
 	}
 
-	.back .btn img {
+	.back .btn image {
 		width: 50rpx;
+		height: 50rpx;
 	}
 
 	/* 分享和后退按钮结束 */
@@ -214,34 +218,48 @@
 	}
 
 	.content .title {
-		font-size: 20px;
+		font-size: 26px;
 		font-weight: 600;
 		display: block;
+		font-weight: bolder;
 		margin: 20rpx 0;
 	}
 
 	.content .name {
-		margin: 10rpx 0;
+		margin: 10rpx 6rpx;
 		color: #15a0ac;
 		font-weight: 600;
 		font-size: 16px;
+		width: 320rpx;
 		display: flex;
-		width: 280rpx;
-		justify-content: space-between;
+		justify-content: left;
 		align-content: center;
 	}
 
-	.content .name img {
-		width: 20px;
+	.content .name text {
+		margin: 0 26rpx;
+	}
+
+	.content .name image {
+		width: 16px;
+		height: 16px;
+		margin-top: 6rpx;
 	}
 
 	.content .name .favor {
 		background-color: #ffffff;
+		border-radius: 10rpx;
+		display: flex;
+		align-items: center;
+		font-size: 14px;
+		padding: 4rpx 6rpx;
 	}
 
-	.content .name .favor img {
+	.content .name .favor image {
 		width: 14px;
+		height: 14px;
 		margin-right: 6rpx;
+		margin-bottom: 2rpx;
 	}
 
 	.content .info {
@@ -259,12 +277,21 @@
 		margin-right: 60rpx;
 	}
 
+	.detail {
+		display: block;
+		width: 21rem;
+		margin: 0 auto;
+		font-size: 14px;
+		line-height: 1.3rem;
+
+	}
+
 	/* 简介结束 */
 	/* 评论区开始 */
 	.comment {
 		width: 690rpx;
 		margin: 20rpx auto;
-		font-size: 12px;
+		font-size: 16px;
 	}
 
 	.comment .input {
@@ -272,49 +299,50 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		margin: 30rpx 0;
+		/* margin: 30rpx 0; */
 	}
 
 	.comment .input .title {
 		font-weight: 600;
 		display: block;
 		width: auto;
-		font-size: 13px;
+		font-size: 15px;
 	}
 
 	/* 输入框 */
-	.comment .input .item {
-		width: 400rpx;
+	.comment .topBottom {
+		width: 380rpx;
 		height: 50rpx;
+		background-color: #ffffff;
+		margin: 30rpx 10rpx;
+		padding: 0 20rpx;
 		border-radius: 25rpx !important;
 		overflow: hidden;
+		display: flex;
+		align-items: center;
+		font-size: 12px;
 	}
 
-	.comment .input .item :deep(.el-input__wrapper) {
-		/* 如果没有下面这一行样式的话 无法对border进行自定义修改 */
-		box-shadow: 0 0 0 0px var(--el-input-border-color, var(--el-border-color)) inset;
-		border: none;
+	.comment .topBottom .search {
+		width: 100%;
 	}
 
-	/* 发送按钮 */
-	.comment .input .send {
-		border: none;
-		background-color: #ffffff;
-		padding-top: 10rpx;
-	}
-
-	.comment .input .send img {
+	.comment .topBottom image {
+		/* background-color: #90c9b4; */
+		margin-left: 10rpx;
 		width: 40rpx;
+		height: 40rpx;
 	}
 
 	/* 查看更多按钮 */
 	.comment .input .more {
-		font-size: 12px;
+		font-size: 14px;
 		color: #15a0ac;
 	}
 
-	.comment .input .more img {
+	.comment .input .more image {
 		width: 14px;
+		height: 14px;
 	}
 
 	/* 用户评论 */
@@ -325,7 +353,7 @@
 		margin-top: 30rpx;
 	}
 
-	.comment .box .item img {
+	.comment .box .item image {
 		width: 80rpx;
 		height: 80rpx;
 
@@ -340,6 +368,8 @@
 	.text {
 		display: block;
 		margin-left: 10rpx;
+		font-size: 13px;
+		line-height: 1.3rem;
 	}
 
 
@@ -362,6 +392,10 @@
 	.comment .box .item .info .btn img {
 		width: 100%;
 		height: 100%;
+	}
+
+	.remarkImg {
+		border-radius: 20px;
 	}
 
 	/* 评论区结束 */

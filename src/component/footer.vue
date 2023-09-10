@@ -103,14 +103,13 @@
 	.footer .talk {
 		position: absolute;
 		top: -50%;
-		width: 100rpx;
-		height: 100rpx;
-		border-radius: 50rpx;
+		width: 106rpx;
+		height: 106rpx;
+		border-radius: 53rpx;
 		background-color: #f6e382;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
-	.footer .talk .btn {
-		/* width: 100rpx; */
-		height: auto;
-	}
 </style>

@@ -17,13 +17,10 @@
 			<!-- 评价 -->
 			<view class="comment">
 				<!-- 输入框 -->
-				<el-input class="input" v-model="input" size="small" placeholder="写条评论吧...">
-					<template #append class="p-0">
-						<el-button class="send">
-							<image src="@/static/image/icon/send_white.svg" alt="" />
-						</el-button>
-					</template>
-				</el-input>
+				<view class="topBottom">
+					<input class="search" v-model="input" placeholder="写条评论吧..." />
+					<image @click="" src="@/static/image/icon/send_white.svg" mode=""></image>
+				</view>
 				<!-- 按钮 -->
 				<view class="btnGroup">
 					<image src="@/static/image/icon/comment_.svg" alt="" />
@@ -48,7 +45,7 @@
 	var newsId = -1
 	// const news = ref([{newTitle:'0',newDetail:'1'}])
 	const news = ref({})
-	
+
 
 	onLoad((res) => {
 		// console.log(~~res.id)
@@ -75,7 +72,7 @@
 					if (res.data.code == 200) {
 						console.log("主页-调用selectNewDetail成功");
 						var newInImg = "http://www.a-puppy-c.top/smartLearning/newin1.jpg";
-						
+
 						resolve(res.data.data)
 					} else {
 						console.log("主页-调用selectNewDetail失败");
@@ -93,6 +90,8 @@
 <style>
 	.news {
 		padding-top: 30rpx;
+		/* width: 680rpx; */
+		/* margin: 0 auto; */
 	}
 
 	.content {
@@ -100,28 +99,31 @@
 		display: flex;
 		flex-wrap: wrap;
 		flex-direction: column;
+		justify-content: center;
 	}
 
 	/* 标题 */
 	.title {
 		display: block;
-		font-size: 28px;
+		font-size: 20px;
 		font-weight: bolder;
-		font-family:  "Helvetica Neue", "Arial", sans-serif;
-		 font-variant-ligatures: normal;
+		font-family: "Helvetica Neue", "Arial", sans-serif;
+		font-variant-ligatures: normal;
 	}
 
 	/* 大图 */
 	.content>image {
 		width: 100%;
 		height: 350rpx;
-		margin: 20rpx auto;
+		/* margin: 20rpx auto; */
 		margin-top: 30rpx;
 		/* border: #909090 1px solid; */
 	}
 
 	/* 大图备注 */
 	.tip {
+		width: 100%;
+		margin-top: 10rpx;
 		font-size: 12px;
 		color: #909090;
 		text-align: center;
@@ -129,7 +131,8 @@
 
 	/* 正文 */
 	.text {
-		margin-top: 40rpx;
+		width: 99%;
+		margin-top: 30rpx;
 		margin-bottom: 40rpx;
 	}
 
@@ -141,60 +144,50 @@
 	.text .info {
 		display: block;
 		font-size: 17px;
-		line-height: 4vh;
+		line-height: 1.5rem;
 		margin-top: 20rpx;
 	}
 
 	/* 评论区开始 */
 	/* 输入框 */
 	.comment {
-		width: 100%;
+		width: 750rpx;
 		position: fixed;
+		z-index: 1;
 		bottom: 0;
+		left: 0;
 		margin-top: 50rpx;
 		display: flex;
-		/* justify-content: space-evenly; */
+		justify-content: space-evenly;
 		align-items: center;
-		border-top: #909090 1px solid;
+		border-top: #c5c5c5 1px solid;
 		padding: 20rpx 0;
 		background-color: #ffffff;
-	
+
 	}
 
-	.comment .input {
-		width: 400rpx;
+	.comment .topBottom {
+		width: 380rpx;
 		height: 70rpx;
+		padding: 0 10rpx;
 		border-radius: 30rpx !important;
+		background-color: #dadada;
 		overflow: hidden;
-		color: #ffffff;
-
+		color: #515151;
+		display: flex;
+		align-items: center;
+		justify-content: space-evenly;
 	}
 
-	.comment .input :deep(.el-input__wrapper) {
-		/* 如果没有下面这一行样式的话 无法对border进行自定义修改 */
-		box-shadow: 0 0 0 0px var(--el-input-border-color, var(--el-border-color)) inset;
-		border: none;
-		background-color: #f3efee;
-	}
 
-	::v-deep .el-button {
-		border-radius: 0;
-	}
-
-	/* 发送按钮 */
-	.comment .input .send {
-		border: none;
-		background-color: #ffffff;
-		padding-top: 10rpx;
-		background-color: #f3efee;
-	}
-
-	.comment .input .send image {
+	.comment .topBottom image {
+		/* background-color: #90c9b4; */
+		margin-left: 10rpx;
 		width: 40rpx;
+		height: 40rpx;
 	}
 
 	/* 点赞按钮 */
-
 	.comment .btnGroup {
 		width: 260rpx;
 		display: flex;

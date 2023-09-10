@@ -151,21 +151,8 @@
 		ref
 	} from 'vue';
 
-	var userId = 1
-	var user = ref({
-		userAvatar: '',
-		userEmail: '',
-		userGrade: '',
-		userId: 0,
-		userInterest: '',
-		userLoginAddress: '',
-		userNickName: '',
-		userNumber: '',
-		userPhone: '',
-		userPoints: '',
-		userState: '',
-		userVip: ''
-	})
+	var userId = ref(1)
+	var user = ref({})
 
 
 	// 跳转方法
@@ -187,17 +174,18 @@
 	}
 	let collect = () => {
 		uni.navigateTo({
-			url: '/pages/user/collect'
+			url: '/pages/user/collect?id='+userId.value
 		})
 	}
 
 	// // smzhouqi
 	onMounted(() => {
-		getUser()
+		userId.value = getApp().globalData.userDetail.userId
+		getUser(userId.value)
 	})
 
 	// 获取用户信息
-	let getUser = () => {
+	let getUser = (userId) => {
 		console.log("开始调用getUser")
 		uni.request({
 			url: 'http://a-puppy-c.top:9999/Smart/User/getUser',
@@ -211,11 +199,7 @@
 			},
 			success: (res) => {
 				console.log("用户-调用getUser成功");
-				// console.log(res.data);
 				user.value = res.data.data;
-				// 用户缓存
-				// let item = JSON.stringify(user.value)
-				// uni.setStorageSync('userInfo',item)
 			},
 			fail() {
 				console.log("调用getUser失败");
@@ -227,7 +211,7 @@
 <style scoped>
 	.user {
 		background-color: #15a0ac;
-		padding-top: 30rpx;
+		padding-top: 36rpx;
 		width: 750rpx;
 	}
 

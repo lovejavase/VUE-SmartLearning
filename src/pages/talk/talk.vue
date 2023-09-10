@@ -2,7 +2,7 @@
 	<view class="chat">
 		<!-- 顶部 -->
 		<myheader title='智能交流'></myheader>
-		<scroll-view :style="{height: `${windowHeight-inputHeight-30}rpx`}" id="scrollview" scroll-y="true"
+		<scroll-view :style="{height: `${windowHeight-inputHeight-120}rpx`}" id="scrollview" scroll-y="true"
 			:scroll-top="scrollTop" class="scroll-view">
 			<!-- 聊天主体 -->
 			<view id="msglistview" class="chat-body">
@@ -67,13 +67,12 @@
 	//发送的消息
 	const chatMsg = ref("")
 	const msgList = ref([{
-			botContent: "你好！有什么我可以帮助您的吗？",
-			recordId: 0,
-			titleId: 0,
-			userContent: "",
-			userId: 0
-		}
-	])
+		botContent: "你好！有什么我可以帮助您的吗？",
+		recordId: 0,
+		titleId: 0,
+		userContent: "",
+		userId: 0
+	}])
 
 
 	onUpdated(() => { //页面更新时调用聊天消息定位到最底部
@@ -83,46 +82,45 @@
 	onLoad(() => {
 		uni.onKeyboardHeightChange(res => {
 			//这里正常来讲代码直接写就行了
-			keyboardHeight.value = rpxTopx(res.height)
+			// keyboardHeight.value = rpxTopx(res.height)
 			// console.log(res.height)
 			//但是之前界面ui设计聊天框的高度有点高,为了不让键盘和聊天输入框之间距离差太大所以我改动了一下。
-			// keyboardHeight.value = rpxTopx(res.height + 30)
-			// if (keyboardHeight.value < 0) {
-			// 	keyboardHeight.value = 0;
-			// }
+			keyboardHeight.value = rpxTopx(res.height + 30)
+			if (keyboardHeight.value < 0) {
+				keyboardHeight.value = 0;
+			}
 		})
-
 	})
 	onUnload(() => {
 		uni.offKeyboardHeightChange()
 	})
 
-	let AIDialog = (text) => {
-		return new Promise((resolve, reject) => {
-			uni.request({
-				url: 'http://a-puppy-c.top:9999/Smart/AI/AIDialog',
-				method: 'POST',
-				data: {
-					text: text
-				},
-				header: {
-					'Authorization': uni.getStorageSync('Authorization'),
-					'content-type': 'application/x-www-form-urlencoded'
-				},
-				success: (res) => {
-					if (res.data.code == 200) {
-						console.log("AIDialog请求成功");
-						resolve(res.data.data)
-					} else {
-						console.log("AIDialog请求失败");
-					}
-				},
-				fail() {
-					console.log("接口请求失败");
-				}
-			})
-		})
-	}
+	// let AIDialog = (text) => {
+	// 	return new Promise((resolve, reject) => {
+	// 		uni.request({
+	// 			url: 'http://a-puppy-c.top:9999/Smart/AI/AIDialog',
+	// 			method: 'POST',
+	// 			data: {
+	// 				text: text
+	// 			},
+	// 			header: {
+	// 				'Authorization': uni.getStorageSync('Authorization'),
+	// 				'content-type': 'application/x-www-form-urlencoded'
+	// 			},
+	// 			success: (res) => {
+	// 				if (res.data.code == 200) {
+	// 					console.log("AIDialog请求成功");
+	// 					resolve(res.data.data)
+	// 				} else {
+	// 					console.log("AIDialog请求失败");
+	// 				}
+	// 			},
+	// 			fail() {
+	// 				console.log("接口请求失败");
+	// 			}
+	// 		})
+	// 	})
+	// }
 
 	// 计算
 	let windowHeight = computed(() => {
@@ -180,7 +178,7 @@
 				userId: 0
 			}
 			msgList.value.push(obj);
-			AIDialog(chatMsg.value).then(res=>{
+			AIDialog(chatMsg.value).then(res => {
 				console.log(res)
 				let aiRes = {
 					botContent: res,
@@ -200,8 +198,7 @@
 </script>
 
 <style scoped>
-	/* 	view,
-	button,
+	/* button,
 	text,
 	input,
 	textarea {
@@ -209,10 +206,12 @@
 		padding: 0;
 		box-sizing: border-box;
 	} */
+
 	::v-deep .header {
 		position: fixed;
 		margin: 0 auto;
 		padding: 30rpx 35rpx;
+		padding-top: 60rpx;
 		top: 0rpx;
 		background-color: #EDEDED;
 		width: 680rpx;
@@ -228,7 +227,7 @@
 	}
 
 	.scroll-view {
-		margin-top: 90rpx;
+		margin-top: 120rpx;
 	}
 
 	.scroll-view ::-webkit-scrollbar {
@@ -248,7 +247,6 @@
 		display: flex;
 		flex-direction: column;
 		padding-top: 23rpx;
-		/* // background-color:skyblue; */
 	}
 
 	.scroll-view .self {
@@ -258,7 +256,6 @@
 	.scroll-view .item {
 		display: flex;
 		padding: 23rpx 30rpx;
-		/* // background-color: greenyellow; */
 	}
 
 	.scroll-view .right {
@@ -326,7 +323,7 @@
 
 	/* 底部聊天发送栏 */
 	.chat-bottom {
-		width: 750rpx;
+		width: 100%;
 		/* height: 100%; */
 		background: transparent;
 		transition: all 0.1s ease;

@@ -4,11 +4,6 @@
 			<view class="background"> </view>
 			<text class="text">{{title}}</text>
 		</view>
-		<!-- <el-link class="link">
-			<el-icon>
-				<Sort />
-			</el-icon>
-		</el-link> -->
 	</view>
 </template>
 

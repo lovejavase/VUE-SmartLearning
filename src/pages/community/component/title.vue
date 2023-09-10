@@ -5,11 +5,6 @@
 			<view class="background">
 			</view>
 		</view>
-		<!-- 	<el-link class="link">
-			显示全部<el-icon class="el-icon--right">
-				<ArrowRight />
-			</el-icon>
-		</el-link> -->
 	</view>
 </template>
 

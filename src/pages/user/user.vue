@@ -1,8 +1,8 @@
 <template>
 	<!-- 未登录页面 -->
-	<visit v-if="!login"></visit>
+	<visit v-if="!isLogin"></visit>
 	<!-- 登录后的主页 -->
-	<my v-if="login"></my>
+	<my v-if="isLogin"></my>
 
 </template>
 
@@ -17,20 +17,13 @@
 		ref
 	} from "vue";
 
-	const login = ref(false)
+	const isLogin = ref(false)
 	// var login = true
 	onLoad(() => {
-		// console.log('11')
-		uni.$on('userid', function(res) {
-			// console.log(res)
-			login.value = res > 0 ? true : false
-		})
+		// 判断是否登录
+		isLogin.value = getApp().globalData.userDetail.userId >= 0 ? true : false
+		console.log('登录？' + isLogin.value)
 	})
-	// onUnload() {
-	// 	// 移除监听事件  
-	// 	uni.$off('userid');
-	// }
-	console.log('登录？' + login.value)
 </script>
 
 <style>

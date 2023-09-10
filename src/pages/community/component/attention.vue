@@ -2,21 +2,25 @@
 	<view class="attention">
 		<view class="item" v-for="user in mylist">
 			<view class="user">
-				<image src="@/static/image/userImg1.png" alt=""/>
+				<image src="@/static/image/userImg1.png" alt="" />
 				<view class="">
 					<text class="name">{{user.name}}</text>
 					<text class="num">内容：{{user.num}}</text>
 					<text class="fans">粉丝：{{user.fans}}</text>
 				</view>
-				<el-button class="btn" link>已关注</el-button>
+				<view class="btn">已关注</view>
 			</view>
 			<view class="content">
 				<text class="text">{{user.text}}</text>
 				<text class="author">作者：{{user.name}}</text>
 				<view class="btnGroup">
-					<el-button link>11</el-button>
-					<el-button link>11</el-button>
-					<el-button link>11</el-button>
+					<image class='btn' src="@/static/image/icon/appreciate_fill_light.svg" alt="" />
+					<image class='btn' src="@/static/image/icon/oppose_fill_light.svg" alt="" />
+					<image class='btn' src="@/static/image/icon/message_fill_light.svg" alt="" />
+
+					<!-- 	<view class="btn">11</view>
+					<view class="btn">11</view>
+					<view class="btn">11</view> -->
 				</view>
 			</view>
 			<view class="borderbottom">
@@ -125,6 +129,15 @@
 		color: #909090;
 		display: block;
 		margin-bottom: 10rpx;
+	}
+
+	.attention .btn {
+		width: 40rpx;
+		height: 40rpx;
+		display: inline-flex;
+		margin-right: 20rpx;
+		border-radius: 4rpx;
+		padding: 2rpx 4rpx;
 	}
 
 	/* 帖子内容结束 */
