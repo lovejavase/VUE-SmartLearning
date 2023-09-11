@@ -11,14 +11,14 @@
 		<!-- 翻译结果 -->
 		<view class="result">
 			<view class="tabs" v-if="gototranslate">
-				<text @click='click(0)'>翻译1</text>
-				<text @click='click(1)'>翻译2</text>
-				<text @click='click(2)'>翻译3</text>
+				<text @click='click(0)' :class="id==0?'bg':''">翻译1</text>
+				<text @click='click(1)' :class="id==1?'bg':''">翻译2</text>
+				<text @click='click(2)' :class="id==2?'bg':''">翻译3</text>
 			</view>
 			<view class="tab-item" v-if="gototranslate">
-				<text v-if='id==0'>111111111111111111111111111111111111111111111</text>
-				<text v-if='id==1'>222222222222222222222\/\/\/222222222222222222222222</text>
-				<text v-if='id==2'>233333333333333333333333333333333333233333333</text>
+				<text v-if='gototranslate'>{{result[id]}}</text>
+				<!-- <text v-if='id==1'></text> -->
+				<!-- <text v-if='id==2'></text> -->
 			</view>
 		</view>
 	</view>
@@ -32,14 +32,53 @@
 
 	const input = ref('')
 	const id = ref(0)
-	const gototranslate = ref(true)
+	const gototranslate = ref(false)
 	const result = ref([])
 	let click = (chickId) => {
 		id.value = chickId
 	}
 	let gotranslate = () => {
-		console.log(input.value)
+		gototranslate.value = true
+		// console.log(input.value)
+		// 判断语言类型
+		const SourceLanguage = ref('en') //输入语言类型
+		const TargetLanguage = ref('zh') //目标语言类型
 		// 调用接口
+		result.value = []
+		for (let i = 0; i < 3; i++) {
+			AITranslate(SourceLanguage.value, TargetLanguage.value, input.value).then(res => {
+				console.log(res)
+				result.value.push(res)
+			})
+		}
+	}
+	let AITranslate = (SourceLanguage, TargetLanguage, SourceText) => {
+		return new Promise((resolve, reject) => {
+			uni.request({
+				url: 'http://a-puppy-c.top:9999/Smart/AI/AITranslate',
+				method: 'POST',
+				data: {
+					SourceLanguage: SourceLanguage,
+					TargetLanguage: TargetLanguage,
+					SourceText: SourceText
+				},
+				header: {
+					'Authorization': uni.getStorageSync('Authorization'),
+					'content-type': 'application/x-www-form-urlencoded'
+				},
+				success: (res) => {
+					if (res.data.code == 200) {
+						console.log("AITranslate请求成功");
+						resolve(res.data.data)
+					} else {
+						console.log("AITranslate请求失败");
+					}
+				},
+				fail() {
+					console.log("接口请求失败");
+				}
+			})
+		})
 	}
 </script>
 
@@ -55,7 +94,7 @@
 		padding-bottom: 40rpx;
 		min-height: 500rpx;
 		overflow: hidden;
-		background-color: antiquewhite;
+		background-color: #f6d95f20;
 	}
 
 	.input textarea {
@@ -64,7 +103,7 @@
 		margin: 0 auto;
 		padding: 30rpx 40rpx;
 		padding-bottom: 0;
-		background-color: antiquewhite;
+		/* background-color: #f6d95f20; */
 		color: #434343;
 	}
 
@@ -76,6 +115,8 @@
 		padding: 30rpx 40rpx;
 		background-color: #ffffff;
 		border-radius: 50rpx 50rpx 0 0;
+		border-top: #90909040 2rpx solid;
+		
 	}
 
 	.result .tabs {
@@ -84,11 +125,15 @@
 
 	.result .tabs text {
 		display: inline-block;
+		font-size: 16px;
 		background-color: #90c9b4;
 		border-radius: 30rpx;
-		padding: 4rpx 12rpx;
-		margin-right: 30rpx;
+		padding: 6rpx 14rpx;
+		margin-right: 36rpx;
 		margin-left: 0;
+	}
+	.bg{
+		background-color: #f6e382 !important;
 	}
 
 	.result .tab-item {

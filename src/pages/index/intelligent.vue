@@ -132,6 +132,7 @@
 			url:'/pages/index/translate'
 		})
 	}
+	
 </script>
 
 <style>

@@ -10,17 +10,13 @@
 				</view>
 				<view class="btn">已关注</view>
 			</view>
-			<view class="content">
+			<view class="content" @click="gotoDetail">
 				<text class="text">{{user.text}}</text>
 				<text class="author">作者：{{user.name}}</text>
-				<view class="btnGroup">
+				<view class="btnGroup" >
 					<image class='btn' src="@/static/image/icon/appreciate_fill_light.svg" alt="" />
 					<image class='btn' src="@/static/image/icon/oppose_fill_light.svg" alt="" />
 					<image class='btn' src="@/static/image/icon/message_fill_light.svg" alt="" />
-
-					<!-- 	<view class="btn">11</view>
-					<view class="btn">11</view>
-					<view class="btn">11</view> -->
 				</view>
 			</view>
 			<view class="borderbottom">
@@ -49,6 +45,13 @@
 		fans: "1284",
 		text: "未来的强人工智能是什么样的呢？"
 	}]
+	
+	let gotoDetail = () => {
+		console.log('111')
+		uni.navigateTo({
+			url: '/pages/community/post'
+		})
+	}
 </script>
 
 <style scoped>
@@ -131,7 +134,7 @@
 		margin-bottom: 10rpx;
 	}
 
-	.attention .btn {
+	.attention .content .btn {
 		width: 40rpx;
 		height: 40rpx;
 		display: inline-flex;
