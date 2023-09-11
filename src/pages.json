@@ -13,6 +13,13 @@
 				"navigationStyle": "custom"
 				// "enablePullDownRefresh": false
 			}
+		},{
+			"text": "智能翻译",
+			"path": "pages/index/translate",
+			"style": {
+				"navigationStyle": "custom"
+				// "enablePullDownRefresh": false
+			}
 		}, {
 			"text": "新闻详情",
 			"path": "pages/index/news",

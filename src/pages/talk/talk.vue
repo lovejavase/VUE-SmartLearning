@@ -95,32 +95,32 @@
 		uni.offKeyboardHeightChange()
 	})
 
-	// let AIDialog = (text) => {
-	// 	return new Promise((resolve, reject) => {
-	// 		uni.request({
-	// 			url: 'http://a-puppy-c.top:9999/Smart/AI/AIDialog',
-	// 			method: 'POST',
-	// 			data: {
-	// 				text: text
-	// 			},
-	// 			header: {
-	// 				'Authorization': uni.getStorageSync('Authorization'),
-	// 				'content-type': 'application/x-www-form-urlencoded'
-	// 			},
-	// 			success: (res) => {
-	// 				if (res.data.code == 200) {
-	// 					console.log("AIDialog请求成功");
-	// 					resolve(res.data.data)
-	// 				} else {
-	// 					console.log("AIDialog请求失败");
-	// 				}
-	// 			},
-	// 			fail() {
-	// 				console.log("接口请求失败");
-	// 			}
-	// 		})
-	// 	})
-	// }
+	let AIDialog = (text) => {
+		return new Promise((resolve, reject) => {
+			uni.request({
+				url: 'http://a-puppy-c.top:9999/Smart/AI/AIDialog',
+				method: 'POST',
+				data: {
+					text: text
+				},
+				header: {
+					'Authorization': uni.getStorageSync('Authorization'),
+					'content-type': 'application/x-www-form-urlencoded'
+				},
+				success: (res) => {
+					if (res.data.code == 200) {
+						console.log("AIDialog请求成功");
+						resolve(res.data.data)
+					} else {
+						console.log("AIDialog请求失败");
+					}
+				},
+				fail() {
+					console.log("接口请求失败");
+				}
+			})
+		})
+	}
 
 	// 计算
 	let windowHeight = computed(() => {

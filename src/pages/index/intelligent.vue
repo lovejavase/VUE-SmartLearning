@@ -23,8 +23,8 @@
 						p-id="6257" fill="#ffffff"></path>
 				</svg>
 			</view>
-			<view class="toolItem bg2">
-				<text class="title">智能对话</text>
+			<view class="toolItem bg2" @click="translate">
+				<text class="title">智能翻译</text>
 				<text class="text">高效解答</text>
 				<svg t="1691679494406" class="icon" viewBox="0 0 1024 1024" version="1.1"
 					xmlns="http://www.w3.org/2000/svg" p-id="6458" width="32" height="32">
@@ -83,7 +83,7 @@
 		<view class="classify">
 			<ClassTitle :title="title[2]"></ClassTitle>
 			<view class="content">
-				<view class="btn" v-for="(i,index) in 4">
+				<view class="btn" v-for="(item,index) in 4">
 					<svg t="1691774231997" class="icon" viewBox="0 0 1024 1024" version="1.1"
 						xmlns="http://www.w3.org/2000/svg" p-id="7729" width="32" height="32">
 						<path
@@ -127,6 +127,11 @@
 	const searchText = "搜索功能"
 	const title = ["知识科普", "大咖科普", "智能分类"]
 	const famousImg = ["@/static/image/famous1.png", "@/static/image/famous2.png"]
+	let translate=()=>{
+		uni.navigateTo({
+			url:'/pages/index/translate'
+		})
+	}
 </script>
 
 <style>
