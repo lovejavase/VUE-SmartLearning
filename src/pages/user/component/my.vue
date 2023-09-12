@@ -19,11 +19,11 @@
 			<!-- <image @click="modify" class="uimg" src="@/static/image/userImg1.png" alt="" /> -->
 			<image @click="modify" class="uimg" :src="user.userAvatar" alt="" />
 			<view @click="modify">
-				<el-row class="udetail" align="bottom">
-					<el-col :span="10"><text class="uname">{{user.userNickName}}</text></el-col>
-					<el-col :span="12"><text class="ulv">lv.{{user.userVip}}</text></el-col>
-					<el-col :span="24"><text class="uid">ID:{{user.userNumber}}</text></el-col>
-				</el-row>
+				<view class="udetail">
+					<text class="uname">{{user.userNickName}}</text>
+					<text class="ulv">lv.{{user.userVip}}</text>
+				</view>
+				<text class="uid">ID:{{user.userNumber}}</text>
 			</view>
 			<view class="sign  btn-flex">
 				<!-- <view class="content"> -->
@@ -174,7 +174,7 @@
 	}
 	let collect = () => {
 		uni.navigateTo({
-			url: '/pages/user/collect?id='+userId.value
+			url: '/pages/user/collect?id=' + userId.value
 		})
 	}
 
@@ -274,8 +274,6 @@
 
 	.details .udetail {
 		width: 260rpx;
-		height: 90%;
-		/* margin-top: 2%; */
 		padding-top: 12%;
 	}
 
@@ -289,10 +287,11 @@
 		font-weight: 600;
 		background-color: #f6e382;
 		padding: 2rpx 16rpx;
+		margin-left: 10rpx;
 		border-radius: 5%;
 	}
 
-	.details .udetail .uid {
+	.details .uid {
 		font-size: 12px;
 		/* font-weight: 600; */
 		color: #515151;

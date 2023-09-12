@@ -4,7 +4,7 @@
 		<!-- 标题 -->
 		<myheader title='帖子详情'></myheader>
 		<!-- 图片 -->
-		<image :src="postDetail.img" mode="aspectFit"></image>
+		<image :src="img" mode="aspectFit"></image>
 		<!-- 标题 -->
 		<view class="poTitle">
 			{{postDetail.title}}
@@ -12,17 +12,17 @@
 		<!-- 作者信息 -->
 		<view class="author">
 			<view class="uname">
-				<image :src="postDetail.authorImg" mode=""></image>
-				<text>{{postDetail.author}}</text>
+				<image :src="authorImg" mode=""></image>
+				<text>{{userName}}</text>
 			</view>
 			<view class="btn">
 				关注
 			</view>
 		</view>
 		<!-- 简介 -->
-		<view class="blurb">
+<!-- 		<view class="blurb">
 			{{postDetail.blurb}}
-		</view>
+		</view> -->
 		<!-- 正文 -->
 		<view class="content">
 			<!-- 小标题 -->
@@ -38,17 +38,67 @@
 <script setup>
 	import myheader from "@/component/header.vue"
 	import {
+		onLoad
+	} from "@dcloudio/uni-app";
+	import {
 		ref
 	} from "vue";
-	const postDetail = ref({
-		img: '../../static/image/days1.png',
-		title: '人工智能时代大冲击',
-		authorImg: '../../static/image/userImg1.png',
-		author: '作者昵称',
-		blurb: '人工智能时代大冲击人工智能时代大冲击人工智能时代大冲击人工智能时代大冲击.',
-		reTitle: '小标题',
-		content: '人工智能时代大冲击人工智能时代大冲击人工智能时代大冲击人工智能时代大冲击人工智能时代大冲击人工智能时代大冲击人工智能时代大冲击人工智能时代大冲击人工智能时代大冲击人工智能时代大冲击人工智能时代大冲击人工智能时代大冲击'
-
+	const img = ref('../../static/image/days1.png')
+	const authorImg = ref('../../static/image/userImg1.png')
+	const userName = ref('')
+	const postDetail = ref({})
+	onLoad((re) => {
+		uni.request({
+			url: 'http://a-puppy-c.top:9999/Smart/TieZi/getAll',
+			method: 'GET',
+			data: {
+				// userId: res.postId
+			},
+			header: {
+				'Authorization': uni.getStorageSync('Authorization'),
+				'content-type': 'application/x-www-form-urlencoded'
+			},
+			success: (res) => {
+				if (res.data.code == 200) {
+					console.log("请求成功");
+					for (let i = 0; i < res.data.data.length; i++) {
+						if (res.data.data[i].id == ~~re.id) {
+							postDetail.value = res.data.data[i]
+							// console.log(postDetail.value)
+						}
+					}
+				} else {
+					console.log("请求失败");
+					// console.log(res.data);
+				}
+			},
+			fail() {
+				console.log("接口请求失败");
+			}
+		})
+		uni.request({
+			url: 'http://a-puppy-c.top:9999/Smart/User/getUser',
+			method: 'GET',
+			data: {
+				userId: re.user
+			},
+			header: {
+				'Authorization': uni.getStorageSync('Authorization'),
+				'content-type': 'application/x-www-form-urlencoded'
+			},
+			success: (res) => {
+				if (res.data.code == 200) {
+					console.log("请求成功");
+					userName.value = res.data.data.userNickName
+				} else {
+					console.log("请求失败");
+					// console.log(res.data);
+				}
+			},
+			fail() {
+				console.log("接口请求失败");
+			}
+		})
 	})
 </script>
 
@@ -116,8 +166,9 @@
 	/* 内容 */
 	.content {
 		width: 84%;
-		margin: 30rpx auto;
+		margin: 40rpx auto;
 		font-size: 14px;
+		line-height: 1.3rem;
 	}
 
 	.content>.title {

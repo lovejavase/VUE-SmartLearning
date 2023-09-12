@@ -1,19 +1,19 @@
 <template>
 	<view class="attention">
-		<view class="item" v-for="user in mylist">
+		<view class="item" v-for="(post,index) in postList">
 			<view class="user">
 				<image src="@/static/image/userImg1.png" alt="" />
 				<view class="">
-					<text class="name">{{user.name}}</text>
-					<text class="num">内容：{{user.num}}</text>
-					<text class="fans">粉丝：{{user.fans}}</text>
+					<text class="name">{{userName[index]}}</text>
+					<text class="num">内容：{{content[index]}}</text>
+					<text class="fans">粉丝：{{fans[index]}}</text>
 				</view>
 				<view class="btn">已关注</view>
 			</view>
-			<view class="content" @click="gotoDetail">
-				<text class="text">{{user.text}}</text>
-				<text class="author">作者：{{user.name}}</text>
-				<view class="btnGroup" >
+			<view class="content" @click="gotoDetail(post.id,post.userId)">
+				<text class="text">{{post.title}}</text>
+				<text class="author">作者：{{userName[index]}}</text>
+				<view class="btnGroup">
 					<image class='btn' src="@/static/image/icon/appreciate_fill_light.svg" alt="" />
 					<image class='btn' src="@/static/image/icon/oppose_fill_light.svg" alt="" />
 					<image class='btn' src="@/static/image/icon/message_fill_light.svg" alt="" />
@@ -26,6 +26,12 @@
 </template>
 
 <script setup>
+	import {
+		onLoad
+	} from '@dcloudio/uni-app';
+	import {
+		ref
+	} from 'vue';
 	const mylist = [{
 		name: "张遥",
 		img: "",
@@ -45,13 +51,66 @@
 		fans: "1284",
 		text: "未来的强人工智能是什么样的呢？"
 	}]
-	
-	let gotoDetail = () => {
-		console.log('111')
+	const postList = ref([])
+	const userName = ref([])
+	const content = ref([])
+	const fans = ref([])
+	let gotoDetail = (postId,userId) => {
 		uni.navigateTo({
-			url: '/pages/community/post'
+			url: '/pages/community/post?id=' + postId+'&user='+userId
 		})
 	}
+	onLoad(() => {
+		uni.request({
+			url: 'http://a-puppy-c.top:9999/Smart/TieZi/getAll',
+			method: 'GET',
+			data: {},
+			header: {
+				'Authorization': uni.getStorageSync('Authorization'),
+				'content-type': 'application/x-www-form-urlencoded'
+			},
+			success: (res) => {
+				if (res.data.code == 200) {
+					console.log("请求成功");
+					for (let i = 0; i < res.data.data.length; i++) {
+						postList.value.push(res.data.data[i])
+						content.value.push(Math.floor(Math.random() * 5 + 1))
+						fans.value.push(Math.floor(Math.random() * 5 + 1))
+						// 获取用户
+						uni.request({
+							url: 'http://a-puppy-c.top:9999/Smart/User/getUser',
+							method: 'GET',
+							data: {
+								userId: res.data.data[i].userId
+							},
+							header: {
+								'Authorization': uni.getStorageSync('Authorization'),
+								'content-type': 'application/x-www-form-urlencoded'
+							},
+							success: (res) => {
+								if (res.data.code == 200) {
+									console.log("getUser请求成功");
+									userName.value.push(res.data.data.userNickName)
+								} else {
+									console.log("getUser请求失败");
+									// console.log(res.data);
+								}
+							},
+							fail() {
+								console.log("接口请求失败");
+							}
+						})
+					}
+				} else {
+					console.log("请求失败");
+				}
+			},
+			fail() {
+				console.log("接口请求失败");
+			}
+		})
+
+	})
 </script>
 
 <style scoped>

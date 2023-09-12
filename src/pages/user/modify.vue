@@ -7,7 +7,7 @@
 		<view class="content">
 			<view class="item">
 				<text class="text">头像</text>
-				<img src="@/static/image/icon/round_people_fill.svg" alt="">
+				<image src="@/static/image/icon/round_people_fill.svg" alt=""/>
 			</view>
 			<view class="item">
 				<text class="text">昵称</text>
@@ -64,7 +64,7 @@
 	}
 	
 
-	.modify .content .item img {
+	.modify .content .item image {
 		width: 100rpx;
 		height: 100rpx;
 		margin-right: 6rpx;

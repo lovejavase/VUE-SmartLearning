@@ -37,8 +37,8 @@
 			</view>
 			<!-- 内容 -->
 			<view class="content">
-				<view class="card" v-for="(item,index) in classes" :key="index" @click='gotoCourse(index)'>
-					<image src="@/static/image/class1.png" class="image" />
+				<view class="card" v-for="(item,index) in classes" :key="index" @click='gotoCourse(item.lessonId)'>
+					<image :src="item.lessonImage" class="image" />
 					<view class="text">
 						<text class="className">{{item.lessonTitle}}</text>
 						<view class="mid">
@@ -89,22 +89,23 @@
 			</view>
 
 		</view>
+
 		<!-- 好书推荐 -->
 		<view class="book">
 			<!-- 标题 -->
 			<ClassTitle :title="title[1]"></ClassTitle>
 			<!-- 内容 -->
-			<view class="content" v-for="(i,index) in 2">
+			<view class="content" v-for="(item,index) in ArrayList">
 				<view class="text">
-					<text>各类智能化产品已经成为人类生活当中不可或缺的一部分智能手机、电脑、数控电器，甚至是已经逐渐形成规模化生产制造的各类机器人.....所有的这一切表明:人工智能来了人工智能的时代到来了!</text>
+					<text>{{item.header}}</text>
 				</view>
 				<view class="item">
-					<image src="@/static/image/book1.png" alt="" />
+					<image :src="item.link" alt="" />
 					<view class="">
-						<div class="itemBook">地平线2025:人工智能来了</div>
-						<div class="itemAuthor">共12章</div>
+						<div class="itemBook">{{item.name}}</div>
+						<div class="itemAuthor">{{item.total}}</div>
 					</view>
-					<view class="itemBtn" link @click='gotoBook'>
+					<view class="itemBtn" link @click='gotoBook(item.id)'>
 						<image src="../../static/image/icon/right_grey.png" mode=""></image>
 						前往阅读
 					</view>
@@ -118,6 +119,9 @@
 </template>
 
 <script setup>
+	import {
+		reactive
+	} from 'vue';
 	import {
 		Search,
 		ArrowRight,
@@ -135,11 +139,32 @@
 		onLoad
 	} from '@dcloudio/uni-app';
 
+
+	const ArrayList = reactive([{
+			id: 1,
+			link: 'http://www.a-puppy-c.top/smartLearning/book1.jpg',
+			total: '共十章',
+			header: '人工智能时代来临，将带来划时代的变革。人工智能正改变我们的社会、经济、政治和外交政策，这一切影响远远超过任何领域的传统范畴，而我们做好准备了吗？',
+			name: "人工智能时代",
+		},
+		{
+			id: 2,
+			link: 'http://www.a-puppy-c.top/smartLearning/book2.jpg',
+			total: '共十二章',
+			header: '本书全面讲述人工智能的发展史，涵盖人工智能的起源、自动定理证明、专家系统、神经网络、自然语言处理、遗传算法、深度学习、强化学习、超级智能、哲学问题和未来趋势等。',
+			name: "人工智能简史",
+		},
+
+	]);
+
+
+
 	const input = ''
 	const text = "乐趣课堂"
 	const searchText = "搜索课堂"
 	const title = ["相关推荐", "好书推荐"]
 	const classes = ref([])
+
 
 	onLoad(() => {
 		getList().then(res => {
@@ -178,6 +203,7 @@
 		})
 	}
 
+
 	// 课堂跳转
 	let gotoCourse = (id) => {
 		uni.navigateTo({
@@ -185,9 +211,9 @@
 		})
 	};
 	// 书籍跳转
-	let gotoBook = () => {
+	let gotoBook = (id) => {
 		uni.navigateTo({
-			url: '/pages/class/book'
+			url: '/pages/class/book?id=' + id
 		})
 	};
 </script>
@@ -390,7 +416,7 @@
 	}
 
 	.book .content {
-		margin: 20rpx auto;
+		margin: 40rpx auto;
 		/* margin-bottom: 0; */
 		padding: 20rpx;
 		width: 660rpx;
@@ -399,7 +425,8 @@
 	}
 
 	.book .text {
-		font-size: 12px;
+		font-size: 14px;
+		line-height: 18px;
 	}
 
 	.book .item {
@@ -416,12 +443,12 @@
 	}
 
 	.book .item .itemBook {
-		font-size: 13px;
+		font-size: 15px;
 		margin-bottom: 14rpx;
 	}
 
 	.book .item .itemAuthor {
-		font-size: 12px;
+		font-size: 13px;
 		color: #909090;
 	}
 

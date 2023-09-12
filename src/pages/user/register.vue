@@ -10,20 +10,22 @@
 		</view> -->
 		<view class="input">
 			<view class="box">
-				<el-input v-model="account" placeholder="请输入您的邮箱或手机号">
-				</el-input>
+				<input v-model="account" placeholder="请输入您的邮箱或手机号">
+
 			</view>
 			<view class="box">
-				<el-input v-model="pwd" type="password" placeholder="请输入您的密码" show-password />
+				<input v-model="pwd" :password="pwdShow" placeholder="请输入您的密码">
+				<image src="@/static/image/icon/eye.svg" mode="" @click="changePassword"></image>
 			</view>
 			<view class="box">
-				<el-input v-model="rePwd" type="password" placeholder="请确认您的密码" show-password />
+				<input v-model="rePwd" :password="rePwdShow" placeholder="请输入您的密码">
+				<image src="@/static/image/icon/eye.svg" mode="" @click="changeRePassword"></image>
 			</view>
 		</view>
 		<text class="login" @click="gotoLogin">已有账户？登录</text>
-		<el-button class="btn" plain @click='register'>
+		<view class="btn" @click='register'>
 			<text>注册</text>
-		</el-button>
+		</view>
 	</view>
 </template>
 
@@ -34,7 +36,15 @@
 	const account = ref('')
 	const pwd = ref('')
 	const rePwd = ref('')
+	const rePwdShow = ref(true)
+	const pwdShow = ref(true)
 
+	let changeRePassword = () => {
+		rePwdShow.value = !rePwdShow.value
+	}
+	let changePassword = () => {
+		pwdShow.value = !pwdShow.value
+	}
 	let gotoLogin = () => {
 		uni.navigateTo({
 			url: '/pages/user/login'
@@ -87,15 +97,16 @@
 		flex-direction: column;
 	}
 
-	
+
 	.bg {
 		margin-top: 160rpx;
 		padding-left: 10rpx;
 		display: flex;
 		align-items: center;
+		justify-content: center;
 		flex-direction: column;
 	}
-	
+
 	.bg .text1 {
 		margin-bottom: 20rpx;
 		width: 300rpx;
@@ -108,14 +119,14 @@
 		border-radius: 250rpx;
 		color: white;
 	}
-	
+
 	.bg .text2 {
 		color: black;
 		display: block;
 		/* width: 300rpx; */
 		font-size: 60rpx;
 		text-align: center;
-		/* padding-left: 20rpx; */
+		padding-left: 40rpx;
 	}
 
 	.input {
@@ -129,19 +140,21 @@
 		border: #d6d6d6 1px solid;
 		height: 90rpx;
 		margin-bottom: 30rpx;
+		display: flex;
+		align-items: center;
 	}
 
-	.input .box :deep(.el-input__wrapper) {
-		/* 对border进行样式修改 */
-		box-shadow: 0 0 0 0px var(--el-input-border-color, var(--el-border-color)) inset;
-		border: none;
-		height: 90rpx;
-		margin: 0 5rpx;
+	.input .box input {
+		width: 80%;
+		margin: 0 20rpx;
 	}
 
-	/* .input .btn {
-		width: 50rpx;
-	} */
+	.input .box image {
+		width: 40rpx;
+		height: 40rpx;
+	}
+
+
 	.login {
 		display: block;
 		margin-bottom: 30rpx;
@@ -149,12 +162,17 @@
 	}
 
 	.btn {
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
 		width: 560rpx;
+		height: 70rpx;
 		background-color: #f6e382;
 		border: none;
-		border-radius: 26rpx;
+		border-radius: 30rpx;
 		color: white;
-		font-size: 16px;
+		font-size: 20px;
+		text-shadow: 1rpx 1rpx 2rpx #b1a35e;
 		font-weight: 600;
 	}
 </style>

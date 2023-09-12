@@ -40,17 +40,17 @@
 				<!-- 输入框 -->
 				<view class="topBottom">
 					<input class="search" v-model="input" placeholder="写条评论吧" placeholder-style="font-size:14px" />
-					<image @click="" src="@/static/image/icon/check.svg" mode=""></image>
+					<image @click="addRemark" src="@/static/image/icon/check.svg" mode=""></image>
 				</view>
 				<view class="more" link>
 					查看更多
-					<image src="@/static/image/icon/right.svg" alt=""/>
+					<image src="@/static/image/icon/right.svg" alt="" />
 				</view>
 			</view>
 			<!-- 用户评论 -->
 			<view class="box">
 				<view class="item" v-for="(item,index) in remark" :key="index">
-					<image :src="item.userAvatar" alt="" class="remarkImg"/>
+					<image :src="item.userAvatar" alt="" class="remarkImg" />
 					<view class="info">
 						<text class="name">{{item.userNickName}}</text>
 						<text class="time">{{item.time}}</text>
@@ -86,7 +86,8 @@
 	// const classes = ref([])
 	const classItem = ref({})
 	const remark = ref([]) //评论
-	const classId = ref(-1) //课程id，实际的值应该+1
+	const classId = ref() //课程id，实际的值应该+1
+	
 
 	let back = () => {
 		uni.navigateBack({
@@ -95,15 +96,18 @@
 	}
 	onLoad((res) => {
 		classId.value = ~~res.id //id字符串转数字类型
+
 		getAllLesson().then(res => {
+
 			// 查询所有课程中id与页面传入id相同的课程
 			for (let j = 0; j < res.length; j++) {
-				if (j == classId.value) {
+				console.log(res[j].lessonId)
+				if (res[j].lessonId == classId.value) {
 					classItem.value = res[j]
-					// console.log(res[j]);
+					break
 				}
 			}
-			selectRemarkByLesson(classId.value + 1).then(res => {
+			selectRemarkByLesson(classId.value).then(res => {
 				for (let i = 0; i < res.length; i++) {
 					remark.value.push(res[i])
 				}
@@ -152,10 +156,58 @@
 				},
 				success: (res) => {
 					if (res.data.code == 200) {
+						console.log(classId)
 						console.log("selectRemarkByLesson请求成功");
 						resolve(res.data.data)
 					} else {
 						console.log("selectRemarkByLesson请求失败");
+					}
+					// console.log(res.data);
+				},
+				fail() {
+					console.log("接口请求失败");
+				}
+			})
+		})
+	}
+
+	// 增加评论接口
+
+	let addRemark = () => {
+		return new Promise((resolve, reject) => {
+			const userId = getApp().globalData.userDetail.userId
+			if (userId == undefined) {
+				console.log('请登录')
+				uni.showToast({
+					title: "请先登录才能发表评价"
+				})
+				// 跳转等登录页面
+				uni.navigateTo({
+					url: '/pages/user/user'
+				})
+			}
+			uni.request({
+				url: 'http://a-puppy-c.top:9999/Smart/Lesson/appearRemark',
+				method: 'Post',
+				data: {
+					lessonId: classId.value,
+					lessonRemarkText: input.value,
+					lessonRemarkUserId: userId
+				},
+				header: {
+					'Authorization': uni.getStorageSync('Authorization'),
+					'content-type': 'application/x-www-form-urlencoded'
+				},
+				success: (res) => {
+					if (res.data.code == 0) {
+						console.log("addRemark请求成功");
+						uni.showToast({
+							title: "评价发表成功"
+						})
+						uni.
+						resolve(res.data.data)
+					} else {
+						console.log("addRemark请求失败");
 					}
 					// console.log(res.data);
 				},

@@ -14,7 +14,6 @@
 						<view class="topBtn" @click="gotoMy">
 							<image src="@/static/image/my.png" mode=""></image>
 						</view>
-
 					</view>
 				</view>
 				<text class="titleBottom">{{hiText}}</text>
@@ -71,7 +70,7 @@
 			<scroll-view class="navscroll" scroll-x>
 				<view class="content card" v-for="(item, index) in classItem" :key="index">
 					<image :src="item.lessonImage" class="image" />
-					<view class="text" @click="gotoCourse(item.lessonId-1)">
+					<view class="text" @click="gotoCourse(item.lessonId)">
 						<text class="className">{{item.lessonTitle}}</text>
 						<view class="row">
 							<view>

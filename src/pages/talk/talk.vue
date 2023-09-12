@@ -16,12 +16,14 @@
 						</view>
 						<!-- 头像 -->
 						<view class="avatar">
+							<image :src="userAvatar" mode=""  class="uimg"></image>
 						</view>
 					</view>
 					<!-- 机器人发的消息 -->
 					<view class="item Ai" v-if="item.botContent != ''">
 						<!-- 头像 -->
 						<view class="avatar">
+							<image src="http://www.a-puppy-c.top/smartLearning/AI.png" mode="" style="width: 50px;height: 51px;"></image>
 						</view>
 						<!-- 文字内容 -->
 						<view class="content left">
@@ -64,6 +66,8 @@
 	//滚动距离
 	const scrollTop = ref(0)
 	const userId = ref('')
+	const userAvatar =getApp().globalData.userDetail.userAvatar;
+	
 	//发送的消息
 	const chatMsg = ref("")
 	const msgList = ref([{
@@ -73,6 +77,7 @@
 		userContent: "",
 		userId: 0
 	}])
+	// const userAvatar = getApp().globalData.userDetail.userAvatar,
 
 
 	onUpdated(() => { //页面更新时调用聊天消息定位到最底部
@@ -80,6 +85,19 @@
 		scrollToBottom();
 	})
 	onLoad(() => {
+		
+		if(userAvatar==undefined){
+			console.log('请登录')
+			uni.showToast({
+				title: "请先登录才能使用对话功能"
+			})
+			// 跳转等登录页面
+			// uni.navigateTo({
+			// 	url: '/pages/user/user'
+			// })
+		}
+		console.log('avatar'+userAvatar)
+		
 		uni.onKeyboardHeightChange(res => {
 			//这里正常来讲代码直接写就行了
 			// keyboardHeight.value = rpxTopx(res.height)
@@ -310,7 +328,7 @@
 		justify-content: center;
 		width: 78rpx;
 		height: 78rpx;
-		background: #90c9b4;
+		/* background: #90c9b4; */
 		border-radius: 39rpx;
 		overflow: hidden;
 	}
@@ -383,5 +401,10 @@
 	uni-button:after {
 		border: none;
 		border-radius: 0;
+	}
+	.uimg {
+		width: 50;
+		height: 50px;
+		/* border-radius: 50%; */
 	}
 </style>

@@ -5,17 +5,17 @@
 		<myheader title='收藏'></myheader>
 		<!-- 内容 -->
 		<view class="content">
-			<el-card class="card" v-for="(item,index) in classItem" :key="index" shadow="never"
+			<view class="card" v-for="(item,index) in classItem" :key="index" shadow="never"
 				:body-style="{ padding: '0px' }">
-				<img src="@/static/image/class1.png" class="image" />
+				<image src="@/static/image/class1.png" mode="" class="image" />
 				<view class="text">
 					<text class="name">{{item.lessonTitle}}</text>
 					<view class="bottom">
 						<text class="tag">文章</text>
-						<img src="@/static/image/icon/favor_fill_red.svg" />
+						<image src="@/static/image/icon/favor_fill_red.svg" mode="aspectFit" />
 					</view>
 				</view>
-			</el-card>
+			</view>
 		</view>
 		<text class="tip">已全部加载完毕……</text>
 	</view>
@@ -128,10 +128,13 @@
 		border-radius: 14rpx;
 		width: 300rpx;
 		margin: 10rpx 0;
+		background-color: #ffffff;
+		border: #c1c1c160 1rpx solid;
 	}
 
 	.content .image {
 		width: 100%;
+		height: 190rpx;
 		display: block;
 	}
 
@@ -161,8 +164,9 @@
 		border-radius: 4rpx;
 	}
 
-	.content .bottom>img {
+	.content .bottom>image {
 		width: 34rpx;
+		height: 34rpx;
 	}
 
 	.tip {

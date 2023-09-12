@@ -2,7 +2,18 @@
 	<view class="recommend">
 		<titleItem title="热门话题"></titleItem>
 		<view class="top">
-
+			<view class="content">
+				<view class="btn" v-for="(item,index) in 4">
+					<image src="../../../static/image/icon/hot.svg" mode="aspectFit"></image>
+					art
+				</view>
+			</view>
+			<view class="content even">
+				<view class="btn" v-for="(item,index) in 4">
+					<image src="../../../static/image/icon/hot.svg" mode="aspectFit"></image>
+					art
+				</view>
+			</view>
 		</view>
 		<titleItem title="大家都在聊"></titleItem>
 		<view class="public">
@@ -104,6 +115,37 @@
 	.recommend {
 		padding: 20rpx;
 	}
+	/* 热门分类 */
+	.top {
+		width: 600rpx;
+		padding: 20rpx 0;
+		margin: 0 auto;
+		margin-left: 20rpx;
+		padding-bottom: 30rpx;
+		font-size: 14px;
+	}
+	
+	.top .content {
+		width: 100%;
+		margin-top: 10rpx;
+		display: flex;
+		justify-content: space-between;
+	}
+	.top .content .btn {
+		display: inline-flex;
+		align-items: center;
+	}
+	
+	.top .content image {
+		width: 40rpx;
+		height: 40rpx;
+		margin-right: 4rpx;
+	}
+	
+	.top .even {
+		margin-left: 48rpx;
+	}
+	/* 热门分类结束 */
 
 	/* 热门开始 */
 	.public .hot {
