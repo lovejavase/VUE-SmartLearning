@@ -27,26 +27,17 @@
 
 <style>
 	/*每个页面公共css */
-	body {}
-
-	/* 	::v-deep .uni-tabbar-bottom {
-		background-color: #f3efee;
+	@font-face {
+		font-family: AlimamaShuHeiTi-Bold;
+		src: url('@/static/font/AlimamaShuHeiTi-Bold.ttf');
 	}
 
-	::v-deep .uni-tabbar {
-		border-radius: 50rpx 50rpx 0 0;
-	} */
-
-	/* 中间按钮 */
-	/* ::v-deep .uni-tabbar__mid {
-		background-color: #f6e382;
-		border-radius: 50rpx;
-		bottom: 40rpx;
-		align-items: center;
+	@font-face {
+		font-family: SourceHanSansCN-VF;
+		src: url('@/static/font/SourceHanSansCN-VF.otf');
 	}
-	
-	::v-deep .uni-tabbar__mid img{
-		width: 40rpx !important;
-		height: auto !important;
-	} */
+
+	view {
+		font-family: 'SourceHanSansCN-VF';
+	}
 </style>

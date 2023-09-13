@@ -90,6 +90,7 @@
 
 	.header .title .text {
 		font-size: 24px;
+		/* z-index: 2; */
 	}
 
 	.header .title .link {
@@ -107,6 +108,7 @@
 
 
 	.header .title .background {
+		/* z-index: 0; */
 		background-color: #f6b02360;
 		width: 96px;
 		height: 6px;

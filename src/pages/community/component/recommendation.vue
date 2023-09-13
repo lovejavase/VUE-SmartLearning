@@ -1,7 +1,7 @@
 <template>
 	<view class="recommend">
 		<titleItem title="热门话题"></titleItem>
-		
+
 		<scroll-view class="top" scroll-x>
 			<view class="content">
 				<view class="btn" v-for="(item,index) in 4">
@@ -14,7 +14,7 @@
 				</view>
 			</view>
 		</scroll-view>
-	<!-- 	<view class="top">
+		<!-- 	<view class="top">
 			<view class="content">
 				<view class="btn" v-for="(item,index) in 4">
 					#{{titles[index]}}
@@ -133,14 +133,14 @@
 		width: 800rpx;
 		padding: 20rpx 0;
 		margin: 0 auto;
-		margin-left: 20rpx;
+		margin-left: -20rpx;
 		padding-bottom: 30rpx;
 		font-size: 14px;
 	}
 
 	.top .content {
 		width: 100%;
-		margin-top: 10rpx;
+		margin: 20rpx;
 		/* display: flex; */
 		/* justify-content: space-between; */
 	}
@@ -157,14 +157,9 @@
 		text-shadow: 2rpx 2rpx 2rpx #7bad7b;
 	}
 
-/* 	.top .content image {
-		width: 40rpx;
-		height: 40rpx;
-		margin-right: 4rpx;
-	} */
 
 	.top .even {
-		margin-left: 48rpx;
+		margin-left: 60rpx;
 	}
 
 	/* 热门分类结束 */

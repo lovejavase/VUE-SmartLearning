@@ -255,7 +255,8 @@
 
 	.topClass .title .text {
 		/* position: relative; */
-		font-size: 14px;
+		font-size: 18px;
+		font-family: AlimamaShuHeiTi-Bold !important;
 		/* font-weight: 500; */
 	}
 
@@ -265,7 +266,7 @@
 	}
 
 
-	.topClass .title .left {
+	.topClass .title>.left {
 		display: inline-flex;
 		align-items: center;
 	}
@@ -302,7 +303,7 @@
 		background-color: #ffffff;
 		border-radius: 10rpx;
 		overflow: hidden;
-		
+
 	}
 
 	.topClass .content .image {
@@ -347,7 +348,7 @@
 	/* 精选好课结束 */
 	/* 相关推荐开始 */
 	.similar {
-		margin: 20rpx;
+		margin: 30rpx 20rpx;
 	}
 
 	.similar .content {
@@ -409,12 +410,12 @@
 	/* 相关推荐结束 */
 	/* 好书推荐开始 */
 	.book {
-		margin: 10rpx 10rpx 0rpx 10rpx;
+		margin: 40rpx 10rpx 0rpx 10rpx;
 		padding-bottom: 10rpx;
 	}
 
 	.book .content {
-		margin: 40rpx auto;
+		margin: 20rpx auto;
 		/* margin-bottom: 0; */
 		padding: 20rpx;
 		width: 660rpx;

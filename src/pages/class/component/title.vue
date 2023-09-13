@@ -1,30 +1,35 @@
 <template>
 	<view class="title">
 		<view class=" left">
-			<view class="background"> </view>
 			<text class="text">{{title}}</text>
+			<view class="background"> </view>
 		</view>
 	</view>
 </template>
 
 <script setup>
 	import {
-		Sort,  
+		Sort,
 		View as IconView
 	} from '@element-plus/icons-vue'
-	import { toRefs, defineProps } from 'vue'
+	import {
+		toRefs,
+		defineProps
+	} from 'vue'
 	const props = defineProps({
-	  //子组件接收父组件传递过来的值
-	  title: String,
+		//子组件接收父组件传递过来的值
+		title: String,
 	})
 	//使用父组件传递过来的值
-	const {title} =toRefs(props)
-	
+	const {
+		title
+	} = toRefs(props)
 </script>
 
 <style scoped>
 	/* 标题 */
-	 .title {
+
+	.title {
 		width: 680rpx;
 		display: flex;
 		justify-content: space-between;
@@ -35,25 +40,28 @@
 
 	}
 
-	 .title .text {
+	.title .text {
 		/* position: relative; */
-		font-size: 14px;
+		z-index: 2;
+		font-size: 18px;
+		font-family: AlimamaShuHeiTi-Bold !important;
 		/* font-weight: 500; */
 	}
 
-	 .title .link {
+	.title .link {
 		font-size: 16px;
 		color: #15a0ac;
 		margin-top: 2px;
 	}
 
 
-	 .title .left {
+	.title .left {
 		display: inline-flex;
 		align-items: center;
 	}
 
-	 .title .background {
+	.title .background {
+		z-index: 0;
 		background-color: #f6de2840;
 		width: 0.7rem;
 		height: 0.7rem;

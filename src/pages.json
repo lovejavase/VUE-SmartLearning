@@ -49,6 +49,13 @@
 				// "enablePullDownRefresh": false
 			}
 		}, {
+			"text": "知识科普",
+			"path": "pages/index/popularize",
+			"style": {
+				"navigationStyle": "custom"
+				// "enablePullDownRefresh": false
+			}
+		},  {
 			"text": "课堂",
 			"path": "pages/class/class",
 			"style": {
@@ -76,7 +83,7 @@
 				"navigationStyle": "custom"
 				// "enablePullDownRefresh": false
 			}
-		}, {
+		},{
 			"text": "社区",
 			"path": "pages/community/community",
 			"style": {

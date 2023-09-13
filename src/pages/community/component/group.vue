@@ -199,7 +199,7 @@
 		margin-top: 30rpx;
 		padding: 30rpx 40rpx;
 		width: 590rpx;
-		background-color: #949bb8;
+		background-color: #90c9b4;
 		border-radius: 20rpx;
 	}
 

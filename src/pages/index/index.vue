@@ -30,10 +30,10 @@
 					<image class="carImg" src="@/static/image/days1.png" mode="aspectFit" alt="" />
 				</swiper-item>
 				<swiper-item>
-					<image class="carImg" src="@/static/image/days1.png" mode="aspectFit" alt="" />
+					<image class="carImg" src="@/static/image/banner2.png" mode="aspectFit" alt="" />
 				</swiper-item>
 				<swiper-item>
-					<image class="carImg" src="@/static/image/days1.png" mode="aspectFit" alt="" />
+					<image class="carImg" src="@/static/image/banner3.png" mode="aspectFit" alt="" />
 				</swiper-item>
 			</swiper>
 		</view>
@@ -41,23 +41,23 @@
 		<view class="tool">
 			<!-- <view justify="space-between"> -->
 			<view class="toolImg" @click="gotoAItalk">
-				<image src="@/static/image/tool1-2.png" alt="" />
+				<image src="@/static/image/tool23.png" alt="" />
 				<text class="toolItem">AI对话</text>
 			</view>
 			<view class="toolImg" @click="gotoIntelligent">
-				<image src="@/static/image/tool2.png" alt="" />
+				<image src="@/static/image/tool21.png" alt="" />
 				<text class="toolItem">智能识别</text>
 			</view>
 			<view class="toolImg" @click="gotoClass">
-				<image src="@/static/image/tool3.png" alt="" />
+				<image src="@/static/image/tool22.png" alt="" />
 				<text class="toolItem">问答测验</text>
 			</view>
 			<view class="toolImg" @click="">
-				<image src="@/static/image/tool4-un.png" alt="" />
+				<image src="@/static/image/tool24.png" alt="" />
 				<text class="toolItem">实践体验</text>
 			</view>
 			<view class="toolImg" @click="">
-				<image src="@/static/image/tool5-un.png" alt="" />
+				<image src="@/static/image/tool25.png" alt="" />
 				<text class="toolItem">知识科普</text>
 			</view>
 			<!-- </view> -->
@@ -426,16 +426,23 @@
 	}
 
 	.carousal image {
-		width: 100%;
-		height: 100%;
+		width: 99%;
+		height: 99%;
 	}
+
+	.carousal .carImg {
+		border-radius: 22rpx;
+		border: #e3e3e3 2rpx solid;
+		overflow: hidden;
+	}
+
 
 	/* 轮播结束 */
 
 	/* 工具开始 */
 	.tool {
 		margin: 0 30rpx;
-		padding: 0 0.4rem;
+		padding: 0 10rpx;
 		display: flex;
 		justify-content: space-between;
 	}
@@ -454,11 +461,12 @@
 
 	.tool .toolItem {
 		width: 100%;
+		margin-top: 8rpx;
 		display: inline-block;
 		font-size: 14px;
 		white-space: nowrap;
 		text-align: center;
-		font-weight: bold;
+		/* font-weight: bold; */
 	}
 
 	/* 工具结束 */

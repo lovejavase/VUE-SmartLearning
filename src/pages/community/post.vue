@@ -4,7 +4,7 @@
 		<!-- 标题 -->
 		<myheader title='帖子详情'></myheader>
 		<!-- 图片 -->
-		<image :src="img" mode="aspectFit"></image>
+		<image :src="img" mode="scaleToFill"></image>
 		<!-- 标题 -->
 		<view class="poTitle">
 			{{postDetail.title}}
@@ -12,7 +12,7 @@
 		<!-- 作者信息 -->
 		<view class="author">
 			<view class="uname">
-				<image :src="authorImg" mode=""></image>
+				<image :src="userImg" mode=""></image>
 				<text>{{userName}}</text>
 			</view>
 			<view class="btn">
@@ -20,7 +20,7 @@
 			</view>
 		</view>
 		<!-- 简介 -->
-<!-- 		<view class="blurb">
+		<!-- 		<view class="blurb">
 			{{postDetail.blurb}}
 		</view> -->
 		<!-- 正文 -->
@@ -43,9 +43,10 @@
 	import {
 		ref
 	} from "vue";
-	const img = ref('../../static/image/days1.png')
+	const img = ref('../../static/image/knowledge1.png')
 	const authorImg = ref('../../static/image/userImg1.png')
 	const userName = ref('')
+	const userImg = ref('')
 	const postDetail = ref({})
 	onLoad((re) => {
 		uni.request({
@@ -90,6 +91,7 @@
 				if (res.data.code == 200) {
 					console.log("请求成功");
 					userName.value = res.data.data.userNickName
+					userImg.value = res.data.data.userAvatar
 				} else {
 					console.log("请求失败");
 					// console.log(res.data);
@@ -142,6 +144,7 @@
 		width: 80rpx;
 		height: 80rpx;
 		margin-right: 14rpx;
+		border-radius: 40rpx;
 	}
 
 	.author .btn {
