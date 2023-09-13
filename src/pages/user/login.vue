@@ -16,7 +16,7 @@
 		</view>
 		<view class="choice">
 			<label>
-				<checkbox :value="11" /><text>记住我</text>
+				<checkbox value="1" /><text>记住我</text>
 			</label>
 			<view text>忘记密码</view>
 		</view>

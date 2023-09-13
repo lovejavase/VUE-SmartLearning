@@ -13,9 +13,23 @@
 				"navigationStyle": "custom"
 				// "enablePullDownRefresh": false
 			}
-		},{
+		}, {
 			"text": "智能翻译",
 			"path": "pages/index/translate",
+			"style": {
+				"navigationStyle": "custom"
+				// "enablePullDownRefresh": false
+			}
+		}, {
+			"text": "问答测验",
+			"path": "pages/index/test",
+			"style": {
+				"navigationStyle": "custom"
+				// "enablePullDownRefresh": false
+			}
+		}, {
+			"text": "答题测试",
+			"path": "pages/index/quiz",
 			"style": {
 				"navigationStyle": "custom"
 				// "enablePullDownRefresh": false
@@ -27,7 +41,7 @@
 				"navigationStyle": "custom"
 				// "enablePullDownRefresh": false
 			}
-		},{
+		}, {
 			"text": "新闻列表页",
 			"path": "pages/index/newsList",
 			"style": {
@@ -44,6 +58,13 @@
 		}, {
 			"text": "课程详情页",
 			"path": "pages/class/course",
+			"style": {
+				"navigationStyle": "custom"
+				// "enablePullDownRefresh": false
+			}
+		}, {
+			"text": "书籍阅读",
+			"path": "pages/class/bookRead",
 			"style": {
 				"navigationStyle": "custom"
 				// "enablePullDownRefresh": false

@@ -60,7 +60,7 @@
 			<view class="btn btn-flex" link>
 				<view class="info">
 					<text>积分</text>
-					<text>123</text>
+					<text>{{user.userPoints}}</text>
 				</view>
 			</view>
 			<view class="btn btn-flex" link @click='history'>
@@ -200,6 +200,7 @@
 			success: (res) => {
 				console.log("用户-调用getUser成功");
 				user.value = res.data.data;
+				console.log(res.data.data);
 			},
 			fail() {
 				console.log("调用getUser失败");

@@ -87,7 +87,6 @@
 					</div>
 				</view>
 			</view>
-
 		</view>
 
 		<!-- 好书推荐 -->
@@ -139,7 +138,6 @@
 		onLoad
 	} from '@dcloudio/uni-app';
 
-
 	const ArrayList = reactive([{
 			id: 1,
 			link: 'http://www.a-puppy-c.top/smartLearning/book1.jpg',
@@ -157,14 +155,11 @@
 
 	]);
 
-
-
 	const input = ''
 	const text = "乐趣课堂"
 	const searchText = "搜索课堂"
 	const title = ["相关推荐", "好书推荐"]
 	const classes = ref([])
-
 
 	onLoad(() => {
 		getList().then(res => {
@@ -305,6 +300,9 @@
 		width: 320rpx;
 		margin: 10rpx 0;
 		background-color: #ffffff;
+		border-radius: 10rpx;
+		overflow: hidden;
+		
 	}
 
 	.topClass .content .image {
@@ -456,7 +454,7 @@
 		background-color: #f3efee;
 		padding: 6rpx 4rpx;
 		padding-right: 10rpx;
-		margin-left: 90rpx;
+		margin-left: 190rpx;
 		font-size: 12px;
 		border-radius: 20rpx;
 		display: flex;

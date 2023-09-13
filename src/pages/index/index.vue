@@ -217,7 +217,7 @@
 				method: 'GET',
 				data: {
 					start: 0,
-					limit: 2
+					limit: 4
 				},
 				header: {
 					'Authorization': uni.getStorageSync('Authorization'),
@@ -301,7 +301,7 @@
 	};
 	let gotoClass = () => {
 		uni.navigateTo({ //普通页面跳转
-			url: '/pages/class/class'
+			url: '/pages/index/test'
 		});
 	};
 	// 课堂跳转

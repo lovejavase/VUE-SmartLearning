@@ -33,7 +33,7 @@
 			<text></text>
 		</view> -->
 	</view>
-	<button class="start">开始阅读</button>
+	<button class="start" @click="gotoBook(bookId)">开始阅读</button>
 </template>
 
 <script setup>
@@ -54,7 +54,7 @@
 
 	onLoad((res) => {
 		bookId = ~~res.id
-		console.log(bookId)
+		console.log("bookId"+bookId)
 		getBook(bookId).then(res => {
 			book.value = res
 			console.log(book.value)
@@ -89,6 +89,13 @@
 			})
 		})
 	}
+	
+	// 书籍跳转
+	let gotoBook = (bookId) => {
+		uni.navigateTo({
+			url: '/pages/class/bookRead?id=' + bookId
+		})
+	};
 </script>
 
 <style>
