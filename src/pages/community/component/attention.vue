@@ -1,8 +1,17 @@
 <template>
 	<view class="attention">
+		<!-- 顶部样式 -->
+		<view class="topStyle">
+			<image class="img1" src="@/static/image/userImg1.png" alt="" />
+			<image class="img2" src="@/static/image/userImg1.png" alt="" />
+			<image class="img3" src="@/static/image/userImg1.png" alt="" />
+			<image class="img4" src="@/static/image/userImg1.png" alt="" />
+			<image class="img5" src="@/static/image/userImg1.png" alt="" />
+		</view>
+		<text>和志趣相投的朋友遨游智能的海洋吧！</text>
 		<view class="item" v-for="(post,index) in postList">
 			<view class="user">
-				<image src="@/static/image/userImg1.png" alt="" />
+				<image :src="userImg[index]" alt="" />
 				<view class="">
 					<text class="name">{{userName[index]}}</text>
 					<text class="num">内容：{{content[index]}}</text>
@@ -14,7 +23,7 @@
 				<text class="text">{{post.title}}</text>
 				<text class="author">作者：{{userName[index]}}</text>
 				<view class="btnGroup">
-					<image class='btn' src="@/static/image/icon/appreciate_fill_light.svg" alt="" />
+					<image class='btn' src="@/static/image/icon/appreciate_fill.svg" alt="" />
 					<image class='btn' src="@/static/image/icon/oppose_fill_light.svg" alt="" />
 					<image class='btn' src="@/static/image/icon/message_fill_light.svg" alt="" />
 				</view>
@@ -32,32 +41,18 @@
 	import {
 		ref
 	} from 'vue';
-	const mylist = [{
-		name: "张遥",
-		img: "",
-		num: "142",
-		fans: "1284",
-		text: "揭秘中国AI创投的隐秘力量：中科院如何批量复制独角兽？"
-	}, {
-		name: "张遥",
-		img: "",
-		num: "142",
-		fans: "1284",
-		text: "揭秘中国AI创投的隐秘力量：中科院如何批量复制独角兽？"
-	}, {
-		name: "张遥",
-		img: "",
-		num: "142",
-		fans: "1284",
-		text: "未来的强人工智能是什么样的呢？"
-	}]
 	const postList = ref([])
 	const userName = ref([])
+	const userImg = ref([])
 	const content = ref([])
 	const fans = ref([])
-	let gotoDetail = (postId,userId) => {
+	const zan = ref([0,1,1])
+	// let click=(cla)=>{
+	// 	if
+	// }
+	let gotoDetail = (postId, userId) => {
 		uni.navigateTo({
-			url: '/pages/community/post?id=' + postId+'&user='+userId
+			url: '/pages/community/post?id=' + postId + '&user=' + userId
 		})
 	}
 	onLoad(() => {
@@ -91,6 +86,7 @@
 								if (res.data.code == 200) {
 									console.log("getUser请求成功");
 									userName.value.push(res.data.data.userNickName)
+									userImg.value.push(res.data.data.userAvatar)
 								} else {
 									console.log("getUser请求失败");
 									// console.log(res.data);
@@ -121,12 +117,76 @@
 		font-size: 12px;
 	}
 
+	/* 顶部样式开始 */
+	.topStyle {
+		width: 230rpx;
+		height: 80rpx;
+		border-radius: 25rpx;
+		overflow: hidden;
+		margin: 0 auto;
+		display: flex;
+		justify-content: center;
+		position: relative;
+	}
+
+	.topStyle image {
+		width: 70rpx;
+		height: 70rpx;
+	}
+
+	.topStyle .img1 {
+		position: absolute;
+		z-index: 1;
+		top: 0;
+		left: 0;
+	}
+
+	.topStyle .img2 {
+		position: absolute;
+		z-index: 2;
+		top: 0;
+		left: 40rpx;
+	}
+
+	.topStyle .img3 {
+		position: absolute;
+		z-index: 3;
+		top: 0;
+		left: 80rpx;
+	}
+
+	.topStyle .img4 {
+		position: absolute;
+		z-index: 4;
+		top: 0;
+		left: 120rpx;
+	}
+
+	.topStyle .img5 {
+		position: absolute;
+		z-index: 5;
+		top: 0;
+		left: 160rpx;
+	}
+
+	.topStyle+text {
+		width: 700rpx;
+		margin: 10rpx auto;
+		display: block;
+		text-align: center;
+		color: #909090;
+		margin-bottom: 30rpx;
+	}
+
+	/* 顶部样式结束 */
+
+	/* 帖子下边框 */
 	.attention .item .borderbottom {
 		margin-left: -20rpx;
 		margin-top: 20rpx;
 		width: 750rpx;
 		height: 10rpx;
-		background-color: #e6e2cf60;
+		background-color: #e6e2cf40;
 	}
 
 	/* 用户信息开始 */
@@ -140,6 +200,7 @@
 		width: 80rpx;
 		height: 80rpx;
 		margin-right: 14rpx;
+		border-radius: 40rpx;
 	}
 
 	.attention .user .name {
@@ -194,10 +255,11 @@
 	}
 
 	.attention .content .btn {
-		width: 40rpx;
-		height: 40rpx;
+		width: 30rpx;
+		height: 30rpx;
 		display: inline-flex;
 		margin-right: 20rpx;
+		margin-top: 10rpx;
 		border-radius: 4rpx;
 		padding: 2rpx 4rpx;
 	}

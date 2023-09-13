@@ -1,20 +1,31 @@
 <template>
 	<view class="recommend">
 		<titleItem title="热门话题"></titleItem>
-		<view class="top">
+		
+		<scroll-view class="top" scroll-x>
 			<view class="content">
 				<view class="btn" v-for="(item,index) in 4">
-					<image src="../../../static/image/icon/hot.svg" mode="aspectFit"></image>
-					art
+					#{{titles[index]}}
 				</view>
 			</view>
 			<view class="content even">
 				<view class="btn" v-for="(item,index) in 4">
-					<image src="../../../static/image/icon/hot.svg" mode="aspectFit"></image>
-					art
+					#{{titles[index+4]}}
 				</view>
 			</view>
-		</view>
+		</scroll-view>
+	<!-- 	<view class="top">
+			<view class="content">
+				<view class="btn" v-for="(item,index) in 4">
+					#{{titles[index]}}
+				</view>
+			</view>
+			<view class="content even">
+				<view class="btn" v-for="(item,index) in 4">
+					#{{titles[index+4]}}
+				</view>
+			</view>
+		</view> -->
 		<titleItem title="大家都在聊"></titleItem>
 		<view class="public">
 			<view class="hot">
@@ -66,6 +77,7 @@
 
 <script setup>
 	import titleItem from "./title.vue"
+	const titles = ["openAI", "chatGPT", "智能世界史", "智能世界史", "智能世界史", "智能世界史", "智能世界史", "智能世界史"]
 	const hotList = [{
 		num: 1,
 		title: "改变世界的百大科技",
@@ -115,36 +127,46 @@
 	.recommend {
 		padding: 20rpx;
 	}
+
 	/* 热门分类 */
 	.top {
-		width: 600rpx;
+		width: 800rpx;
 		padding: 20rpx 0;
 		margin: 0 auto;
 		margin-left: 20rpx;
 		padding-bottom: 30rpx;
 		font-size: 14px;
 	}
-	
+
 	.top .content {
 		width: 100%;
 		margin-top: 10rpx;
-		display: flex;
-		justify-content: space-between;
+		/* display: flex; */
+		/* justify-content: space-between; */
 	}
+
 	.top .content .btn {
 		display: inline-flex;
 		align-items: center;
+		background-color: #90c9b4;
+		padding: 10rpx 14rpx;
+		border-radius: 18rpx;
+		margin-bottom: 10rpx;
+		margin-right: 20rpx;
+		color: #ffffff;
+		text-shadow: 2rpx 2rpx 2rpx #7bad7b;
 	}
-	
-	.top .content image {
+
+/* 	.top .content image {
 		width: 40rpx;
 		height: 40rpx;
 		margin-right: 4rpx;
-	}
-	
+	} */
+
 	.top .even {
 		margin-left: 48rpx;
 	}
+
 	/* 热门分类结束 */
 
 	/* 热门开始 */
