@@ -1,8 +1,8 @@
 <template>
 	<view class="title">
 		<view class=" left">
-			<text class="text">{{title}}</text>
 			<view class="background"> </view>
+			<text class="text">{{title}}</text>
 		</view>
 	</view>
 </template>

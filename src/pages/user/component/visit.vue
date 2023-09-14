@@ -10,7 +10,7 @@
 			<view class="btn1" style="margin-top: 50rpx;" @click='login'>登录</view>
 			<!-- 验证码登录包括手机号和邮箱-->
 			<view class="btn1" @click='register'>注册</view>
-			<view class="btnNo">不登录，随便看看</view>
+			<view class="btnNo" @click='gotoIndex'>不登录，随便看看</view>
 			<text class="or">OR</text>
 			<view class="other">
 				<view class="orBtn">
@@ -39,6 +39,11 @@
 	let register = () => {
 		uni.navigateTo({
 			url: '/pages/user/register'
+		})
+	}
+	let gotoIndex = () => {
+		uni.navigateTo({
+			url: '/pages/index/index'
 		})
 	}
 </script>

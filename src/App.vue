@@ -37,7 +37,9 @@
 		src: url('@/static/font/SourceHanSansCN-VF.otf');
 	}
 
-	view {
+	view,
+	text {
 		font-family: 'SourceHanSansCN-VF';
+		font-weight: 500;
 	}
 </style>

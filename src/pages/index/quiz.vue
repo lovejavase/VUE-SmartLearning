@@ -5,20 +5,20 @@
 		<ClassHeader searchText="" text="答题测验"></ClassHeader>
 		<!-- 进度条 -->
 		<view class="">
-			<slider class="slider" @change="" min="0" max="5" step="1" :value="svalue" color="#b3b3b3" block-size="14"
+			<slider class="slider" @change="" min="0" max="4" step="1" :value="page" color="#b3b3b3" block-size="14"
 				active-color="#90c9b4" block-color="#f5f5f5" />
-			<!-- <uv-line-progress  :percentage="30" activeColor="#ff0000"></uv-line-progress> -->
 		</view>
 		<!-- 答题卡 -->
-		<swiper previous-margin="50rpx" next-margin="50rpx">
-			<swiper-item v-for="i in 3">
+		<swiper previous-margin="50rpx" next-margin="50rpx" :current="page">
+			<swiper-item v-for="i in 5">
 				<view class="card">
 					<view class="box">
-						<text class="question">Question1</text>
-						<text class="problem">{{problem[0].problem}}</text>
-						<text class="answer" @click="check('a')">A：{{problem[0].a}}</text>
-						<text class="answer" @click="check('b')">B：{{problem[0].b}}</text>
-						<text class="answer" @click="check('c')">C：{{problem[0].c}}</text>
+						<text class="question">{{question[i-1]}}</text>
+						<text class="problem">{{problem[i-1]}}</text>
+						<text class="answer" @click="check('A')">A：{{answerA[i-1]}}</text>
+						<text class="answer" @click="check('B')">B：{{answerB[i-1]}}</text>
+						<text class="answer" @click="check('C')">C：{{answerC[i-1]}}</text>
+						<text class="answer" @click="check('D')">D：{{answerD[i-1]}}</text>
 					</view>
 				</view>
 			</swiper-item>
@@ -26,7 +26,7 @@
 		</swiper>
 
 		<!-- 继续答题 -->
-		<text>继续答题</text>
+		<text @click="to">{{button}}</text>
 	</view>
 </template>
 
@@ -39,34 +39,142 @@
 	import {
 		onLoad
 	} from '@dcloudio/uni-app';
+	import {
+		Button
+	} from '@dcloudio/uni-h5';
 	const svalue = ref(0)
-	const problem = ref([{
-		problem: '一二三四无六其把就是一二三四无六其把就是',
-		a: '正确答案',
-		b: '错误答案',
-		c: '错误',
-		right: 'a'
-	}])
+	const page = ref(0)
+	const problem = ref([])
+	const answerA = ref([])
+	const button = ref("继续答题")
+	const answerB = ref([])
+	const answerC = ref([])
+	const answerD = ref([])
+	const question = ref(["Question1", "Question2", "Question3", "Question4", "Question5"])
+	const answer = ref([])
 	const user = ref(getApp().globalData.userDetail)
-	// console.log(getApp().globalData.userDetail)
-	// console.log(user.value.userId)
+	const point = ref(0)
 
+	//验证答案方法
 	let check = (item) => {
-		console.log()
-		if (item == problem.value[0].right) {
-			// request({
-			// 	url: '/Smart/User/updateUser',
-			// 	method:'POST',
-			// 	data:{user,userPoints:user.value.userPoints+2}
-			// }).then(res=>{
-			// 	console.log(res)
-			// })
-		}
-		svalue.value += 1
-		if (svalue.value > 5) {
-			svalue.value = 0
+		console.log(page.value)
+		// console.log(answer.value[page.value])
+		// console.log(svalue.value)
+		if (item == answer.value[point.value]) {
+			uni.showToast({
+				title: "回答正确"
+			})
+			if (svalue.value < 4) {
+				point.value += 1
+				svalue.value += 1
+				page.value += 1
+			} else {
+				button.value = "结束答题"
+				console.log("结束答题")
+				svalue.value += 1
+				point.value += 1
+			}
+		} else {
+			if (page.value < 4) {
+				// point.value += 1
+				page.value += 1
+				svalue.value += 1
+			} else {
+				button.value = "结束答题"
+			}
+			uni.showToast({
+				title: "回答错误"
+			})
+
 		}
 
+	}
+
+	//获取答题数据
+	let getQuestion = () => {
+		console.log("开始调用答题接口")
+		return new Promise((resolve, reject) => {
+			uni.request({
+				url: 'http://a-puppy-c.top:9999/Smart/Answer/selectAllByTab',
+				data: {
+					tab: '人工智能发展史',
+					start: 0,
+					limit: 5
+				},
+				header: {
+					'Authorization': uni.getStorageSync('Authorization'),
+					'content-type': 'application/x-www-form-urlencoded'
+				},
+				success: (res) => {
+					if (res.data.code == 200) {
+						console.log("获取问题成功")
+						console.log(res.data)
+						resolve(res.data.data)
+						for (let i = 0; i < res.data.data.length; i++) {
+							problem.value.push(res.data.data[i].question)
+							answerA.value.push(res.data.data[i].answerA)
+							answerB.value.push(res.data.data[i].answerB)
+							answerC.value.push(res.data.data[i].answerC)
+							answerD.value.push(res.data.data[i].answerD)
+							answer.value.push(res.data.data[i].answerRight)
+						}
+						console.log(problem.value)
+					} else {
+						console.log("获取问题失败")
+					}
+				}
+			})
+		})
+	}
+
+	//页面加载方法
+	onLoad(() => {
+		getQuestion().then(res => {
+			console.log("问题调用完成")
+		})
+	})
+
+	let to = () => {
+		if (button.value == "继续答题") {
+			console.log("继续答题")
+			page.value += 1
+
+		} else {
+			console.log("答题结束")
+			//路由跳转  并调用封装的addPoint方法
+			addPoint()
+				
+		}
+	}
+
+
+	let addPoint = () => {
+		const userId = getApp().globalData.userDetail.userId //获取用户id
+		console.log(userId)
+		console.log("调用加分接口")
+		return new Promise((resolve, reject) => {
+			uni.request({
+				url:"http://a-puppy-c.top:9999/Smart/Answer/updateUserPointsAdd",
+				data: {
+					userId: userId,
+					points: point.value
+				},
+				method: 'Post',
+				header: {
+					'Authorization': uni.getStorageSync('Authorization'),
+					'content-type': 'application/x-www-form-urlencoded'
+				},
+				success: (res) => {
+					console.log(res)
+					if(res.data.code == 0){
+						console.log("加分成功，跳转路由")
+						uni.navigateTo({
+							url: "test",
+						});
+					}
+				}
+			})
+		})
 	}
 </script>
 
@@ -139,15 +247,15 @@
 
 	.card .box .problem {
 		width: 520rpx;
-		background-color: #90c9b4;
-		font-size: 22px;
+		/* background-color: #90c9b4; */
+		font-size: 20px;
 		color: #4a4a4a;
 	}
 
 	.card .box .answer {
 		width: 520rpx;
-		background-color: #90c9b4;
-		font-size: 18px;
+		/* background-color: #90c9b4; */
+		font-size: 16px;
 		color: #4a4a4a;
 	}
 

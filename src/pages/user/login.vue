@@ -78,22 +78,9 @@
 		})
 	}
 	let gologin = () => {
-		login().then(res => {
-			getApp().globalData.userDetail = res.data
-			if (res.code == 200) {
-				//登录成功
-				gotoUser()
-			} else {
-				//成功但是需要验证
-				console.log("前往手机短信验证");
-				gotoAuthenticate()
-			}
-		})
-	}
-	// 接口调用
-	let login = () => {
-		return new Promise((resolve, reject) => {
-			console.log("开始调用login")
+		if (account.value == '' || pwd.value == '') {
+			console.log("账号或密码不能为空");
+		} else {
 			uni.request({
 				url: 'http://a-puppy-c.top:9999/Smart/User/login',
 				method: 'GET',
@@ -108,17 +95,20 @@
 				success: (res) => {
 					if (res.data.code == 200) {
 						console.log("调用login成功");
+						getApp().globalData.userDetail = res.data
+						//登录成功
+						gotoUser()
 					} else {
 						console.log("调用login失败");
+						console.log(res.data);
+						gotoAuthenticate()
 					}
-					// console.log(res.data.data)
-					resolve(res.data)
 				},
 				fail() {
 					console.log("请求login失败");
 				}
 			})
-		})
+		}
 	}
 </script>
 

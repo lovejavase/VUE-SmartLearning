@@ -466,7 +466,6 @@
 		font-size: 14px;
 		white-space: nowrap;
 		text-align: center;
-		/* font-weight: bold; */
 	}
 
 	/* 工具结束 */
@@ -578,7 +577,7 @@
 
 	.news .content .time {
 		display: block;
-		width: 124rpx;
+		width: 110rpx;
 		white-space: nowrap;
 		overflow: hidden;
 		margin: 8rpx 10rpx;
@@ -601,7 +600,8 @@
 	}
 
 	.news .content .userName {
-		margin-left: 2%;
+		margin-left: 2rpx;
+		word-wrap: normal;
 		display: inline-block;
 	}
 
@@ -614,16 +614,14 @@
 	/* 新闻详情 */
 	.news .newsDetail {
 		padding: 10rpx 12rpx;
-		margin-left: 210rpx;
+		margin-left: 190rpx;
 	}
 
 	.news .content .conTitle {
 		display: block;
 		font-size: 16px;
 		color: #90c9b4;
-		/* margin: 4rpx 0; */
 		margin-bottom: 6rpx;
-		/* font-weight: 600; */
 	}
 
 	.news .content .conText {
@@ -635,7 +633,7 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 		display: -webkit-box;
-		-webkit-line-clamp: 5;
+		-webkit-line-clamp: 4;
 		-webkit-box-orient: vertical;
 
 	}
