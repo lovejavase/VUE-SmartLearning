@@ -46,7 +46,7 @@
 	const userImg = ref([])
 	const content = ref([])
 	const fans = ref([])
-	const zan = ref([0,1,1])
+	const zan = ref([0, 1, 1])
 	// let click=(cla)=>{
 	// 	if
 	// }

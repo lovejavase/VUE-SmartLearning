@@ -97,6 +97,13 @@
 				"navigationStyle": "custom"
 				// "enablePullDownRefresh": false
 			}
+		},{
+			"text": "帖子发布",
+			"path": "pages/community/publish",
+			"style": {
+				"navigationStyle": "custom"
+				// "enablePullDownRefresh": false
+			}
 		}, {
 			"text": "对话",
 			"path": "pages/talk/talk",
