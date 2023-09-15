@@ -40,7 +40,7 @@
 		});
 	}
 	let gotoUser = () => {
-		uni.redirectTo({
+		uni.navigateTo({
 			url: '/pages/user/user'
 		})
 	}

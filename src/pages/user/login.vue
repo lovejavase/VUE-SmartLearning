@@ -95,14 +95,17 @@
 				success: (res) => {
 					if (res.data.code == 200) {
 						console.log("调用login成功");
-						getApp().globalData.userDetail = res.data
 						//登录成功
 						gotoUser()
 					} else {
 						console.log("调用login失败");
 						console.log(res.data);
-						gotoAuthenticate()
+						if (res.data.code == -10004) {
+							gotoAuthenticate()
+						}
 					}
+					console.log(res.data.code)
+					getApp().globalData.userDetail = res.data.data
 				},
 				fail() {
 					console.log("请求login失败");

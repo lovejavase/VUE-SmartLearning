@@ -4,9 +4,11 @@
 		onLaunch,
 		onShow
 	} from '@dcloudio/uni-app';
-
+	// 存储用户信息
 	const userDetail = ''
-
+	// 获取设备信息
+	// const systemInfo = uni.getSystemInfoSync()
+	// 
 	onLaunch(() => {
 		console.log('App Launch')
 	})
@@ -21,6 +23,7 @@
 	export default {
 		globalData: {
 			userDetail: {},
+			systemInfo: uni.getSystemInfoSync(),//获取设备信息
 		},
 	};
 </script>

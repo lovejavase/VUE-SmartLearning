@@ -50,15 +50,20 @@
 		color: #15a0ac;
 		position: relative;
 	}
+	.header .title text{
+		position: relative;
+		z-index: 10;
+	}
 
 	.header .bottom {
 		position: absolute;
-		height: 10rpx;
+		height: 12rpx;
 		width: 100%;
 		left: 0;
 		top: 22px;
 		background-color: #f6e38280;
 		border-radius: 4px;
+		z-index: 0;
 	}
 	.header image{
 		width: 20px;

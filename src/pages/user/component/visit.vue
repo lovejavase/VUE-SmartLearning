@@ -11,7 +11,10 @@
 			<!-- 验证码登录包括手机号和邮箱-->
 			<view class="btn1" @click='register'>注册</view>
 			<view class="btnNo" @click='gotoIndex'>不登录，随便看看</view>
-			<text class="or">OR</text>
+			<view class="or">
+				<text class="">OR</text>
+				<view class="bg"></view>
+			</view>
 			<view class="other">
 				<view class="orBtn">
 					<image src="../../../static/image/icon/wchat.svg" mode=""></image>
@@ -111,9 +114,27 @@
 		color: #7a7a7a;
 		width: 96%;
 		text-align: center;
-		margin-top: 16px;
+		margin-top: 16rpx;
+		position: relative;
 		/* height: 0; */
 		/* border: #f6e382 solid 4px; */
+	}
+
+	.content .or>text {
+		position: relative;
+		z-index: 10;
+		background-color: #ffffff;
+		padding: 4rpx;
+	}
+
+	.content .bg {
+		width: 80%;
+		margin: 0 10%;
+		height: 3rpx;
+		background-color: #d9d9d9;
+		z-index: 1;
+		position: absolute;
+		top: 16rpx;
 	}
 
 	.content .other {
@@ -129,8 +150,8 @@
 		font-size: 24px;
 		margin: 0 14px;
 	}
-	
-	.content .orBtn image{
+
+	.content .orBtn image {
 		width: 50rpx;
 		height: 50rpx;
 	}

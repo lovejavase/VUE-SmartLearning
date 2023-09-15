@@ -16,14 +16,15 @@
 						</view>
 						<!-- 头像 -->
 						<view class="avatar">
-							<image :src="userAvatar" mode=""  class="uimg"></image>
+							<image :src="userAvatar" mode="" class="uimg"></image>
 						</view>
 					</view>
 					<!-- 机器人发的消息 -->
 					<view class="item Ai" v-if="item.botContent != ''">
 						<!-- 头像 -->
 						<view class="avatar">
-							<image src="http://www.a-puppy-c.top/smartLearning/AI.png" mode="" style="width: 50px;height: 51px;"></image>
+							<image src="http://www.a-puppy-c.top/smartLearning/AI.png" mode=""
+								style="width: 50px;height: 51px;"></image>
 						</view>
 						<!-- 文字内容 -->
 						<view class="content left">
@@ -66,8 +67,8 @@
 	//滚动距离
 	const scrollTop = ref(0)
 	const userId = ref('')
-	const userAvatar =getApp().globalData.userDetail.userAvatar;
-	
+	const userAvatar = getApp().globalData.userDetail.userAvatar;
+
 	//发送的消息
 	const chatMsg = ref("")
 	const msgList = ref([{
@@ -85,19 +86,23 @@
 		scrollToBottom();
 	})
 	onLoad(() => {
-		
-		if(userAvatar==undefined){
+
+		if (userAvatar == undefined) {
 			console.log('请登录')
 			uni.showToast({
-				title: "请先登录才能使用对话功能"
+				title: "请先登录!",
+				duration:2000,
+				icon:'error'
 			})
-			// 跳转等登录页面
-			// uni.navigateTo({
-			// 	url: '/pages/user/user'
-			// })
+			setTimeout(() => {
+				// 跳转等登录页面
+				uni.navigateTo({
+					url: '/pages/user/user'
+				})
+			}, 2100)
 		}
-		console.log('avatar'+userAvatar)
-		
+		console.log('avatar' + userAvatar)
+
 		uni.onKeyboardHeightChange(res => {
 			//这里正常来讲代码直接写就行了
 			// keyboardHeight.value = rpxTopx(res.height)
@@ -402,6 +407,7 @@
 		border: none;
 		border-radius: 0;
 	}
+
 	.uimg {
 		width: 50;
 		height: 50px;

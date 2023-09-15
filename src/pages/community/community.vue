@@ -222,12 +222,12 @@
 		bottom: -300rpx;
 		left: 0;
 		height: 400rpx;
-		width: 748rpx;
+		width: 750rpx;
 		/* width: 688rpx; */
 		/* padding: 30rpx 30rpx; */
 		padding: 60rpx 0;
 		background-color: #ffffff;
-		border: #15a0ac90 1rpx solid;
+		/* border: #15a0ac90 1rpx solid; */
 		border-radius: 40rpx 40rpx 0 0;
 		display: flex;
 		justify-content: center;

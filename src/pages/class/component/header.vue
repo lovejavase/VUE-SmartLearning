@@ -9,9 +9,9 @@
 				</view>
 			</view>
 			<view class="link">
-				<image src="../../../static/image/icon/user_top.svg" mode=""></image>
-				<image src="../../../static/image/icon/news_top.svg" mode=""></image>
-				<image src="../../../static/image/icon/history_top.svg" mode=""></image>
+				<image src="@/static/image/icon/user_top.svg" mode=""></image>
+				<image src="@/static/image/icon/news_top.svg" mode=""></image>
+				<image src="@/static/image/icon/history_top.svg" mode=""></image>
 			</view>
 		</view>
 		<!-- 搜索框 -->

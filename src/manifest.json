@@ -41,9 +41,28 @@
                 ]
             },
             /* ios打包配置 */
-            "ios" : {},
+            "ios" : {
+                "dSYMs" : false
+            },
             /* SDK配置 */
-            "sdkConfigs" : {}
+            "sdkConfigs" : {
+                "ad" : {}
+            }
+        }
+    },
+    "h5" : {
+        "devServer" : {
+            "port" : 8080, //浏览器运行端口
+            "disableHostCheck" : true,
+            "https" : false,
+            "proxy" : {
+                "/api" : {
+                    //修改配置跨域代理路由(需要重启)
+                    "target" : "http://a-puppy-c.top:9999",
+                    "changeOrigin" : true,
+                    "secure" : false
+                }
+            }
         }
     },
     /* 快应用特有相关 */
