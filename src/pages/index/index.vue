@@ -9,10 +9,10 @@
 					</view>
 					<view class="topButton">
 						<view class="topBtn" @click="gotoNotice">
-							<image src="@/static/image/news.png" mode=""></image>
+							<image src="@/static/image/notice1.png" mode=""></image>
 						</view>
 						<view class="topBtn" @click="gotoMy">
-							<image src="@/static/image/my.png" mode=""></image>
+							<image src="@/static/image/my1.png" mode=""></image>
 						</view>
 					</view>
 				</view>
@@ -296,12 +296,13 @@
 	let gotoIntelligent = () => {
 		uni.navigateTo({
 			//智能识别
-			url: '/pages/index/intelligent'
+			url: '/pages/tools/intelligent'
 		});
 	};
+	// 问答测验
 	let gotoClass = () => {
 		uni.navigateTo({ //普通页面跳转
-			url: '/pages/index/test'
+			url: '/pages/tools/test'
 		});
 	};
 	// 课堂跳转

@@ -36,6 +36,9 @@
 				<view class="orBtn">
 					<image src="../../static/image/icon/email.svg" mode=""></image>
 				</view>
+				<view class="orBtn" @click="faceid">
+					<image src="../../static/image/icon/face.svg" mode=""></image>
+				</view>
 			</view>
 		</view>
 		<text class="login" @click="gotoRegister">没有账户？注册</text>
@@ -55,9 +58,9 @@
 	const pwd = ref('')
 	const remember = ref('')
 	const pwdShow = ref(true)
-	var userid = 2
-	// const userDetail = ref()
-	// var islogin=false
+	const userDetail = ref( getApp().globalData.userDetail )
+	console.log(userDetail.value)
+
 
 	let changePassword = () => {
 		pwdShow.value = !pwdShow.value
@@ -75,6 +78,11 @@
 	let gotoAuthenticate = () => {
 		uni.navigateTo({
 			url: '/pages/user/authenticate'
+		})
+	}
+	let faceid = () => {
+		uni.navigateTo({
+			url: '/pages/user/face'
 		})
 	}
 	let gologin = () => {

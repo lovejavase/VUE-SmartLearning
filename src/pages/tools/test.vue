@@ -48,7 +48,7 @@
 	import titleItem from '../class/component/title.vue'
 	let gotoTest=()=>{
 		uni.navigateTo({
-			url:'/pages/index/quiz'
+			url:'/pages/tools/quiz'
 		})
 	}
 </script>

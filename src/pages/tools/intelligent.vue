@@ -87,7 +87,7 @@
 	const famousImg = ["@/static/image/famous1.png", "@/static/image/famous2.png"]
 	let translate = () => {
 		uni.navigateTo({
-			url: '/pages/index/translate'
+			url: '/pages/tools/translate'
 		})
 	}
 </script>

@@ -63,13 +63,38 @@
 					pwd: pwd.value
 				},
 				success: (res) => {
-					if (res.data.code == 200) {
+					if (res.data.code == 0) {
 						console.log("调用register成功");
+						uni.request({
+							url: 'http://a-puppy-c.top:9999/Smart/User/getUser',
+							method: 'GET',
+							header: {
+								'Authorization': uni.getStorageSync('Authorization'),
+								'content-type': 'application/x-www-form-urlencoded'
+							},
+							data: {
+								userId:res.data.data
+							},
+							success: (res) => {
+								getApp().globalData.userDetail = res.data.data
+							},
+							fail() {
+								console.log("请求login失败");
+							}
+						})
+						uni.showToast({
+							icon:'success',
+							title:'注册成功！'
+						})
+						setTimeout(()=>{
+						uni.redirectTo({
+							url:'/pages/user/modify'
+						})
+						},400)
 					} else {
 						console.log("调用register失败");
+						console.log(res.data);
 					}
-					// console.log(res.data)
-
 				},
 				fail() {
 					console.log("调用register失败");
@@ -79,7 +104,7 @@
 			console.log('密码不一致')
 			uni.showToast({
 				title: '密码不一致',
-				duration: 1500.,
+				duration: 1500,
 				icon: 'error'
 			})
 		}

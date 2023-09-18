@@ -134,7 +134,7 @@
 
 	.tab—btns .tab-btn {
 		display: inline-flex;
-		font-size: 22px;
+		font-size: 20px;
 		color: #515151;
 		padding: 10rpx;
 		margin: 0 10rpx;
@@ -142,7 +142,7 @@
 
 	.tab—btns .bg {
 		margin-left: 20rpx;
-		width: 44px;
+		width: 40px;
 		height: 4px;
 		background-color: #f6e38290;
 		border-radius: 2px;
@@ -166,7 +166,7 @@
 		width: 180rpx;
 		display: flex;
 		justify-content: space-between;
-		position: fixed;
+		position: absolute;
 		z-index: 99;
 		top: 76rpx;
 		right: 36rpx;

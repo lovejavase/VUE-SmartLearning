@@ -23,8 +23,7 @@
 					<view class="item Ai" v-if="item.botContent != ''">
 						<!-- 头像 -->
 						<view class="avatar">
-							<image src="http://www.a-puppy-c.top/smartLearning/AI.png" mode=""
-								style="width: 50px;height: 51px;"></image>
+							<image src="http://www.a-puppy-c.top/smartLearning/AI.png" mode=""></image>
 						</view>
 						<!-- 文字内容 -->
 						<view class="content left">
@@ -340,6 +339,8 @@
 
 	.scroll-view .avatar image {
 		align-self: center;
+		width: 78rpx;
+		height: 78rpx;
 	}
 
 

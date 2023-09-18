@@ -11,6 +11,7 @@
 	import my from "./component/my.vue"
 	import {
 		onLoad,
+		onShow,
 		onUnload
 	} from "@dcloudio/uni-app";
 	import {
@@ -19,7 +20,7 @@
 
 	const isLogin = ref(false)
 	// var login = true
-	onLoad(() => {
+	onShow(() => {
 		// 判断是否登录
 		isLogin.value = getApp().globalData.userDetail.userId >= 0 ? true : false
 		console.log('登录？' + isLogin.value)

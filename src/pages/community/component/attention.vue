@@ -112,7 +112,7 @@
 <style scoped>
 	.attention {
 		padding: 20rpx;
-		padding-bottom: 0;
+		padding-bottom: 100rpx;
 		width: 710rpx;
 		font-size: 12px;
 	}
@@ -194,6 +194,7 @@
 		display: flex;
 		align-items: center;
 		padding: 20rpx;
+		position: relative;
 	}
 
 	.attention .user image {
@@ -220,13 +221,15 @@
 
 	/* 关注按钮 */
 	.attention .user .btn {
-		margin-left: 200rpx;
+		/* margin-left: 200rpx; */
 		font-size: 12px;
 		background-color: #15a0ac90;
 		color: #ffffff;
 		/* text-shadow: 1rpx 1rpx 1rpx #90909090; */
 		padding: 8rpx 16rpx;
 		border-radius: 20rpx;
+		position: absolute;
+		right: 30rpx;
 	}
 
 	/* 用户信息结束 */

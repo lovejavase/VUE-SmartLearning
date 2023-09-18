@@ -1,8 +1,7 @@
 <template>
 	<view class="recommend">
 		<titleItem title="热门话题"></titleItem>
-
-		<scroll-view class="top" scroll-x>
+		<scroll-view class="top" scroll-x='true' >
 			<view class="content">
 				<view class="btn" v-for="(item,index) in 4">
 					#{{titles[index]}}
@@ -14,18 +13,6 @@
 				</view>
 			</view>
 		</scroll-view>
-		<!-- 	<view class="top">
-			<view class="content">
-				<view class="btn" v-for="(item,index) in 4">
-					#{{titles[index]}}
-				</view>
-			</view>
-			<view class="content even">
-				<view class="btn" v-for="(item,index) in 4">
-					#{{titles[index+4]}}
-				</view>
-			</view>
-		</view> -->
 		<titleItem title="大家都在聊"></titleItem>
 		<view class="public">
 			<view class="hot">
@@ -50,17 +37,17 @@
 			</view>
 			<!-- 热门帖子 -->
 			<view class="post">
-				<view class="item" v-for="i in postList">
+				<view class="item" v-for="(info,index) in postList">
 					<img src="@/static/image/userImg1.png" alt="">
 					<view class="info">
-						<text class="name">{{i.name}}</text>
-						<text class="text">{{i.text}}</text>
+						<text class="name">{{info.name}}</text>
+						<text class="text">{{info.text}}</text>
 						<!-- 书籍 -->
 						<view class="book">
-							<img src="@/static/image/book1.png" alt="">
-							<view class="">
-								<div class="itemBook">地平线2025:人工智能来了</div>
-								<div class="itemAuthor">共12章</div>
+							<img :src="info.bookImg" alt="">
+							<view class="bookname">
+								<div class="itemBook">{{info.book}}</div>
+								<div class="itemAuthor">{{info.total}}</div>
 							</view>
 							<view class="itemBtn">
 								<img src="@/static/image/icon/Right.svg" alt="">
@@ -76,6 +63,9 @@
 </template>
 
 <script setup>
+	import {
+		reactive
+	} from "vue";
 	import titleItem from "./title.vue"
 	const titles = ["openAI", "chatGPT", "智能世界史", "智能世界史", "智能世界史", "智能世界史", "智能世界史", "智能世界史"]
 	const hotList = [{
@@ -102,46 +92,50 @@
 	const postList = [{
 		name: "AC",
 		img: "",
+		total: '共十章',
 		text: "各类智能化产品已经成为人类生活当中不可或缺的一部分。智能手机、电脑、数控电器.....",
-		book: "地平线2025：人工智能来了",
-		bookImg: "",
-		num: 12
-	}, {
-		name: "vvd",
-		img: "",
-		text: "评价内容.....",
-		book: "书名",
-		bookImg: "",
-		num: 11
+		book: "人工智能时代",
+		bookImg: "http://www.a-puppy-c.top/smartLearning/book1.jpg",
+		num: 12,
+		bookid: 1
 	}, {
 		name: "Vvd",
 		img: "",
 		text: "评价内容.....",
-		book: "书名",
-		bookImg: "",
-		num: 11
+		book: "人工智能简史",
+		total: '共十二章',
+		bookImg: "http://www.a-puppy-c.top/smartLearning/book2.jpg",
+		num: 11,
+		bookid: 2
+	}, {
+		name: "vvd",
+		img: "",
+		text: "评价内容.....",
+		total: '共十章',
+		book: "人工智能时代",
+		bookImg: "http://www.a-puppy-c.top/smartLearning/book1.jpg",
+		num: 11,
+		bookid: 1
 	}]
 </script>
 
 <style scoped>
 	.recommend {
 		padding: 20rpx;
+		padding-bottom: 100rpx;
 	}
 
 	/* 热门分类 */
 	.top {
-		width: 800rpx;
-		padding: 20rpx 0;
-		margin: 0 auto;
-		margin-left: -20rpx;
-		padding-bottom: 30rpx;
-		font-size: 14px;
+		white-space: nowrap;
+		width: 100%;
 	}
 
 	.top .content {
-		width: 100%;
+		font-size: 14px;
+		width: 900rpx;
 		margin: 20rpx;
-		/* display: flex; */
+		display: flex;
 		/* justify-content: space-between; */
 	}
 
@@ -152,7 +146,7 @@
 		padding: 10rpx 14rpx;
 		border-radius: 18rpx;
 		margin-bottom: 10rpx;
-		margin-right: 20rpx;
+		margin-right: 50rpx;
 		color: #ffffff;
 		text-shadow: 2rpx 2rpx 2rpx #7bad7b;
 	}
@@ -289,6 +283,10 @@
 	.post .item .book .itemBook {
 		font-size: 12px;
 		margin-bottom: 4rpx;
+	}
+
+	.post .item .book .bookname {
+		margin-right: 100rpx;
 	}
 
 	.post .item .book .itemAuthor {
