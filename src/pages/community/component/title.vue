@@ -43,20 +43,21 @@
 	}
 
 	.title .text {
-		/* position: relative; */
+		position: relative;
 		font-size: 14px;
-		/* font-weight: 600; */
+		z-index: 10;
 	}
 
-	.title .link {
+/* 	.title .link {
 		font-size: 12px;
 		color: #15a0ac;
 		margin-top: 2px;
-	}
+	} */
 
 	.title .background {
-		background-color: #f6de2840;
+		background-color: #f6de28;
 		width: 3.4rem;
+		/* width: 100%; */
 		height: 0.3rem;
 		position: absolute;
 		border-radius: 0.1rem;
@@ -64,5 +65,6 @@
 		/* top: 10px; */
 		left: 4%;
 		bottom: 1%;
+		z-index: 0;
 	}
 </style>

@@ -40,7 +40,7 @@
 				<view class="uni-textarea">
 					<textarea v-model="chatMsg" maxlength="300" confirm-type="send" @confirm="handleSend"
 						:show-confirm-bar="false" :adjust-position="false" @linechange="sendHeight" @focus="focus"
-						@blur="blur" auto-height></textarea>
+						@blur="blur" auto-height placeholder="发消息..." placeholder-style="color:#c5c5c5"></textarea>
 				</view>
 				<button @click="handleSend" class="send-btn">发送</button>
 			</view>
@@ -383,6 +383,7 @@
 		color: #333333;
 		line-height: 75rpx;
 		padding: 0 8rpx;
+		padding-left: 18rpx;
 		border: none;
 	}
 

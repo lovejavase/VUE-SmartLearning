@@ -2,11 +2,12 @@
 	<view class="attention">
 		<!-- 顶部样式 -->
 		<view class="topStyle">
-			<image class="img1" src="@/static/image/userImg1.png" alt="" />
+			<!-- <image class="img1" src="@/static/image/userImg1.png" alt="" />
 			<image class="img2" src="@/static/image/userImg1.png" alt="" />
 			<image class="img3" src="@/static/image/userImg1.png" alt="" />
 			<image class="img4" src="@/static/image/userImg1.png" alt="" />
-			<image class="img5" src="@/static/image/userImg1.png" alt="" />
+			<image class="img5" src="@/static/image/userImg1.png" alt="" /> -->
+			<image class="img" src="@/static/image/attention.png" alt="" />
 		</view>
 		<text>和志趣相投的朋友遨游智能的海洋吧！</text>
 		<view class="item" v-for="(post,index) in postList">
@@ -28,8 +29,8 @@
 					<image class='btn' src="@/static/image/icon/message_fill_light.svg" alt="" />
 				</view>
 			</view>
-			<view class="borderbottom">
-			</view>
+			<!-- <view class="borderbottom">
+			</view> -->
 		</view>
 	</view>
 </template>
@@ -129,9 +130,13 @@
 		position: relative;
 	}
 
-	.topStyle image {
+	/* .topStyle image {
 		width: 70rpx;
 		height: 70rpx;
+	} */
+	.topStyle .img{
+		width: 100%;
+		height: 85%;
 	}
 
 	.topStyle .img1 {
@@ -181,12 +186,13 @@
 	/* 顶部样式结束 */
 
 	/* 帖子下边框 */
-	.attention .item .borderbottom {
-		margin-left: -20rpx;
-		margin-top: 20rpx;
-		width: 750rpx;
-		height: 10rpx;
-		background-color: #e6e2cf40;
+	.attention .item  {
+		/* margin-left: -20rpx; */
+		margin-top: 10rpx;
+		padding-bottom: 30rpx;
+		/* width: 750rpx; */
+		/* height: 10rpx; */
+		border-bottom: #90c0b4 dashed 3rpx;
 	}
 
 	/* 用户信息开始 */
@@ -241,6 +247,7 @@
 		padding: 20rpx;
 		background-color: #f6d95f20;
 		border-radius: 20rpx;
+		box-shadow:2rpx 2rpx 6rpx  #d6d6d6;
 		/* border: #909090 1px solid; */
 	}
 

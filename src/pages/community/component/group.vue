@@ -201,7 +201,7 @@
 			margin-top: 30rpx;
 			padding: 30rpx 40rpx;
 			width: 590rpx;
-			background-color: #90c9b4;
+			background-color: #8BC1AE;
 			border-radius: 20rpx;
 		}
 

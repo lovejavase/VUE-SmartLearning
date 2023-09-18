@@ -13,6 +13,12 @@
 				"navigationStyle": "custom"
 			}
 		}, {
+			"text": "首页",
+			"path": "pages/index/search",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		}, {
 			"text": "智能识别",
 			"path": "pages/tools/intelligent",
 			"style": {
@@ -159,7 +165,7 @@
 				"navigationStyle": "custom"
 				// "enablePullDownRefresh": false
 			}
-		},, {
+		},{
 			"text": "人脸识别",
 			"path": "pages/user/face",
 			"style": {
@@ -204,6 +210,13 @@
 		}, {
 			"text": "设置",
 			"path": "pages/user/setup",
+			"style": {
+				"navigationStyle": "custom"
+				// "enablePullDownRefresh": false
+			}
+		}, {
+			"text": "数据",
+			"path": "pages/user/data",
 			"style": {
 				"navigationStyle": "custom"
 				// "enablePullDownRefresh": false

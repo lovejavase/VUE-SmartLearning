@@ -52,7 +52,12 @@
                 "ad" : {}
             },
             "splashscreen" : {
-                "androidStyle" : "default"
+                "androidStyle" : "default",
+                "android" : {
+                    "hdpi" : "src/static/image/qd0.9.png",
+                    "xhdpi" : "src/static/image/qd0.9.png",
+                    "xxhdpi" : "src/static/image/qd0.9.png"
+                }
             },
             "icons" : {
                 "android" : {

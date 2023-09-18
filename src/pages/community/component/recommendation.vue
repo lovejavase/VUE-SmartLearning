@@ -1,7 +1,7 @@
 <template>
 	<view class="recommend">
 		<titleItem title="热门话题"></titleItem>
-		<scroll-view class="top" scroll-x='true' >
+		<scroll-view  class="top" scroll-x='true' >
 			<view class="content">
 				<view class="btn" v-for="(item,index) in 4">
 					#{{titles[index]}}
@@ -50,8 +50,8 @@
 								<div class="itemAuthor">{{info.total}}</div>
 							</view>
 							<view class="itemBtn">
-								<img src="@/static/image/icon/Right.svg" alt="">
 								去阅读
+								<img src="@/static/image/icon/Right.svg" alt="">
 							</view>
 						</view>
 
@@ -123,6 +123,7 @@
 	.recommend {
 		padding: 20rpx;
 		padding-bottom: 100rpx;
+		background-color: #f3efee;
 	}
 
 	/* 热门分类 */
@@ -269,9 +270,10 @@
 		align-items: center;
 		justify-content: space-between;
 		margin-top: 16rpx;
-		width: 510rpx;
+		/* margin-left: -20rpx; */
+		width: 520rpx;
 		background-color: #ffffff;
-		padding: 6rpx 10rpx;
+		padding: 12rpx 16rpx;
 		border-radius: 14rpx;
 	}
 

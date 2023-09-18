@@ -5,25 +5,27 @@
 		<myheader title=''></myheader>
 		<!-- 书籍 -->
 		<view class="blueb">
-			<img :src="book.cover" alt="">
+			<image :src="book.cover" alt="" />
 			<view class="content">
 				<text class="name">{{book.name}}</text>
 				<text class="chapter">共{{book.total}}章</text>
-				<!-- <view class="vip">
-					<text class="">会员免费读</text>
-					<img src="@/static/image/icon/right_white.svg" alt="">
-				</view> -->
+				<view class="vip">
+					<text>会员免费读</text>
+					<image src="@/static/image/icon/right_brown.png" alt=""/>
+				</view>
 
 			</view>
 		</view>
 		<!-- 作者 -->
 		<!-- 简介 -->
 		<view class="summary">
-			<img src="http://www.a-puppy-c.top/smartLearning/antro.png" alt="" class="img_author"
-				style="width: 78px;height:41px;">
+			<!-- <img src="http://www.a-puppy-c.top/smartLearning/antro.png" alt="" class="img_author"
+				style="width: 78px;height:41px;"> -->
+			<titles title='作者' class="sutit"></titles>
 			<text class="author">{{book.author}}</text>
 			<text class="title"></text>
-			<image src="http://www.a-puppy-c.top/smartLearning/intro.png" style="width: 64px;height: 38px;"></image>
+			<!-- <image src="http://www.a-puppy-c.top/smartLearning/intro.png" style="width: 64px;height: 38px;"></image> -->
+			<titles title='简介' class="autit"></titles>
 			<text class="content">{{book.intro}}</text>
 
 		</view>
@@ -54,7 +56,7 @@
 
 	onLoad((res) => {
 		bookId = ~~res.id
-		console.log("bookId"+bookId)
+		console.log("bookId" + bookId)
 		getBook(bookId).then(res => {
 			book.value = res
 			console.log(book.value)
@@ -89,7 +91,7 @@
 			})
 		})
 	}
-	
+
 	// 书籍跳转
 	let gotoBook = (bookId) => {
 		uni.navigateTo({
@@ -106,64 +108,84 @@
 		padding-top: 20rpx;
 	}
 
-	::v-deep .header {
+	/* ::v-deep .header {
 		margin: 0;
 		padding: 20rpx 40rpx;
 		background-color: #90c9b4;
+	} */
+	/* 标题样式调整 */
+	::v-deep .title .text {
+		color: #000;
+		font-size: 24px !important;
+		font-family: 'AlimamaShuHeiTi-Bold';
 	}
+
+	::v-deep .title .background {
+		width: 50px;
+	}
+
+	.autit :deep(.background) {
+		background-color: #15a0ac;
+	}
+
 
 	/* 封面信息开始 */
 	.blueb {
-		/* display: flex; */
+		display: flex;
 		align-items: center;
 		width: 650rpx;
 		margin: 0 auto;
 		padding-top: 20rpx;
+		color: #fff;
 	}
 
-	.blueb>img {
-		width: 240rpx;
-		display: block;
+	.blueb>image {
+		width: 170rpx;
 		margin: 0 auto;
-		height: auto;
-
+		height: 240rpx;
+		border-radius: 4rpx;
 	}
 
 	.blueb .content {
-		height: 190rpx;
+		height: 200rpx;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-around;
-
 	}
 
 	.blueb .content .name {
-		font-size: 28px;
-		margin: 10px auto;
-		padding-top: 20px;
-		font-weight: bolder;
+		font-size: 20px;
+		/* margin: 10px auto; */
+		margin-bottom: 10rpx;
+		/* padding-top: 20px; */
 	}
 
 	.blueb .content .chapter {
-		color: #909090;
-		margin: 0 auto;
-		font-size: 16px;
+		/* color: #909090; */
+		/* margin: 0 auto; */
+		font-size: 14px;
 	}
 
 	.blueb .content .vip {
 		display: flex;
 		align-items: center;
-		color: #ffffff;
-		text-shadow: #b29575 2rpx 2rpx 2rpx;
+		color: #8F7C45;
 		width: 76px;
 		padding: 4rpx 16rpx;
 		padding-right: 12rpx;
 		background-image: linear-gradient(to right, #d8cdbe, #b29575);
 		border-radius: 20rpx;
+		margin-top: 20rpx;
+	}
+	
+	.blueb .content .vip text{
+		line-height: 30rpx;
+		margin-bottom: 2rpx;
 	}
 
-	.blueb .content .vip>img {
+	.blueb .content .vip>image {
 		width: 14px;
+		height: 14px;
 		margin-left: 2px;
 	}
 
@@ -183,7 +205,7 @@
 	}
 
 	.summary .content {
-		margin: 16rpx 0;
+		margin: 24rpx 0;
 		/* color: #909090; */
 		font-size: 17px;
 		line-height: 1.25rem;
@@ -224,8 +246,9 @@
 		margin: 0 auto;
 		font-size: 16px;
 		font-weight: bold;
-		color: #907D45;
-		background-color: #F4E9D1;
+		color: white;
+		text-shadow: grey 2px 2px 2px;
+		background-color: #8BC1AE;
 
 	}
 </style>

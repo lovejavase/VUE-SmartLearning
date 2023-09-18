@@ -6,6 +6,9 @@
 		<!-- 介绍 -->
 		<view class="introduce">
 			<text class="title">人工智能</text>
+			<view class="bg">
+				
+			</view>
 			<text class="text">此频道是人工智能基础知识概况之一，此频道是人工智能基
 				础知识概况之一，此频道是人工智能基础知识概况之一。</text>
 		</view>
@@ -140,17 +143,32 @@
 		background-color: #ffffff;
 		box-shadow: 6rpx 6rpx 10rpx #90909090;
 		border-radius: 10rpx;
+		position: relative;
 	}
 
+	.introduce .bg{
+		position: absolute;
+		top: 22rpx;
+		left: 0;
+		background-color: #87BAA8;
+		width: 130rpx;
+		height: 40rpx;
+		border-radius: 0 20rpx 20rpx 0;
+		z-index: 10;
+	}
 	.introduce .title {
+		position: relative;
 		display: block;
 		font-size: 18px;
 		margin-bottom: 10rpx;
+		font-family: 'AlimamaShuHeiTi-Bold';
+		z-index: 100;
 	}
 
 	.introduce .text {
 		display: block;
 		font-size: 14px;
+		color: #909090;
 	}
 
 	/* 介绍结束 */

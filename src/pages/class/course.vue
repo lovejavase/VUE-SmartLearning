@@ -363,7 +363,7 @@
 
 	/* 输入框 */
 	.comment .topBottom {
-		width: 380rpx;
+		width: 340rpx;
 		height: 50rpx;
 		background-color: #ffffff;
 		margin: 30rpx 10rpx;

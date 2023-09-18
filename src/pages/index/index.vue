@@ -30,10 +30,10 @@
 					<image class="carImg" src="@/static/image/days1.png" mode="aspectFit" alt="" />
 				</swiper-item>
 				<swiper-item>
-					<image class="carImg" src="@/static/image/banner2.png" mode="aspectFit" alt="" />
+					<image class="carImg" src="@/static/image/banner3.png" mode="aspectFit" alt="" />
 				</swiper-item>
 				<swiper-item>
-					<image class="carImg" src="@/static/image/banner3.png" mode="aspectFit" alt="" />
+					<image class="carImg" src="@/static/image/banner2.png" mode="aspectFit" alt="" />
 				</swiper-item>
 			</swiper>
 		</view>
@@ -69,7 +69,8 @@
 			<!-- 滚动视图 -->
 			<scroll-view class="navscroll" scroll-x>
 				<view class="content card" v-for="(item, index) in classItem" :key="index">
-					<image :src="item.lessonImage" class="image" />
+					<!-- <image :src="item.lessonImage" class="image" /> -->
+					<image src="@/static/image/class1.png" class="image" />
 					<view class="text" @click="gotoCourse(item.lessonId)">
 						<text class="className">{{item.lessonTitle}}</text>
 						<view class="row">
@@ -91,7 +92,8 @@
 			<!-- 新闻内容 -->
 			<view class="content" v-for="(item, index) in news" :key="index" @click="gotoNews(index)">
 				<view class="newsItem">
-					<image class="img" :src="item.newImg" alt="" />
+					<image class="img" :src="item.newImg" mode="aspectFit"
+						:style="'background-image:url('+item.newImg+') ;'" alt="" />
 					<view class="uContent">
 						<image class="uimg" :src="avatar[index]" alt="" />
 						<view class="userName">
@@ -154,7 +156,9 @@
 		getNews().then(res => {
 			for (let j = 0; j < res.length; j++) {
 				news.value.push(res[j])
-				console.log(news.value[j].newImg)
+				console.log(news.value[j].createTime)
+				news.value[j].createTime = news.value[j].createTime.substring(0, 10)
+				console.log(news.value[j].createTime)
 			}
 			// 根据新闻的用户id获取用户名
 			for (var i = 0; i < news.value.length; i++) {
@@ -178,6 +182,9 @@
 	// 搜索按钮
 	let sendSearch = () => {
 		console.log(input.value)
+		uni.navigateTo({
+			url: '/pages/index/search?text=' + input.value
+		})
 	}
 	// 查询部分课程
 	let getList = () => {
@@ -487,7 +494,7 @@
 		display: inline-block;
 		margin-top: 20rpx;
 		/* 斜体 */
-		font-style: italic;
+		/* font-style: italic; */
 		width: 440rpx;
 		margin-right: 40rpx;
 		border-radius: 14px;
@@ -574,11 +581,12 @@
 		border-radius: 10px;
 		height: 160rpx;
 		margin-top: 10px;
+		/* background-color: #539898; */
 	}
 
 	.news .content .time {
 		display: block;
-		width: 110rpx;
+		width: 120rpx;
 		white-space: nowrap;
 		overflow: hidden;
 		margin: 8rpx 10rpx;
