@@ -7,10 +7,8 @@
 		<view class="introduce">
 			<text class="title">人工智能</text>
 			<view class="bg">
-				
 			</view>
-			<text class="text">此频道是人工智能基础知识概况之一，此频道是人工智能基
-				础知识概况之一，此频道是人工智能基础知识概况之一。</text>
+			<text class="text">此频道是人工智能基础知识概况之一，帮助人工智能小白了解人工智能，看看未来的影子，抓住机遇迎发展</text>
 		</view>
 		<!-- 列表 -->
 		<view class="news">
@@ -19,8 +17,12 @@
 					<text class="title">{{news[index].newTitle}}</text>
 					<text class="author">作者：{{userName[index]}}</text>
 				</view>
-				<image src="@/static/image/knowledge1.png" alt="" />
+				<image :src="news[index].newImg" alt="" />
+				<view class="button">
+					查看
+				</view>
 			</view>
+
 		</view>
 	</view>
 </template>
@@ -37,9 +39,11 @@
 	const news = ref([])
 	const userName = ref([])
 
+
 	onLoad(() => {
 		getNews().then(res => {
 			for (let j = 0; j < res.length; j++) {
+				console.log(res)
 				news.value.push(res[j])
 			}
 			// 根据新闻的用户id获取用户名
@@ -146,7 +150,7 @@
 		position: relative;
 	}
 
-	.introduce .bg{
+	.introduce .bg {
 		position: absolute;
 		top: 22rpx;
 		left: 0;
@@ -156,6 +160,7 @@
 		border-radius: 0 20rpx 20rpx 0;
 		z-index: 10;
 	}
+
 	.introduce .title {
 		position: relative;
 		display: block;
@@ -184,12 +189,13 @@
 
 	.news .item {
 		display: flex;
+		position: relative;
 		justify-content: space-around;
 		align-items: center;
-		background-color: #fcf3e1;
+		background-color: #FFFAE8;
 		padding: 20rpx;
 		border-radius: 10rpx;
-		margin-bottom: 30rpx;
+		margin-bottom: 90rpx;
 	}
 
 	.news .item .text {
@@ -211,6 +217,20 @@
 		width: 200rpx;
 		height: 150rpx;
 
+	}
+
+	.button {
+		position: absolute;
+		z-index: 100;
+		top: 110px;
+		right: 20rpx;
+		color: white;
+		text-align: center;
+		line-height: 20px;
+		height: 20px;
+		width: 80px;
+		border-radius: 5px;
+		background-color: #4E999A;
 	}
 
 	/* 列表结束 */

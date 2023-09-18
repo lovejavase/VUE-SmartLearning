@@ -98,7 +98,7 @@
 			</view>
 			<!-- 图片推广start -->
 			<view class="img">
-				<image src="@/static/image/user_img1.png" alt="" />
+				<image src="@/static/image/userdata.png" @click="myData" alt="" />
 			</view>
 			<!-- 图片推广end -->
 			<view class="btn btn-flex" link @click="setup">
@@ -160,6 +160,11 @@
 		uni.$emit(user)
 		uni.navigateTo({
 			url: '/pages/user/setup'
+		})
+	}
+	let myData = () => {
+		uni.navigateTo({
+			url: '/pages/user/data'
 		})
 	}
 	let history = () => {

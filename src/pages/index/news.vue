@@ -51,8 +51,9 @@
 		// console.log(~~res.id)
 		newsId = ~~res.id + 1 //id字符串转数字类型
 		getNew(newsId).then(res => {
+			console.log(res)
 			news.value = res
-			console.log(news.value)
+			
 		})
 	})
 
@@ -133,7 +134,7 @@
 	.text {
 		width: 99%;
 		margin-top: 30rpx;
-		margin-bottom: 40rpx;
+		margin-bottom: 120rpx;
 	}
 
 	.text .line {
