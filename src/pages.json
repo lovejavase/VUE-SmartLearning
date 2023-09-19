@@ -47,6 +47,13 @@
 				// "enablePullDownRefresh": false
 			}
 		}, {
+			"text": "图片识别",
+			"path": "pages/tools/photo",
+			"style": {
+				"navigationStyle": "custom"
+				// "enablePullDownRefresh": false
+			}
+		}, {
 			"text": "新闻详情",
 			"path": "pages/index/news",
 			"style": {

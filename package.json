@@ -52,6 +52,7 @@
     "@dcloudio/uni-mp-weixin": "3.0.0-3080720230703001",
     "@dcloudio/uni-quickapp-webview": "3.0.0-3080720230703001",
     "@element-plus/icons-vue": "^2.1.0",
+    "cross-env": "^7.0.3",
     "echarts": "^5.4.3",
     "element-plus": "^2.3.7",
     "vue": "^3.2.45",

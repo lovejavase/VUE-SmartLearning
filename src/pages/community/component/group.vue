@@ -41,7 +41,7 @@
 			<view class="item" v-for="info in talkList">
 				<text class="title">{{info.title}}</text>
 				<view class="content">
-					<image src="@/static/image/userImg1.png" alt=""/>
+					<image src="@/static/image/userImg1.png" alt="" />
 					<view class="">
 						<text class="name">{{info.name}}</text>
 						<text class="text">“{{info.text}}”</text>
@@ -78,6 +78,12 @@
 			name: "用户名2",
 			img: "@/static/image/userImg1.png",
 			text: "话题内容2"
+		},
+		{
+			title: "#人工智能会反抗？",
+			name: "用户名2",
+			img: "@/static/image/userImg1.png",
+			text: "话题内容2"
 		}
 	]
 </script>
@@ -88,6 +94,7 @@
 		width: 710rpx;
 		font-size: 12px;
 		padding-bottom: 100rpx;
+		background-color: #f3efee;
 	}
 
 	/* 推荐圈子开始 */
@@ -172,6 +179,7 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
+			position: relative;
 		}
 
 
@@ -181,12 +189,11 @@
 		}
 
 		.item .name {
-			position: fixed;
+			position: absolute;
 			font-size: 16px;
 			font-weight: 500;
 			color: #ffffff;
 			text-shadow: 10rpx 10rpx 6rpx #252525, -4rpx -4rpx 6rpx #252525;
-			/* text-shadow: 12rpx 12rpx 6rpx #252525,-4rpx -4rpx 6rpx #252525 ; */
 		}
 	}
 
@@ -222,7 +229,8 @@
 			align-items: center;
 			margin: 20rpx 0;
 			color: #ffffff;
-			image{
+
+			image {
 				width: 100rpx;
 				height: 100rpx;
 			}

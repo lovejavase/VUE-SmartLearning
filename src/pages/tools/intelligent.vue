@@ -5,7 +5,7 @@
 		<ClassHeader :searchText="searchText" :text="hText"></ClassHeader>
 		<!-- 工具栏 -->
 		<view class="tool">
-			<view class="toolItem">
+			<view class="toolItem" @click="photo">
 				<text class="title">图像识别</text>
 				<text class="text">海量识别</text>
 				<image src='@/static/image/icon/photo.svg' class="image" />
@@ -39,18 +39,18 @@
 		<!-- 智能分类 -->
 		<view class="classify">
 			<ClassTitle title="话题参与"></ClassTitle>
-			<view class="content">
-				<view class="btn" v-for="(item,index) in 4">
-					<!-- <image src="../../static/image/icon/hot.svg" mode="aspectFit"></image> -->
-					#art
+			<scroll-view class="top" scroll-x='true'>
+				<view class="content">
+					<view class="btn" v-for="(item,index) in 4">
+						#{{list[index]}}
+					</view>
 				</view>
-			</view>
-			<view class="content even">
-				<view class="btn" v-for="(i,index) in 4">
-					<!-- <image src="../../static/image/icon/hot.svg" mode="aspectFit"></image> -->
-					#art
+				<view class="content even">
+					<view class="btn" v-for="(item,index) in 4">
+						#{{list[index+4]}}
+					</view>
 				</view>
-			</view>
+			</scroll-view>
 		</view>
 		<!-- 底部 -->
 		<Footer></Footer>
@@ -68,6 +68,7 @@
 
 	const hText = "智能识别"
 	const searchText = "搜索功能"
+	const list = ["改变世界的百大科技", "人工智能会反抗？", "未来的智能是怎样？", "人工智能发展史", ]
 	const tools = [{
 		img: '../../static/image/icon/scoreA.svg',
 		name: '我的成绩'
@@ -88,6 +89,11 @@
 	let translate = () => {
 		uni.navigateTo({
 			url: '/pages/tools/translate'
+		})
+	}
+	let photo = () => {
+		uni.navigateTo({
+			url: '/pages/tools/photo'
 		})
 	}
 </script>
@@ -118,13 +124,14 @@
 		display: inline-block;
 	}
 
-	.tool .toolItem .image{
+	.tool .toolItem .image {
 		margin-left: 50%;
 		margin-top: 20rpx;
 		width: 80rpx;
 		height: 80rpx;
 		display: block;
 	}
+
 	.tool .bg2 {
 		background-color: #e4827d;
 	}
@@ -166,20 +173,20 @@
 		flex-direction: column;
 		justify-content: center;
 		border-radius: 20rpx;
-		margin-top: 14rpx;
+		margin-top: 30rpx;
 		margin-left: 10rpx;
 		/* 斜体 */
 		/* font-style: italic; */
 		width: 200rpx;
 		padding: 20rpx 0;
-		background-color: #ffffff;
 		margin-bottom: 20rpx;
+		background-color: #fffce5;
 	}
 
 	.mid {
 		margin-left: 40rpx !important;
 		margin-right: 40rpx !important;
-
+		background-color: #ffede7 !important;
 	}
 
 	.knowledge .content .image {
@@ -219,40 +226,37 @@
 	/* 学习助手结束 */
 
 	/* 智能分类开始 */
-	.classify {
-		width: 710rpx;
-		padding: 20rpx;
-		margin: 0 auto;
-		padding-bottom: 30rpx;
+	.top {
+		white-space: nowrap;
+		width: 100%;
+		margin-top: 20rpx;
+	}
+
+	.top .content {
 		font-size: 14px;
-	}
-
-	.classify .content {
-		width: 660rpx;
-		margin-top: 30rpx;
+		width: 900rpx;
+		margin: 20rpx;
 		display: flex;
-		justify-content: space-around;
+		/* justify-content: space-between; */
 	}
 
-	.classify .content .btn {
+	.top .content .btn {
 		display: inline-flex;
 		align-items: center;
 		background-color: #90c9b4;
+		padding: 10rpx 14rpx;
+		border-radius: 18rpx;
+		margin-bottom: 10rpx;
+		margin-right: 50rpx;
 		color: #ffffff;
-		text-shadow: 1rpx 1rpx 2rpx #719e8d;
-		padding: 6rpx 12rpx;
-		border-radius: 8rpx;
+		text-shadow: 2rpx 2rpx 2rpx #7bad7b;
 	}
 
-	.classify .content image {
-		width: 40rpx;
-		height: 40rpx;
-		margin-right: 4rpx;
+
+	.top .even {
+		margin-left: 60rpx;
 	}
 
-	.classify .even {
-		margin-left: 48rpx;
-	}
 
 	/* 智能分类结束 */
 </style>

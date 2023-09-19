@@ -152,7 +152,7 @@
 
 	.introduce .bg {
 		position: absolute;
-		top: 22rpx;
+		top: 20rpx;
 		left: 0;
 		background-color: #87BAA8;
 		width: 130rpx;
@@ -196,6 +196,7 @@
 		padding: 20rpx;
 		border-radius: 10rpx;
 		margin-bottom: 90rpx;
+		/* margin-bottom: 30rpx; */
 	}
 
 	.news .item .text {

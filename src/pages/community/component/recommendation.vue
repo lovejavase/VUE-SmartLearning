@@ -1,7 +1,7 @@
 <template>
 	<view class="recommend">
 		<titleItem title="热门话题"></titleItem>
-		<scroll-view  class="top" scroll-x='true' >
+		<scroll-view class="top" scroll-x='true'>
 			<view class="content">
 				<view class="btn" v-for="(item,index) in 4">
 					#{{titles[index]}}
@@ -54,7 +54,12 @@
 								<img src="@/static/image/icon/Right.svg" alt="">
 							</view>
 						</view>
-
+						<view class="btnGroup">
+							<image class='btn' src="@/static/image/icon/appreciate_fill.svg" alt="" />
+							<image class='btn' src="@/static/image/icon/oppose_fill_light.svg" alt="" />
+							<image class='btn' src="@/static/image/icon/message_fill_light.svg" alt="" />
+							<image class='btn btn2' src="@/static/image/icon/share_grey.svg" alt="" />
+						</view>
 					</view>
 				</view>
 			</view>
@@ -270,7 +275,7 @@
 		align-items: center;
 		justify-content: space-between;
 		margin-top: 16rpx;
-		/* margin-left: -20rpx; */
+		margin-left: -20rpx;
 		width: 520rpx;
 		background-color: #ffffff;
 		padding: 12rpx 16rpx;
@@ -307,6 +312,24 @@
 
 	.post .item .book .itemBtn>img {
 		width: 20rpx;
+	}
+
+	.post .btnGroup{
+		position: relative;
+	}
+	.post .btnGroup .btn {
+		width: 30rpx;
+		height: 30rpx;
+		display: inline-flex;
+		margin-right: 20rpx;
+		margin-top: 10rpx;
+		border-radius: 4rpx;
+		padding: 2rpx 4rpx;
+	}
+	
+	.post .btnGroup .btn2{
+		position: absolute;
+		right: 0;
 	}
 
 	/* 热门帖子结束 */

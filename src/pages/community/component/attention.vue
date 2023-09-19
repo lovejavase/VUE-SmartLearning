@@ -116,6 +116,7 @@
 		padding-bottom: 100rpx;
 		width: 710rpx;
 		font-size: 12px;
+		background-color: #f3efee;
 	}
 
 	/* 顶部样式开始 */
@@ -134,7 +135,7 @@
 		width: 70rpx;
 		height: 70rpx;
 	} */
-	.topStyle .img{
+	.topStyle .img {
 		width: 100%;
 		height: 85%;
 	}
@@ -186,7 +187,7 @@
 	/* 顶部样式结束 */
 
 	/* 帖子下边框 */
-	.attention .item  {
+	.attention .item {
 		/* margin-left: -20rpx; */
 		margin-top: 10rpx;
 		padding-bottom: 30rpx;
@@ -247,7 +248,7 @@
 		padding: 20rpx;
 		background-color: #f6d95f20;
 		border-radius: 20rpx;
-		box-shadow:2rpx 2rpx 6rpx  #d6d6d6;
+		box-shadow: 2rpx 2rpx 6rpx #d6d6d6;
 		/* border: #909090 1px solid; */
 	}
 

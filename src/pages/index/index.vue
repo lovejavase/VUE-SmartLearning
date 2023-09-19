@@ -69,13 +69,13 @@
 			<!-- 滚动视图 -->
 			<scroll-view class="navscroll" scroll-x>
 				<view class="content card" v-for="(item, index) in classItem" :key="index">
-					<!-- <image :src="item.lessonImage" class="image" /> -->
-					<image src="@/static/image/class1.png" class="image" />
+					<image :src="item.lessonImage" class="image" />
+					<!-- <image src="@/static/image/class1.png" class="image" /> -->
 					<view class="text" @click="gotoCourse(item.lessonId)">
 						<text class="className">{{item.lessonTitle}}</text>
 						<view class="row">
 							<view>
-								<image src="@/static/image/icon/user1.svg" mode=""></image>
+								<image src="@/static/image/icon/user_grey.svg" mode="" />
 								<text class="name">{{item.lessonTeacher}}</text>
 								<!-- 热门推荐标签 -->
 							</view>
@@ -525,9 +525,12 @@
 		font-size: 12px;
 	}
 
+
 	.class .content image {
+		display: inline-block;
 		width: 20rpx;
 		height: 20rpx;
+		margin-right: 4rpx;
 	}
 
 	.class .content .icon {

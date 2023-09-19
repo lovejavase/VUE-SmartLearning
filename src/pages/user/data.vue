@@ -296,6 +296,7 @@
 			bar.resize();
 		};
 	}
+
 </script>
 
 <style lang="scss">

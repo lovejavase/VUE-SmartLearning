@@ -65,6 +65,7 @@
 				success: (res) => {
 					if (res.data.code == 0) {
 						console.log("调用register成功");
+						// 根据id获取用户信息
 						uni.request({
 							url: 'http://a-puppy-c.top:9999/Smart/User/getUser',
 							method: 'GET',

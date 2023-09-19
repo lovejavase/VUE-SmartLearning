@@ -1,6 +1,6 @@
 <template>
 	<!-- 启动页 -->
-	<view class="launch"  @click="nextPage">
+	<view class="launch">
 		<!-- 		<image @click="nextPage" v-if="page==-1" src="@/static/image/qd0.jpg" mode='scaleToFill'
 			:style="'min-height:'+windowHeight+'rpx;'"></image> -->
 		<swiper :current="page" :style="'min-height:'+windowHeight+'rpx;'">
@@ -59,7 +59,6 @@
 	.sc1 {
 		width: 750rpx;
 		height: 100%;
-		background-color: salmon;
 		position: relative;
 		background-image: url(@/static/image/qd2.jpg);
 		background-size: 100% 100%;

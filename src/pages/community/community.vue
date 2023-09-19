@@ -122,7 +122,7 @@
 		margin: 0;
 		padding-top: 30rpx;
 		position: relative;
-		/* background-color: #f3efee; */
+		background-color: #f3efee;
 	}
 
 	/* 标签页开始 */
