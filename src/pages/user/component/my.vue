@@ -154,7 +154,7 @@
 	var userId = ref(1)
 	var user = ref({})
 	var collectnum = ref(0)
-	var historynum = ref(0)
+	var historynum = ref(7)
 
 
 	// 跳转方法
@@ -185,7 +185,6 @@
 		})
 	}
 
-	// // smzhouqi
 	onMounted(() => {
 		userId.value = getApp().globalData.userDetail.userId
 		getUser(userId.value)

@@ -77,7 +77,7 @@
 		width: 750rpx;
 		height: 100%;
 		position: relative;
-		background-image: url(@/static/image/qd2.jpg);
+		background-image: url(@/static/image/page/qd1.jpg);
 		background-size: 100% 100%;
 	}
 
@@ -85,7 +85,7 @@
 		width: 750rpx;
 		height: 100%;
 		position: relative;
-		background-image: url(@/static/image/qd3.jpg);
+		background-image: url(@/static/image/page/qd2.jpg);
 		background-size: 100% 100%;
 	}
 
@@ -93,7 +93,7 @@
 		width: 750rpx;
 		height: 100%;
 		position: relative;
-		background-image: url(@/static/image/qd1.jpg);
+		background-image: url(@/static/image/page/qd3.jpg);
 		background-size: 100% 100%;
 	}
 

@@ -24,10 +24,11 @@
 				</text>
 				个核心知识点
 			</view>
-			<view id="radar1"></view>
-			<view class="text">喜爱视频类型分布</view>
 			<view id="radar2"></view>
 			<view class="text">科普知识点分布</view>
+			<view id="radar1"></view>
+			<view class="text">喜爱视频类型分布</view>
+
 			<view id="pie"></view>
 			<view class="text">总共学习时长
 				<text>
@@ -49,7 +50,7 @@
 		ref
 	} from "vue";
 
-	const sum = ref([364, 1023])
+	const sum = ref([78, 389])
 
 	/// 声明定义一下echart
 	let echart = echarts;
@@ -76,23 +77,23 @@
 			legend: {},
 			radar: [{
 				indicator: [{
-						name: '智能',
+						name: '计算',
 						max: 1000
 					},
 					{
-						name: '研究',
+						name: '传感',
 						max: 1000
 					},
 					{
-						name: '学科',
+						name: '概览',
 						max: 1000
 					},
 					{
-						name: '历史',
+						name: '伦理',
 						max: 1000
 					},
 					{
-						name: '科技',
+						name: '逻辑',
 						max: 1000
 					}
 				],
@@ -148,23 +149,23 @@
 			legend: {},
 			radar: [{
 				indicator: [{
-						name: '创新类',
+						name: '智能与发展',
 						max: 1000
 					},
 					{
-						name: '娱乐类',
+						name: '智能与风险',
 						max: 1000
 					},
 					{
-						name: '专家讲坛',
+						name: '智能与历史',
 						max: 1000
 					},
 					{
-						name: '解析类',
+						name: '智能与应用',
 						max: 1000
 					},
 					{
-						name: '科普类',
+						name: '智能与历史',
 						max: 1000
 					},
 				],
@@ -222,7 +223,7 @@
 				radius: '60%',
 				data: [{
 						value: 323,
-						name: '技术'
+						name: '发展'
 					},
 					{
 						value: 161,
@@ -230,11 +231,11 @@
 					},
 					{
 						value: 100,
-						name: '实践'
+						name: '历史'
 					},
 					{
 						value: 253,
-						name: '答题'
+						name: '原理'
 					},
 				],
 				emphasis: {
@@ -263,7 +264,7 @@
 			},
 			xAxis: [{
 				type: 'category',
-				data: ['9-18', '9-19', '9-20', '9-21', '9-22', '9-23'],
+				data: ['9-17', '9-18', '9-19', '9-20', '9-21', '9-22', '9-23'],
 				axisTick: {
 					alignWithLabel: true
 				}
@@ -275,7 +276,7 @@
 				name: 'Direct',
 				type: 'bar',
 				barWidth: '60%',
-				data: [104, 52, 142, 187, 297, 241, 231],
+				data: [60, 52, 69, 57, 39, 41, 71],
 				label: {
 					show: true, //开启显示
 					position: 'top', //在上方显示
@@ -296,7 +297,6 @@
 			bar.resize();
 		};
 	}
-
 </script>
 
 <style lang="scss">

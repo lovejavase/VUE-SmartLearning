@@ -41,8 +41,9 @@
 			<!-- 标题 -->
 			<ClassTitle :title="title[0]"></ClassTitle>
 			<!-- 内容 -->
-			<view class="content" v-for="item in similar">
-				<image :src="item.link" alt="" />
+			<view class="content" v-for="(item,index) in similar" @click="gotoSimilar(index)">
+				<image class="link" :src="item.link" alt="" />
+				<image class='ear' src="@/static/image/icon/ear.png" mode="aspectFit"/>
 				<view class="box-card">
 					<div class="itemTitle">{{item.title}}</div>
 					<div class="itemName">{{item.tip}}</div>
@@ -182,6 +183,12 @@
 	let gotoCourse = (id) => {
 		uni.navigateTo({
 			url: '/pages/class/course?id=' + id
+		})
+	};
+	// 课堂跳转
+	let gotoSimilar = (id) => {
+		uni.navigateTo({
+			url: '/pages/class/similar?id=' + id
 		})
 	};
 	// 书籍跳转
@@ -335,6 +342,7 @@
 	}
 
 	.similar .content {
+		position: relative;
 		width: 670rpx;
 		margin: 10rpx auto;
 		margin-bottom: 20rpx;
@@ -346,10 +354,21 @@
 		padding: 20rpx 10rpx;
 	}
 
-	.similar .content image {
+	.similar .content .link {
+		position: relative;
 		width: 240rpx;
 		height: auto;
 		max-height: 210rpx;
+		z-index: 10;
+	}
+
+	.similar .content .ear {
+		position: absolute;
+		z-index: 100;
+		left: 100rpx;
+		top: 90rpx;
+		width: 70rpx;
+		height: 70rpx;
 	}
 
 	.similar .box-card {

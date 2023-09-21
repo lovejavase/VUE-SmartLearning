@@ -26,7 +26,7 @@
 					<image src="@/static/image/icon/comment_.svg" alt="" />
 					<image src="@/static/image/icon/share_.svg" alt="" />
 					<image v-if="isfavor" @click="favor" src="@/static/image/icon/favor_fill_red.svg" alt="" />
-					<image v-if="!isfavor"  @click="favor" src="@/static/image/icon/favor_green.svg" alt="" />
+					<image v-if="!isfavor" @click="favor" src="@/static/image/icon/favor_green.svg" alt="" />
 				</view>
 			</view>
 		</view>
@@ -50,30 +50,29 @@
 
 
 	onLoad((res) => {
-		// console.log(~~res.id)
-		newsId = ~~res.id + 1 //id字符串转数字类型
+		newsId = ~~res.id //id字符串转数字类型
 		getNew(newsId).then(res => {
-			console.log(res)
 			news.value = res
+			console.log(res)
 
 		})
 	})
-	const favor=()=>{
-		if(isfavor.value){
+	const favor = () => {
+		if (isfavor.value) {
 			uni.showToast({
-				title:'取消收藏！',
-				duration:500
+				title: '取消收藏！',
+				duration: 500
 			})
-			
-		}else{
+
+		} else {
 			console.log(11)
 			uni.showToast({
-				title:'收藏成功！',
-				duration:500
+				title: '收藏成功！',
+				duration: 500
 			})
-			
+
 		}
-		isfavor.value=!isfavor.value
+		isfavor.value = !isfavor.value
 	}
 
 	let getNew = (id) => {

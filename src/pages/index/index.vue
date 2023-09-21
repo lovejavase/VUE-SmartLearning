@@ -91,7 +91,7 @@
 			<!-- 标题 -->
 			<titleItem :title="title[1]" @click='gotoNewsList'></titleItem>
 			<!-- 新闻内容 -->
-			<view class="content" v-for="(item, index) in news" :key="index" @click="gotoNews(index)">
+			<view class="content" v-for="(item, index) in news" :key="index" @click="gotoNews(item.newId)">
 				<view class="newsItem">
 					<image class="img" :src="item.newImg" mode="aspectFit"
 						:style="'background-image:url('+item.newImg+') ;'" alt="" />
@@ -161,6 +161,7 @@
 					userName.value.push(user.userNickName)
 					avatar.value.push(user.userAvatar)
 					news.value.push({
+						newId: res[j].newId,
 						newImg: res[j].newImg,
 						createTime: res[j].createTime.substring(0, 10),
 						newTitle: res[j].newTitle,
@@ -447,8 +448,8 @@
 
 	.carousal .carImg {
 		border-radius: 22rpx;
-		border: #e3e3e3 2rpx solid;
 		overflow: hidden;
+		/* border: #e3e3e3 2rpx solid; */
 	}
 
 

@@ -6,7 +6,7 @@
 		<!-- 工具栏 -->
 		<view class="tool">
 			<view class="toolItem" @click="photo">
-				<text class="title">图像识别</text>
+				<text class="title">图书识源</text>
 				<text class="text">海量识别</text>
 				<image src='@/static/image/icon/photo.svg' class="image" />
 			</view>

@@ -37,10 +37,13 @@
 		<!-- 用来占位，防止聊天消息被发送框遮挡 -->
 		<view class="chat-bottom" :style="{height: `${inputHeight}rpx`}">
 			<view class="send-msg" :style="{bottom:`${keyboardHeight}rpx`}">
+				<!-- 左边语音输入的按钮 -->
+				<image src="../../static/image/icon/mkf.png" class="mkf" @touchstart="startLuyin"></image>
 				<view class="uni-textarea">
 					<textarea v-model="chatMsg" maxlength="300" confirm-type="send" @confirm="handleSend"
 						:show-confirm-bar="false" :adjust-position="false" @linechange="sendHeight" @focus="focus"
-						@blur="blur" auto-height placeholder="发消息..." placeholder-style="color:#c5c5c5"></textarea>
+						@blur="blur" auto-height placeholder="发消息..."
+						placeholder-style="color:#c5c5c5">{{searchText}}</textarea>
 				</view>
 				<button @click="handleSend" class="send-btn">发送</button>
 			</view>
@@ -67,7 +70,6 @@
 	const scrollTop = ref(0)
 	const userId = ref('')
 	const userAvatar = getApp().globalData.userDetail.userAvatar;
-
 	//发送的消息
 	const chatMsg = ref("")
 	const msgList = ref([{
@@ -77,7 +79,14 @@
 		userContent: "",
 		userId: 0
 	}])
+	const speechEngine = 'baidu'
+
 	// const userAvatar = getApp().globalData.userDetail.userAvatar,
+	//录音
+	const recorderManager = uni.getRecorderManager();
+	//播放录音
+	const innerAudioContext = uni.createInnerAudioContext();
+	innerAudioContext.autoplay = true;
 
 
 	onUpdated(() => { //页面更新时调用聊天消息定位到最底部
@@ -90,8 +99,8 @@
 			console.log('请登录')
 			uni.showToast({
 				title: "请先登录!",
-				duration:2000,
-				icon:'error'
+				duration: 2000,
+				icon: 'error'
 			})
 			setTimeout(() => {
 				// 跳转等登录页面
@@ -116,6 +125,23 @@
 	onUnload(() => {
 		uni.offKeyboardHeightChange()
 	})
+
+	let startLuyin = () => {
+		console.log('语音输入')
+		let options = {};
+		options.engine = speechEngine.value
+		options.punctuation = false; // 是否需要标点符号 
+		options.timeout = 10 * 1000; //超时时间
+		plus.speech.startRecognize(options, function(s) {
+			console.log(s) //识别的结果
+			chatMsg.value = s
+			plus.speech.stopRecognize(); // 关闭
+		}, function(e) {
+			console.log("失败" + e.message)
+		});
+
+
+	}
 
 	let AIDialog = (text) => {
 		return new Promise((resolve, reject) => {
@@ -143,6 +169,7 @@
 			})
 		})
 	}
+
 
 	// 计算
 	let windowHeight = computed(() => {
@@ -221,13 +248,13 @@
 
 <style scoped>
 	/* button,
-	text,
-	input,
-	textarea {
-		margin: 0;
-		padding: 0;
-		box-sizing: border-box;
-	} */
+text,
+input,
+textarea {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+} */
 
 	::v-deep .header {
 		position: fixed;
@@ -411,8 +438,13 @@
 	}
 
 	.uimg {
-		width: 50;
+		width: 50px;
 		height: 50px;
 		/* border-radius: 50%; */
+	}
+
+	.mkf {
+		height: 40px;
+		width: 40px;
 	}
 </style>

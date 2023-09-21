@@ -1,20 +1,20 @@
 <template>
 	<!-- 搜索列表 -->
 	<view class="search">
-		<view class="content" v-for="(item,index) in news" @click="gotoNews(index)">
+		<view class="content" v-for="(item,index) in news" @click="gotoClass(item.lessonId)">
 			<view class="text">
 				<text class="title">{{item.lessonTitle}}</text>
 				<text class="author">作者：{{item.lessonTeacher}}</text>
 			</view>
 			<image :src="item.lessonImage" alt="" />
 		</view>
-		<view class="content post" v-for="(item,index) in posts">
+		<!-- <view class="content post" v-for="(item,index) in posts">
 			<view class="text">
 				<text class="title">{{item.postTitle}}</text>
 				<text class="author">作者：{{item.postAuthor}}</text>
 			</view>
 			<image :src="item.lessonImage" alt="" />
-		</view>
+		</view> -->
 	</view>
 </template>
 
@@ -112,9 +112,9 @@
 			}
 		})
 	})
-	const gotoNews = (newsId) => {
+	const gotoClass = (classId) => {
 		uni.navigateTo({
-			url: '/pages/index/news?id=' + newsId
+			url: '/pages/class/course?id=' + classId
 		})
 	}
 </script>

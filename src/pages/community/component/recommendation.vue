@@ -73,8 +73,8 @@
 		ref
 	} from "vue";
 	import titleItem from "./title.vue"
-	const titles = ["超人工智能", "AI与人类创造力", "AI在自动驾驶中的应用", "情感计算", "人工智能的未来发展",
-		"知识表示与推理", "AI在医疗保健中的应用", "机器人技术", "人工智能的监管", "人工智能的偏见和歧视"
+	const titles = ["超人工智能", "AI与人类创造力", "人工智能的监管", "人工智能的未来发展", "知识表示与推理", "机器人技术",
+		"情感计算", "AI在医疗保健中的应用", "AI在自动驾驶中的应用", "人工智能的偏见和歧视"
 	]
 	const hotList = [{
 		num: 1,
@@ -130,11 +130,14 @@
 	setInterval(() => {
 		if (scrollxy.value) {
 			scrollx.value += 1
-		
-			scrollxy.value=scrollx.value==440?false:true
+			if (scrollx.value == 420) {
+				scrollxy.value = false
+			}
 		} else {
 			scrollx.value -= 1
-			scrollxy.value=scrollx.value==440?true:false
+			if (scrollx.value == 0) {
+				scrollxy.value = true
+			}
 		}
 	}, 40)
 </script>
@@ -149,7 +152,8 @@
 	/* 热门分类 */
 	.top {
 		white-space: nowrap;
-		width: 100%;
+		width: 730rpx;
+		padding-right: 30rpx;
 	}
 
 	.top .content {
