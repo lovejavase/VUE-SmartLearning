@@ -19,7 +19,8 @@
         /* 模块配置 */
         "modules" : {
             "VideoPlayer" : {},
-            "Camera" : {}
+            "Camera" : {},
+            "Speech" : {}
         },
         /* 应用发布信息 */
         "distribute" : {
@@ -49,7 +50,14 @@
             },
             /* SDK配置 */
             "sdkConfigs" : {
-                "ad" : {}
+                "ad" : {},
+                "speech" : {
+                    "baidu" : {
+                        "appid" : "32789578",
+                        "apikey" : "P41B2MQ1WG5YbmOmspkBaLu1",
+                        "secretkey" : "BIQMDwzw6xv17DmDXbqMmMWU91jgyyMG"
+                    }
+                }
             },
             "splashscreen" : {
                 "androidStyle" : "default",

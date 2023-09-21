@@ -1,7 +1,7 @@
 <template>
 	<view class="recommend">
 		<titleItem title="热门话题"></titleItem>
-		<scroll-view class="top" scroll-x='true'>
+		<scroll-view class="top" scroll-x='true' :scroll-left='scrollx'>
 			<view class="content">
 				<view class="btn" v-for="(item,index) in 5">
 					#{{titles[index]}}
@@ -69,7 +69,8 @@
 
 <script setup>
 	import {
-		reactive
+		reactive,
+		ref
 	} from "vue";
 	import titleItem from "./title.vue"
 	const titles = ["超人工智能", "AI与人类创造力", "AI在自动驾驶中的应用", "情感计算", "人工智能的未来发展",
@@ -124,6 +125,18 @@
 		num: 11,
 		bookid: 1
 	}]
+	const scrollx = ref(0)
+	const scrollxy = ref(true)
+	setInterval(() => {
+		if (scrollxy.value) {
+			scrollx.value += 1
+		
+			scrollxy.value=scrollx.value==440?false:true
+		} else {
+			scrollx.value -= 1
+			scrollxy.value=scrollx.value==440?true:false
+		}
+	}, 40)
 </script>
 
 <style scoped>

@@ -1,6 +1,6 @@
 <template>
 	<view class="group">
-		<!-- 推荐圈子 -->
+		<!-- 特别发现 -->
 		<titleItem :title="groupTitle[0]"></titleItem>
 		<view class="recommend" @click="goFound">
 			<view class="title">
@@ -10,8 +10,8 @@
 			<view class="content">
 				<image src="@/static/image/found1.png" alt="" />
 				<view class="text">
-					<text class="name">用户名</text>
-					<text class="info">路人觉得真的很推荐</text>
+					<text class="name">张遥</text>
+					<text class="info">领略人工智能的奥秘</text>
 					<!-- <view class="num">
 						<image src="@/static/image/icon/group_fill.svg" alt="" />
 						<text>1234</text>
@@ -24,18 +24,18 @@
 		<view class="my">
 			<view class="item">
 				<image src="@/static/image/group1.png" mode=""></image>
-				<text class="name">自然百科</text>
+				<text class="name">自然</text>
 				<text class="bottom">自然百科</text>
 			</view>
 			<view class="item">
 				<image src="@/static/image/group3.png" mode=""></image>
-				<text class="name">AI智能</text>
+				<text class="name">智能</text>
 				<text class="bottom">AI智能</text>
 			</view>
 			<view class="item">
 				<image src="@/static/image/group2.png" mode=""></image>
 				<text class="name">历史</text>
-				<text class="bottom">历史</text>
+				<text class="bottom">发展历史</text>
 			</view>
 		</view>
 		<!-- 互动话题 -->
@@ -58,7 +58,7 @@
 <script setup>
 	import titleItem from "./title.vue"
 
-	const groupTitle = ["推荐圈子", "我的圈子", "互动话题"]
+	const groupTitle = ["特别发现", "我的圈子", "互动话题"]
 	const my = [{
 		name: "自然百科",
 		img: '@/static/image/group1.png'
@@ -73,7 +73,7 @@
 	const talkList = [{
 			title: "# AI与人类智能的关系？",
 			name: "张瑶",
-			img: "../../static/image/icon/talk1.svg",
+			img: "../../static/image/icon/talk2.svg",
 			text: "人工智能技术是否会超越人类智能？如果会，那会有什么样的影响？"
 		},{
 			title: "# 你认为未来的智能是怎样的？",
@@ -84,7 +84,7 @@
 		{
 			title: "# AI对就业和社会的影响？",
 			name: "志云",
-			img: "../../static/image/icon/talk3.svg",
+			img: "../../static/image/icon/talk2.svg",
 			text: "随着人工智能技术的普及，许多传统行业的工作可能被取代，也催生了许多新兴行业和就业机会，我们该如何适应这种变革？"
 		}, 
 	]
@@ -141,6 +141,7 @@
 				width: 100rpx;
 				height: 100rpx;
 				margin-top: 14rpx;
+				border-radius: 50rpx;
 			}
 
 			/* 中间简介 */
@@ -214,6 +215,7 @@
 		}
 
 		.item .bottom {
+			// display: none;
 			position: absolute;
 			width: 110%;
 			height: 50rpx;

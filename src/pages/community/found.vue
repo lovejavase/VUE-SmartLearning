@@ -3,7 +3,7 @@
 	<view class="found">
 		<myheader title='特别发现'></myheader>
 		<view class="card">
-			<image class="img" src="../../static/image/found1.png" mode=""></image>
+			<image class="img" src="../../static/image/found1.png" mode="aspectFill" ></image>
 			<view class="info">
 				<view class="text">
 					<text>NEWS PAPER Vol.1 |</text>
@@ -49,7 +49,7 @@
 
 			.img {
 				width: 100%;
-				height: 600rpx;
+				height: 800rpx;
 			}
 
 			.info {
@@ -68,12 +68,13 @@
 				}
 				.btn{
 					display: inline-flex;
+					height: 46rpx;
 					align-items: center;
 					background-color: #fff;
 					color: #90c9b4;
-					padding: 6rpx 4rpx;
-					padding-left: 6rpx;
-					border-radius: 10rpx;
+					padding: 4rpx 4rpx;
+					padding-left: 10rpx;
+					border-radius: 30rpx;
 				}
 				.btn image{
 					width: 30rpx;

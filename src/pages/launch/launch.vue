@@ -3,7 +3,7 @@
 	<view class="launch">
 		<!-- 		<image @click="nextPage" v-if="page==-1" src="@/static/image/qd0.jpg" mode='scaleToFill'
 			:style="'min-height:'+windowHeight+'rpx;'"></image> -->
-		<swiper :current="page" :style="'min-height:'+windowHeight+'rpx;'"  @click="nextPage">
+		<swiper :current="page" :style="'min-height:'+windowHeight+'rpx;'" @click="nextPage">
 			<swiper-item>
 				<view class="sc1">
 					<view class="btn"></view>
@@ -26,6 +26,7 @@
 
 <script setup>
 	import {
+		onLoad,
 		onShow
 	} from '@dcloudio/uni-app';
 	import {
@@ -49,6 +50,22 @@
 		}
 		console.log(page.value)
 	}
+	onLoad(options => {
+		// 从本地缓存中同步获取指定 key 对应的内容，用于判断是否是第一次打开应用
+		const flag = uni.getStorageSync('runFlag');
+		if (flag) {
+			// 如有直接进首页
+			uni.redirectTo({
+				url: '/pages/index/index'
+			});
+		} else {
+			// 值不存在，跳到引导页，并存储标识易读状态，下次进入应用就不再展示引导页
+			uni.setStorage({
+				key: 'runFlag',
+				data: true
+			});
+		}
+	})
 </script>
 
 <style>
