@@ -123,11 +123,12 @@
 	/* 列表开始 */
 	.search {
 		margin: 30rpx auto;
+		margin-top: 50rpx;
 		width: 660rpx;
 		padding: 30rpx 20rpx;
 		background-color: #ffffff;
 		border-radius: 10rpx;
-		box-shadow: 6rpx 6rpx 10rpx #90909090;
+		/* box-shadow: 6rpx 6rpx 10rpx #90909090; */
 
 		.content {
 			display: flex;
@@ -139,7 +140,8 @@
 			margin-bottom: 30rpx;
 		}
 		.post{
-			background-color: #b7e7d6;
+			/* background-color: #d5e7de; */
+			background-color: #fcf3e1;
 		}
 
 		.content .text {

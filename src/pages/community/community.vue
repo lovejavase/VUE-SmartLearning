@@ -27,28 +27,31 @@
 		</view>
 		<!-- 发布按钮 -->
 		<view class="upbtn" @click='upPost'>
-			<image src="@/static/image/add.svg" mode="" />
+			<image src="@/static/image/icon/add.svg" mode="" />
 		</view>
 		<!-- 变暗的背景 -->
 		<view class="mask" v-if="showModalStatus"></view>
 		<!-- 发布帖子弹出框 -->
 		<view class="publishing" :animation="animationData" v-if="showPublish">
-			<image @click="close" src="@/static/image/close.svg" mode="" />
+			<image @click="close" src="@/static/image/icon/close.svg" mode="" />
 			<view class="item1">
-				<image src="@/static/image/icon/pinglun.svg" mode="" />
+				<image src="@/static/image/pub1.png" mode="" />
 				<text>发布文章</text>
 				<text class="t-end t-bg1">发布文章</text>
 			</view>
 			<view class="item1 bg2" @click='gotoPbulish'>
-				<image src="@/static/image/icon/pinglun.svg" mode="" />
+				<image src="@/static/image/pub2.png" mode="" />
 				<text>发布帖子</text>
 				<text class="t-end t-bg2">发布帖子</text>
 			</view>
 			<!-- </view> -->
+			<view class="tip">
+				没想好说什么？发起一个话题吧！
+			</view>
 			<view class="item2">
 				<image src="@/static/image/icon/pinglun.svg" mode="" />
-				<text>创建新话题</text>
-				<text class="t-end t-bg3">创建新话题</text>
+				<text>发起新话题</text>
+				<!-- <text class="t-end t-bg3">创建新话题</text> -->
 			</view>
 		</view>
 		<Footer></Footer>
@@ -88,7 +91,7 @@
 			delay: 0,
 			duration: 500,
 		})
-		animation.translateY('-340rpx').step()
+		animation.translateY('-390rpx').step()
 		animationData.value = animation.export(),
 			setTimeout(() => {
 				animationData.value = animation.export(),
@@ -122,7 +125,7 @@
 		margin: 0;
 		padding-top: 30rpx;
 		position: relative;
-		background-color: #f3efee;
+		background-color: #fff;
 	}
 
 	/* 标签页开始 */
@@ -138,13 +141,14 @@
 		color: #515151;
 		padding: 10rpx;
 		margin: 0 10rpx;
+		font-family: 'AlimamaShuHeiTi-Bold';
 	}
 
 	.tab—btns .bg {
 		margin-left: 20rpx;
 		width: 40px;
 		height: 4px;
-		background-color: #f6e38290;
+		background-color: #f6e382;
 		border-radius: 2px;
 		/* position: fixed; */
 	}
@@ -257,7 +261,7 @@
 		flex-wrap: wrap;
 		width: 300rpx;
 		height: 160rpx;
-		background-color: #ffbfab90;
+		background-color: #F9EBE9;
 		margin: 10rpx 20rpx;
 		border-radius: 20rpx;
 		margin-top: 20rpx;
@@ -274,18 +278,25 @@
 	}
 
 	.publishing .bg2 {
-		background-color: #b9d8ff90 !important;
+		background-color: #ECF2F8 !important;
 	}
-
+.publishing .tip{
+	font-size: 14px;
+	color: #a1a1a1;
+	width: 85%;
+	/* background-color: #000000; */
+	margin: 10rpx;
+}
 	.publishing .item2 {
 		display: inline-flex;
-		align-items: flex-end;
+		align-items: center;
+		justify-content: center;
 		flex-wrap: wrap;
 		width: 640rpx;
 		height: 120rpx;
 		border-radius: 20rpx;
 		overflow: hidden;
-		background-color: #f6e38290;
+		background-color: #F4E9D0;
 	}
 
 	.publishing .item2 image {
@@ -309,14 +320,14 @@
 	}
 
 	.publishing .t-bg1 {
-		background-color: #ff9582;
+		background-color: #F2C6C0;
 	}
 
 	.publishing .t-bg2 {
-		background-color: #93beff;
+		background-color: #BFD8ED;
 	}
 
-	.publishing .t-bg3 {
-		background-color: s#f1c469;
-	}
+	/* .publishing .t-bg3 {
+		background-color: #F4E9D0;
+	} */
 </style>

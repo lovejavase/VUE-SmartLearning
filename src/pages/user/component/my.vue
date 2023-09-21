@@ -66,13 +66,13 @@
 			<view class="btn btn-flex" link @click='history'>
 				<view class="info">
 					<text>足迹</text>
-					<text>9</text>
+					<text>{{historynum}}</text>
 				</view>
 			</view>
 			<view class="btn btn-flex" link @click="collect">
 				<view class="info">
 					<text>收藏</text>
-					<text>12</text>
+					<text>{{collectnum}}</text>
 				</view>
 			</view>
 		</view>
@@ -153,6 +153,8 @@
 
 	var userId = ref(1)
 	var user = ref({})
+	var collectnum = ref(0)
+	var historynum = ref(0)
 
 
 	// 跳转方法
@@ -187,6 +189,25 @@
 	onMounted(() => {
 		userId.value = getApp().globalData.userDetail.userId
 		getUser(userId.value)
+		uni.request({
+			url: 'http://a-puppy-c.top:9999/Smart/Collection/getCollection',
+			method: 'GET',
+			data: {
+				userId: userId.value
+			},
+			header: {
+				'Authorization': uni.getStorageSync('Authorization'),
+				'content-type': 'application/x-www-form-urlencoded'
+			},
+			success: (res) => {
+				console.log("用户-调用getCollection成功");
+				collectnum.value = res.data.data.length;
+				console.log(res.data.data);
+			},
+			fail() {
+				console.log("调用getCollection失败");
+			}
+		})
 	})
 
 	// 获取用户信息

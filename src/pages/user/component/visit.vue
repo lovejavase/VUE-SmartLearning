@@ -45,6 +45,7 @@
 		})
 	}
 	let gotoIndex = () => {
+		getApp().globalData.pageid = 1
 		uni.navigateTo({
 			url: '/pages/index/index'
 		})

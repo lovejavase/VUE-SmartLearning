@@ -1,12 +1,12 @@
 <template>
-	<!-- 智能识别-翻译页 -->
+	<!-- 智能识别-图书识别 -->
 	<view class="book">
 		<!-- 标题 -->
 		<myheader title='图书识别'></myheader>
 		<!-- 输入内容 -->
-		<view class="input">
+		<view class="input" :style="bgimg==''?'':'background-image: url('+bgimg+');'">
 			<view class="tip" v-if="!sucess">
-				请选择您要识别的图片...
+				{{tip}}
 			</view>
 			<view class="btn" v-if="!sucess" @click="upimg">
 				上传图片
@@ -18,8 +18,11 @@
 				结果
 			</view>
 			<text class="text" v-if="sucess">
-				测试测试测试测试测试测试测试测试测试测试测试测试测试测试1111111111111111111
+				{{result}}
 			</text>
+			<view class="rebtn" v-if="sucess" @click="refresh">
+				继续识别
+			</view>
 		</view>
 	</view>
 </template>
@@ -30,8 +33,17 @@
 		ref
 	} from "vue";
 	const sucess = ref(false)
+	const bgimg = ref('')
+	const result = ref('')
+	const tip = ref('请选择您要识别的图片...')
+	const refresh = () => {
+		tip.value = '请选择您要识别的图片...'
+		result.value = ''
+		bgimg.value = ''
+		sucess.value = false
+	}
 	const upimg = () => {
-		sucess.value = true
+		tip.value = '正在识别...'
 		//下面是获取人脸比对参数的接口
 		uni.chooseImage({
 			count: 1, //默认9
@@ -40,26 +52,18 @@
 			success: function(res) {
 				console.log(JSON.stringify(res.tempFilePaths)); //拍照图片的路径
 				uni.uploadFile({
-					url: 'http://a-puppy-c.top:9999/Smart/AI/Face', //接口地址
+					url: 'http://a-puppy-c.top:9999/Smart/AI/OCR', //接口地址
 					filePath: res.tempFilePaths[0],
 					header: {
 						'Authorization': uni.getStorageSync('Authorization'),
 					},
-					name: 'file1',
-					formData: {
-						file2: img.value // 后端接收的其他参数
-					},
+					name: 'file',
 					success: (uploadFileRes) => {
 						var obj = JSON.parse(uploadFileRes.data)
-						console.log(obj.data.result.score)
-						if (obj.data.result.score > 70) {
-							console.log("人脸识别成功")
-							//根据用户id获取用户详情保存在全局中
-							
-
-						} else {
-							console.log("人脸识别失败")
-						}
+						bgimg.value = res.tempFilePaths[0]
+						console.log(bgimg.value.slice(5))
+						result.value = obj.data
+						sucess.value = true //隐藏识别按钮
 					}
 				})
 			},
@@ -81,6 +85,9 @@
 		min-height: 500rpx;
 		overflow: hidden;
 		background-color: #f6d95f20;
+		background-size: 100%;
+		background-position:  center; 
+		background-repeat: no-repeat;
 
 		.tip {
 			width: 100%;
@@ -117,16 +124,30 @@
 			font-size: 16px;
 			background-color: #90c9b4;
 			border-radius: 30rpx;
-			padding: 6rpx 14rpx;
+			padding: 6rpx 20rpx;
 			margin-top: 30rpx;
 		}
 
 		.text {
 			display: block;
 			width: 100%;
-			height: 100rpx;
+			min-height: 100rpx;
 			font-size: 16px;
 			margin-top: 30rpx;
+		}
+
+		.rebtn {
+			background-color: #f6e382;
+			color: #ffffff;
+			font-size: 18px;
+			text-shadow: 1px 1px 2px #978b50;
+			width: 230rpx;
+			height: 70rpx;
+			line-height: 70rpx;
+			text-align: center;
+			margin: 0 auto;
+			margin-top: 90rpx;
+			border-radius: 33rpx;
 		}
 	}
 

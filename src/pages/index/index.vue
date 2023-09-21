@@ -27,7 +27,7 @@
 		<view class="carousal">
 			<swiper class="swiper" circular easeInOutCubic autoplay="true" interval="4500" duration="500">
 				<swiper-item>
-					<image class="carImg" src="@/static/image/days1.png" mode="aspectFit" alt="" />
+					<image @click="banner1" class="carImg" src="@/static/image/days1.png" mode="aspectFit" alt="" />
 				</swiper-item>
 				<swiper-item>
 					<image class="carImg" src="@/static/image/banner3.png" mode="aspectFit" alt="" />
@@ -56,7 +56,7 @@
 				<image src="@/static/image/tool24.png" alt="" />
 				<text class="toolItem">实践体验</text>
 			</view>
-			<view class="toolImg" @click="">
+			<view class="toolImg" @click="goPopularize">
 				<image src="@/static/image/tool25.png" alt="" />
 				<text class="toolItem">知识科普</text>
 			</view>
@@ -78,6 +78,7 @@
 								<image src="@/static/image/icon/user_grey.svg" mode="" />
 								<text class="name">{{item.lessonTeacher}}</text>
 								<!-- 热门推荐标签 -->
+								<text class="hot">热门推荐</text>
 							</view>
 							<text class="value">￥150</text>
 						</view>
@@ -95,9 +96,9 @@
 					<image class="img" :src="item.newImg" mode="aspectFit"
 						:style="'background-image:url('+item.newImg+') ;'" alt="" />
 					<view class="uContent">
-						<image class="uimg" :src="avatar[index]" alt="" />
+						<image class="uimg" :src="item.userAvatar" alt="" />
 						<view class="userName">
-							<text>{{userName[index]}}</text>
+							<text>{{item.userNickName}}</text>
 						</view>
 					</view>
 					<text class="time">{{item.createTime}}</text>
@@ -151,24 +152,24 @@
 	const classItem = ref([])
 	const avatar = ref([])
 
-
 	onLoad(() => {
 		getNews().then(res => {
+			console.log(res)
 			for (let j = 0; j < res.length; j++) {
-				news.value.push(res[j])
-				console.log(news.value[j].createTime)
-				news.value[j].createTime = news.value[j].createTime.substring(0, 10)
-				console.log(news.value[j].createTime)
-			}
-			// 根据新闻的用户id获取用户名
-			for (var i = 0; i < news.value.length; i++) {
-				getUser(news.value[i].newUser).then(res => {
-					console.log(res.userAvatar)
-					userName.value.push(res.userNickName)
-					avatar.value.push(res.userAvatar)
+				getUser(res[j].newUser).then(user => {
+					console.log(user.userAvatar)
+					userName.value.push(user.userNickName)
+					avatar.value.push(user.userAvatar)
+					news.value.push({
+						newImg: res[j].newImg,
+						createTime: res[j].createTime.substring(0, 10),
+						newTitle: res[j].newTitle,
+						newDetail: res[j].newDetail,
+						userAvatar:user.userAvatar,
+						userNickName:user.userNickName
+					})
 				})
 			}
-			// console.log(news.value)
 		})
 		// 获取课程
 		getList().then(res => {
@@ -312,6 +313,12 @@
 			url: '/pages/tools/test'
 		});
 	};
+	// 问答测验
+	let goPopularize = () => {
+		uni.navigateTo({ //普通页面跳转
+			url: '/pages/tools/popularize'
+		});
+	};
 	// 课堂跳转
 	let gotoCourse = (id) => {
 		uni.navigateTo({
@@ -352,14 +359,14 @@
 		padding-right: 4%;
 		border-end-start-radius: 36px;
 		border-end-end-radius: 36px;
-		padding-top: 20px;
+		padding-top: 30px;
 	}
 
 	.top .topTop {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		margin: 20rpx 0;
+		/* margin: 20rpx 0; */
 	}
 
 	.top .topHi {
@@ -498,7 +505,7 @@
 		width: 440rpx;
 		margin-right: 40rpx;
 		border-radius: 14px;
-		background-color: #ffffff;
+		/* background-color: #ffffff; */
 		overflow: hidden;
 	}
 
@@ -509,7 +516,8 @@
 	}
 
 	.class .content .text {
-		margin: 2% 4%;
+		padding: 10rpx 20rpx;
+		background-color: #ffffff;
 	}
 
 	.class .content .className {
@@ -549,6 +557,16 @@
 		font-weight: 600;
 	}
 
+	.class .content .hot {
+		background-color: #ff606030;
+		color: #c85833;
+		display: inline-block;
+		padding: 2rpx 12rpx;
+		margin-left: 10rpx;
+		border-radius: 20rpx;
+		font-size: 10px !important;
+	}
+
 	/* 学习课堂结束 */
 	/* 推荐新闻开始 */
 	.news {
@@ -584,6 +602,7 @@
 		border-radius: 10px;
 		height: 160rpx;
 		margin-top: 10px;
+		/* filter: blur(1px); */
 		/* background-color: #539898; */
 	}
 
@@ -591,7 +610,7 @@
 		display: block;
 		width: 120rpx;
 		white-space: nowrap;
-		overflow: hidden;
+		/* overflow: hidden; */
 		margin: 8rpx 10rpx;
 	}
 

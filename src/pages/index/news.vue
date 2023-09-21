@@ -25,7 +25,8 @@
 				<view class="btnGroup">
 					<image src="@/static/image/icon/comment_.svg" alt="" />
 					<image src="@/static/image/icon/share_.svg" alt="" />
-					<image src="@/static/image/icon/favor_fill_red.svg" alt="" />
+					<image v-if="isfavor" @click="favor" src="@/static/image/icon/favor_fill_red.svg" alt="" />
+					<image v-if="!isfavor"  @click="favor" src="@/static/image/icon/favor_green.svg" alt="" />
 				</view>
 			</view>
 		</view>
@@ -45,6 +46,7 @@
 	var newsId = -1
 	// const news = ref([{newTitle:'0',newDetail:'1'}])
 	const news = ref({})
+	const isfavor = ref(false)
 
 
 	onLoad((res) => {
@@ -53,9 +55,26 @@
 		getNew(newsId).then(res => {
 			console.log(res)
 			news.value = res
-			
+
 		})
 	})
+	const favor=()=>{
+		if(isfavor.value){
+			uni.showToast({
+				title:'取消收藏！',
+				duration:500
+			})
+			
+		}else{
+			console.log(11)
+			uni.showToast({
+				title:'收藏成功！',
+				duration:500
+			})
+			
+		}
+		isfavor.value=!isfavor.value
+	}
 
 	let getNew = (id) => {
 		return new Promise((resolve, reject) => {

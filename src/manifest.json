@@ -54,9 +54,9 @@
             "splashscreen" : {
                 "androidStyle" : "default",
                 "android" : {
-                    "hdpi" : "",
-                    "xhdpi" : "",
-                    "xxhdpi" : ""
+                    "hdpi" : "src/static/image/page/qd0.png",
+                    "xhdpi" : "src/static/image/page/qd0.png",
+                    "xxhdpi" : "src/static/image/page/qd0.png"
                 }
             },
             "icons" : {

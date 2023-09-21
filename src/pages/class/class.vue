@@ -5,13 +5,7 @@
 		<ClassHeader :searchText="searchText" :text="text"></ClassHeader>
 		<!-- 推广 -->
 		<view class="carousal">
-			<swiper class="swiper" circular easeInOutCubic autoplay="true" interval="4500" duration="500">
-				<swiper-item>
-					<image class="carImg" src="@/static/image/classBanner1.png" alt="" style="width: 100%;" />
-				</swiper-item>
-				<swiper-item>
-					<image class="carImg" src="@/static/image/classBanner1.png" alt="" style="width: 100%;" />
-				</swiper-item>
+			<swiper class="swiper" circular easeInOutCubic autoplay="false" interval="4500" duration="500">
 				<swiper-item>
 					<image class="carImg" src="@/static/image/classBanner1.png" alt="" style="width: 100%;" />
 				</swiper-item>
@@ -25,7 +19,7 @@
 					<view class="background"> </view>
 					<text class="text">精选好课</text>
 				</view>
-				<image src="@/static/image/icon/sort.svg" alt=""/>
+				<image src="@/static/image/icon/sort.svg" alt="" />
 			</view>
 			<!-- 内容 -->
 			<view class="content">
@@ -34,7 +28,7 @@
 					<view class="text">
 						<text class="className">{{item.lessonTitle}}</text>
 						<view class="mid">
-							<image src="@/static/image/icon/user.svg" mode=""/>
+							<image src="@/static/image/icon/user.svg" mode="" />
 							<text class="name">{{item.lessonTeacher}}</text>
 						</view>
 						<text class="value">￥{{item.lessonPrice}}</text>
@@ -47,11 +41,11 @@
 			<!-- 标题 -->
 			<ClassTitle :title="title[0]"></ClassTitle>
 			<!-- 内容 -->
-			<view class="content" v-for="(i,index) in 2">
-				<image src="@/static/image/similar2.png" alt="" />
+			<view class="content" v-for="item in similar">
+				<image :src="item.link" alt="" />
 				<view class="box-card">
-					<div class="itemTitle">人工智能觉醒之谜（上）什么是意识？</div>
-					<div class="itemName">真假世界未解之谜</div>
+					<div class="itemTitle">{{item.title}}</div>
+					<div class="itemName">{{item.tip}}</div>
 					<div class="itemBtns">
 						<image class='btn' src="@/static/image/icon/appreciate_fill.svg" alt="" />
 						<image class='btn' src="@/static/image/icon/oppose_fill_light.svg" alt="" />
@@ -77,8 +71,8 @@
 						<div class="itemAuthor">{{item.total}}</div>
 					</view>
 					<view class="itemBtn" link @click='gotoBook(item.id)'>
-						<image src="../../static/image/icon/right_grey.png" mode=""></image>
 						前往阅读
+						<image src="../../static/image/icon/right_grey.png" mode=""></image>
 					</view>
 				</view>
 			</view>
@@ -123,6 +117,19 @@
 			total: '共十二章',
 			header: '本书全面讲述人工智能的发展史，涵盖人工智能的起源、自动定理证明、专家系统、神经网络、自然语言处理、遗传算法、深度学习、强化学习、超级智能、哲学问题和未来趋势等。',
 			name: "人工智能简史",
+		},
+	]);
+	const similar = reactive([{
+			id: 1,
+			link: '../../static/image/similar2.png',
+			title: '人工智能觉醒之谜（上）什么是意识？',
+			tip: "真假世界之谜",
+		},
+		{
+			id: 2,
+			link: '../../static/image/similar1.png',
+			title: '计算机的演化算法如何模拟生命？',
+			tip: "真假世界之谜",
 		},
 
 	]);
@@ -270,11 +277,10 @@
 	}
 
 	.topClass .content .card {
-		border-radius: 14rpx;
 		width: 320rpx;
 		margin: 10rpx 0;
-		background-color: #ffffff;
-		border-radius: 10rpx;
+		background-color: transparent;
+		border-radius: 20rpx;
 		overflow: hidden;
 
 	}
@@ -283,11 +289,13 @@
 		width: 100%;
 		height: 180rpx;
 		display: block;
+		background-color: transparent;
 	}
 
 	.topClass .content .text {
-		margin: 2% 4%;
+		padding: 8rpx 14rpx;
 		font-size: 12px;
+		background-color: #ffffff;
 	}
 
 	.topClass .content .mid {
@@ -430,10 +438,11 @@
 	.book .item .itemBtn {
 		background-color: #f3efee;
 		padding: 6rpx 4rpx;
-		padding-right: 10rpx;
+		padding-left: 10rpx;
+		padding-bottom: 8rpx;
 		margin-left: 190rpx;
 		font-size: 12px;
-		border-radius: 20rpx;
+		border-radius: 24rpx;
 		display: flex;
 		align-items: center;
 	}

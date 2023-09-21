@@ -23,7 +23,7 @@
 					<view class="item Ai" v-if="item.botContent != ''">
 						<!-- 头像 -->
 						<view class="avatar">
-							<image src="http://www.a-puppy-c.top/smartLearning/AI.png" mode=""></image>
+							<image src="@/static/image/robot.png" mode=""></image>
 						</view>
 						<!-- 文字内容 -->
 						<view class="content left">

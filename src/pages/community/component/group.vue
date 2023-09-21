@@ -2,20 +2,20 @@
 	<view class="group">
 		<!-- 推荐圈子 -->
 		<titleItem :title="groupTitle[0]"></titleItem>
-		<view class="recommend">
+		<view class="recommend" @click="goFound">
 			<view class="title">
-				<text>推荐圈子</text>
+				<text>《人工智能时代大冲击》</text>
 				<image src="@/static/image/icon/hot.svg" alt="" />
 			</view>
 			<view class="content">
-				<image src="@/static/image/userImg1.png" alt="" />
+				<image src="@/static/image/found1.png" alt="" />
 				<view class="text">
-					<text class="name">好文章</text>
-					<text>路人觉得真的很推荐</text>
-					<view class="num">
+					<text class="name">用户名</text>
+					<text class="info">路人觉得真的很推荐</text>
+					<!-- <view class="num">
 						<image src="@/static/image/icon/group_fill.svg" alt="" />
 						<text>1234</text>
-					</view>
+					</view> -->
 				</view>
 			</view>
 		</view>
@@ -25,14 +25,17 @@
 			<view class="item">
 				<image src="@/static/image/group1.png" mode=""></image>
 				<text class="name">自然百科</text>
+				<text class="bottom">自然百科</text>
 			</view>
 			<view class="item">
 				<image src="@/static/image/group3.png" mode=""></image>
 				<text class="name">AI智能</text>
+				<text class="bottom">AI智能</text>
 			</view>
 			<view class="item">
 				<image src="@/static/image/group2.png" mode=""></image>
 				<text class="name">历史</text>
+				<text class="bottom">历史</text>
 			</view>
 		</view>
 		<!-- 互动话题 -->
@@ -41,9 +44,9 @@
 			<view class="item" v-for="info in talkList">
 				<text class="title">{{info.title}}</text>
 				<view class="content">
-					<image src="@/static/image/userImg1.png" alt="" />
+					<image :src="info.img" alt="" />
 					<view class="">
-						<text class="name">{{info.name}}</text>
+						<!-- <text class="name">{{info.name}}</text> -->
 						<text class="text">“{{info.text}}”</text>
 					</view>
 				</view>
@@ -68,24 +71,29 @@
 	}]
 	// console.log(my[0])
 	const talkList = [{
-			title: "#你认为未来的智能是怎样的？",
-			name: "用户名1",
-			img: "@/static/image/userImg1.png",
-			text: "为社会服务，方便生活，创造价值。"
+			title: "# AI与人类智能的关系？",
+			name: "张瑶",
+			img: "../../static/image/icon/talk1.svg",
+			text: "人工智能技术是否会超越人类智能？如果会，那会有什么样的影响？"
+		},{
+			title: "# 你认为未来的智能是怎样的？",
+			name: "何光",
+			img: "../../static/image/icon/talk2.svg",
+			text: "人工智能未来的发展方向是什么？将会对社会和经济产生什么影响？"
 		},
 		{
-			title: "#人工智能会反抗？",
-			name: "用户名2",
-			img: "@/static/image/userImg1.png",
-			text: "话题内容2"
-		},
-		{
-			title: "#人工智能会反抗？",
-			name: "用户名2",
-			img: "@/static/image/userImg1.png",
-			text: "话题内容2"
-		}
+			title: "# AI对就业和社会的影响？",
+			name: "志云",
+			img: "../../static/image/icon/talk3.svg",
+			text: "随着人工智能技术的普及，许多传统行业的工作可能被取代，也催生了许多新兴行业和就业机会，我们该如何适应这种变革？"
+		}, 
 	]
+
+	const goFound = () => {
+		uni.navigateTo({
+			url: '/pages/community/found'
+		})
+	}
 </script>
 
 <style lang="scss">
@@ -93,7 +101,7 @@
 		padding: 20rpx;
 		width: 710rpx;
 		font-size: 12px;
-		padding-bottom: 100rpx;
+		padding-bottom: 120rpx;
 		background-color: #f3efee;
 	}
 
@@ -101,7 +109,7 @@
 	.recommend {
 		width: 590rpx;
 		background-color: #f6d95f20;
-		;
+		box-shadow: 2rpx 2rpx 4rpx #dbdbdb;
 		padding: 20rpx 40rpx;
 		margin: 20rpx;
 		border-radius: 20rpx;
@@ -110,7 +118,9 @@
 		.title {
 			display: flex;
 			align-items: center;
-			font-size: 16px;
+			font-size: 18px;
+			margin-top: 20rpx;
+			margin-bottom: 10rpx;
 		}
 
 		/* 火热图标 */
@@ -123,7 +133,8 @@
 		.content {
 			display: flex;
 			// align-items: center;
-			padding-top: 20rpx;
+			padding-bottom: 20rpx;
+			color: #333;
 
 			/* 圈子图片 */
 			image {
@@ -139,23 +150,29 @@
 			}
 
 			.text .name {
-				font-size: 14px;
+				font-size: 16px;
 				display: block;
 				margin-bottom: 10rpx;
 			}
 
-			.num {
-				display: flex;
-				align-items: center;
-				justify-content: right;
-				width: 470rpx;
-				margin-top: -10rpx
+			.text .info {
+				font-size: 12px;
+				display: block;
+				margin-bottom: 10rpx;
 			}
 
-			.num>image {
-				width: 50rpx;
-				height: 50rpx;
-			}
+			// .num {
+			// 	display: flex;
+			// 	align-items: center;
+			// 	justify-content: right;
+			// 	width: 470rpx;
+			// 	margin-top: -10rpx
+			// }
+
+			// .num>image {
+			// 	width: 50rpx;
+			// 	height: 50rpx;
+			// }
 		}
 	}
 
@@ -195,6 +212,20 @@
 			color: #ffffff;
 			text-shadow: 10rpx 10rpx 6rpx #252525, -4rpx -4rpx 6rpx #252525;
 		}
+
+		.item .bottom {
+			position: absolute;
+			width: 110%;
+			height: 50rpx;
+			line-height: 46rpx;
+			text-align: center;
+			bottom: -1rpx;
+			background-color: #8BC1AE;
+			font-size: 16px;
+			font-weight: 500;
+			color: #ffffff;
+			text-shadow: 2rpx 2rpx 4rpx #9c9c9c, -2rpx -2rpx 4rpx #9c9c9c;
+		}
 	}
 
 	/* 我的圈子结束 */
@@ -208,14 +239,14 @@
 			margin-top: 30rpx;
 			padding: 30rpx 40rpx;
 			width: 590rpx;
-			background-color: #8BC1AE;
+			background-color: #8BC1AE50;
 			border-radius: 20rpx;
 		}
 
 		.item .title {
-			font-size: 14px;
-			/* font-weight: 600; */
-			color: #fff0b0;
+			font-size: 16px;
+			font-weight: 600;
+			color: #528e75;
 			display: block;
 			margin-bottom: 20rpx;
 		}
@@ -228,11 +259,12 @@
 			display: flex;
 			align-items: center;
 			margin: 20rpx 0;
-			color: #ffffff;
+			color: #555;
+			// text-shadow: 1rpx 1rpx 2rpx #c0c0c0;
 
 			image {
-				width: 100rpx;
-				height: 100rpx;
+				width: 90rpx;
+				height: 90rpx;
 			}
 		}
 
@@ -243,10 +275,12 @@
 		}
 
 		.item .content .text {
+			width: 490rpx;
 			display: block;
-			font-size: 12px;
+			font-size: 14px;
 			margin-left: 6px;
 			margin-top: 20rpx;
+			line-height: 1.2rem;
 		}
 	}
 

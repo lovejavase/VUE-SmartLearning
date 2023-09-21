@@ -34,37 +34,36 @@
 
 <style scoped>
 	.title {
+		width: fit-content;
 		display: flex;
 		justify-content: space-between;
-		padding: 0 30rpx;
-		/* padding: 0 4%; */
+		padding-left: 30rpx;
 		color: #15a0ac;
 		position: relative;
 	}
 
 	.title .text {
+		font-family: 'AlimamaShuHeiTi-Bold';
 		position: relative;
-		font-size: 14px;
+		font-size: 18px;
 		z-index: 10;
 	}
 
-/* 	.title .link {
+	/* 	.title .link {
 		font-size: 12px;
 		color: #15a0ac;
 		margin-top: 2px;
 	} */
 
 	.title .background {
-		background-color: #f6de28;
-		width: 3.4rem;
-		/* width: 100%; */
-		height: 0.3rem;
+		background-color: #f6e382;
+		width: 83%;
+		height: 0.4rem;
 		position: absolute;
+		left: 30rpx;
 		border-radius: 0.1rem;
 		overflow: hidden;
-		/* top: 10px; */
-		left: 4%;
-		bottom: 1%;
+		bottom: 1rpx;
 		z-index: 0;
 	}
 </style>

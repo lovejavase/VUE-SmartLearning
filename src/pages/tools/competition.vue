@@ -1,12 +1,14 @@
 <template>
-	<!-- 答题页 -->
+	<!-- ai对战页 -->
 	<view class="quiz">
 		<!-- 顶部 -->
 		<ClassHeader searchText="" text="答题测验"></ClassHeader>
 		<!-- 进度条 -->
 		<view class="">
-			<slider class="slider" @change="" min="0" max="5" step="1" :value="page" color="#b3b3b3" block-size="14"
-				active-color="#90c9b4" block-color="#f5f5f5" />
+			<slider id="ai" class="slider" @change="" min="0" max="4" step="1" :value="aipage" color="#b3b3b3"
+				block-size="14" active-color="#e36729" block-color="#f5f5f5" />
+			<slider id="user" class="slider" @change="" min="0" max="4" step="1" :value="page" color="#b3b3b3"
+				block-size="14" active-color="#90c9b4" block-color="#f5f5f5" />
 		</view>
 		<!-- 答题卡 -->
 		<swiper previous-margin="50rpx" next-margin="50rpx" :current="page">
@@ -54,6 +56,21 @@
 	const answer = ref([])
 	const user = ref(getApp().globalData.userDetail)
 	const point = ref(0)
+	const aipage = ref(0)
+	console.log(user.value)
+
+	const aitime = setInterval(() => {
+		if (aipage.value < 4) {
+			aipage.value += 1
+		} else if (aipage.value > page.value) {
+			clearInterval(aitime)
+			uni.showToast({
+				title: "AI机器人获胜！",
+				icon: 'error',
+				duration: 1200
+			})
+		}
+	}, 3000)
 
 	//验证答案方法
 	let check = (item) => {
@@ -73,6 +90,16 @@
 				console.log("结束答题")
 				svalue.value += 1
 				point.value += 1
+				// 判断获胜
+				if (page.value > aipage.value) {
+					setTimeout(() => {
+						uni.showToast({
+							title: "恭喜你获胜！",
+							icon: 'success',
+							duration: 1200
+						})
+					}, 300)
+				}
 			}
 		} else {
 			if (page.value < 4) {
@@ -81,6 +108,15 @@
 				svalue.value += 1
 			} else {
 				button.value = "结束答题"
+				if (page.value > aipage.value) {
+					setTimeout(() => {
+						uni.showToast({
+							title: "恭喜你获胜！",
+							icon: 'success',
+							duration: 1200
+						})
+					}, 300)
+				}
 			}
 			uni.showToast({
 				title: "回答错误"
@@ -143,7 +179,7 @@
 			console.log("答题结束")
 			//路由跳转  并调用封装的addPoint方法
 			addPoint()
-				
+
 		}
 	}
 
@@ -154,7 +190,7 @@
 		console.log("调用加分接口")
 		return new Promise((resolve, reject) => {
 			uni.request({
-				url:"http://a-puppy-c.top:9999/Smart/Answer/updateUserPointsAdd",
+				url: "http://a-puppy-c.top:9999/Smart/Answer/updateUserPointsAdd",
 				data: {
 					userId: userId,
 					points: point.value
@@ -166,7 +202,7 @@
 				},
 				success: (res) => {
 					console.log(res)
-					if(res.data.code == 0){
+					if (res.data.code == 0) {
 						console.log("加分成功，跳转路由")
 						uni.navigateTo({
 							url: "test",
@@ -192,6 +228,16 @@
 	}
 
 	/* 滑块 */
+	/* 修改滑块图案为头像 */
+	#ai :deep(.uni-slider-handle) {
+		background-image: url('@/static/image/robot.png');
+		background-size: 100% 100%;
+	}
+
+	#user :deep(.uni-slider-handle) {
+		background-size: 100% 100%;
+	}
+
 	.slider {
 		width: 600rpx;
 		margin: 50rpx auto;

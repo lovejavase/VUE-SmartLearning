@@ -1,4 +1,5 @@
 <template>
+	<!-- 首页->问答测验 -->
 	<view class="test">
 		<!-- 顶部 -->
 		<ClassHeader searchText="" text="答题测验"></ClassHeader>
@@ -24,18 +25,18 @@
 		<view class="pvp">
 			<view class="p4">
 				<text>四人赛</text>
-				<image src='@/static/image/icon/bg1.png' class="bg1" />
+				<image src='@/static/image/pk0.png' class="bg1" />
 				<image src='@/static/image/icon/bg11.png' class="bg2" />
 			</view>
 			<view class="pGroup">
-				<view class="p2">
-					<text>双人赛</text>
-				<image src='@/static/image/icon/bg2.png' class="bg1" />
+				<view class="p2" @click='competition'>
+					<text>AI挑战赛</text>
+				<image src='@/static/image/pk2.png' class="bg1" />
 				<image src='@/static/image/icon/bg22.png' class="bg2" />
 				</view>
 				<view class="p2 p3">
-					<text>挑战赛</text>
-				<image src='@/static/image/icon/bg3.png' class="bg1" />
+					<text>双人赛</text>
+				<image src='@/static/image/pk1.png' class="bg1" />
 				<image src='@/static/image/icon/bg33.png' class="bg2" />
 				</view>
 			</view>
@@ -49,6 +50,11 @@
 	let gotoTest=()=>{
 		uni.navigateTo({
 			url:'/pages/tools/quiz'
+		})
+	}
+	let competition=()=>{
+		uni.navigateTo({
+			url:'/pages/tools/competition'
 		})
 	}
 </script>
@@ -120,14 +126,14 @@
 		margin: 10rpx 0;
 		font-size: 18px;
 		font-weight: 600;
-		text-shadow: 1rpx 1rpx 2rpx #909090;
+		text-shadow: 1px 1px 2px #909090;
 	}
 
 	.practice .day image {
 		width: 100rpx;
 		height: 100rpx;
 		margin-left: 68%;
-		margin-top: 30rpx;
+		margin-top: 20rpx;
 	}
 
 	/* 答题练习结束 */
@@ -176,8 +182,8 @@
 	.pvp .pGroup .p2 {
 		position: relative;
 		display: flex;
-		align-items: center;
-		justify-content: center;
+		align-items: flex-end;
+		justify-content: right;
 		width: 280rpx;
 		height: 176rpx;
 		padding: 20rpx;
@@ -217,6 +223,10 @@
 		z-index: 0;
 	}
 	
+	.pvp .p2>.bg1 :deep(img){
+		opacity: 1;
+	}
+	
 	.pvp .p2>.bg2 {
 		width: 40rpx;
 		height: 40rpx;
@@ -224,6 +234,9 @@
 		top: 5%;
 		left: 5%;
 		z-index: 0;
+	}
+	.pvp .p2>.bg2 :deep(img){
+		opacity: 1;
 	}
 	
 

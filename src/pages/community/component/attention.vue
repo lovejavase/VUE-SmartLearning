@@ -12,17 +12,17 @@
 		<text>和志趣相投的朋友遨游智能的海洋吧！</text>
 		<view class="item" v-for="(post,index) in postList">
 			<view class="user">
-				<image :src="userImg[index]" alt="" />
+				<image :src="post.userAvatar" alt="" />
 				<view class="">
-					<text class="name">{{userName[index]}}</text>
-					<text class="num">内容：{{content[index]}}</text>
-					<text class="fans">粉丝：{{fans[index]}}</text>
+					<text class="name">{{post.userNickName}}</text>
+					<text class="num">内容：{{post.content}}</text>
+					<text class="fans">粉丝：{{post.fans}}</text>
 				</view>
 				<view class="btn">已关注</view>
 			</view>
 			<view class="content" @click="gotoDetail(post.id,post.userId)">
 				<text class="text">{{post.title}}</text>
-				<text class="author">作者：{{userName[index]}}</text>
+				<text class="author">作者：{{post.userNickName}}</text>
 				<view class="btnGroup">
 					<image class='btn' src="@/static/image/icon/appreciate_fill.svg" alt="" />
 					<image class='btn' src="@/static/image/icon/oppose_fill_light.svg" alt="" />
@@ -43,14 +43,10 @@
 		ref
 	} from 'vue';
 	const postList = ref([])
-	const userName = ref([])
-	const userImg = ref([])
-	const content = ref([])
+
 	const fans = ref([])
 	const zan = ref([0, 1, 1])
-	// let click=(cla)=>{
-	// 	if
-	// }
+
 	let gotoDetail = (postId, userId) => {
 		uni.navigateTo({
 			url: '/pages/community/post?id=' + postId + '&user=' + userId
@@ -69,9 +65,7 @@
 				if (res.data.code == 200) {
 					console.log("请求成功");
 					for (let i = 0; i < res.data.data.length; i++) {
-						postList.value.push(res.data.data[i])
-						content.value.push(Math.floor(Math.random() * 5 + 1))
-						fans.value.push(Math.floor(Math.random() * 5 + 1))
+						console.log(res.data.data[i])
 						// 获取用户
 						uni.request({
 							url: 'http://a-puppy-c.top:9999/Smart/User/getUser',
@@ -83,14 +77,20 @@
 								'Authorization': uni.getStorageSync('Authorization'),
 								'content-type': 'application/x-www-form-urlencoded'
 							},
-							success: (res) => {
-								if (res.data.code == 200) {
+							success: (user) => {
+								if (user.data.code == 200) {
 									console.log("getUser请求成功");
-									userName.value.push(res.data.data.userNickName)
-									userImg.value.push(res.data.data.userAvatar)
+									postList.value.push({
+										id:res.data.data[i].id,
+										userId:res.data.data[i].userId,
+										title: res.data.data[i].title,
+										userAvatar: user.data.data.userAvatar,
+										userNickName: user.data.data.userNickName,
+										content:Math.floor(Math.random() * 60 + 12),
+										fans:Math.floor(Math.random() * 500 + 100)
+									})
 								} else {
 									console.log("getUser请求失败");
-									// console.log(res.data);
 								}
 							},
 							fail() {

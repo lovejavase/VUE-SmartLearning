@@ -3,21 +3,21 @@
 	<view class="launch">
 		<!-- 		<image @click="nextPage" v-if="page==-1" src="@/static/image/qd0.jpg" mode='scaleToFill'
 			:style="'min-height:'+windowHeight+'rpx;'"></image> -->
-		<swiper :current="page" :style="'min-height:'+windowHeight+'rpx;'">
+		<swiper :current="page" :style="'min-height:'+windowHeight+'rpx;'"  @click="nextPage">
 			<swiper-item>
 				<view class="sc1">
-					<view class="btn" @click="nextPage"></view>
+					<view class="btn"></view>
 				</view>
 			</swiper-item>
 			<swiper-item>
 				<view class="sc2">
-					<view class="btn" @click="nextPage"></view>
+					<view class="btn"></view>
 				</view>
 			</swiper-item>
 
 			<swiper-item>
 				<view class="sc3">
-					<view class="btn" @click="nextPage"></view>
+					<view class="btn"></view>
 				</view>
 			</swiper-item>
 		</swiper>

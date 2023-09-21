@@ -68,7 +68,10 @@
 
 	const hText = "智能识别"
 	const searchText = "搜索功能"
-	const list = ["改变世界的百大科技", "人工智能会反抗？", "未来的智能是怎样？", "人工智能发展史", ]
+	const list = ["超人工智能", "人工智能的监管", "AI与人类创造力", "AI在医疗保健中的应用","人工智能的偏见和歧视", "情感计算", "人工智能的未来发展",
+		"知识表示与推理", "机器人技术",  "AI在自动驾驶中的应用"
+	]
+	// const list = ["改变世界的百大科技", "人工智能会反抗？", "未来的智能是怎样？", "人工智能发展史", ]
 	const tools = [{
 		img: '../../static/image/icon/scoreA.svg',
 		name: '我的成绩'
@@ -180,13 +183,13 @@
 		width: 200rpx;
 		padding: 20rpx 0;
 		margin-bottom: 20rpx;
-		background-color: #fffce5;
+		background-color: #f6d95f20;
 	}
 
 	.mid {
 		margin-left: 40rpx !important;
 		margin-right: 40rpx !important;
-		background-color: #ffede7 !important;
+		background-color: #F9EBE9 !important;
 	}
 
 	.knowledge .content .image {

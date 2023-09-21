@@ -2,19 +2,23 @@
 	<view class="buttom">
 		<view class="footer">
 			<view class="btn" @click="gotoIndex">
-				<image class="img" src="@/static/image/footer/index.png" />
+				<image v-if="pageid!=1" class="img" src="@/static/image/footer/index.png" />
+				<image v-if="pageid==1" class="img" src="@/static/image/footer/index2.png" />
 			</view>
 			<view class="btn" @click="gotoClass">
-				<image class="img" src="@/static/image/footer/class.png" />
+				<image v-if="pageid!=2" class="img" src="@/static/image/footer/class.png" />
+				<image v-if="pageid==2" class="img" src="@/static/image/footer/class2.png" />
 			</view>
 			<view class="mid">
-				
+
 			</view>
 			<view class="btn" @click='gotocommunity'>
-				<image class="img" src="@/static/image/footer/community.png" />
+				<image v-if="pageid!=3" class="img" src="@/static/image/footer/community.png" />
+				<image v-if="pageid==3" class="img" src="@/static/image/footer/community2.png" />
 			</view>
 			<view class="btn" @click="gotoUser">
-				<image class="img" src="@/static/image/footer/user.png" />
+				<image v-if="pageid!=4" class="img" src="@/static/image/footer/user.png" />
+				<image v-if="pageid==4" class="img" src="@/static/image/footer/user2.png" />
 			</view>
 			<view class="talk" @click='gototalk'>
 				<view class="btn">
@@ -29,27 +33,35 @@
 	import {
 		ref
 	} from 'vue'
-	let gotoIndex = () => {
+
+	const pageid = ref(getApp().globalData.pageid)
+	console.log(pageid.value)
+	
+	const gotoIndex = () => {
+		getApp().globalData.pageid = 1
 		uni.redirectTo({
 			url: '/pages/index/index'
 		});
 	};
-	let gotoClass = () => {
+	const gotoClass = () => {
+		getApp().globalData.pageid = 2
 		uni.redirectTo({
 			url: '/pages/class/class'
 		});
 	}
-	let gotoUser = () => {
+	const gotoUser = () => {
+		getApp().globalData.pageid = 4
 		uni.navigateTo({
 			url: '/pages/user/user'
 		})
 	}
-	let gotocommunity = () => {
+	const gotocommunity = () => {
+		getApp().globalData.pageid = 3
 		uni.redirectTo({
 			url: '/pages/community/community'
 		})
 	}
-	let gototalk = () => {
+	const gototalk = () => {
 		uni.navigateTo({
 			url: '/pages/talk/talk'
 		})
@@ -111,5 +123,4 @@
 		align-items: center;
 		justify-content: center;
 	}
-
 </style>

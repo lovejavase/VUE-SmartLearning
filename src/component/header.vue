@@ -61,7 +61,7 @@
 		width: 100%;
 		left: 0;
 		top: 22px;
-		background-color: #f6e38280;
+		background-color: #f6e382;
 		border-radius: 4px;
 		z-index: 0;
 	}

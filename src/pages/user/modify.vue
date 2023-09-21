@@ -91,13 +91,15 @@
 		padding-top: 30rpx;
 
 		.btn {
-			width: 120rpx;
+			width: 220rpx;
 			height: 60rpx;
 			background-color: #90c9b4;
 			line-height: 60rpx;
 			text-align: center;
 			margin: 20rpx auto;
 			border-radius: 30rpx;
+			color: #fff;
+			font-size: 18px;
 		}
 
 		.content {

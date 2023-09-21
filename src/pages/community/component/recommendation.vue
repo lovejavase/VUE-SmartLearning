@@ -3,13 +3,13 @@
 		<titleItem title="热门话题"></titleItem>
 		<scroll-view class="top" scroll-x='true'>
 			<view class="content">
-				<view class="btn" v-for="(item,index) in 4">
+				<view class="btn" v-for="(item,index) in 5">
 					#{{titles[index]}}
 				</view>
 			</view>
 			<view class="content even">
-				<view class="btn" v-for="(item,index) in 4">
-					#{{titles[index+4]}}
+				<view class="btn" v-for="(item,index) in 5">
+					#{{titles[index+5]}}
 				</view>
 			</view>
 		</scroll-view>
@@ -19,12 +19,12 @@
 				<!-- 标题 -->
 				<view class="title">
 					<view class="left">
-						<img src="@/static/image/icon/hot.svg" alt="">
+						<image src="@/static/image/icon/hot.svg" alt="" />
 						<text>热门</text>
 					</view>
 					<view class="right">
 						<text>更多</text>
-						<img src="@/static/image/icon/right.svg" alt="">
+						<image src="@/static/image/icon/right.svg" alt="" />
 					</view>
 				</view>
 				<!-- 内容 -->
@@ -38,20 +38,20 @@
 			<!-- 热门帖子 -->
 			<view class="post">
 				<view class="item" v-for="(info,index) in postList">
-					<img src="@/static/image/userImg1.png" alt="">
+					<image :src="info.img" mode="" />
 					<view class="info">
 						<text class="name">{{info.name}}</text>
 						<text class="text">{{info.text}}</text>
 						<!-- 书籍 -->
 						<view class="book">
-							<img :src="info.bookImg" alt="">
+							<image :src="info.bookImg" alt="" />
 							<view class="bookname">
 								<div class="itemBook">{{info.book}}</div>
 								<div class="itemAuthor">{{info.total}}</div>
 							</view>
 							<view class="itemBtn">
 								去阅读
-								<img src="@/static/image/icon/Right.svg" alt="">
+								<image src="@/static/image/icon/Right.svg" alt="" />
 							</view>
 						</view>
 						<view class="btnGroup">
@@ -72,7 +72,9 @@
 		reactive
 	} from "vue";
 	import titleItem from "./title.vue"
-	const titles = ["openAI", "chatGPT", "智能世界史", "智能世界史", "智能世界史", "智能世界史", "智能世界史", "智能世界史"]
+	const titles = ["超人工智能", "AI与人类创造力", "AI在自动驾驶中的应用", "情感计算", "人工智能的未来发展",
+		"知识表示与推理", "AI在医疗保健中的应用", "机器人技术", "人工智能的监管", "人工智能的偏见和歧视"
+	]
 	const hotList = [{
 		num: 1,
 		title: "改变世界的百大科技",
@@ -83,39 +85,39 @@
 		tag: "爆"
 	}, {
 		num: 3,
-		title: "维特根斯坦",
+		title: "人工智能的就业影响",
 		tag: "爆"
 	}, {
 		num: 4,
-		title: "智能世界史",
+		title: "各界人士AI普及度",
 		tag: "热"
 	}, {
 		num: 5,
-		title: "各界人士AI普及度",
+		title: "智能世界史",
 		tag: "新"
 	}]
 	const postList = [{
-		name: "AC",
-		img: "",
+		name: "志云",
+		img: "../../static/image/icon/userimg2.svg",
 		total: '共十章',
-		text: "各类智能化产品已经成为人类生活当中不可或缺的一部分。智能手机、电脑、数控电器.....",
+		text: "尽管人工智能的发展如火如荼，但书中并未过分乐观，而是提醒我们关注未来的变革。",
 		book: "人工智能时代",
 		bookImg: "http://www.a-puppy-c.top/smartLearning/book1.jpg",
 		num: 12,
 		bookid: 1
 	}, {
-		name: "Vvd",
-		img: "",
-		text: "评价内容.....",
+		name: "鹿遥",
+		img: "../../static/image/icon/userimg1.svg",
+		text: "这本书的逻辑清晰，让我深入了解了人工智能的发展和可能的前景。",
 		book: "人工智能简史",
 		total: '共十二章',
 		bookImg: "http://www.a-puppy-c.top/smartLearning/book2.jpg",
 		num: 11,
 		bookid: 2
 	}, {
-		name: "vvd",
-		img: "",
-		text: "评价内容.....",
+		name: "何光",
+		img: "../../static/image/icon/userimg3.svg",
+		text: "展现了人工智能的巨大潜力和挑战，它不仅改变了我们的生活方式，也让我们对未来充满期待和思考。",
 		total: '共十章',
 		book: "人工智能时代",
 		bookImg: "http://www.a-puppy-c.top/smartLearning/book1.jpg",
@@ -171,6 +173,7 @@
 		border-radius: 20rpx;
 
 		background-color: #fef5e3;
+		box-shadow: 2rpx 2rpx 4rpx #d3d3d3;
 	}
 
 	.public .hot .left {
@@ -178,8 +181,9 @@
 		align-items: center;
 	}
 
-	.public .hot .left img {
+	.public .hot .left image {
 		width: 30rpx;
+		height: 30rpx;
 		margin-right: 10rpx;
 	}
 
@@ -194,8 +198,9 @@
 		align-items: center;
 	}
 
-	.public .hot>.title .right img {
+	.public .hot>.title .right image {
 		width: 30rpx;
+		height: 30rpx;
 	}
 
 	.public .hot .content {
@@ -241,6 +246,11 @@
 
 	}
 
+	.post .info {
+		width: 520rpx;
+		/* background-color: #7bad7b; */
+	}
+
 	.post .item {
 		padding: 20rpx 0;
 		display: flex;
@@ -251,7 +261,7 @@
 	}
 
 	/* 头像 */
-	.post .item>img {
+	.post .item>image {
 		width: 80rpx;
 		height: 80rpx;
 		padding: 6rpx 0;
@@ -282,8 +292,9 @@
 		border-radius: 14rpx;
 	}
 
-	.post .item .book img {
-		width: 60rpx;
+	.post .item .book image {
+		width: 86rpx;
+		height: 120rpx;
 		border-radius: 10rpx;
 	}
 
@@ -305,18 +316,20 @@
 	.post .item .book .itemBtn {
 		background-color: #f3efee;
 		padding: 6rpx;
-		padding-right: 10rpx;
+		padding-left: 10rpx;
 		border-radius: 20rpx;
 		margin-left: 30rpx;
 	}
 
-	.post .item .book .itemBtn>img {
+	.post .item .book .itemBtn>image {
 		width: 20rpx;
+		height: 20rpx;
 	}
 
-	.post .btnGroup{
+	.post .btnGroup {
 		position: relative;
 	}
+
 	.post .btnGroup .btn {
 		width: 30rpx;
 		height: 30rpx;
@@ -326,8 +339,8 @@
 		border-radius: 4rpx;
 		padding: 2rpx 4rpx;
 	}
-	
-	.post .btnGroup .btn2{
+
+	.post .btnGroup .btn2 {
 		position: absolute;
 		right: 0;
 	}

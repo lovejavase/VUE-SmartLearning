@@ -23,6 +23,7 @@
 	export default {
 		globalData: {
 			userDetail: {},
+			pageid: 1, //底部导航栏id
 			systemInfo: uni.getSystemInfoSync(), //获取设备信息
 		},
 	};
