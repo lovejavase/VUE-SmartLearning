@@ -4,7 +4,7 @@
 		<!-- 头部 -->
 		<myheader title='每日智能推荐'></myheader>
 		<!-- 内容 -->
-		<img src="@/static/image/page/timtalk.png" alt="">
+		<image src="@/static/image/page/timtalk.png" mode="widthFix" />
 	</view>
 </template>
 
@@ -13,7 +13,7 @@
 </script>
 
 <style>
-	.timtalk img {
+	.timtalk image {
 		width: 100%;
 	}
 </style>

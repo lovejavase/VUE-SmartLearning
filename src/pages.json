@@ -145,6 +145,13 @@
 				// "enablePullDownRefresh": false
 			}
 		}, {
+			"text": "特别发现-帖子",
+			"path": "pages/community/grouppost",
+			"style": {
+				"navigationStyle": "custom"
+				// "enablePullDownRefresh": false
+			}
+		}, {
 			"text": "帖子发布",
 			"path": "pages/community/publish",
 			"style": {
