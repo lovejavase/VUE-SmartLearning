@@ -52,9 +52,9 @@
 				<image src="@/static/image/tool22.png" alt="" />
 				<text class="toolItem">问答测验</text>
 			</view>
-			<view class="toolImg" @click="">
+			<view class="toolImg" @click="goPoDepth">
 				<image src="@/static/image/tool24.png" alt="" />
-				<text class="toolItem">实践体验</text>
+				<text class="toolItem">深度体验</text>
 			</view>
 			<view class="toolImg" @click="goPopularize">
 				<image src="@/static/image/tool25.png" alt="" />
@@ -96,7 +96,7 @@
 					<image class="img" :src="item.newImg" mode="aspectFit"
 						:style="'background-image:url('+item.newImg+') ;'" alt="" />
 					<view class="uContent">
-						<image class="uimg" :src="item.userAvatar" alt="" />
+						<image class="uimg" :src="item.userAvatar" mode="aspectFill" />
 						<view class="userName">
 							<text>{{item.userNickName}}</text>
 						</view>
@@ -166,8 +166,8 @@
 						createTime: res[j].createTime.substring(0, 10),
 						newTitle: res[j].newTitle,
 						newDetail: res[j].newDetail,
-						userAvatar:user.userAvatar,
-						userNickName:user.userNickName
+						userAvatar: user.userAvatar,
+						userNickName: user.userNickName
 					})
 				})
 			}
@@ -308,15 +308,21 @@
 			url: '/pages/tools/intelligent'
 		});
 	};
-	// 问答测验
 	let gotoClass = () => {
-		uni.navigateTo({ //普通页面跳转
+		uni.navigateTo({
+			// 问答测验
 			url: '/pages/tools/test'
 		});
 	};
-	// 问答测验
+	let goPoDepth = () => {
+		uni.navigateTo({
+			// 深度体验
+			url: '/pages/tools/depth'
+		});
+	};
 	let goPopularize = () => {
-		uni.navigateTo({ //普通页面跳转
+		uni.navigateTo({
+			// 知识科普
 			url: '/pages/tools/popularize'
 		});
 	};

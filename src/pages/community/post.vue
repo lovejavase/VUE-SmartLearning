@@ -4,7 +4,10 @@
 		<!-- 标题 -->
 		<myheader title='帖子详情'></myheader>
 		<!-- 图片 -->
-		<image :src="img" mode="scaleToFill"></image>
+		<!--  -->
+		<view class="img" :style="'background-image: url('+img+');'">
+			<image :src="img" mode="aspectFit"></image>
+		</view>
 		<!-- 标题 -->
 		<view class="poTitle">
 			{{postDetail.title}}
@@ -12,7 +15,7 @@
 		<!-- 作者信息 -->
 		<view class="author">
 			<view class="uname">
-				<image :src="userImg" mode=""></image>
+				<image :src="userImg" mode="aspectFill"></image>
 				<text>{{userName}}</text>
 			</view>
 			<view class="btn">
@@ -110,11 +113,25 @@
 	}
 
 	/* 大图 */
-	.post>image {
-		margin: 20rpx auto;
+	.post>.img {
+		margin: 50rpx auto;
+		width: 90%;
+		height: 300rpx;
+		box-shadow: 1rpx 1rpx 10rpx #90909090;
+		background-repeat: no-repeat;
+		background-size: 100% 100%;
+		display: flex;
+		justify-content: center;
+		z-index: -1;
+	}
+
+	.post>.img image {
 		width: 100%;
 		height: 340rpx;
-		box-shadow: 1rpx 1rpx 10rpx #90909090;
+		margin: 0 auto;
+		margin-top: -20rpx;
+		backdrop-filter: blur(2px) ;
+		background-color: rgba(245, 245, 245, 0.2);
 	}
 
 	/* 标题 */

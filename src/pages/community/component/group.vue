@@ -2,46 +2,60 @@
 	<view class="group">
 		<!-- 特别发现 -->
 		<titleItem :title="groupTitle[0]"></titleItem>
-		<view class="recommend" @click="goFound">
+		<view class="recommend">
 			<view class="title">
-				<text>《人工智能时代大冲击》</text>
+				<text>推荐圈子</text>
 				<image src="@/static/image/icon/hot.svg" alt="" />
 			</view>
 			<view class="content">
-				<image src="@/static/image/found1.png" alt="" />
-				<view class="text">
-					<text class="name">张遥</text>
-					<text class="info">领略人工智能的奥秘</text>
+				<image src="@/static/image/group3.png" @click="goFound" alt="" />
+				<view class="text" @click="goFound">
+					<text class="name">AI智能</text>
+					<text class="info">领略人工智能的奥秘！</text>
 					<!-- <view class="num">
 						<image src="@/static/image/icon/group_fill.svg" alt="" />
 						<text>1234</text>
 					</view> -->
+				</view>
+				<view class="join" @click="join">
+					{{isjoin}}
 				</view>
 			</view>
 		</view>
 		<!-- 我的圈子 -->
 		<titleItem :title="groupTitle[1]"></titleItem>
 		<view class="my">
-			<view class="item">
-				<image src="@/static/image/group1.png" mode=""></image>
-				<text class="name">自然</text>
-				<text class="bottom">自然百科</text>
+			<view class="item" :class="index==1?'mid':''" v-for="(item,index) in my" @click="talk(item.title)">
+				<image :src="item.img" mode=""></image>
+				<text class="name">{{item.title}}</text>
+				<text class="bottom">{{item.name}}</text>
 			</view>
-			<view class="item">
-				<image src="@/static/image/group3.png" mode=""></image>
-				<text class="name">智能</text>
-				<text class="bottom">AI智能</text>
-			</view>
-			<view class="item">
-				<image src="@/static/image/group2.png" mode=""></image>
-				<text class="name">历史</text>
-				<text class="bottom">发展历史</text>
-			</view>
+
 		</view>
 		<!-- 互动话题 -->
 		<titleItem :title="groupTitle[2]"></titleItem>
 		<view class="talk">
-			<view class="item" v-for="info in talkList">
+			<view class="item" v-if="talkShow=='百科'" v-for="info in wikiList">
+				<text class="title">{{info.title}}</text>
+				<view class="content">
+					<image :src="info.img" alt="" />
+					<view class="">
+						<!-- <text class="name">{{info.name}}</text> -->
+						<text class="text">“{{info.text}}”</text>
+					</view>
+				</view>
+			</view>
+			<view class="item" v-if="talkShow=='历史'" v-for="info in developList">
+				<text class="title">{{info.title}}</text>
+				<view class="content">
+					<image :src="info.img" alt="" />
+					<view class="">
+						<!-- <text class="name">{{info.name}}</text> -->
+						<text class="text">“{{info.text}}”</text>
+					</view>
+				</view>
+			</view>
+			<view class="item" v-if="talkShow=='智能'" v-for="info in aiList">
 				<text class="title">{{info.title}}</text>
 				<view class="content">
 					<image :src="info.img" alt="" />
@@ -56,43 +70,90 @@
 </template>
 
 <script setup>
+	import { onShow } from "@dcloudio/uni-app";
+import {
+		ref
+	} from "vue";
 	import titleItem from "./title.vue"
-
+	// 标题
 	const groupTitle = ["特别发现", "我的圈子", "互动话题"]
-	const my = [{
-		name: "自然百科",
-		img: '@/static/image/group1.png'
-	}, {
-		name: "AI智能",
-		img: '@/static/image/group2.png'
-	}, {
-		name: "历史",
-		img: '@/static/image/group3.png'
-	}]
+	// 我的圈子
+	const my = ref(getApp().globalData.my)
+	const isjoin = ref('加入')
+	const talkShow = ref('百科')
 	// console.log(my[0])
-	const talkList = [{
-			title: "# AI与人类智能的关系？",
-			name: "张瑶",
+	// 互动话题
+	// 百科
+	const wikiList = [{
+			title: "# 人工智能研究目的是什么？",
 			img: "../../static/image/icon/talk2.svg",
 			text: "人工智能技术是否会超越人类智能？如果会，那会有什么样的影响？"
-		},{
+		}, {
+			title: "# ",
+			img: "../../static/image/icon/talk2.svg",
+			text: ""
+		},
+		{
+			title: "# AI",
+			img: "../../static/image/icon/talk2.svg",
+			text: ""
+		},
+	]
+	// 历史
+	const developList = [{
+			title: "# 回望人工智能的发展",
+			img: "../../static/image/icon/talk2.svg",
+			text: "人工智能在1956年的达特茅斯会议上被首次提出，六十多年以来发生了什么变化呢？"
+		}, {
+			title: "# 人工智能的发展现状如何？",
+			img: "../../static/image/icon/talk2.svg",
+			text: ""
+		},
+		{
+			title: "# 工智能的发展前景如何？",
+			img: "../../static/image/icon/talk2.svg",
+			text: ""
+		},
+	]
+	// ai
+	const aiList= [{
+			title: "# AI与人类智能的关系？",
+			img: "../../static/image/icon/talk2.svg",
+			text: "人工智能技术是否会超越人类智能？如果会，那会有什么样的影响？"
+		}, {
 			title: "# 你认为未来的智能是怎样的？",
-			name: "何光",
 			img: "../../static/image/icon/talk2.svg",
 			text: "人工智能未来的发展方向是什么？将会对社会和经济产生什么影响？"
 		},
 		{
 			title: "# AI对就业和社会的影响？",
-			name: "志云",
 			img: "../../static/image/icon/talk2.svg",
 			text: "随着人工智能技术的普及，许多传统行业的工作可能被取代，也催生了许多新兴行业和就业机会，我们该如何适应这种变革？"
-		}, 
+		},
 	]
+	onShow(()=>{
+		if(my.value.length==3&&my.value[2].title=='智能'){
+			isjoin.value = '已加入'
+		}
+	})
 
 	const goFound = () => {
 		uni.navigateTo({
 			url: '/pages/community/found'
 		})
+	}
+	const talk = (title) => {
+		talkShow.value=title
+	}
+	const join = () => {
+		if (isjoin.value=='加入' && my.value.length<3) {
+			my.value.push({
+				title: "智能",
+				name: "AI智能",
+				img: '../../static/image/group2.png'
+			})
+			isjoin.value = '已加入'
+		}
 	}
 </script>
 
@@ -135,6 +196,7 @@
 			// align-items: center;
 			padding-bottom: 20rpx;
 			color: #333;
+			position: relative;
 
 			/* 圈子图片 */
 			image {
@@ -148,18 +210,35 @@
 			.text {
 				margin-left: 20rpx;
 				margin-top: 20rpx;
+
+				.name {
+					font-size: 16px;
+					display: block;
+					margin-bottom: 10rpx;
+				}
+
+				.info {
+					font-size: 12px;
+					display: block;
+					margin-bottom: 10rpx;
+				}
 			}
 
-			.text .name {
+			.join {
+				position: absolute;
+				top: 40rpx;
+				right: 10rpx;
+				z-index: 100;
+				background-color: #8BC1AE;
+				border-radius: 40rpx;
+				padding: 0 10rpx;
+				width: fit-content;
+				height: 50rpx;
+				line-height: 48rpx;
 				font-size: 16px;
-				display: block;
-				margin-bottom: 10rpx;
-			}
-
-			.text .info {
-				font-size: 12px;
-				display: block;
-				margin-bottom: 10rpx;
+				color: #fff;
+				text-align: center;
+				text-shadow: 0 0 4rpx #9c9c9c;
 			}
 
 			// .num {
@@ -182,11 +261,14 @@
 	.group .my {
 		padding: 20rpx 30rpx;
 		margin: 10rpx auto;
-		/* width: 660rpx; */
 		display: flex;
 		flex-wrap: nowrap;
-		justify-content: space-between;
+
+		// justify-content: space-between;
 		/* margin: 20rpx; */
+		.mid {
+			margin: 0 60rpx;
+		}
 
 		.item {
 			/* background-color: #15a0ac60; */

@@ -25,7 +25,7 @@
 		<!-- 知识科普 -->
 		<view class="knowledge">
 			<ClassTitle title="学习助手"></ClassTitle>
-			<view class="content" :class="index==1 ||index==4 ?'mid':''" v-for="(item,index) in tools">
+			<view class="content" :class="item.class" v-for="(item,index) in tools">
 				<image :src='item.img' class="image" />
 				<view class="text">
 					<text class="className">{{item.name}}</text>
@@ -39,7 +39,7 @@
 		<!-- 智能分类 -->
 		<view class="classify">
 			<ClassTitle title="话题参与"></ClassTitle>
-			<scroll-view class="top" scroll-x='true'>
+			<scroll-view class="top" scroll-x='true' :scroll-left='scrollx'>
 				<view class="content">
 					<view class="btn" v-for="(item,index) in 4">
 						#{{list[index]}}
@@ -63,32 +63,57 @@
 		ArrowRight,
 		View as IconView
 	} from '@element-plus/icons-vue'
+	import {
+		ref
+	} from 'vue';
 	import ClassHeader from '../class/component/header.vue'
 	import ClassTitle from '../class/component/title.vue'
 
 	const hText = "智能识别"
 	const searchText = "搜索功能"
-	const list = ["超人工智能", "人工智能的监管", "AI与人类创造力", "AI在医疗保健中的应用","人工智能的偏见和歧视", "情感计算", "人工智能的未来发展",
-		"知识表示与推理", "机器人技术",  "AI在自动驾驶中的应用"
+	const list = ["超人工智能", "人工智能的监管", "AI与人类创造力", "AI在医疗保健中的应用", "人工智能的偏见和歧视", "情感计算", "人工智能的未来发展",
+		"知识表示与推理", "机器人技术", "AI在自动驾驶中的应用"
 	]
 	// const list = ["改变世界的百大科技", "人工智能会反抗？", "未来的智能是怎样？", "人工智能发展史", ]
 	const tools = [{
-		img: '../../static/image/icon/scoreA.svg',
-		name: '我的成绩'
+		img: '../../static/image/icon/scoreA_y.svg',
+		name: '我的成绩',
+		class: 'top'
 	}, {
 		img: '../../static/image/icon/pinglun.svg',
-		name: '课堂点评'
+		name: '课堂点评',
+		class: 'mid'
 	}, {
 		img: '../../static/image/icon/huifang.svg',
-		name: '直播回放'
+		name: '直播回放',
+		class: 'end'
 	}, {
-		img: '../../static/image/icon/news.svg',
-		name: '消息提醒'
+		img: '../../static/image/icon/news_y.svg',
+		name: '消息提醒',
+		class: 'top'
 	}, {
 		img: '../../static/image/icon/minxi.svg',
-		name: '课堂笔记'
+		name: '课堂笔记',
+		class: 'mid'
 	}]
 	const famousImg = ["@/static/image/famous1.png", "@/static/image/famous2.png"]
+	// 滚动
+	const scrollx = ref(0)
+	const scrollxy = ref(true)
+	setInterval(() => {
+		if (scrollxy.value) {
+			scrollx.value += 1
+			if (scrollx.value == 280) {
+				scrollxy.value = false
+			}
+		} else {
+			scrollx.value -= 1
+			if (scrollx.value == -20) {
+				scrollxy.value = true
+			}
+		}
+	}, 40)
+
 	let translate = () => {
 		uni.navigateTo({
 			url: '/pages/tools/translate'
@@ -106,6 +131,7 @@
 		background-color: #f3efee;
 		font-size: 12px;
 		padding-bottom: 280rpx;
+		padding-top: 40rpx;
 	}
 
 	/* 工具开始 */
@@ -180,16 +206,27 @@
 		margin-left: 10rpx;
 		/* 斜体 */
 		/* font-style: italic; */
-		width: 200rpx;
+		width: 198rpx;
 		padding: 20rpx 0;
 		margin-bottom: 20rpx;
+		border: 1rpx solid #e4e4e4;
+	}
+
+
+	.knowledge .top {
 		background-color: #f6d95f20;
 	}
 
-	.mid {
+
+	.knowledge .mid {
 		margin-left: 40rpx !important;
 		margin-right: 40rpx !important;
 		background-color: #F9EBE9 !important;
+	}
+
+
+	.knowledge .end {
+		background-color: #dee3fc90 !important;
 	}
 
 	.knowledge .content .image {

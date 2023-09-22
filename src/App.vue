@@ -25,6 +25,15 @@
 			userDetail: {},
 			pageid: 1, //底部导航栏id
 			systemInfo: uni.getSystemInfoSync(), //获取设备信息
+			my: [{
+				title: "百科",
+				name: "自然百科",
+				img: '../../static/image/group1.png'
+			}, {
+				title: "历史",
+				name: "智能发展史",
+				img: '../../static/image/group3.png'
+			}] //用户圈子
 		},
 	};
 </script>
@@ -68,6 +77,7 @@
 		font-family: SourceHanSansCN-VF;
 		src: url('@/static/font/SourceHanSansCN-VF.otf');
 	}
+
 
 	view,
 	text {

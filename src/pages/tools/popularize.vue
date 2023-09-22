@@ -36,7 +36,7 @@
 		<!-- 智能分类 -->
 		<view class="classify">
 			<ClassTitle :title="title[2]"></ClassTitle>
-			<scroll-view class="top" scroll-x='true'>
+			<scroll-view class="top" scroll-x='true' :scroll-left="scrollx">
 				<view class="content">
 					<view class="btn" v-for="(item,index) in 4">
 						#{{titles[index]}}
@@ -58,6 +58,7 @@
 		ArrowRight,
 		View as IconView
 	} from '@element-plus/icons-vue'
+import { ref } from 'vue';
 	import ClassHeader from '../class/component/header.vue'
 	import ClassTitle from '../class/component/title.vue'
 
@@ -79,11 +80,24 @@
 		cha: '8',
 		img: '../../static/image/knowledge3.png'
 	}]
-	let translate = () => {
-		uni.navigateTo({
-			url: '/pages/index/translate'
-		})
-	}
+
+	// 滚动
+	const scrollx =  ref(0)
+	const scrollxy = ref(true)
+	setInterval(() => {
+		if (scrollxy.value) {
+			scrollx.value += 1
+			if (scrollx.value == 280) {
+				scrollxy.value = false
+			}
+		} else {
+			scrollx.value -= 1
+			if (scrollx.value == -20) {
+				scrollxy.value = true
+			}
+		}
+	}, 40)
+
 </script>
 
 <style>

@@ -17,6 +17,7 @@
 			<view class="midtitle">
 				本周学习数据
 			</view>
+			<!-- 核心知识点 -->
 			<view class="text">
 				掌握
 				<text>
@@ -25,11 +26,13 @@
 				个核心知识点
 			</view>
 			<view id="radar2"></view>
+			<!-- 知识点分布 -->
 			<view class="text">科普知识点分布</view>
 			<view id="radar1"></view>
+			<!-- 视频类型分布 -->
 			<view class="text">喜爱视频类型分布</view>
-
 			<view id="pie"></view>
+			<!-- 学习时长 -->
 			<view class="text">总共学习时长
 				<text>
 					{{sum[1]}}
@@ -37,6 +40,9 @@
 				分钟
 			</view>
 			<view id="bar"></view>
+			<!-- 积分统计 -->
+			<view class="text">本周活跃度分析</view>
+			<view id="polylines"></view>
 		</view>
 	</view>
 </template>
@@ -49,14 +55,35 @@
 		onUnmounted,
 		ref
 	} from "vue";
-
+	// 核心知识点和学习时间统计
 	const sum = ref([78, 389])
+	// 核心知识点发布 雷达图
+	const key = ref([345, 724, 665, 615, 455])
+	// 科普知识点分布 雷达图
+	const science = ref([345, 725, 665, 615, 455])
+	// 喜爱视频类型  饼图
+	const favor = ref([128, 389, 200, 161, 251])
+	// 学习时间  柱状图
+	const study = ref([60, 52, 69, 57, 39, 41, 71])
+	// 本周活跃度分析  折线图
+	const score = ref([141, 222, 134, 206, 366, 156, 218]);
+	//日期数据
+	const data = ref(['9-18', '9-19', '9-20', '9-21', '9-22', '9-23', '9-24'])
 
 	/// 声明定义一下echart
 	let echart = echarts;
 
 	onMounted(() => {
 		initChart()
+		sum.value = [0, 0]
+		// 核心知识点统计
+		for (var i = 0; i < key.value.length; i++) {
+			sum.value[0] += ~~key.value[i]
+		}
+		// 学习时间统计
+		for (var i = 0; i < study.value.length; i++) {
+			sum.value[1] += ~~study.value[i]
+		}
 	})
 	onUnmounted(() => {
 		echart.dispose
@@ -68,7 +95,9 @@
 		let radar2 = echart.init(document.getElementById("radar2"));
 		let pie = echart.init(document.getElementById("pie"));
 		let bar = echart.init(document.getElementById("bar"));
+		let polylines = echart.init(document.getElementById("polylines"));
 		// 把配置和数据放这里
+		// 雷达图：科普知识点
 		radar1.setOption({
 			color: '#83b6a2',
 			title: {
@@ -104,7 +133,7 @@
 				shape: 'circle',
 				axisName: {
 					// formatter: '【{value}】',
-					fontSize: 16,
+					fontSize: 14,
 					color: '#15a0ac',
 				},
 				splitArea: {
@@ -133,14 +162,14 @@
 					}
 				},
 				data: [{
-					value: [345, 725, 665, 615, 455],
+					value: key.value,
 					areaStyle: {
 						color: '#90c9b4'
 					}
 				}]
 			}]
 		});
-
+		// 雷达图：核心知识点
 		radar2.setOption({
 			color: '#83b6a2',
 			title: {
@@ -149,23 +178,23 @@
 			legend: {},
 			radar: [{
 				indicator: [{
-						name: '智能与发展',
+						name: '发展',
 						max: 1000
 					},
 					{
-						name: '智能与风险',
+						name: '风险',
 						max: 1000
 					},
 					{
-						name: '智能与历史',
+						name: '历史',
 						max: 1000
 					},
 					{
-						name: '智能与应用',
+						name: '应用',
 						max: 1000
 					},
 					{
-						name: '智能与历史',
+						name: '历史',
 						max: 1000
 					},
 				],
@@ -176,7 +205,7 @@
 				// shape: 'circle',
 				axisName: {
 					// formatter: '【{value}】',
-					fontSize: 16,
+					fontSize: 14,
 					color: '#15a0ac',
 				},
 				splitArea: {
@@ -201,12 +230,12 @@
 				name: 'Budget vs spending',
 				type: 'radar',
 				data: [{
-					value: [345, 725, 665, 615, 455],
+					value: key.value,
 					color: '#fff'
 				}]
 			}]
 		})
-
+		// 饼图：喜爱视频分布
 		pie.setOption({
 			color: ['#90c9b4', '#90c9b490', '#90c9b460', '#90c990cc'],
 			title: "",
@@ -222,19 +251,19 @@
 				type: 'pie',
 				radius: '60%',
 				data: [{
-						value: 323,
+						value: favor.value[0],
 						name: '发展'
 					},
 					{
-						value: 161,
+						value: favor.value[1],
 						name: '科普'
 					},
 					{
-						value: 100,
+						value: favor.value[2],
 						name: '历史'
 					},
 					{
-						value: 253,
+						value: favor.value[3],
 						name: '原理'
 					},
 				],
@@ -242,12 +271,18 @@
 					itemStyle: {
 						shadowBlur: 10,
 						shadowOffsetX: 0,
-						shadowColor: 'rgba(0, 0, 0, 0.5)'
+						shadowColor: '#15a0ac'
+					}
+				},
+				label: {
+					textStyle: { //数值样式
+						color: '#15a0ac', //字体颜色
+						fontSize: 14 //字体大小
 					}
 				}
 			}]
 		})
-
+		// 柱状图：学习时长
 		bar.setOption({
 			color: ['#90c9b4'],
 			tooltip: {
@@ -257,14 +292,15 @@
 				}
 			},
 			grid: {
+				top: '10%',
 				left: '3%',
 				right: '4%',
-				bottom: '3%',
+				bottom: '10%',
 				containLabel: true
 			},
 			xAxis: [{
 				type: 'category',
-				data: ['9-17', '9-18', '9-19', '9-20', '9-21', '9-22', '9-23'],
+				data: data.value,
 				axisTick: {
 					alignWithLabel: true
 				}
@@ -276,18 +312,76 @@
 				name: 'Direct',
 				type: 'bar',
 				barWidth: '60%',
-				data: [60, 52, 69, 57, 39, 41, 71],
+				data: study.value,
 				label: {
 					show: true, //开启显示
 					position: 'top', //在上方显示
 					// formatter: '{c}',//显示百分号
 					textStyle: { //数值样式
-						color: '#333', //字体颜色
+						color: '#80b29f', //字体颜色
 						fontSize: 14 //字体大小
 					}
 				}
 			}]
 		})
+		// 折线图：本周活跃度分析
+		polylines.setOption({
+			visualMap: [{
+				show: false,
+				type: 'continuous',
+				seriesIndex: 0,
+				min: 0,
+				max: 400
+			}],
+			title: {
+				// left: 'center',
+				// text: 'Gradient along the y axis'
+			},
+			tooltip: {
+				trigger: 'axis'
+			},
+			xAxis: {
+				type: 'category',
+				boundaryGap: false,
+				data: data.value
+			},
+			yAxis: {},
+			grid: {
+				top: '14%',
+				bottom: '16%'
+			},
+			series: {
+				type: 'line',
+				showSymbol: false,
+				data: score.value,
+				lineStyle: {
+					normal: {
+						width: 4,
+						color: {
+							type: 'linear', // radial   linear
+							x: 0,
+							y: 0,
+							x2: 0,
+							y2: 1,
+							colorStops: [{
+									offset: 0,
+									color: '#118a90' // 0% 处的颜色 
+								},
+								{
+									offset: 1,
+									color: '#a1e0c8' // 100% 处的颜色 
+								}
+							],
+							global: false // 缺省为 false 
+						}
+					}
+
+				}
+			}
+		})
+
+
+
 
 		window.onresize = function() {
 			//自适应大小
@@ -295,6 +389,7 @@
 			chart2.resize();
 			pie.resize();
 			bar.resize();
+			polylines.resize();
 		};
 	}
 </script>
@@ -303,6 +398,7 @@
 	.data {
 		background-color: #e5f3ef;
 		padding-top: 40rpx;
+		padding-bottom: 30rpx;
 	}
 
 	.top {
@@ -371,7 +467,8 @@
 		#radar1,
 		#radar2,
 		#pie,
-		#bar {
+		#bar,
+		#polylines {
 			width: 680rpx;
 			height: 530rpx;
 			background-color: #fff;

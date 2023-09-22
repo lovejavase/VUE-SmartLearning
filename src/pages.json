@@ -54,6 +54,13 @@
 				// "enablePullDownRefresh": false
 			}
 		}, {
+			"text": "深度体验",
+			"path": "pages/tools/depth",
+			"style": {
+				"navigationStyle": "custom"
+				// "enablePullDownRefresh": false
+			}
+		}, {
 			"text": "ai对战",
 			"path": "pages/tools/competition",
 			"style": {
@@ -119,6 +126,13 @@
 		}, {
 			"text": "帖子详情",
 			"path": "pages/community/post",
+			"style": {
+				"navigationStyle": "custom"
+				// "enablePullDownRefresh": false
+			}
+		}, {
+			"text": "我的动态",
+			"path": "pages/community/mypost",
 			"style": {
 				"navigationStyle": "custom"
 				// "enablePullDownRefresh": false
@@ -243,7 +257,7 @@
 				// "enablePullDownRefresh": false
 			}
 		}
-		
+
 	],
 	// "tabBar": {
 	// 	"backgroundColor": "#90c9b4",

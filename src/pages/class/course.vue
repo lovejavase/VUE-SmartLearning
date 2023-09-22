@@ -50,7 +50,7 @@
 			<!-- 用户评论 -->
 			<view class="box">
 				<view class="item" v-for="(item,index) in remark" :key="index">
-					<image :src="item.userAvatar" alt="" class="remarkImg" />
+					<image :src="item.userAvatar" mode="aspectFill" class="remarkImg" />
 					<view class="info">
 						<text class="name">{{item.userNickName}}</text>
 						<text class="time">{{item.time}}</text>
@@ -282,7 +282,8 @@
 		color: #15a0ac;
 		font-weight: 600;
 		font-size: 16px;
-		width: 320rpx;
+		/* width: 320rpx; */
+		width: fit-content;
 		display: flex;
 		justify-content: left;
 		align-content: center;

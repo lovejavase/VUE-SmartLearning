@@ -12,7 +12,7 @@
 		<text>和志趣相投的朋友遨游智能的海洋吧！</text>
 		<view class="item" v-for="(post,index) in postList">
 			<view class="user">
-				<image :src="post.userAvatar" alt="" />
+				<image :src="post.userAvatar" mode="aspectFill" />
 				<view class="">
 					<text class="name">{{post.userNickName}}</text>
 					<text class="num">内容：{{post.content}}</text>
