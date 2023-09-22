@@ -7,7 +7,7 @@
 			<!-- 标题 -->
 			<text class="title">{{news.newTitle}}</text>
 			<!-- 图片 -->
-			<image :src="news.newInImg" alt="" />
+			<image :src="news.newInImg" mode="aspectFill" />
 			<text class="tip">与人工智能交谈</text>
 			<!-- 正文 -->
 			<view class="text">
@@ -18,8 +18,8 @@
 			<view class="comment">
 				<!-- 输入框 -->
 				<view class="topBottom">
-					<input class="search" v-model="input" placeholder="写条评论吧..." />
-					<image @click="" src="@/static/image/icon/send_white.svg" mode=""></image>
+					<input class="search" v-model="input" placeholder="写条评论吧..." placeholder-style="font-size:14px" />
+					<image @click="" src="@/static/image/icon/send_white.svg" mode="aspectFit"></image>
 				</view>
 				<!-- 按钮 -->
 				<view class="btnGroup">
@@ -133,7 +133,7 @@
 	/* 大图 */
 	.content>image {
 		width: 100%;
-		height: 350rpx;
+		height: 320rpx;
 		/* margin: 20rpx auto; */
 		margin-top: 30rpx;
 		/* border: #909090 1px solid; */
@@ -186,11 +186,11 @@
 	}
 
 	.comment .topBottom {
-		width: 380rpx;
+		width: 360rpx;
 		height: 70rpx;
-		padding: 0 10rpx;
+		padding: 0 20rpx;
 		border-radius: 30rpx !important;
-		background-color: #dadada;
+		background-color: #ececec;
 		overflow: hidden;
 		color: #515151;
 		display: flex;
@@ -202,8 +202,8 @@
 	.comment .topBottom image {
 		/* background-color: #90c9b4; */
 		margin-left: 10rpx;
-		width: 40rpx;
-		height: 40rpx;
+		width: 80rpx;
+		height: 80rpx;
 	}
 
 	/* 点赞按钮 */
