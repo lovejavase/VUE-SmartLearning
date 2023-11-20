@@ -42,19 +42,26 @@
 		onMounted,
 		ref
 	} from "vue";
+	import request from '../../api/request.js'
+
 	const input = ''
 	var newsId = -1
 	// const news = ref([{newTitle:'0',newDetail:'1'}])
 	const news = ref({})
 	const isfavor = ref(false)
 
-
 	onLoad((res) => {
 		newsId = ~~res.id //id字符串转数字类型
-		getNew(newsId).then(res => {
-			news.value = res
+		// 获取新闻详情
+		request({
+			url: '/Smart/New/selectNewDetail',
+			method: 'GET',
+			data: {
+				newId: newsId
+			}
+		}).then(res => {
+			news.value = res.data
 			console.log(res)
-
 		})
 	})
 	const favor = () => {
@@ -63,46 +70,14 @@
 				title: '取消收藏！',
 				duration: 500
 			})
-
 		} else {
 			console.log(11)
 			uni.showToast({
 				title: '收藏成功！',
 				duration: 500
 			})
-
 		}
 		isfavor.value = !isfavor.value
-	}
-
-	let getNew = (id) => {
-		return new Promise((resolve, reject) => {
-			uni.request({
-				url: 'http://a-puppy-c.top:9999/Smart/New/selectNewDetail',
-				method: 'GET',
-				data: {
-					newId: id
-				},
-				header: {
-					'Authorization': uni.getStorageSync('Authorization'),
-					'content-type': 'application/x-www-form-urlencoded'
-				},
-				success: (res) => {
-					if (res.data.code == 200) {
-						console.log("主页-调用selectNewDetail成功");
-						var newInImg = "http://www.a-puppy-c.top/smartLearning/newin1.jpg";
-
-						resolve(res.data.data)
-					} else {
-						console.log("主页-调用selectNewDetail失败");
-						console.log(res.data);
-					}
-				},
-				fail() {
-					console.log("接口请求失败");
-				}
-			})
-		})
 	}
 </script>
 

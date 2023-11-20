@@ -5,11 +5,6 @@
 			<text class="text1">登录</text>
 			<text class="text2">欢迎回来！</text>
 		</view>
-		<view class="input">
-			<view class="box">
-				<input v-model="name" placeholder="请输入您的用户名">
-			</view>
-		</view>
 		<view class="btn" @click='gologin'>
 			<text>人脸识别</text>
 		</view>
@@ -22,18 +17,18 @@
 		// createApp
 	} from 'vue'
 	const img = ref('')
-	const name = ref('')
+	// const name = ref('')
 	const userId = ref('')
 	let gologin = () => {
 		uni.request({
-			url: 'http://a-puppy-c.top:9999/Smart/User/selectFace',
+			url: 'http://8.130.21.88:9999/Smart/User/selectFace',
 			method: 'Post',
 			header: {
 				'Authorization': uni.getStorageSync('Authorization'),
 				'content-type': 'application/x-www-form-urlencoded'
 			},
 			data: {
-				name: name.value
+				name: "ACC"
 			},
 			success: (res) => {
 				if (res.data.code == 200) {
@@ -52,7 +47,7 @@
 			success: function(res) {
 				console.log(JSON.stringify(res.tempFilePaths)); //拍照图片的路径
 				uni.uploadFile({
-					url: 'http://a-puppy-c.top:9999/Smart/AI/Face', //仅为示例，非真实的接口地址
+					url: 'http://8.130.21.88:9999/Smart/AI/Face', //仅为示例，非真实的接口地址
 					filePath: res.tempFilePaths[0],
 					header: {
 						'Authorization': uni.getStorageSync('Authorization'),
@@ -68,7 +63,7 @@
 							console.log("人脸识别成功")
 							//根据用户id获取用户详情保存在全局中
 							uni.request({
-								url: 'http://a-puppy-c.top:9999/Smart/User/getUser',
+								url: 'http://8.130.21.88:9999/Smart/User/getUser',
 								method: 'GET',
 								header: {
 									'Authorization': uni.getStorageSync(
@@ -96,7 +91,6 @@
 									console.log("请求login失败");
 								}
 							})
-
 						} else {
 							console.log("人脸识别失败")
 						}
@@ -242,5 +236,6 @@
 		font-size: 20px;
 		text-shadow: 1rpx 1rpx 2rpx #b1a35e;
 		font-weight: 600;
+		margin-top: 150px;
 	}
 </style>

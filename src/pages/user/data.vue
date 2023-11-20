@@ -19,15 +19,11 @@
 			</view>
 			<!-- 核心知识点 -->
 			<view class="text">
-				掌握
-				<text>
-					{{sum[0]}}
-				</text>
-				个核心知识点
+				掌握核心知识点情况
 			</view>
-			<view id="radar2"></view>
+			<view id="radar2" force-use-old-canvas="true"></view>
 			<!-- 知识点分布 -->
-			<view class="text">科普知识点分布</view>
+			<view class="text">本周知识点分布</view>
 			<view id="radar1"></view>
 			<!-- 视频类型分布 -->
 			<view class="text">喜爱视频类型分布</view>
@@ -62,11 +58,11 @@
 	// 科普知识点分布 雷达图
 	const science = ref([345, 725, 665, 615, 455])
 	// 喜爱视频类型  饼图
-	const favor = ref([128, 389, 200, 161, 251])
+	const favor = ref([10, 10, 10, 10, 10, 10])
 	// 学习时间  柱状图
-	const study = ref([60, 52, 69, 57, 39, 41, 71])
+	const study = ref([39, 52, 49, 47, 19, 41, 31])
 	// 本周活跃度分析  折线图
-	const score = ref([141, 222, 134, 206, 366, 156, 218]);
+	const score = ref([150, 180, 175, 170, 55, 156, 99]);
 	//日期数据
 	const data = ref(['9-18', '9-19', '9-20', '9-21', '9-22', '9-23', '9-24'])
 
@@ -97,79 +93,58 @@
 		let bar = echart.init(document.getElementById("bar"));
 		let polylines = echart.init(document.getElementById("polylines"));
 		// 把配置和数据放这里
-		// 雷达图：科普知识点
+		// 雷达图：
 		radar1.setOption({
-			color: '#83b6a2',
-			title: {
-				text: ''
+			tooltip: {
+				trigger: 'item'
 			},
-			legend: {},
-			radar: [{
-				indicator: [{
-						name: '计算',
-						max: 1000
-					},
-					{
-						name: '传感',
-						max: 1000
-					},
-					{
-						name: '概览',
-						max: 1000
-					},
-					{
-						name: '伦理',
-						max: 1000
-					},
-					{
-						name: '逻辑',
-						max: 1000
-					}
-				],
-				radius: 100,
-				// top: 90,
-				startAngle: 90,
-				splitNumber: 4,
-				shape: 'circle',
-				axisName: {
-					// formatter: '【{value}】',
-					fontSize: 14,
-					color: '#15a0ac',
-				},
-				splitArea: {
-					areaStyle: {
-						color: ['#fff'],
-						shadowColor: 'rgba(0, 0, 0, 0.1)',
-						shadowBlur: 10
-					}
-				},
-				axisLine: {
-					lineStyle: {
-						color: 'rgba(211, 253, 250, 0.8)'
-					}
-				},
-				splitLine: {
-					lineStyle: {
-						color: '#15a0ac80'
-					}
-				}
-			}],
+			legend: {
+				top: '5%',
+				left: 'center'
+			},
 			series: [{
-				type: 'radar',
+				name: 'Access From',
+				type: 'pie',
+				radius: ['40%', '70%'],
+				avoidLabelOverlap: false,
+				label: {
+					show: false,
+					position: 'center'
+				},
 				emphasis: {
-					lineStyle: {
-						width: 5
+					label: {
+						show: true,
+						fontSize: 40,
+						fontWeight: 'bold'
 					}
+				},
+				labelLine: {
+					show: false
 				},
 				data: [{
-					value: key.value,
-					areaStyle: {
-						color: '#90c9b4'
+						value: 90,
+						name: '发展'
+					},
+					{
+						value: 50,
+						name: '历史'
+					},
+					{
+						value: 55,
+						name: '风险'
+					},
+					{
+						value: 80,
+						name: '原理'
+					},
+					{
+						value: 75,
+						name: '应用'
 					}
-				}]
+				]
 			}]
 		});
-		// 雷达图：核心知识点
+		// 雷达图：核心知识点掌握情况
 		radar2.setOption({
 			color: '#83b6a2',
 			title: {
@@ -178,15 +153,15 @@
 			legend: {},
 			radar: [{
 				indicator: [{
+						name: '历史',
+						max: 1000
+					},
+					{
 						name: '发展',
 						max: 1000
 					},
 					{
-						name: '风险',
-						max: 1000
-					},
-					{
-						name: '历史',
+						name: '原理',
 						max: 1000
 					},
 					{
@@ -194,7 +169,7 @@
 						max: 1000
 					},
 					{
-						name: '历史',
+						name: '风险',
 						max: 1000
 					},
 				],
@@ -237,47 +212,48 @@
 		})
 		// 饼图：喜爱视频分布
 		pie.setOption({
-			color: ['#90c9b4', '#90c9b490', '#90c9b460', '#90c990cc'],
-			title: "",
+			title: {
+				
+				//  subtext: 'Fake Data',
+				left: 'center'
+			},
 			tooltip: {
 				trigger: 'item'
 			},
-			// legend: {
-			// orient: 'vertical',
-			// left: 'left'
-			// },
+			legend: {
+				orient: 'vertical',
+				left: 'left'
+			},
 			series: [{
-				// name: 'Access From',
+				name: 'Access From',
 				type: 'pie',
-				radius: '60%',
+				radius: '50%',
 				data: [{
-						value: favor.value[0],
+						value: 999,
 						name: '发展'
 					},
 					{
-						value: favor.value[1],
-						name: '科普'
+						value: 735,
+						name: '应用'
 					},
 					{
-						value: favor.value[2],
+						value: 580,
+						name: '原理'
+					},
+					{
+						value: 400,
 						name: '历史'
 					},
 					{
-						value: favor.value[3],
-						name: '原理'
-					},
+						value: 400,
+						name: '风险'
+					}
 				],
 				emphasis: {
 					itemStyle: {
 						shadowBlur: 10,
 						shadowOffsetX: 0,
-						shadowColor: '#15a0ac'
-					}
-				},
-				label: {
-					textStyle: { //数值样式
-						color: '#15a0ac', //字体颜色
-						fontSize: 14 //字体大小
+						shadowColor: 'rgba(0, 0, 0, 0.5)'
 					}
 				}
 			}]

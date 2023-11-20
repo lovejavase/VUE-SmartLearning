@@ -167,14 +167,14 @@
 			}
 		}, {
 			"text": "消息通知",
-			"path": "pages/public/notice",
+			"path": "pages/generic/notice",
 			"style": {
 				"navigationStyle": "custom"
 				// "enablePullDownRefresh": false
 			}
 		}, {
 			"text": "我的",
-			"path": "pages/public/my",
+			"path": "pages/generic/my",
 			"style": {
 				"navigationStyle": "custom"
 				// "enablePullDownRefresh": false

@@ -5,7 +5,7 @@
 			@clickCenter="clickCenter" @scrollEnd="scrollEnd" @scrollStart="scrollStart"></lz-red-book>
 
 		<!-- 遮罩层上部分 -->
-		
+
 		<!-- 遮罩层下部分 -->
 		<view class="mask-bottom" :style="{bottom:mask.showMask?0:-300+'upx','background':mask.background}">
 			<view class="v1">
@@ -149,7 +149,7 @@
 				that.set.fontColor = that.arr[index].fontColor //字体颜色
 				that.mask.background = that.arr[index].maskBg //遮罩背景色
 			},
-	
+
 		}
 	};
 </script>
@@ -165,6 +165,7 @@
 		onMounted,
 		ref
 	} from "vue";
+	import request from "../../api/request";
 
 	var bookId = 0
 	const book = ref({})
@@ -173,45 +174,35 @@
 	const content_text = ref('')
 	onLoad((res) => {
 		bookId = ~~res.id
-		getBookContent(bookId).then(res=>{
+		getBookContent(bookId).then(res => {
 			console.log(content_text.value)
 			console.log(chapter.value)
 		})
-		
+
 	})
-	
-	
-	let getBookContent = (id) =>{
-	//从后端获取书籍详细信息
-		return new Promise((resolve, reject) => {
-			uni.request({
-				url: "http://a-puppy-c.top:9999/Smart/Book/selectAllByContent",
-				method: 'GET',
-				data: {
-					bookId: id
-				},
-				header: {
-					'Authorization': uni.getStorageSync('Authorization'),
-					'content-type': 'application/x-www-form-urlencoded'
-				},
-				success: (res) => {
-					if (res.data.code == 200) {
-						console.log("主页-调用getBook成功");
-						content_text.value = res.data.data[1].content
-						chapter.value = res.data.data[1].chapter
-						resolve(res.data.data)
-					} else {
-						console.log("主页-调用getBook失败");
-						console.log(res.data);
-					}
-				},
-				fail() {
-					console.log("接口请求失败");
-				}
-			})
+
+
+	let getBookContent = (id) => {
+		//从后端获取书籍详细信息
+		// return new Promise((resolve, reject) => {
+		request({
+			url: "/Smart/Book/selectAllByContent",
+			method: 'GET',
+			data: {
+				bookId: id
+			}
+		}).then(res => {
+			if (res.code == 200) {
+				console.log("主页-调用getBook成功");
+				content_text.value = res.data[1].content
+				chapter.value = res.data[1].chapter
+			} else {
+				console.log("主页-调用getBook失败");
+				console.log(res.data);
+			}
 		})
+		// })
 	}
-	
 </script>
 
 <style scoped lang="scss">

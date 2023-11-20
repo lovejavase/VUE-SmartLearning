@@ -37,6 +37,7 @@
 	import {
 		ref
 	} from "vue";
+	import request from "../../api/request";
 	const userDetail = ref(getApp().globalData.userDetail)
 	const userid = ref(userDetail.value.userId)
 	const uname = ref(userDetail.value.userNickName)
@@ -44,13 +45,9 @@
 	const uNumber = ref(userDetail.value.userNumber)
 	const uphone = ref(userDetail.value.userPhone)
 	const modify = () => {
-		uni.request({
-			url: 'http://a-puppy-c.top:9999/Smart/User/updateUser',
+		request({
+			url: '/Smart/User/updateUser',
 			method: 'PUT',
-			header: {
-				'Authorization': uni.getStorageSync('Authorization'),
-				'content-type': 'application/x-www-form-urlencoded'
-			},
 			data: {
 				userId: userid.value,
 				nickName: uname.value,
@@ -60,27 +57,22 @@
 				phone: uphone.value || '',
 				interest: '',
 				grade: 1
-
-			},
-			success: (res) => {
-				if (res.data.code == 0) {
-					console.log("调用updateUser成功");
-					uni.showToast({
-						icon: 'success',
-						title: '保存成功！'
+			}
+		}).then(res => {
+			if (res.code == 0) {
+				console.log("调用updateUser成功");
+				uni.showToast({
+					icon: 'success',
+					title: '保存成功！'
+				})
+				setTimeout(() => {
+					uni.redirectTo({
+						url: '/pages/user/user'
 					})
-					setTimeout(() => {
-						uni.redirectTo({
-							url: '/pages/user/user'
-						})
-					}, 1000)
-				} else {
-					console.log("调用updateUser失败");
-					console.log(res.data);
-				}
-			},
-			fail() {
-				console.log("请求失败");
+				}, 1000)
+			} else {
+				console.log("调用updateUser失败");
+				console.log(res);
 			}
 		})
 	}

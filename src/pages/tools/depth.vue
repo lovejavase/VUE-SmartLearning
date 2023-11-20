@@ -9,8 +9,8 @@
 				<image :src='item.img' class="image" mode="aspectFit" />
 				<view class="text">
 					<text class="className">{{item.name}}</text>
-					<view class="btn">
-						前往查看
+					<view class="btn" v-if="item.to=='尚未解锁'">
+						{{item.to}}
 					</view>
 				</view>
 			</view>
@@ -35,7 +35,7 @@
 		<view class="bg1"></view>
 		<view class="bg2"></view>
 		<!-- <view class="bg3"></view> -->
-		
+
 		<!-- 底部 -->
 		<Footer></Footer>
 	</view>
@@ -52,25 +52,45 @@
 	import ClassTitle from '../class/component/title.vue'
 
 	const tools = [{
-		img: '../../static/image/icon/deep5.png',
-		name: '论文查重',
-		class: 'top'
+		img: '../../static/image/icon/deep7.svg',
+		name: 'AI创作',
+		class: 'top',
+		to:'前往查看'
 	}, {
 		img: '../../static/image/icon/deep1.png',
 		name: '听歌识曲',
-		class: 'mid'
+		class: 'mid',
+		to:'前往查看'
 	}, {
 		img: '../../static/image/icon/deep2.png',
 		name: '智能助手',
-		class: 'end'
+		class: 'end',
+		to:'前往查看'
 	}, {
 		img: '../../static/image/icon/deep3.png',
 		name: '影像诊断',
-		class: 'top'
+		class: 'top',
+		to:'前往查看'
 	}, {
 		img: '../../static/image/icon/deep4.png',
 		name: '课堂导航',
-		class: 'mid'
+		class: 'mid',
+		to:'尚未解锁'
+	}, {
+		img: '../../static/image/icon/deep6.svg',
+		name: '作业辅助',
+		class: 'end',
+		to:'尚未解锁'
+	}, {
+		img: '../../static/image/icon/deep5.png',
+		name: '论文查重',
+		class: 'top',
+		to:'尚未解锁'
+	}, {
+		img: '../../static/image/icon/deep8.svg',
+		name: '视频寻源',
+		class: 'mid',
+		to:'尚未解锁'
 	}]
 	const list = ["超人工智能", "人工智能的监管", "AI与人类创造力", "AI在医疗保健中的应用", "人工智能的偏见和歧视", "情感计算", "人工智能的未来发展",
 		"知识表示与推理", "机器人技术", "AI在自动驾驶中的应用"
@@ -178,7 +198,7 @@
 				margin: 0 auto;
 				margin-top: 16rpx;
 				font-size: 14px;
-				background-color: #15a0ac;
+				background-color: rgb(199, 199, 199);
 				color: #ffffff;
 				line-height: 1.4rem;
 				width: 80%;
@@ -244,10 +264,10 @@
 			width: 760rpx;
 			height: 760rpx;
 			border-radius: 380rpx;
-			bottom:  0rpx;
+			bottom: 0rpx;
 			left: -380rpx;
 		}
-		
+
 		.bg3 {
 			position: absolute;
 			z-index: -1;

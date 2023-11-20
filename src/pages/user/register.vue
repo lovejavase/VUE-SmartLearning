@@ -33,6 +33,7 @@
 	import {
 		ref
 	} from 'vue'
+	import request from '../../api/request';
 	const account = ref('')
 	const pwd = ref('')
 	const rePwd = ref('')
@@ -51,63 +52,60 @@
 		})
 	}
 	const register = () => {
-		if (pwd.value == rePwd.value) {
-			uni.request({
-				url: 'http://a-puppy-c.top:9999/Smart/User/register',
-				method: 'POST',
-				header: {
-					'content-type': 'application/x-www-form-urlencoded'
-				},
-				data: {
-					account: account.value,
-					pwd: pwd.value
-				},
-				success: (res) => {
-					if (res.data.code == 0) {
-						console.log("调用register成功");
-						// 根据id获取用户信息
-						uni.request({
-							url: 'http://a-puppy-c.top:9999/Smart/User/getUser',
-							method: 'GET',
-							header: {
-								'Authorization': uni.getStorageSync('Authorization'),
-								'content-type': 'application/x-www-form-urlencoded'
-							},
-							data: {
-								userId:res.data.data
-							},
-							success: (res) => {
-								getApp().globalData.userDetail = res.data.data
-							},
-							fail() {
-								console.log("请求login失败");
-							}
-						})
-						uni.showToast({
-							icon:'success',
-							title:'注册成功！'
-						})
-						setTimeout(()=>{
-						uni.redirectTo({
-							url:'/pages/user/modify'
-						})
-						},400)
-					} else {
-						console.log("调用register失败");
-						console.log(res.data);
-					}
-				},
-				fail() {
-					console.log("调用register失败");
-				}
+		if (account.value == '' || pwd.value == '') {
+			console.log("账号或密码不能为空");
+			uni.showToast({
+				title: '账号或密码不能为空！',
+				icon: "error"
 			})
 		} else {
-			console.log('密码不一致')
-			uni.showToast({
-				title: '密码不一致',
-				duration: 1500,
-				icon: 'error'
-			})
+			if (pwd.value == rePwd.value) {
+				request({
+					url: '/Smart/User/register',
+					method: 'POST',
+					data: {
+						account: account.value,
+						pwd: pwd.value
+					}
+				}).then(res => {
+					if (res.code == 0) {
+						console.log("调用register成功");
+						// 根据id获取用户信息
+						request({
+							url: '/Smart/User/getUser',
+							data: {
+								userId: res.data
+							}
+						}).then(user => {
+							getApp().globalData.userDetail = user.data
+						})
+						uni.showToast({
+							icon: 'success',
+							title: '注册成功！'
+						})
+						setTimeout(() => {
+							uni.redirectTo({
+								url: '/pages/user/modify'
+							})
+						}, 400)
+					} else if (res.code == -10007) {
+						uni.showToast({
+							title: '该账号已被注册！',
+							icon: "error"
+						})
+					} else {
+						console.log("调用register失败");
+						// console.log(res);
+					}
+				})
+			} else {
+				console.log('密码不一致')
+				uni.showToast({
+					title: '密码不一致',
+					duration: 1500,
+					icon: 'error'
+				})
+			}
 		}
 	}
 </script>

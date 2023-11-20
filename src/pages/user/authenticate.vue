@@ -68,7 +68,7 @@
 	let SendSms = (phone) => {
 		return new Promise((resolve, reject) => {
 			uni.request({
-				url: 'http://a-puppy-c.top:9999/Smart/Send/SendSms',
+				url: 'http://8.130.21.88:9999/Smart/Send/SendSms',
 				method: 'GET',
 				header: {
 					'Authorization': uni.getStorageSync('Authorization'),
@@ -99,7 +99,7 @@
 	let checkCode = (phone, code) => {
 		return new Promise((resolve, reject) => {
 			uni.request({
-				url: 'http://a-puppy-c.top:9999/Smart/Send/checkCode',
+				url: 'http://8.130.21.88:9999/Smart/Send/checkCode',
 				method: 'POST',
 				header: {
 					'Authorization': uni.getStorageSync('Authorization'),

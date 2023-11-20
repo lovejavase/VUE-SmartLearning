@@ -52,14 +52,15 @@
 				<image src="@/static/image/tool22.png" alt="" />
 				<text class="toolItem">问答测验</text>
 			</view>
-			<view class="toolImg" @click="goPoDepth">
-				<image src="@/static/image/tool24.png" alt="" />
-				<text class="toolItem">深度体验</text>
-			</view>
 			<view class="toolImg" @click="goPopularize">
 				<image src="@/static/image/tool25.png" alt="" />
 				<text class="toolItem">知识科普</text>
 			</view>
+			<view class="toolImg" @click="goPoDepth">
+				<image src="@/static/image/tool24.png" alt="" />
+				<text class="toolItem">深度体验</text>
+			</view>
+
 			<!-- </view> -->
 		</view>
 		<!-- 学习课堂 -->
@@ -124,21 +125,15 @@
 		reactive,
 		ref
 	} from 'vue';
-
-	import {
-		Search,
-		ArrowRight,
-		Avatar,
-		UserFilled,
-		View as IconView
-	} from '@element-plus/icons-vue'
-	import titleItem from './component/title.vue'
 	import {
 		onInit,
 		onLoad,
 		onReady,
 		onShow
 	} from '@dcloudio/uni-app';
+
+	import titleItem from './component/title.vue'
+	import request from '../../api/request.js'
 
 	const input = ref('')
 	const hiText = "Here is artificial intelligence"
@@ -153,129 +148,65 @@
 	const avatar = ref([])
 
 	onLoad(() => {
-		getNews().then(res => {
-			console.log(res)
-			for (let j = 0; j < res.length; j++) {
-				getUser(res[j].newUser).then(user => {
-					console.log(user.userAvatar)
-					userName.value.push(user.userNickName)
-					avatar.value.push(user.userAvatar)
+		// 获取新闻列表
+		request({
+			url: '/Smart/New/selectAllNews',
+			method: 'GET',
+			data: {
+				start: 0,
+				limit: 4
+			}
+		}).then(res => {
+			const newList = res.data
+			for (let j = 0; j < newList.length; j++) {
+				// 根据新闻id获取作者信息
+				request({
+					url: '/Smart/User/getUser',
+					method: 'GET',
+					data: {
+						userId: newList[j].newUser
+					}
+				}).then(ures => {
+					const uDetail = ures.data
+					// console.log(uDetail)
+					userName.value.push(uDetail.userNickName)
+					avatar.value.push(uDetail.userAvatar)
 					news.value.push({
-						newId: res[j].newId,
-						newImg: res[j].newImg,
-						createTime: res[j].createTime.substring(0, 10),
-						newTitle: res[j].newTitle,
-						newDetail: res[j].newDetail,
-						userAvatar: user.userAvatar,
-						userNickName: user.userNickName
+						newId: newList[j].newId,
+						newImg: newList[j].newImg,
+						createTime: newList[j].createTime.substring(0, 10),
+						newTitle: newList[j].newTitle,
+						newDetail: newList[j].newDetail,
+						userAvatar: uDetail.userAvatar,
+						userNickName: uDetail.userNickName
 					})
 				})
 			}
 		})
-		// 获取课程
-		getList().then(res => {
-			for (let i = 0; i < res.length; i++) {
-				classItem.value.push(res[i])
-				console.log(classItem.value[i].lessonImage)
+		// 获取部分课程
+		request({
+			url: '/Smart/Lesson/getList',
+			data: {
+				start: 0,
+				limit: 3
+			},
+			method: 'GET'
+		}).then(res => {
+			// console.log(res.data)
+			for (let i = 0; i < res.data.length; i++) {
+				classItem.value.push(res.data[i])
+				// console.log(classItem.value[i].lessonImage)
 			}
 		})
 
 	})
 	// 搜索按钮
 	let sendSearch = () => {
-		console.log(input.value)
+		// console.log(input.value)
 		uni.navigateTo({
 			url: '/pages/index/search?text=' + input.value
 		})
-	}
-	// 查询部分课程
-	let getList = () => {
-		return new Promise((resolve, reject) => {
-			uni.request({
-				url: 'http://a-puppy-c.top:9999/Smart/Lesson/getList',
-				method: 'GET',
-				data: {
-					start: 0,
-					limit: 2
-				},
-				header: {
-					'Authorization': uni.getStorageSync('Authorization'),
-					'content-type': 'application/x-www-form-urlencoded'
-				},
-				success: (res) => {
-					if (res.data.code == 200) {
-						console.log("getList请求成功");
-						resolve(res.data.data)
-					} else {
-						console.log("getList请求失败");
-					}
-					// console.log(res.data);
-				},
-				fail() {
-					console.log("接口请求失败");
-				}
-			})
-		})
-	}
-	// 获取新闻列表
-	let getNews = () => {
-		console.log("开始调用查询新闻接口")
-		return new Promise((resolve, reject) => {
-			uni.request({
-				url: 'http://a-puppy-c.top:9999/Smart/New/selectAllNews',
-				method: 'GET',
-				data: {
-					start: 0,
-					limit: 4
-				},
-				header: {
-					'Authorization': uni.getStorageSync('Authorization'),
-					'content-type': 'application/x-www-form-urlencoded'
-				},
-				success: (res) => {
-					if (res.data.code == 200) {
-						// console.log(news);
-						console.log("selectAllNews请求成功");
-						resolve(res.data.data)
-					} else {
-
-						console.log("selectAllNews请求失败");
-					}
-				},
-				fail() {
-					// console.log("接口请求失败");
-				}
-			})
-		})
-	}
-	// 根据新闻用户id获取用户名
-	let getUser = (userid) => {
-		console.log("开始调用查询用户接口")
-		return new Promise((resolve, reject) => {
-			uni.request({
-				url: 'http://a-puppy-c.top:9999/Smart/User/getUser',
-				method: 'GET',
-				data: {
-					userId: userid
-				},
-				header: {
-					'Authorization': uni.getStorageSync('Authorization'),
-					'content-type': 'application/x-www-form-urlencoded'
-				},
-				success: (res) => {
-					if (res.data.code == 200) {
-						console.log("getUser请求成功");
-						resolve(res.data.data)
-					} else {
-						console.log("getUser请求失败");
-						// console.log(res.data);
-					}
-				},
-				fail() {
-					console.log("接口请求失败");
-				}
-			})
-		})
+		input.value = ''
 	}
 
 	// 右上角【通知】和【我的】

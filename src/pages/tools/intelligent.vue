@@ -2,7 +2,7 @@
 	<!-- 智能识别主页面 -->
 	<view class="intelligent">
 		<!-- 顶部 -->
-		<ClassHeader :searchText="searchText" :text="hText"></ClassHeader>
+		<ClassHeader :searchText="searchText" :text="hText" ></ClassHeader>
 		<!-- 工具栏 -->
 		<view class="tool">
 			<view class="toolItem" @click="photo">
@@ -11,16 +11,15 @@
 				<image src='@/static/image/icon/photo.svg' class="image" />
 			</view>
 			<view class="toolItem bg2" @click="translate">
-				<text class="title">智能翻译</text>
-				<text class="text">高效解答</text>
+				<text class="title">文本识译</text>
+				<text class="text">高效解答</text> 
 				<image src='@/static/image/icon/talk.svg' class="image" />
 			</view>
 			<view class="toolItem bg3">
-				<text class="title">算术批改</text>
+				<text class="title">算术识改</text>
 				<text class="text">快速批改</text>
 				<image src='@/static/image/icon/test.svg' class="image" />
 			</view>
-
 		</view>
 		<!-- 知识科普 -->
 		<view class="knowledge">

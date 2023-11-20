@@ -2,7 +2,8 @@
 	<!-- ai对战页 -->
 	<view class="quiz">
 		<!-- 顶部 -->
-		<ClassHeader searchText="" text="答题测验"></ClassHeader>
+		<ClassHeader searchText="" text="问答测验"></ClassHeader>
+		<view class="AIPK">AI人机pk</view>
 		<!-- 进度条 -->
 		<view class="">
 			<slider id="ai" class="slider" @change="" min="0" max="4" step="1" :value="aipage" color="#b3b3b3"
@@ -131,7 +132,7 @@
 		console.log("开始调用答题接口")
 		return new Promise((resolve, reject) => {
 			uni.request({
-				url: 'http://a-puppy-c.top:9999/Smart/Answer/selectAllByTab',
+				url: 'http://8.130.21.88:9999/Smart/Answer/selectAllByTab',
 				data: {
 					tab: '人工智能发展史',
 					start: 0,
@@ -179,7 +180,9 @@
 			console.log("答题结束")
 			//路由跳转  并调用封装的addPoint方法
 			addPoint()
-
+			uni.showToast({
+				title: '本轮获取' + point.value + '积分'
+			})
 		}
 	}
 
@@ -190,7 +193,7 @@
 		console.log("调用加分接口")
 		return new Promise((resolve, reject) => {
 			uni.request({
-				url: "http://a-puppy-c.top:9999/Smart/Answer/updateUserPointsAdd",
+				url: "http://8.130.21.88:9999/Smart/Answer/updateUserPointsAdd",
 				data: {
 					userId: userId,
 					points: point.value
@@ -319,5 +322,10 @@
 		text-align: center;
 		border-radius: 10rpx;
 		font-size: 18px;
+	}
+	.AIPK{
+		font-size: 24px;
+		color: #90c9b4;
+		margin-left: 20px;
 	}
 </style>

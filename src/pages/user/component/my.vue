@@ -80,9 +80,9 @@
 		<view class="tool">
 			<view class="btn btn-flex" link>
 				<view class="box">
-					<view class="title">
+					<view class="title" @click="myDong">
 						<image src="@/static/image/icon/vip.svg" alt="" />
-						<text>会员积分</text>
+						<text>我的动态</text>
 					</view>
 					<image src="@/static/image/icon/right_grey.png" mode=""></image>
 				</view>
@@ -141,15 +141,18 @@
 		onLoad,
 		onShow
 	} from '@dcloudio/uni-app';
-	import {
-		ArrowLeftBold,
-		ArrowRightBold
-	} from '@element-plus/icons-vue'
+	// import {
+	// 	ArrowLeftBold,
+	// 	ArrowRightBold
+	// } from '@element-plus/icons-vue'
 	import {
 		onMounted,
 		reactive,
 		ref
 	} from 'vue';
+	import request from '../../../api/request';
+	// import * as userApi from '@/api/user.js'
+
 
 	var userId = ref(1)
 	var user = ref({})
@@ -169,6 +172,13 @@
 			url: '/pages/user/data'
 		})
 	}
+
+	let myDong = () => {
+		uni.navigateTo({
+			url: '/pages/community/mypost'
+		})
+	}
+
 	let history = () => {
 		uni.navigateTo({
 			url: '/pages/user/history'
@@ -187,51 +197,28 @@
 
 	onMounted(() => {
 		userId.value = getApp().globalData.userDetail.userId
-		getUser(userId.value)
-		uni.request({
-			url: 'http://a-puppy-c.top:9999/Smart/Collection/getCollection',
-			method: 'GET',
+		// console.log(userId.value)
+		// 获取用户信息
+		request({
+			url: '/Smart/User/getUser',
 			data: {
 				userId: userId.value
-			},
-			header: {
-				'Authorization': uni.getStorageSync('Authorization'),
-				'content-type': 'application/x-www-form-urlencoded'
-			},
-			success: (res) => {
-				console.log("用户-调用getCollection成功");
-				collectnum.value = res.data.data.length;
-				console.log(res.data.data);
-			},
-			fail() {
-				console.log("调用getCollection失败");
 			}
+		}).then(res => {
+			user.value = res.data;
+			// console.log(res);
+		})
+		// 获取收藏
+		request({
+			url:'/Smart/Collection/getCollection',
+			data:{
+				userId: userId.value
+			}
+		}).then(res=>{
+			collectnum.value = res.data.length;
+			console.log(collectnum.value)
 		})
 	})
-
-	// 获取用户信息
-	let getUser = (userId) => {
-		console.log("开始调用getUser")
-		uni.request({
-			url: 'http://a-puppy-c.top:9999/Smart/User/getUser',
-			method: 'GET',
-			data: {
-				userId: userId
-			},
-			header: {
-				'Authorization': uni.getStorageSync('Authorization'),
-				'content-type': 'application/x-www-form-urlencoded'
-			},
-			success: (res) => {
-				console.log("用户-调用getUser成功");
-				user.value = res.data.data;
-				console.log(res.data.data);
-			},
-			fail() {
-				console.log("调用getUser失败");
-			}
-		})
-	}
 </script>
 
 <style scoped>

@@ -142,6 +142,7 @@
 	.course {
 		background-color: #f3f3f3;
 		font-size: 12px;
+		padding-top: 20rpx;
 	}
 
 	/* 视频开始 */

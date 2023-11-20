@@ -53,12 +53,16 @@
 		ref,
 		// createApp
 	} from 'vue'
+	import request from '../../api/request';
 	import user from '../../api/user';
+	import {
+		error
+	} from '../../uni_modules/uv-ui-tools/libs/function';
 	const account = ref('')
 	const pwd = ref('')
 	const remember = ref('')
 	const pwdShow = ref(true)
-	const userDetail = ref( getApp().globalData.userDetail )
+	const userDetail = ref(getApp().globalData.userDetail)
 	console.log(userDetail.value)
 
 
@@ -88,36 +92,37 @@
 	let gologin = () => {
 		if (account.value == '' || pwd.value == '') {
 			console.log("账号或密码不能为空");
+			uni.showToast({
+				title: '账号或密码不能为空！',
+				icon: "error"
+			})
 		} else {
-			uni.request({
-				url: 'http://a-puppy-c.top:9999/Smart/User/login',
-				method: 'GET',
-				header: {
-					'Authorization': uni.getStorageSync('Authorization'),
-					'content-type': 'application/x-www-form-urlencoded'
-				},
+			request({
+				url: '/Smart/User/login',
 				data: {
 					account: account.value,
 					pwd: pwd.value
-				},
-				success: (res) => {
-					if (res.data.code == 200) {
-						console.log("调用login成功");
-						//登录成功
-						gotoUser()
-					} else {
-						console.log("调用login失败");
-						console.log(res.data);
-						if (res.data.code == -10004) {
-							gotoAuthenticate()
-						}
-					}
-					console.log(res.data.code)
-					getApp().globalData.userDetail = res.data.data
-				},
-				fail() {
-					console.log("请求login失败");
 				}
+			}).then(res => {
+				if (res.code == 200) {
+					console.log("调用login成功");
+					//登录成功
+					gotoUser()
+				} else {
+					console.log(res);
+					if (res.code == -10004) {
+						setTimeout(() => {
+							uni.showToast({
+								title: '请前往验证',
+								icon: 'error'
+							})
+						}, 600)
+						//跳转验证页
+						gotoAuthenticate()
+					}
+				}
+				console.log(res)
+				getApp().globalData.userDetail = res.data
 			})
 		}
 	}

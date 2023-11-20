@@ -74,6 +74,8 @@
 	import {
 		ref
 	} from 'vue';
+	import request from '../../api/request.js'
+
 	const favor_score = "5.1"
 	const info_watch = "1223"
 	const info_language = "中文"
@@ -87,7 +89,7 @@
 	const classItem = ref({})
 	const remark = ref([]) //评论
 	const classId = ref() //课程id，实际的值应该+1
-	
+
 
 	let back = () => {
 		uni.navigateBack({
@@ -97,82 +99,33 @@
 	onLoad((res) => {
 		classId.value = ~~res.id //id字符串转数字类型
 
-		getAllLesson().then(res => {
-
+		// 查询所有课程
+		request({
+			url: '/Smart/Lesson/getAllLesson'
+		}).then(res => {
 			// 查询所有课程中id与页面传入id相同的课程
-			for (let j = 0; j < res.length; j++) {
-				console.log(res[j].lessonId)
-				if (res[j].lessonId == classId.value) {
-					classItem.value = res[j]
+			for (let j = 0; j < res.data.length; j++) {
+				console.log(res.data[j].lessonId)
+				if (res.data[j].lessonId == classId.value) {
+					classItem.value = res.data[j]
 					break
 				}
 			}
-			selectRemarkByLesson(classId.value).then(res => {
-				for (let i = 0; i < res.length; i++) {
-					remark.value.push(res[i])
+			request({
+				url: '/Smart/Lesson/selectRemarkByLesson',
+				data: {
+					lessonId: classId.value
 				}
-				// console.log(remark.value)
+			}).then(res => {
+				for (let i = 0; i < res.data.length; i++) {
+					remark.value.push(res.data[i])
+				}
 			})
 		})
 	})
-	// 查询所有课程
-	let getAllLesson = () => {
-		return new Promise((resolve, reject) => {
-			uni.request({
-				url: 'http://a-puppy-c.top:9999/Smart/Lesson/getAllLesson',
-				method: 'GET',
-				data: {},
-				header: {
-					'Authorization': uni.getStorageSync('Authorization'),
-					'content-type': 'application/x-www-form-urlencoded'
-				},
-				success: (res) => {
-					if (res.data.code == 200) {
-						console.log("getAllLesson请求成功");
-						resolve(res.data.data)
-					} else {
-						console.log("getAllLesson请求失败");
-					}
-					// console.log(res.data);
-				},
-				fail() {
-					console.log("接口请求失败");
-				}
-			})
-		})
-	}
-	// 根据课程id查询评论
-	let selectRemarkByLesson = (classId) => {
-		return new Promise((resolve, reject) => {
-			uni.request({
-				url: 'http://a-puppy-c.top:9999/Smart/Lesson/selectRemarkByLesson',
-				method: 'GET',
-				data: {
-					lessonId: classId
-				},
-				header: {
-					'Authorization': uni.getStorageSync('Authorization'),
-					'content-type': 'application/x-www-form-urlencoded'
-				},
-				success: (res) => {
-					if (res.data.code == 200) {
-						console.log(classId)
-						console.log("selectRemarkByLesson请求成功");
-						resolve(res.data.data)
-					} else {
-						console.log("selectRemarkByLesson请求失败");
-					}
-					// console.log(res.data);
-				},
-				fail() {
-					console.log("接口请求失败");
-				}
-			})
-		})
-	}
+
 
 	// 增加评论接口
-
 	let addRemark = () => {
 		return new Promise((resolve, reject) => {
 			const userId = getApp().globalData.userDetail.userId
@@ -186,35 +139,55 @@
 					url: '/pages/user/user'
 				})
 			}
-			uni.request({
-				url: 'http://a-puppy-c.top:9999/Smart/Lesson/appearRemark',
+			request({
+				url: '/Smart/Lesson/appearRemark',
 				method: 'Post',
 				data: {
 					lessonId: classId.value,
 					lessonRemarkText: input.value,
 					lessonRemarkUserId: userId
-				},
-				header: {
-					'Authorization': uni.getStorageSync('Authorization'),
-					'content-type': 'application/x-www-form-urlencoded'
-				},
-				success: (res) => {
-					if (res.data.code == 0) {
-						console.log("addRemark请求成功");
-						uni.showToast({
-							title: "评价发表成功"
-						})
-						uni.
-						resolve(res.data.data)
-					} else {
-						console.log("addRemark请求失败");
-					}
-					// console.log(res.data);
-				},
-				fail() {
-					console.log("接口请求失败");
+				}
+			}).then(res => {
+				if (res.data.code == 0) {
+					console.log("addRemark请求成功");
+					uni.showToast({
+						title: "评价发表成功"
+					})
+					uni.
+					resolve(res.data.data)
+				} else {
+					console.log("addRemark请求失败");
 				}
 			})
+			// uni.request({
+			// 	url: 'http://8.130.21.88:9999/Smart/Lesson/appearRemark',
+			// 	method: 'Post',
+			// 	data: {
+			// 		lessonId: classId.value,
+			// 		lessonRemarkText: input.value,
+			// 		lessonRemarkUserId: userId
+			// 	},
+			// 	header: {
+			// 		'Authorization': uni.getStorageSync('Authorization'),
+			// 		'content-type': 'application/x-www-form-urlencoded'
+			// 	},
+			// 	success: (res) => {
+			// 		if (res.data.code == 0) {
+			// 			console.log("addRemark请求成功");
+			// 			uni.showToast({
+			// 				title: "评价发表成功"
+			// 			})
+			// 			uni.
+			// 			resolve(res.data.data)
+			// 		} else {
+			// 			console.log("addRemark请求失败");
+			// 		}
+			// 		// console.log(res.data);
+			// 	},
+			// 	fail() {
+			// 		console.log("接口请求失败");
+			// 	}
+			// })
 		})
 	}
 </script>

@@ -43,7 +43,7 @@
 			<!-- 内容 -->
 			<view class="content" v-for="(item,index) in similar" @click="gotoSimilar(index)">
 				<image class="link" :src="item.link" alt="" />
-				<image class='ear' src="@/static/image/icon/ear.png" mode="aspectFit"/>
+				<image class='ear' src="@/static/image/icon/ear.png" mode="aspectFit" />
 				<view class="box-card">
 					<div class="itemTitle">{{item.title}}</div>
 					<div class="itemName">{{item.tip}}</div>
@@ -88,17 +88,11 @@
 	import {
 		reactive
 	} from 'vue';
-	import {
-		Search,
-		ArrowRight,
-		Sort,
-		UserFilled,
-		View as IconView
-	} from '@element-plus/icons-vue'
+
 	import {
 		ref
 	} from 'vue';
-
+	import request from '../../api/request.js'
 	import ClassTitle from './component/title.vue'
 	import ClassHeader from './component/header.vue'
 	import {
@@ -142,42 +136,20 @@
 	const classes = ref([])
 
 	onLoad(() => {
-		getList().then(res => {
-			for (let j = 0; j < res.length; j++) {
-				classes.value.push(res[j])
+		// 获取展示课程
+		request({
+			url: '/Smart/Lesson/getList',
+			data: {
+				start: 0,
+				limit: 6
 			}
-			// console.log(classes.value)
+		}).then(res => {
+			for (let j = 0; j < res.data.length; j++) {
+				classes.value.push(res.data[j])
+			}
 		})
+
 	})
-
-	let getList = () => {
-		return new Promise((resolve, reject) => {
-			uni.request({
-				url: 'http://a-puppy-c.top:9999/Smart/Lesson/getList',
-				method: 'GET',
-				data: {
-					start: 0,
-					limit: 4
-				},
-				header: {
-					'Authorization': uni.getStorageSync('Authorization'),
-					'content-type': 'application/x-www-form-urlencoded'
-				},
-				success: (res) => {
-					if (res.data.code == 200) {
-						console.log("getList请求成功");
-						resolve(res.data.data)
-					} else {
-						console.log("getList请求失败");
-					}
-				},
-				fail() {
-					console.log("接口请求失败");
-				}
-			})
-		})
-	}
-
 
 	// 课堂跳转
 	let gotoCourse = (id) => {

@@ -5,9 +5,9 @@
 			发布
 		</view>
 		<view class="">
-			<textarea :v-model="title" :class="colorValue" maxlength="30" class="input title"
+			<textarea v-model="title" :class="colorValue" maxlength="30" class="input title"
 				placeholder="请输入标题!"></textarea>
-			<textarea :v-model="input" :class="colorValue" maxlength="400" auto-height class="input"
+			<textarea v-model="input" :class="colorValue" maxlength="400" auto-height class="input"
 				placeholder="请输入您想说的内容吧!"></textarea>
 		</view>
 		<view class="colorBtn">
@@ -61,8 +61,16 @@
 		}
 	})
 	const publish = () => {
-		uni.request({
-			url: 'http://a-puppy-c.top:9999/Smart/TieZi/addNew',
+		if(title.value.includes('微信') || input.value.includes('微信')){
+			
+			uni.showToast({
+				title:"含有敏感词"
+			})
+			title.value = ''
+			input.value = ''
+		}else{
+			uni.request({
+			url: 'http://8.130.21.88:9999/Smart/TieZi/addNew',
 			method: 'PUT',
 			data: {
 				title: title.value,
@@ -92,6 +100,8 @@
 				console.log("接口请求失败");
 			}
 		})
+		}
+		
 
 
 	}

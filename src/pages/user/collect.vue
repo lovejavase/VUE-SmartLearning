@@ -7,7 +7,7 @@
 		<view class="content">
 			<view class="card" v-for="(item,index) in classItem" :key="index" shadow="never"
 				:body-style="{ padding: '0px' }">
-				<image src="@/static/image/class1.png" mode="" class="image" />
+				<image :src="item.lessonImage" mode="" class="image" />
 				<view class="text">
 					<text class="name">{{item.lessonTitle}}</text>
 					<view class="bottom">
@@ -56,7 +56,7 @@
 	let getAllLesson = () => {
 		return new Promise((resolve, reject) => {
 			uni.request({
-				url: 'http://a-puppy-c.top:9999/Smart/Lesson/getAllLesson',
+				url: 'http://8.130.21.88:9999/Smart/Lesson/getAllLesson',
 				method: 'GET',
 				data: {},
 				header: {
@@ -83,7 +83,7 @@
 		return new Promise((resolve, reject) => {
 			console.log("开始调用getCollection")
 			uni.request({
-				url: 'http://a-puppy-c.top:9999/Smart/Collection/getCollection',
+				url: 'http://8.130.21.88:9999/Smart/Collection/getCollection',
 				method: 'GET',
 				header: {
 					'Authorization': uni.getStorageSync('Authorization'),

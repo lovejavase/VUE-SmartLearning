@@ -2,7 +2,7 @@
 	<!-- 首页->问答测验 -->
 	<view class="test">
 		<!-- 顶部 -->
-		<ClassHeader searchText="" text="答题测验"></ClassHeader>
+		<ClassHeader searchText="" text="问答测验"></ClassHeader>
 		<!-- 小标题 -->
 		<title-item class="ti" title='答题练习'></title-item>
 		<text class="bTitle">坚持练习，掌握知识！</text>

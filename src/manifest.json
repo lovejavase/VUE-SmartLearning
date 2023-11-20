@@ -1,6 +1,6 @@
 {
     "name" : "智能享学",
-    "appid" : "__UNI__E5E6429",
+    "appid" : "__UNI__EE88017",
     "description" : "",
     "versionName" : "1.0.0",
     "versionCode" : "100",
@@ -85,7 +85,7 @@
             "proxy" : {
                 "/api" : {
                     //修改配置跨域代理路由(需要重启)
-                    "target" : "http://a-puppy-c.top:9999",
+                    "target" : "http://8.130.21.88:9999",
                     "changeOrigin" : true,
                     "secure" : false
                 }

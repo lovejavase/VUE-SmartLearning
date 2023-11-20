@@ -42,6 +42,7 @@
 	import {
 		ref
 	} from 'vue';
+	import request from '../../../api/request';
 	const postList = ref([])
 
 	const fans = ref([])
@@ -53,57 +54,38 @@
 		})
 	}
 	onLoad(() => {
-		uni.request({
-			url: 'http://a-puppy-c.top:9999/Smart/TieZi/getAll',
-			method: 'GET',
-			data: {},
-			header: {
-				'Authorization': uni.getStorageSync('Authorization'),
-				'content-type': 'application/x-www-form-urlencoded'
-			},
-			success: (res) => {
-				if (res.data.code == 200) {
-					console.log("请求成功");
-					for (let i = 0; i < res.data.data.length; i++) {
-						console.log(res.data.data[i])
-						// 获取用户
-						uni.request({
-							url: 'http://a-puppy-c.top:9999/Smart/User/getUser',
-							method: 'GET',
-							data: {
-								userId: res.data.data[i].userId
-							},
-							header: {
-								'Authorization': uni.getStorageSync('Authorization'),
-								'content-type': 'application/x-www-form-urlencoded'
-							},
-							success: (user) => {
-								if (user.data.code == 200) {
-									console.log("getUser请求成功");
-									postList.value.push({
-										id:res.data.data[i].id,
-										userId:res.data.data[i].userId,
-										title: res.data.data[i].title,
-										userAvatar: user.data.data.userAvatar,
-										userNickName: user.data.data.userNickName,
-										content:Math.floor(Math.random() * 60 + 12),
-										fans:Math.floor(Math.random() * 500 + 100)
-									})
-								} else {
-									console.log("getUser请求失败");
-								}
-							},
-							fail() {
-								console.log("接口请求失败");
-							}
-						})
-					}
-				} else {
-					console.log("请求失败");
+		request({
+			url: '/Smart/TieZi/getAll'
+		}).then(res => {
+			if (res.code == 200) {
+				// console.log("请求成功");
+				for (let i = 0; i < res.data.length; i++) {
+					// console.log(res.data[i])
+					// 获取用户
+					request({
+						url: '/Smart/User/getUser',
+						data: {
+							userId: res.data[i].userId
+						}
+					}).then(user => {
+						if (user.code == 200) {
+							// console.log("getUser请求成功");
+							postList.value.push({
+								id: res.data[i].id,
+								userId: res.data[i].userId,
+								title: res.data[i].title,
+								userAvatar: user.data.userAvatar,
+								userNickName: user.data.userNickName,
+								content: Math.floor(Math.random() * 60 + 12),
+								fans: Math.floor(Math.random() * 500 + 100)
+							})
+						} else {
+							console.log("getUser请求失败");
+						}
+					})
 				}
-			},
-			fail() {
-				console.log("接口请求失败");
+			} else {
+				console.log("请求失败");
 			}
 		})
 

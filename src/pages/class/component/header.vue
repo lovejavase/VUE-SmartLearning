@@ -15,12 +15,12 @@
 			</view>
 		</view>
 		<!-- 搜索框 -->
-		<view class="topBottom">
+		<!-- <view class="topBottom"> -->
 			<!-- <view class="topInput"> -->
-				<input class="search" v-model="input" placeholder="搜索科普/课堂/识别" />
-				<image @click="" src="@/static/image/icon/search.png" mode=""></image>
+				<!-- <input class="search" v-model="input" placeholder="搜索科普/课堂/识别" /> -->
+				<!-- <image @click="" src="@/static/image/icon/search.png" mode=""></image> -->
 			<!-- </view> -->
-		</view>
+		<!-- </view> -->
 	</view>
 </template>
 

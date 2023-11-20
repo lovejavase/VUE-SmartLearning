@@ -6,15 +6,8 @@
 				<text class="title">{{item.lessonTitle}}</text>
 				<text class="author">作者：{{item.lessonTeacher}}</text>
 			</view>
-			<image :src="item.lessonImage" alt="" />
+			<image :src="item.lessonImage" alt="" mode="heightFix" />
 		</view>
-		<!-- <view class="content post" v-for="(item,index) in posts">
-			<view class="text">
-				<text class="title">{{item.postTitle}}</text>
-				<text class="author">作者：{{item.postAuthor}}</text>
-			</view>
-			<image :src="item.lessonImage" alt="" />
-		</view> -->
 	</view>
 </template>
 
@@ -25,92 +18,62 @@
 	import {
 		ref
 	} from 'vue';
+	import request from '../../api/request.js'
+
 	const news = ref([])
 	const posts = ref([])
-	onLoad((res) => {
-		const text = res.text 
-		uni.request({
-			url: 'http://a-puppy-c.top:9999/Smart/Lesson/getAllLesson',
-			method: 'GET',
-			data: {},
-			header: {
-				'Authorization': uni.getStorageSync('Authorization'),
-				'content-type': 'application/x-www-form-urlencoded'
-			},
-			success: (res) => {
-				if (res.data.code == 200) {
-					const results = res.data.data
-					console.log(results)
-					for (let i = 0; i < results.length; i++) {
-						if (results[i].lessonTitle.indexOf(text) != -1) {
-							console.log(results[i].lessonTitle)
-							news.value.push({
-								'lessonTitle': results[i].lessonTitle,
-								'lessonTeacher': results[i].lessonTeacher,
-								'lessonId': results[i].lessonId,
-								'lessonImage': results[i].lessonImage
-							})
-						}
-					}
-					console.log(news.value)
-				}
-				console.log(res.data);
-			},
-			fail() {
-				console.log("接口请求失败");
-			}
-		})
-		// 查询帖子
-		uni.request({
-			url: 'http://a-puppy-c.top:9999/Smart/TieZi/getAll',
-			method: 'GET',
-			data: {},
-			header: {
-				'Authorization': uni.getStorageSync('Authorization'),
-				'content-type': 'application/x-www-form-urlencoded'
-			},
-			success: (res) => {
-				if (res.data.code == 200) {
-					const results = res.data.data
-					console.log(results)
-					for (let i = 0; i < results.length; i++) {
-						if (results[i].title.indexOf(text) != -1) {
-							// 获取用户
-							uni.request({
-								url: 'http://a-puppy-c.top:9999/Smart/User/getUser',
-								method: 'GET',
-								data: {
-									userId: results[i].id
-								},
-								header: {
-									'Authorization': uni.getStorageSync('Authorization'),
-									'content-type': 'application/x-www-form-urlencoded'
-								},
-								success: (res) => {
-									if (res.data.code == 200) {
-										console.log(res.data);
-										posts.value.push({
-											'postTitle': results[i].title,
-											'postAuthor': res.data.data.userNickName,
-											'postImage':res.data.data.userAvatar
-										})
-									}
-								},
-								fail() {
-									console.log("接口请求失败");
-								}
-							})
 
-						}
+	onLoad((res) => {
+		const text = res.text
+		// 根据关键词查询课堂
+		request({
+			url: '/Smart/Lesson/getAllLesson'
+		}).then(res => {
+			if (res.code == 200) {
+				const results = res.data
+				// console.log(results)
+				for (let i = 0; i < results.length; i++) {
+					if (results[i].lessonTitle.indexOf(text) != -1) {
+						news.value.push({
+							'lessonTitle': results[i].lessonTitle,
+							'lessonTeacher': results[i].lessonTeacher,
+							'lessonId': results[i].lessonId,
+							'lessonImage': results[i].lessonImage || ''
+						})
 					}
-					console.log(news.value)
 				}
-				console.log(res.data);
-			},
-			fail() {
-				console.log("接口请求失败");
 			}
 		})
+		// 根据关键词获取帖子
+		request({
+			url: '/Smart/TieZi/getAll'
+		}).then(res => {
+			if (res.code == 200) {
+				const results = res.data
+				// console.log(results)
+				for (let i = 0; i < results.length; i++) {
+					if (results[i].title.indexOf(text) != -1) {
+						// 获取用户
+						request({
+							url: '/Smart/User/getUser',
+							data: {
+								userId: results[i].id
+							}
+						}).then(user => {
+							if (user.code == 200) {
+								// console.log(res.data);
+								posts.value.push({
+									'postTitle': results[i].title,
+									'postAuthor': user.data.userNickName,
+									'postImage': user.data.userAvatar
+								})
+							}
+						})
+					}
+				}
+			}
+		})
+
 	})
 	const gotoClass = (classId) => {
 		uni.navigateTo({
@@ -139,7 +102,8 @@
 			border-radius: 10rpx;
 			margin-bottom: 30rpx;
 		}
-		.post{
+
+		.post {
 			/* background-color: #d5e7de; */
 			background-color: #fcf3e1;
 		}
@@ -162,7 +126,8 @@
 		.content>image {
 			width: 200rpx;
 			height: 150rpx;
-			border-radius: 10rpx;
+			border-radius: 20rpx;
+			overflow: hidden;
 
 		}
 	}

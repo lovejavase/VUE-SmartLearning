@@ -11,7 +11,7 @@
 				<text class="chapter">共{{book.total}}章</text>
 				<view class="vip">
 					<text>会员免费读</text>
-					<image src="@/static/image/icon/right_brown.png" alt=""/>
+					<image src="@/static/image/icon/right_brown.png" alt="" />
 				</view>
 
 			</view>
@@ -39,8 +39,6 @@
 </template>
 
 <script setup>
-	import myheader from "@/component/header.vue";
-	import titles from "@/pages/community/component/title.vue"
 	import {
 		onLoad
 	} from '@dcloudio/uni-app';
@@ -49,6 +47,9 @@
 		onMounted,
 		ref
 	} from "vue";
+	import myheader from "@/component/header.vue";
+	import titles from "@/pages/community/component/title.vue"
+	import request from '../../api/request.js'
 
 	const author = '（美）布莱克·克里斯汀'
 	var bookId = 0
@@ -56,41 +57,19 @@
 
 	onLoad((res) => {
 		bookId = ~~res.id
-		console.log("bookId" + bookId)
-		getBook(bookId).then(res => {
-			book.value = res
-			console.log(book.value)
+		console.log("bookId:" + bookId)
+		request({
+			url: '/Smart/Book/selectBookById',
+			method: 'GET',
+			data: {
+				bookId: bookId
+			}
+		}).then(res => {
+			book.value = res.data
+			console.log(res)
 		})
 	})
 
-
-	let getBook = (id) => {
-		return new Promise((resolve, reject) => {
-			uni.request({
-				url: 'http://a-puppy-c.top:9999/Smart/Book/selectBookById',
-				method: 'GET',
-				data: {
-					bookId: id
-				},
-				header: {
-					'Authorization': uni.getStorageSync('Authorization'),
-					'content-type': 'application/x-www-form-urlencoded'
-				},
-				success: (res) => {
-					if (res.data.code == 200) {
-						console.log("主页-调用getBook成功");
-						resolve(res.data.data)
-					} else {
-						console.log("主页-调用getBook失败");
-						console.log(res.data);
-					}
-				},
-				fail() {
-					console.log("接口请求失败");
-				}
-			})
-		})
-	}
 
 	// 书籍跳转
 	let gotoBook = (bookId) => {
@@ -177,8 +156,8 @@
 		border-radius: 20rpx;
 		margin-top: 20rpx;
 	}
-	
-	.blueb .content .vip text{
+
+	.blueb .content .vip text {
 		line-height: 30rpx;
 		margin-bottom: 2rpx;
 	}

@@ -2,7 +2,7 @@
 	<!-- 智能识别-翻译页 -->
 	<view class="translate">
 		<!-- 标题 -->
-		<myheader title='智能翻译'></myheader>
+		<myheader title='文本识译'></myheader>
 		<!-- 输入内容 -->
 		<view class="input">
 			<textarea v-model="input" confirm-type="done" @confirm="gotranslate" placeholder="请输入需要翻译的内容......"
@@ -55,7 +55,7 @@
 	let AITranslate = (SourceLanguage, TargetLanguage, SourceText) => {
 		return new Promise((resolve, reject) => {
 			uni.request({
-				url: 'http://a-puppy-c.top:9999/Smart/AI/AITranslate',
+				url: 'http://8.130.21.88:9999/Smart/AI/AITranslate',
 				method: 'POST',
 				data: {
 					SourceLanguage: SourceLanguage,

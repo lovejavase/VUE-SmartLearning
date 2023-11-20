@@ -53,7 +53,7 @@
 	const postDetail = ref({})
 	onLoad((re) => {
 		uni.request({
-			url: 'http://a-puppy-c.top:9999/Smart/TieZi/getAll',
+			url: 'http://8.130.21.88:9999/Smart/TieZi/getAll',
 			method: 'GET',
 			data: {
 				// userId: res.postId
@@ -81,7 +81,7 @@
 			}
 		})
 		uni.request({
-			url: 'http://a-puppy-c.top:9999/Smart/User/getUser',
+			url: 'http://8.130.21.88:9999/Smart/User/getUser',
 			method: 'GET',
 			data: {
 				userId: re.user

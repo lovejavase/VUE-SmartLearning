@@ -9,14 +9,16 @@ import {
 } from "vue";
 import App from "./App.vue";
 import Footer from "./component/footer.vue"
-
-
+// import request from './api/request.js'
 
 export function createApp() {
 	const app = createSSRApp(App);
-	app.use(ElementPlus,{locale})
+	app.use(ElementPlus, {
+		locale
+	})
 
 	app.component('Footer', Footer)
+	// app.config.globalProperties.$request = request
 	// for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 	//   app.component(key, component)
 	// };

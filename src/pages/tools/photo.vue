@@ -2,7 +2,7 @@
 	<!-- 智能识别-图书识别 -->
 	<view class="book">
 		<!-- 标题 -->
-		<myheader title='图书识别'></myheader>
+		<myheader title='图书识源'></myheader>
 		<!-- 输入内容 -->
 		<view class="input" :style="bgimg==''?'':'background-image: url('+bgimg+');'">
 			<view class="tip" v-if="!sucess">
@@ -52,7 +52,7 @@
 			success: function(res) {
 				console.log(JSON.stringify(res.tempFilePaths)); //拍照图片的路径
 				uni.uploadFile({
-					url: 'http://a-puppy-c.top:9999/Smart/AI/OCR', //接口地址
+					url: 'http://8.130.21.88:9999/Smart/AI/OCR', //接口地址
 					filePath: res.tempFilePaths[0],
 					header: {
 						'Authorization': uni.getStorageSync('Authorization'),

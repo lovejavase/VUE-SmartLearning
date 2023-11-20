@@ -8,9 +8,10 @@
 				<image src="@/static/image/icon/hot.svg" alt="" />
 			</view>
 			<view class="content">
-				<image src="@/static/image/group3.png" @click="goFound" alt="" />
+				<image :src="'../../static/image/group'+topTalk.id+'.png'" @click="goFound" alt="" />
 				<view class="text" @click="goFound">
-					<text class="name">AI智能</text>
+					<text class="name">{{topTalk.qzName}}</text>
+					<!-- <text class="name">AI智能</text> -->
 					<text class="info">领略人工智能的奥秘！</text>
 					<!-- <view class="num">
 						<image src="@/static/image/icon/group_fill.svg" alt="" />
@@ -18,14 +19,14 @@
 					</view> -->
 				</view>
 				<view class="join" @click="join">
-					{{isjoin}}
+					{{isJoin[topTalk.id-1]}}
 				</view>
 			</view>
 		</view>
 		<!-- 我的圈子 -->
 		<titleItem :title="groupTitle[1]"></titleItem>
 		<view class="my">
-			<view class="item" :class="index==1?'mid':''" v-for="(item,index) in my" @click="talk(item.title)">
+			<view class="item" :class="index==1?'mid':''" v-for="(item,index) in my" @click="talk(item.qzid)">
 				<image :src="item.img" mode=""></image>
 				<text class="name">{{item.title}}</text>
 				<text class="bottom">{{item.name}}</text>
@@ -35,33 +36,12 @@
 		<!-- 互动话题 -->
 		<titleItem :title="groupTitle[2]"></titleItem>
 		<view class="talk">
-			<view class="item" v-if="talkShow=='百科'" v-for="info in wikiList">
-				<text class="title">{{info.title}}</text>
+			<view class="item" v-for="info in talkList">
+				<text class="title"># {{info.topicTitle}}</text>
 				<view class="content">
-					<image :src="info.img" alt="" />
+					<image src="../../../static/image/icon/talk2.svg" alt="" />
 					<view class="">
-						<!-- <text class="name">{{info.name}}</text> -->
-						<text class="text">“{{info.text}}”</text>
-					</view>
-				</view>
-			</view>
-			<view class="item" v-if="talkShow=='历史'" v-for="info in developList">
-				<text class="title">{{info.title}}</text>
-				<view class="content">
-					<image :src="info.img" alt="" />
-					<view class="">
-						<!-- <text class="name">{{info.name}}</text> -->
-						<text class="text">“{{info.text}}”</text>
-					</view>
-				</view>
-			</view>
-			<view class="item" v-if="talkShow=='智能'" v-for="info in aiList">
-				<text class="title">{{info.title}}</text>
-				<view class="content">
-					<image :src="info.img" alt="" />
-					<view class="">
-						<!-- <text class="name">{{info.name}}</text> -->
-						<text class="text">“{{info.text}}”</text>
+						<text class="text">“{{info.topicIntroduce}}”</text>
 					</view>
 				</view>
 			</view>
@@ -70,71 +50,76 @@
 </template>
 
 <script setup>
-	import { onShow } from "@dcloudio/uni-app";
-import {
+	import {
+		onShow
+	} from "@dcloudio/uni-app";
+	import {
 		ref
 	} from "vue";
+	import request from "../../../api/request";
 	import titleItem from "./title.vue"
-	// 标题
-	const groupTitle = ["特别发现", "我的圈子", "互动话题"]
-	// 我的圈子
-	const my = ref(getApp().globalData.my)
-	const isjoin = ref('加入')
-	const talkShow = ref('百科')
-	// console.log(my[0])
-	// 互动话题
-	// 百科
-	const wikiList = [{
-			title: "# 人工智能研究目的是什么？",
-			img: "../../static/image/icon/talk2.svg",
-			text: "人工智能技术是否会超越人类智能？如果会，那会有什么样的影响？"
-		}, {
-			title: "# ",
-			img: "../../static/image/icon/talk2.svg",
-			text: ""
-		},
-		{
-			title: "# AI",
-			img: "../../static/image/icon/talk2.svg",
-			text: ""
-		},
-	]
-	// 历史
-	const developList = [{
-			title: "# 回望人工智能的发展",
-			img: "../../static/image/icon/talk2.svg",
-			text: "人工智能在1956年的达特茅斯会议上被首次提出，六十多年以来发生了什么变化呢？"
-		}, {
-			title: "# 人工智能的发展现状如何？",
-			img: "../../static/image/icon/talk2.svg",
-			text: ""
-		},
-		{
-			title: "# 工智能的发展前景如何？",
-			img: "../../static/image/icon/talk2.svg",
-			text: ""
-		},
-	]
-	// ai
-	const aiList= [{
-			title: "# AI与人类智能的关系？",
-			img: "../../static/image/icon/talk2.svg",
-			text: "人工智能技术是否会超越人类智能？如果会，那会有什么样的影响？"
-		}, {
-			title: "# 你认为未来的智能是怎样的？",
-			img: "../../static/image/icon/talk2.svg",
-			text: "人工智能未来的发展方向是什么？将会对社会和经济产生什么影响？"
-		},
-		{
-			title: "# AI对就业和社会的影响？",
-			img: "../../static/image/icon/talk2.svg",
-			text: "随着人工智能技术的普及，许多传统行业的工作可能被取代，也催生了许多新兴行业和就业机会，我们该如何适应这种变革？"
-		},
-	]
-	onShow(()=>{
-		if(my.value.length==3&&my.value[2].title=='智能'){
-			isjoin.value = '已加入'
+
+	const userId = getApp().globalData.userDetail.userId
+	const groupTitle = ["特别发现", "我的圈子", "互动话题"] // 标题
+	const topTalk = ref({}) //推荐圈子
+	const my = ref([]) //我的圈子
+	const isJoin = ref(['加入', '加入', '加入'])
+	const talkShow = ref(1) //展示话题id
+	const talkList = ref([]) // 互动话题
+
+	onShow(() => {
+		// 判断是否登录
+		if (userId == undefined) {
+			uni.showToast({
+				title: "请先登录!",
+				duration: 1600,
+				icon: 'error'
+			})
+			setTimeout(() => {
+				// 跳转等登录页面
+				uni.navigateTo({
+					url: '/pages/user/user'
+				})
+			}, 1800)
 		}
+		request({ //随机推荐圈子
+			url: '/Smart/QuanZi/getAll',
+		}).then(res => {
+			topTalk.value = res.data[Math.floor(Math.random() * (res.data.length))]
+			// console.log(topTalk.value.id)
+		})
+	})
+	// 获取用户圈子
+	request({
+		url: '/Smart/QuanZi/getAllById',
+		data: {
+			id: getApp().globalData.userDetail.userId
+		}
+	}).then(res => {
+		console.log(res.data)
+		for (let i = 0; i < res.data.length; i++) {
+			my.value.push({
+				qzid: res.data[i].qzCreat, //待修改
+				title: res.data[i].name,
+				name: res.data[i].qzIntroduce,
+				img: '../../static/image/group' + res.data[i].qzCreat + '.png'
+			})
+			isJoin.value[res.data[i].qzCreat - 1] = '已加入'
+		}
+		console.log(isJoin.value)
+		// 获取帖子
+		request({
+			url: '/Smart/QuanZi/getTopic',
+			data: {
+				topicId: my.value[0].qzid
+			}
+		}).then(res => {
+			talkList.value = []
+			for (let i = 0; i < res.data.length; i++) {
+				talkList.value.push(res.data[i])
+			}
+			talkShow.value = my.value[0].qzid
+		})
 	})
 
 	const goFound = () => {
@@ -142,18 +127,60 @@ import {
 			url: '/pages/community/found'
 		})
 	}
-	const talk = (title) => {
-		talkShow.value=title
+	const talk = (qzid) => { //切换圈子
+		talkShow.value = qzid
+		// 查询帖子
+		request({
+			url: '/Smart/QuanZi/getTopic',
+			data: {
+				topicId: qzid
+			}
+		}).then(res => {
+			talkList.value = []
+			for (let i = 0; i < res.data.length; i++) {
+				talkList.value.push(res.data[i])
+			}
+		})
 	}
+	// 加入圈子
 	const join = () => {
-		if (isjoin.value=='加入' && my.value.length<3) {
-			my.value.push({
-				title: "智能",
-				name: "AI智能",
-				img: '../../static/image/group2.png'
+		if (isJoin.value[topTalk.value.id - 1] == '加入') {
+			request({
+				url: '/Smart/QuanZi/addNew',
+				method: 'POST',
+				data: {
+					userId: userId,
+					quanZiId: topTalk.value.id //当前展示的圈子id
+				}
+			}).then(res => {
+				uni.showToast({
+					title: "加入成功!",
+					duration: 800
+				})
+				request({
+					url: '/Smart/QuanZi/getAllByQuanZiId',
+					data: {
+						QuanZiId: topTalk.value.id
+					}
+				}).then(qzDetail => {
+					my.value.push({
+						qzid: qzDetail.data.qzCreat, //待修改
+						title: qzDetail.data.name,
+						name: qzDetail.data.qzIntroduce,
+						img: '../../static/image/group' + qzDetail.data.qzCreat + '.png'
+					})
+					isJoin.value[qzDetail.data.qzCreat - 1] = '已加入'
+				})
 			})
-			isjoin.value = '已加入'
 		}
+		// if (isjoin.value == '加入' && my.value.length < 3) {
+		// 	my.value.push({
+		// 		title: "智能",
+		// 		name: "AI智能",
+		// 		img: '../../static/image/group3.png'
+		// 	})
+		// 	isjoin.value = '已加入'
+		// }
 	}
 </script>
 

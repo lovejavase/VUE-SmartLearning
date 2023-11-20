@@ -38,7 +38,7 @@
 		<view class="chat-bottom" :style="{height: `${inputHeight}rpx`}">
 			<view class="send-msg" :style="{bottom:`${keyboardHeight}rpx`}">
 				<!-- 左边语音输入的按钮 -->
-				<image src="../../static/image/icon/mkf.png" class="mkf" @touchstart="startLuyin"></image>
+				<image src="../../static/image/icon/mkf.svg" class="mkf" @touchstart="startLuyin"></image>
 				<view class="uni-textarea">
 					<textarea v-model="chatMsg" maxlength="300" confirm-type="send" @confirm="handleSend"
 						:show-confirm-bar="false" :adjust-position="false" @linechange="sendHeight" @focus="focus"
@@ -94,7 +94,6 @@
 		scrollToBottom();
 	})
 	onLoad(() => {
-
 		if (userAvatar == undefined) {
 			console.log('请登录')
 			uni.showToast({
@@ -113,10 +112,10 @@
 
 		uni.onKeyboardHeightChange(res => {
 			//这里正常来讲代码直接写就行了
-			// keyboardHeight.value = rpxTopx(res.height)
+			keyboardHeight.value = rpxTopx(res.height)
 			// console.log(res.height)
 			//但是之前界面ui设计聊天框的高度有点高,为了不让键盘和聊天输入框之间距离差太大所以我改动了一下。
-			keyboardHeight.value = rpxTopx(res.height + 30)
+			// keyboardHeight.value = rpxTopx(res.height + 30)
 			if (keyboardHeight.value < 0) {
 				keyboardHeight.value = 0;
 			}
@@ -146,7 +145,7 @@
 	let AIDialog = (text) => {
 		return new Promise((resolve, reject) => {
 			uni.request({
-				url: 'http://a-puppy-c.top:9999/Smart/AI/AIDialog',
+				url: 'http://8.130.21.88:9999/Smart/AI/AIDialog',
 				method: 'POST',
 				data: {
 					text: text
@@ -227,16 +226,28 @@
 				userId: 0
 			}
 			msgList.value.push(obj);
+			const aiRes = ref({
+				botContent: '正在思考中...',
+				recordId: 0,
+				titleId: 0,
+				userContent: '',
+				userId: 0
+			})
+			msgList.value.push(aiRes.value);
 			AIDialog(chatMsg.value).then(res => {
 				console.log(res)
-				let aiRes = {
-					botContent: res,
-					recordId: 0,
-					titleId: 0,
-					userContent: '',
-					userId: 0
-				}
-				msgList.value.push(aiRes);
+				let len = msgList.value.length - 1
+				//监听长度
+				let wenlen = 0
+				const time = setInterval(() => {
+					msgList.value[len].botContent = res.substr(0, wenlen);
+					//wenlen大于data.content的长度，停止计时器
+					if (wenlen < res.length) {
+						wenlen++
+					} else {
+						time.clearInterval();
+					}
+				}, 100)
 			})
 			chatMsg.value = '';
 			scrollToBottom()
@@ -387,6 +398,7 @@ box-sizing: border-box;
 		justify-content: center;
 		padding: 16rpx 0;
 		margin: 0 auto;
+
 		width: 100%;
 		min-height: 100rpx;
 		position: fixed;
@@ -444,7 +456,8 @@ box-sizing: border-box;
 	}
 
 	.mkf {
-		height: 40px;
-		width: 40px;
+		height: 36px;
+		width: 36px;
+		margin-right: 6rpx;
 	}
 </style>
