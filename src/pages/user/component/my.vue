@@ -158,6 +158,10 @@
 	var user = ref({})
 	var collectnum = ref(0)
 	var historynum = ref(7)
+	
+	onShow(()=>{
+		getApp().globalData.pageid = 4
+	})
 
 
 	// 跳转方法

@@ -121,7 +121,7 @@
 				limit: 30
 			},
 		}).then(res => {
-			const newsList = res.data
+			console.log(res.data)
 			for (let j = 0; j < newsList.length; j++) {
 				// 根据新闻的用户id获取用户名
 				request({

@@ -65,7 +65,7 @@
 	import attention from "./component/attention.vue"
 	import recommend from "./component/recommendation.vue"
 
-	const navIndex = ref(0)
+	const navIndex = ref(2)
 	const bg = ref('bg0')
 	const showModalStatus = ref(false)
 	const showPublish = ref(false)
