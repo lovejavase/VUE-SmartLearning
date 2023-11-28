@@ -158,8 +158,8 @@
 	var user = ref({})
 	var collectnum = ref(0)
 	var historynum = ref(7)
-	
-	onShow(()=>{
+
+	onShow(() => {
 		getApp().globalData.pageid = 4
 	})
 
@@ -214,13 +214,13 @@
 		})
 		// 获取收藏
 		request({
-			url:'/Smart/Collection/getCollection',
-			data:{
+			url: '/Smart/Collection/getCollection',
+			data: {
 				userId: userId.value
 			}
-		}).then(res=>{
+		}).then(res => {
 			collectnum.value = res.data.length;
-			console.log(collectnum.value)
+			console.log(collectnum.value)//收藏数
 		})
 	})
 </script>

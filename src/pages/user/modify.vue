@@ -7,7 +7,7 @@
 		<view class="content">
 			<view class="item">
 				<text class="text">头像</text>
-				<image src="@/static/image/icon/round_people_fill.svg" alt="" />
+				<image :src="userimg" alt="" />
 			</view>
 			<view class="item">
 				<text class="text">用户名</text>
@@ -40,10 +40,16 @@
 	import request from "../../api/request";
 	const userDetail = ref(getApp().globalData.userDetail)
 	const userid = ref(userDetail.value.userId)
+	const userimg = ref(userDetail.value.userAvatar)
 	const uname = ref(userDetail.value.userNickName)
 	const uemail = ref(userDetail.value.userEmail)
 	const uNumber = ref(userDetail.value.userNumber)
 	const uphone = ref(userDetail.value.userPhone)
+	
+	const upImg=()=>{
+		
+		
+	}
 	const modify = () => {
 		request({
 			url: '/Smart/User/updateUser',
@@ -119,6 +125,7 @@
 				width: 100rpx;
 				height: 100rpx;
 				margin-right: 6rpx;
+				border-radius: 50%;
 			}
 
 			.item .my_input {

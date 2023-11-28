@@ -122,6 +122,7 @@
 			},
 		}).then(res => {
 			console.log(res.data)
+			const newsList=res.data
 			for (let j = 0; j < newsList.length; j++) {
 				// 根据新闻的用户id获取用户名
 				request({

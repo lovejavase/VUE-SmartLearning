@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>智能享学</title>
+	</head>
+
+	<body>
+
+		<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+		<!-- <div id="main" style="width: 600px;height:400px;"></div> -->
+
+		<div class="data">
+			<!-- <myheader title='数据分析'></myheader> -->
+			<div class="top">
+				<image src="../image/peo1.png" mode="aspectFill"></image>
+				<div class="right">
+					<text class="left">“</text>
+					<text class="title">坚持</text>
+					<text class="text">持之以恒的学习</text>
+				</div>
+			</div>
+			<div class="dtitle">
+				<text>个人数据分析</text>
+				<div class="bg"></div>
+			</div>
+			<div class="datas">
+				<div class="midtitle">
+					本周学习数据
+				</div>
+				<!-- 核心知识点 -->
+				<div class="text">
+					掌握核心知识点情况
+				</div>
+				<div id="radar2" style="width: 90%;height:300px;" force-use-old-canvas="true"></div>
+				<!-- 知识点分布 -->
+				<div class="text">本周知识点分布</div>
+				<div id="radar1" style="width: 90%;height:300px;"></div>
+				<!-- 视频类型分布 -->
+				<div class="text">喜爱视频类型分布</div>
+				<div id="pie" style="width: 90%;height:300px;"></div>
+				<!-- 学习时长 -->
+				<div class="text">总共学习时长
+					<text id="time">
+
+					</text>
+					分钟
+				</div>
+				<div id="bar" style="width: 90%;height:300px;"></div>
+				<!-- 积分统计 -->
+				<div class="text">本周活跃度分析</div>
+				<div id="polylines" style="width: 90%;height:300px;"></div>
+			</div>
+		</div>
+
+
+		<!-- 引入 echarts.js -->
+		<script src="../js/echarts.js"></script>
+		<script type="text/javascript">
+			// 核心知识点和学习时间统计
+			var sum = [78, 389]
+			// 核心知识点发布 雷达图
+			var key = [345, 724, 665, 615, 455]
+			// 科普知识点分布 雷达图
+			var science = [345, 725, 665, 615, 455]
+			// 喜爱视频类型  饼图
+			var favor = [10, 10, 10, 10, 10, 10]
+			// 学习时间  柱状图
+			var study = [39, 52, 49, 47, 19, 41, 31]
+			// 本周活跃度分析  折线图
+			var score = [150, 180, 175, 170, 55, 156, 99]
+			//日期数据
+			let dates = [];
+			let now = new Date(); // 获取当前日期
+			let dayTimestamp = 24 * 60 * 60 * 1000; // 一天的毫秒数
+			// 循环获取最近 7 天的日期
+			for (let i = 0; i < 7; i++) {
+				let timestamp = now.getTime(); // 时间戳
+				let iDayAgoTimestamp = timestamp - i * dayTimestamp; // 计算 i 天前的时间
+				let date = new Date(iDayAgoTimestamp); // 转换为日期对象
+				// 格式化日期为 MM-dd 的字符串
+				let month = ("0" + (date.getMonth() + 1)).slice(-2);
+				let day = ("0" + date.getDate()).slice(-2);
+				dates.push(month + "-" + day);
+			}
+			dates.reverse()
+
+
+			// 基于准备好的dom，初始化echarts实例
+			var radar1 = echarts.init(document.getElementById('radar1'));
+			var radar2 = echarts.init(document.getElementById('radar2'));
+			var pie = echarts.init(document.getElementById('pie'));
+			var bar = echarts.init(document.getElementById('bar'));
+			var polylines = echarts.init(document.getElementById('polylines'));
+
+			document.getElementById('time').innerHTML = sum[1]
+			// 指定图表的配置项和数据
+			// 雷达图：
+			radar1.setOption({
+				tooltip: {
+					trigger: 'item'
+				},
+				legend: {
+					top: '5%',
+					left: 'center'
+				},
+				series: [{
+					name: 'Access From',
+					type: 'pie',
+					radius: ['40%', '70%'],
+					avoidLabelOverlap: false,
+					label: {
+						show: false,
+						position: 'center'
+					},
+					emphasis: {
+						label: {
+							show: true,
+							fontSize: 40,
+							fontWeight: 'bold'
+						}
+					},
+					labelLine: {
+						show: false
+					},
+					data: [{
+							value: 90,
+							name: '发展'
+						},
+						{
+							value: 50,
+							name: '历史'
+						},
+						{
+							value: 55,
+							name: '风险'
+						},
+						{
+							value: 80,
+							name: '原理'
+						},
+						{
+							value: 75,
+							name: '应用'
+						}
+					]
+				}]
+			});
+			// 雷达图：核心知识点掌握情况
+			radar2.setOption({
+				color: '#83b6a2',
+				title: {
+					text: ''
+				},
+				legend: {},
+				radar: [{
+					indicator: [{
+							name: '历史',
+							max: 1000
+						},
+						{
+							name: '发展',
+							max: 1000
+						},
+						{
+							name: '原理',
+							max: 1000
+						},
+						{
+							name: '应用',
+							max: 1000
+						},
+						{
+							name: '风险',
+							max: 1000
+						},
+					],
+					radius: 100,
+					// top: 90,
+					startAngle: 90,
+					splitNumber: 4,
+					// shape: 'circle',
+					axisName: {
+						// formatter: '【{value}】',
+						fontSize: 14,
+						color: '#15a0ac',
+					},
+					splitArea: {
+						areaStyle: {
+							color: '#90c9b430',
+							shadowColor: 'none',
+							// shadowBlur: 10
+						}
+					},
+					axisLine: {
+						lineStyle: {
+							color: '#90c9b400'
+						}
+					},
+					splitLine: {
+						lineStyle: {
+							color: '#90c9b400'
+						}
+					}
+				}],
+				series: [{
+					name: 'Budget vs spending',
+					type: 'radar',
+					data: [{
+						value: key,
+						color: '#fff'
+					}]
+				}]
+			})
+			// 饼图：喜爱视频分布
+			pie.setOption({
+				title: {
+
+					//  subtext: 'Fake Data',
+					left: 'center'
+				},
+				tooltip: {
+					trigger: 'item'
+				},
+				legend: {
+					orient: 'vertical',
+					left: 'left'
+				},
+				series: [{
+					name: 'Access From',
+					type: 'pie',
+					radius: '50%',
+					data: [{
+							value: 90,
+							name: '发展'
+						},
+						{
+							value: 75,
+							name: '应用'
+						},
+						{
+							value: 80,
+							name: '原理'
+						},
+						{
+							value: 50,
+							name: '历史'
+						},
+						{
+							value: 55,
+							name: '风险'
+						}
+					],
+					emphasis: {
+						itemStyle: {
+							shadowBlur: 10,
+							shadowOffsetX: 0,
+							shadowColor: 'rgba(0, 0, 0, 0.5)'
+						}
+					}
+				}]
+			})
+			// 柱状图：学习时长
+			bar.setOption({
+				color: ['#90c9b4'],
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: {
+						type: 'shadow'
+					}
+				},
+				grid: {
+					top: '10%',
+					left: '3%',
+					right: '4%',
+					bottom: '10%',
+					containLabel: true
+				},
+				xAxis: [{
+					type: 'category',
+					data: dates,
+					axisTick: {
+						alignWithLabel: true
+					}
+				}],
+				yAxis: [{
+					type: 'value'
+				}],
+				series: [{
+					name: 'Direct',
+					type: 'bar',
+					barWidth: '60%',
+					data: study,
+					label: {
+						show: true, //开启显示
+						position: 'top', //在上方显示
+						// formatter: '{c}',//显示百分号
+						textStyle: { //数值样式
+							color: '#80b29f', //字体颜色
+							fontSize: 14 //字体大小
+						}
+					}
+				}]
+			})
+			// 折线图：本周活跃度分析
+			polylines.setOption({
+				visualMap: [{
+					show: false,
+					type: 'continuous',
+					seriesIndex: 0,
+					min: 0,
+					max: 400
+				}],
+				title: {
+					// left: 'center',
+					// text: 'Gradient along the y axis'
+				},
+				tooltip: {
+					trigger: 'axis'
+				},
+				xAxis: {
+					type: 'category',
+					boundaryGap: false,
+					data: dates
+				},
+				yAxis: {},
+				grid: {
+					top: '14%',
+					bottom: '16%'
+				},
+				series: {
+					type: 'line',
+					showSymbol: false,
+					data: score,
+					lineStyle: {
+						normal: {
+							width: 4,
+							color: {
+								type: 'linear', // radial   linear
+								x: 0,
+								y: 0,
+								x2: 0,
+								y2: 1,
+								colorStops: [{
+										offset: 0,
+										color: '#118a90' // 0% 处的颜色 
+									},
+									{
+										offset: 1,
+										color: '#a1e0c8' // 100% 处的颜色 
+									}
+								],
+								global: false // 缺省为 false 
+							}
+						}
+
+					}
+				}
+			})
+			//自适应大小
+			radar1.resize();
+			radar2.resize();
+			pie.resize();
+			bar.resize();
+			// polylines.resize();
+		</script>
+
+
+		<style>
+			body {
+				padding: 0;
+				margin: 0;
+			}
+
+			.data {
+				background-color: #e5f3ef;
+				padding-top: 40px;
+				/* padding-bottom: 26px; */
+			}
+
+			.top {
+				display: flex;
+				align-items: center;
+				justify-content: space-evenly;
+				margin: 0 auto;
+				height: 140px;
+			}
+
+			.top img {
+				width: 45%;
+				height:100%;
+				/* height: auto; */
+			}
+
+			.top .right {
+				background-color: #f6e382;
+				height: 100%;
+				width: 40%;
+				border-radius: 20px;
+				color: #fff;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-evenly;
+			}
+
+			.top .right .left {
+				height: 40px;
+				width: 50px;
+				margin-left: -6px;
+				margin-top: -6px;
+				font-size: 50px;
+			}
+
+			.top .right .title {
+				font-size: 24px;
+				margin: 0 auto;
+				margin-bottom: 10px;
+			}
+
+			.top .right .text {
+				margin: 0 auto;
+				margin-bottom: 10px;
+				font-size: 14px;
+			}
+
+			.dtitle {
+				margin: 30px 40px;
+				font-size: 24px;
+				color: #fff;
+				text-shadow: 2px 2px 6px #4a675c;
+			}
+
+			.dtitle .bg {
+				width: 144px;
+				height: 8px;
+				background-color: #f6e382bb;
+				border-radius: 6px;
+			}
+
+			.datas {
+				background-color: #fff;
+				padding: 0;
+				/* // padding: 70rpx; */
+				width: 90%;
+				margin: auto;
+				/* // position: relative; */
+			}
+
+			#radar1,
+			#radar2,
+			#pie,
+			#bar,
+			#polylines {
+				background-color: #fff;
+				margin: 10px;
+				padding: 0;
+			}
+
+			.datas .text {
+				font-size: 18px;
+				font-family: AlimamaShuHeiTi-Bold;
+				color: #333;
+				margin-left: 4%;
+				height: auto;
+			}
+
+			.datas .text text {
+				color: #f6e382;
+			}
+
+			.datas .midtitle {
+				background-color: #90c9b4;
+				font-size: 16px;
+				display: block;
+				margin: 0 auto;
+				margin-bottom: 30px;
+				width: 40%;
+				height: 50px;
+				line-height: 50px;
+				text-align: center;
+				border-radius: 0 0 20px 20px;
+				color: #fff;
+				text-shadow: 1px 1px 3px #999;
+			}
+		</style>
+	</body>
+
+</html>
